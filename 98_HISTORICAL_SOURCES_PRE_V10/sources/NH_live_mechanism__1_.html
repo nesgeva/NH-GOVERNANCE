@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>N.H — the live mechanism</title>
+<style>
+  :root{
+    --bg:#1b1a18; --card:#252320; --card2:#2c2a27; --ink:#e9e7dd; --ink2:#a8a69c; --ink3:#7d7b73;
+    --line:#383631; --line2:#474440;
+    --me-bg:#2f5e96; --me-ink:#eaf2fc;
+    --nh-bg:#2e2c28; --nh-ink:#e6e4da;
+    --purple:#a39cf0; --purple-b:#7F77DD;
+    --danger:#E2655F; --ok:#5DCAA5;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif; line-height:1.55;}
+  .wrap{max-width:760px; margin:0 auto; padding:26px 18px 60px;}
+  h1{font-size:21px; font-weight:600; margin:0 0 3px;}
+  .sub{font-size:12.5px; color:var(--ink3); margin:0 0 20px;}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:16px; margin-bottom:18px;}
+
+  .chat-head{display:flex; align-items:center; justify-content:space-between; padding:2px 4px 12px; border-bottom:1px solid var(--line);}
+  .chat-head .name{font-weight:600; font-size:15px; letter-spacing:.2px;}
+  .chat-head .who{font-size:12px; color:var(--ink3);}
+
+  #msgs{height:320px; overflow-y:auto; padding:16px 6px 8px; display:flex; flex-direction:column; gap:11px; position:relative;}
+  #msgs::-webkit-scrollbar{width:8px;} #msgs::-webkit-scrollbar-thumb{background:#3a3833; border-radius:4px;}
+  .bubble{max-width:80%; padding:9px 13px; border-radius:16px; font-size:14.5px;}
+  .me{align-self:flex-end; background:var(--me-bg); color:var(--me-ink); border-bottom-right-radius:6px;}
+  .nh{align-self:flex-start; background:var(--nh-bg); color:var(--nh-ink); border-bottom-left-radius:6px;}
+  .bubble.flash{animation:flash 1.7s ease;}
+  @keyframes flash{0%,100%{box-shadow:0 0 0 0 rgba(127,119,221,0);} 22%{box-shadow:0 0 0 3px rgba(127,119,221,.55);}}
+  .pointback{margin-top:7px; display:inline-flex; align-items:center; gap:5px; font-size:12px; color:var(--purple); border:1px solid var(--purple-b); background:rgba(127,119,221,.08); border-radius:9px; padding:3px 9px; cursor:pointer;}
+  .pointback:hover{background:rgba(127,119,221,.18);}
+
+  .composer{display:flex; gap:8px; align-items:center; margin-top:12px;}
+  input[type=text]{flex:1; height:42px; padding:0 14px; border:1px solid var(--line2); border-radius:12px; font-size:14px; font-family:inherit; background:#1f1d1b; color:var(--ink);}
+  input[type=text]::placeholder{color:var(--ink3);}
+  input[type=text]:focus{outline:none; border-color:var(--purple-b);}
+  button.b{height:42px; padding:0 18px; border:1px solid var(--line2); background:#1f1d1b; border-radius:12px; font-size:14px; cursor:pointer; font-family:inherit; color:var(--ink);}
+  button.b:hover{background:#2c2a27;}
+  button.b.small{height:auto; padding:5px 11px; font-size:12px; border-radius:9px;}
+  #tonow{display:none; align-self:center; margin-top:6px;}
+
+  .map-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;}
+  .map-head h2{font-size:14px; font-weight:600; margin:0; color:var(--ink2);}
+  svg{display:block; width:100%; height:auto;}
+
+  #panel{display:none; margin-top:12px; border:1px solid var(--line2); border-radius:12px; padding:14px; background:var(--card2);}
+  #panel .ptitle{display:flex; align-items:center; gap:9px; margin-bottom:8px;}
+  #panel .dot{width:11px; height:11px; border-radius:3px; flex:none;}
+  #panel .pname{font-size:15px; font-weight:600;}
+  #panel .prole{font-size:12px; color:var(--ink3); margin-left:auto;}
+  #panel .pdesc{font-size:13.5px; color:var(--ink); margin:0 0 9px;}
+  #panel .phow{font-size:12.5px; color:var(--ink2); margin:0;}
+  #panel .status{margin-top:11px; padding:8px 11px; border-radius:9px; font-size:12.5px;}
+  #panel .status.ok{background:#242c28; border:1px solid #3a4a42; color:#9fcdb9;}
+  #panel .status.err{background:#3a2422; border:1px solid #7a3c39; color:#f0a8a3;}
+  #panel .hint{margin-top:9px; font-size:11.5px; color:var(--ink3);}
+
+  .legend{font-size:12px; color:var(--ink2); margin-top:14px; border-top:1px solid var(--line); padding-top:12px;}
+  .legend .row{display:flex; align-items:center; gap:10px; margin:6px 0;}
+  .legend .sw{width:34px; height:0; border-top-width:2px; border-top-style:solid; flex:none;}
+
+  details{font-size:13px; color:var(--ink2); margin-top:4px;}
+  details summary{cursor:pointer; font-weight:600; color:var(--ink2); font-size:13px;}
+  details ul{margin:9px 0 0; padding-left:18px;}
+  details li{margin:5px 0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>N.H</h1>
+  <p class="sub">the live mechanism · working sketch · not confirmed · not built</p>
+
+  <div class="card">
+    <div class="chat-head"><span class="name">N.H</span><span class="who">a mind alongside yours</span></div>
+    <div id="msgs"></div>
+    <button class="b small" id="tonow">↓ back to now</button>
+    <div class="composer">
+      <input id="inp" type="text" placeholder="talk to N.H — mention a piece to see a point-back"/>
+      <button class="b" id="send">send</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="map-head">
+      <h2>the system — tap any piece to see what it does</h2>
+      <button class="b small" id="fault">inject a quiet fault</button>
+    </div>
+    <svg id="map" viewBox="0 0 560 300" aria-label="N.H system map">
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="#8a887e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+
+      <text x="280" y="16" text-anchor="middle" font-size="11" fill="#8a887e">Ness · present · steers — the membrane</text>
+
+      <path d="M74 104 L74 58 L426 58" fill="none" stroke="#54524c" stroke-width="0.8" stroke-dasharray="3 3" marker-end="url(#ar)"/>
+      <text x="250" y="52" text-anchor="middle" font-size="10" fill="#807e76">memory flows back to chat</text>
+
+      <line x1="486" y1="80" x2="486" y2="104" stroke="#6a6963" stroke-width="1" marker-end="url(#ar)"/>
+      <line x1="432" y1="124" x2="412" y2="124" stroke="#6a6963" stroke-width="1" marker-end="url(#ar)"/>
+      <path d="M356 144 L358 196" fill="none" stroke="#6a6963" stroke-width="1" marker-end="url(#ar)"/>
+      <line x1="298" y1="216" x2="276" y2="216" stroke="#6a6963" stroke-width="1" marker-end="url(#ar)"/>
+      <line x1="150" y1="216" x2="128" y2="216" stroke="#6a6963" stroke-width="1" marker-end="url(#ar)"/>
+      <line x1="74" y1="196" x2="74" y2="146" stroke="#6a6963" stroke-width="1" marker-end="url(#ar)"/>
+
+      <g id="links"></g>
+
+      <g class="node" data-id="chat"><rect x="432" y="40" width="108" height="40" rx="9" fill="#5a2516" stroke="#D85A30" stroke-width="0.8"/><text x="486" y="60" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#F5C4B3">chat</text></g>
+      <g class="node" data-id="cache"><rect x="432" y="104" width="108" height="40" rx="9" fill="#3f3e3a" stroke="#B4B2A9" stroke-width="0.8"/><text x="486" y="124" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#D3D1C7">cache</text></g>
+      <g class="node" data-id="loop"><rect x="300" y="104" width="110" height="40" rx="9" fill="#2e2769" stroke="#7F77DD" stroke-width="0.8"/><text x="355" y="124" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#CECBF6">loop · starter</text></g>
+      <g class="node" data-id="creation"><rect x="298" y="196" width="124" height="40" rx="9" fill="#5c1d33" stroke="#D4537E" stroke-width="0.8"/><text x="360" y="216" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#F4C0D1">creation filter</text></g>
+      <g class="node" data-id="meaning"><rect x="150" y="196" width="124" height="40" rx="9" fill="#0c4036" stroke="#5DCAA5" stroke-width="0.8"/><text x="212" y="216" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#9FE1CB">meaning filter</text></g>
+      <g class="node" data-id="memory"><rect x="22" y="196" width="104" height="40" rx="9" fill="#0c3a66" stroke="#378ADD" stroke-width="0.8"/><text x="74" y="216" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#B5D4F4">memory</text></g>
+      <g class="node" data-id="log"><rect x="22" y="104" width="104" height="40" rx="9" fill="#14497f" stroke="#85B7EB" stroke-width="0.8"/><text x="74" y="124" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#E6F1FB">log · mirror</text></g>
+
+      <g id="reveal"></g>
+      <g id="chips"></g>
+    </svg>
+
+    <div id="panel"></div>
+
+    <div class="legend">
+      <div class="row"><span class="sw" style="border-top-color:#6a6963;"></span> flow — runs silently underneath; N.H never narrates it in the chat</div>
+      <div class="row"><span class="sw" style="border-top-color:#54524c; border-top-style:dashed;"></span> memory ↔ chat — always on, both directions</div>
+      <div class="row"><span class="sw" style="border-top-color:#7F77DD;"></span> point-back — the only thing shown in the chat, clickable</div>
+      <div style="margin-top:8px; color:var(--ink3);">tap a piece for what it does + its health · tap it again to close (or fix a fault)</div>
+    </div>
+  </div>
+
+  <div class="card" style="padding:14px 16px;">
+    <details>
+      <summary>what this is</summary>
+      <ul>
+        <li><b>The live chat is itself an input.</b> Your conversation with N.H is recorded as a "Ness ↔ N.H" piece (speaker carried), flowing through the same engine as the seeds — just another front door.</li>
+        <li><b>The path:</b> chat → cache → loop · starter → creation filter → meaning filter → memory + log. It rides the loop (fire-and-let-go), so the chat never waits.</li>
+        <li><b>The point-back is the one thing shown.</b> When a message touches an earlier topic, a clickable link appears — jump to the earlier piece, then back to now. Navigation, not narration.</li>
+        <li><b>The surface stays quiet otherwise:</b> no recording badge, errors only on tap, and N.H never narrates its own mechanism.</li>
+      </ul>
+    </details>
+  </div>
+
+</div>
+
+<script>
+const SVGNS="http://www.w3.org/2000/svg";
+const msgs=document.getElementById('msgs');
+const inp=document.getElementById('inp');
+const tonow=document.getElementById('tonow');
+const chipsG=document.getElementById('chips');
+const linksG=document.getElementById('links');
+const revealG=document.getElementById('reveal');
+const panel=document.getElementById('panel');
+
+const NODES={chat:[486,60],cache:[486,124],loop:[355,124],creation:[360,216],meaning:[212,216],memory:[74,216],log:[74,124]};
+const RECT={chat:[432,40,108,40],cache:[432,104,108,40],loop:[300,104,110,40],creation:[298,196,124,40],meaning:[150,196,124,40],memory:[22,196,104,40],log:[22,104,104,40]};
+
+const INFO={
+  chat:{name:'chat', role:'the surface', color:'#D85A30',
+    desc:'Where Ness and N.H actually talk. The live conversation is itself an input — recorded as a "Ness ↔ N.H" piece, speaker carried.',
+    how:'Every message drops into the cache instantly, so the chat never waits on the work behind it. The chat stays natural — N.H never narrates its own mechanism here. The one visible extra is the point-back link.'},
+  cache:{name:'cache', role:'the holding file', color:'#B4B2A9',
+    desc:'A buffer that sits outside the loop and just fills with what was said.',
+    how:'It decouples chat-speed from work-speed: the chat writes into it the instant you send; the loop picks things up on its own pass. Neither side ever waits on the other.'},
+  loop:{name:'loop · starter', role:'fire-and-let-go', color:'#7F77DD',
+    desc:'The thing that keeps everything moving and never stalls. It takes what is in the cache and fires it into the deep side.',
+    how:'It fires a job and lets go in the same instant — never holds, never waits. Because no part ever holds still, there is no queue and no ceiling. This is what lets deep search run without freezing the chat, and lets several topics run at once.'},
+  creation:{name:'creation filter', role:'deep side · nearer the chat', color:'#D4537E',
+    desc:'Catches what was created in the conversation — the ideas, decisions, and things made in the talk.',
+    how:'First stop on the deep side. It works each fired job on its own and hands it onward. (Open question: a distinct filter, or a creation-aware mode of the meaning filter — not yet settled.)'},
+  meaning:{name:'meaning filter', role:'the Universal Filter', color:'#5DCAA5',
+    desc:'Reads each piece across the webs of meaning — what was meant, not just what was said — and lays it down as layers.',
+    how:'This is the real engine (the hard, unbuilt part). It sorts by meaning-type, never decides "real" on its own, and adds new readings beside old ones — memory only accretes, never overwrites.'},
+  memory:{name:'memory', role:'append-only store', color:'#378ADD',
+    desc:'Where readings land — and only ever ADD, never edit or overwrite.',
+    how:'New context adds a new layer beside the old one; nothing is ever deleted. This is the keystone, and it is exactly what keeps the fast loop safe: N.H\u2019s own output can only land as a proposal layer here, never cross into fact on its own.'},
+  log:{name:'log · mirror', role:'read-only surface', color:'#85B7EB',
+    desc:'The read-only, subject-tagged record of everything the system did — the inward mirror.',
+    how:'Ness can look but not edit, so the record can never lie about its own past. It is reached from inside the chat by the point-back: jump to an earlier piece, then back to now.'},
+};
+
+const TOPICS=[
+  {id:'loop', label:'the loop', kw:['loop','fire-and-let-go','no-stall','stall']},
+  {id:'cache', label:'the cache', kw:['cache','drawer']},
+  {id:'creation', label:'the creation filter', kw:['creation','created','create']},
+  {id:'meaning', label:'the meaning filter', kw:['meaning','webs','read across','universal filter','deep','search','reasoning']},
+  {id:'memory', label:'memory', kw:['memory','store','append','overwrite','layer']},
+  {id:'log', label:'the log', kw:['log','mirror']},
+  {id:'membrane', label:'the membrane', kw:['membrane','steer']},
+  {id:'voice', label:'voice', kw:['voice']},
+];
+function detect(text){ const t=text.toLowerCase(); const out=[]; for(const tp of TOPICS){ if(tp.kw.some(k=>t.includes(k))){ out.push(tp); } } return out; }
+
+const nhReplies=[
+  "yeah, I'd keep going — you've got the hard part already.",
+  "good — where do you want to take it next?",
+  "makes sense. I'm with you.",
+  "that connects to what you were chasing earlier.",
+  "let me sit with that a second… okay, I follow.",
+  "right. say more whenever you're ready."
+];
+let replyIdx=0;
+let msgId=0;
+const topicRegistry={};
+
+function addMessage(text, who){
+  const id='m'+(msgId++);
+  const topics=detect(text);
+  let pb=null;
+  for(const tp of topics){ const earlier=topicRegistry[tp.id]; if(earlier && earlier.length){ pb={topic:tp, target:earlier[0]}; break; } }
+  for(const tp of topics){ if(!topicRegistry[tp.id]) topicRegistry[tp.id]=[]; topicRegistry[tp.id].push({id, snippet:text}); }
+
+  const wrap=document.createElement('div');
+  wrap.className='bubble '+(who==='me'?'me':'nh'); wrap.id=id;
+  const t=document.createElement('div'); t.textContent=text; wrap.appendChild(t);
+  if(pb){
+    const link=document.createElement('div'); link.className='pointback';
+    const snip=pb.target.snippet.length>34?pb.target.snippet.slice(0,34)+'…':pb.target.snippet;
+    link.innerHTML='↩ '+pb.topic.label+' — earlier: “'+snip+'”';
+    link.onclick=()=>jumpTo(pb.target.id);
+    wrap.appendChild(link);
+  }
+  msgs.appendChild(wrap); msgs.scrollTop=msgs.scrollHeight;
+  topics.forEach(tp=>drawLink(tp.id));
+  spawnChip(who);
+  return id;
+}
+
+function jumpTo(targetId){
+  const el=document.getElementById(targetId); if(!el) return;
+  el.scrollIntoView({block:'center', behavior:'smooth'});
+  el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
+  tonow.style.display='inline-block';
+}
+tonow.onclick=()=>{ msgs.scrollTo({top:msgs.scrollHeight, behavior:'smooth'}); tonow.style.display='none'; };
+
+function drawLink(id){
+  const node=NODES[id]; if(!node || (node[0]===486 && node[1]===60)) return;
+  const g=document.createElementNS(SVGNS,'g'); g.style.transition='opacity .4s'; g.style.opacity='0';
+  const x1=486,y1=72,x2=node[0],y2=node[1]; const mx=(x1+x2)/2, my=Math.min(y1,y2)-26;
+  const p=document.createElementNS(SVGNS,'path');
+  p.setAttribute('d','M'+x1+' '+y1+' Q '+mx+' '+my+' '+x2+' '+y2);
+  p.setAttribute('fill','none'); p.setAttribute('stroke','#a39cf0'); p.setAttribute('stroke-width','1.3'); p.setAttribute('stroke-dasharray','4 3');
+  g.appendChild(p); linksG.appendChild(g);
+  requestAnimationFrame(()=>{ g.style.opacity='0.9'; });
+  setTimeout(()=>{ g.style.opacity='0'; }, 2400);
+  setTimeout(()=>{ g.remove(); }, 3000);
+}
+
+const faults={};
+const reasons={chat:'input stream dropped',cache:'write failed',loop:'starter stalled on a job',creation:'filter returned no output',meaning:'web read timed out',memory:'append rejected — schema invalid',log:'surface write failed'};
+
+function clearReveal(){ revealG.innerHTML=''; }
+function ringNode(id, color, w){
+  const r=RECT[id];
+  const ring=document.createElementNS(SVGNS,'rect');
+  ring.setAttribute('x',r[0]-2); ring.setAttribute('y',r[1]-2); ring.setAttribute('width',r[2]+4); ring.setAttribute('height',r[3]+4); ring.setAttribute('rx',10); ring.setAttribute('fill','none'); ring.setAttribute('stroke',color); ring.setAttribute('stroke-width',w);
+  revealG.appendChild(ring);
+  if(faults[id]){
+    const badge=document.createElementNS(SVGNS,'circle'); badge.setAttribute('cx',r[0]+r[2]-3); badge.setAttribute('cy',r[1]-1); badge.setAttribute('r',7); badge.setAttribute('fill','#E2655F'); revealG.appendChild(badge);
+    const bang=document.createElementNS(SVGNS,'text'); bang.setAttribute('x',r[0]+r[2]-3); bang.setAttribute('y',r[1]-1); bang.setAttribute('text-anchor','middle'); bang.setAttribute('dominant-baseline','central'); bang.setAttribute('font-size','10'); bang.setAttribute('fill','#1b1a18'); bang.textContent='!'; revealG.appendChild(bang);
+  }
+}
+
+function openPanel(id){
+  clearReveal();
+  const info=INFO[id];
+  const faulted=!!faults[id];
+  ringNode(id, faulted?'#E2655F':'#a39cf0', faulted?'2':'1.6');
+  const statusHtml = faulted
+    ? '<div class="status err">⚠ fault: '+reasons[id]+' &nbsp;<span style="opacity:.75">(tap the piece again to fix)</span></div>'
+    : '<div class="status ok">✓ running fine</div>';
+  panel.innerHTML =
+    '<div class="ptitle"><span class="dot" style="background:'+info.color+'"></span>'+
+    '<span class="pname">'+info.name+'</span><span class="prole">'+info.role+'</span></div>'+
+    '<p class="pdesc">'+info.desc+'</p>'+
+    '<p class="phow"><b style="color:var(--ink)">how it works:</b> '+info.how+'</p>'+
+    statusHtml+
+    '<div class="hint">tap the piece again to close'+(faulted?' and clear the fault':'')+'</div>';
+  panel.style.display='block';
+}
+function closePanel(){ panel.style.display='none'; clearReveal(); }
+
+let openId=null;
+document.getElementById('map').addEventListener('click', e=>{
+  const g=e.target.closest('.node');
+  if(!g){ closePanel(); openId=null; return; }
+  const id=g.dataset.id;
+  if(openId===id){ if(faults[id]) faults[id]=false; closePanel(); openId=null; }
+  else { openPanel(id); openId=id; }
+});
+document.getElementById('fault').onclick=()=>{ const ids=Object.keys(NODES).filter(k=>!faults[k]); if(!ids.length) return; faults[ids[Math.floor(Math.random()*ids.length)]]=true; if(openId) openPanel(openId); };
+
+const WP=[[486,60],[486,124],[355,124],[360,216,'C'],[212,216,'M'],[74,216,'done']];
+const active=[];
+function spawnChip(who){
+  const c=document.createElementNS(SVGNS,'circle');
+  c.setAttribute('r',5); c.setAttribute('fill', who==='me'?'#5fa0e8':'#e8895a');
+  c.setAttribute('cx',486); c.setAttribute('cy',60); chipsG.appendChild(c);
+  active.push({el:c, x:486, y:60, wp:1, dwell:0});
+}
+const SPEED=0.055, DWELL=1400; let last=0;
+function frame(ts){
+  const dt=last?Math.min(ts-last,40):16; last=ts;
+  for(let i=active.length-1;i>=0;i--){
+    const a=active[i]; const target=WP[a.wp];
+    if(a.dwell>0){ a.dwell-=dt; if(a.dwell<=0) a.wp++; continue; }
+    const dx=target[0]-a.x, dy=target[1]-a.y, d=Math.hypot(dx,dy), step=SPEED*dt;
+    if(d<=step){ a.x=target[0]; a.y=target[1]; if(target[2]==='done'){ a.el.remove(); active.splice(i,1); continue; } if(target[2]==='C'||target[2]==='M') a.dwell=DWELL; else a.wp++; }
+    else { a.x+=dx/d*step; a.y+=dy/d*step; }
+    a.el.setAttribute('cx',a.x); a.el.setAttribute('cy',a.y);
+  }
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+function nhReply(){ const r=nhReplies[replyIdx%nhReplies.length]; replyIdx++; addMessage(r,'nh'); }
+function send(){ const v=inp.value.trim(); if(!v) return; addMessage(v,'me'); inp.value=''; setTimeout(nhReply, 800); }
+document.getElementById('send').onclick=send;
+inp.addEventListener('keydown',e=>{ if(e.key==='Enter') send(); });
+
+addMessage("do you think I should keep building the loop?", 'me');
+setTimeout(()=> addMessage("yeah, I'd keep going — you've got the hard part already.", 'nh'), 500);
+setTimeout(()=> addMessage("and the loop is what makes voice possible, right?", 'me'), 1100);
+</script>
+</body>
+</html>

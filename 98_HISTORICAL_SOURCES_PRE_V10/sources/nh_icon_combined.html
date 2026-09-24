@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>N.H — Combined Icon Style</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { background:#000; font-family:-apple-system,"Segoe UI",sans-serif; color:#ff9d9d;
+    min-height:100%;
+    background-image:
+      linear-gradient(rgba(255,40,50,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,40,50,0.05) 1px, transparent 1px);
+    background-size:46px 46px; padding:40px; }
+  h1 { font-size:15px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,70,70,0.8);
+    text-align:center; margin-bottom:8px; font-weight:500; }
+  .sub { text-align:center; font-size:12px; color:rgba(255,120,120,0.5); margin-bottom:40px; letter-spacing:0.05em; }
+  .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:32px; max-width:760px; margin:0 auto; }
+  .cell { border:1px solid rgba(255,60,65,0.25); border-radius:12px; padding:28px 16px 18px;
+    text-align:center; background:rgba(10,2,4,0.6); cursor:pointer; transition:border-color .2s, background .2s; }
+  .cell:hover { border-color:rgba(255,90,95,0.7); background:rgba(20,4,8,0.8); }
+  .cell svg { width:96px; height:96px; display:block; margin:0 auto 14px; }
+  .style-name { font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,100,100,0.65); }
+  .obj-name { font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,140,140,0.4); margin-top:3px; }
+  .note { text-align:center; font-size:11px; color:rgba(255,120,120,0.45); margin-top:36px; letter-spacing:0.05em; }
+</style>
+</head>
+<body>
+<h1>N.H // combined style &mdash; C2 + D2</h1>
+<div class="sub">glow-fill body + HUD scanner detailing &middot; click any icon to see it react</div>
+
+<div class="grid">
+
+  <div class="cell" onclick="pulse(this)">
+    <svg viewBox="0 0 100 100">
+      <defs>
+        <radialGradient id="gateglow" cx="50%" cy="32%" r="70%">
+          <stop offset="0%" stop-color="#ffb060"/>
+          <stop offset="60%" stop-color="#8a4410"/>
+          <stop offset="100%" stop-color="#3a1c06"/>
+        </radialGradient>
+      </defs>
+      <g style="filter:drop-shadow(0 0 9px rgba(255,130,50,0.65))">
+        <path d="M22 76 V32 a28 16 0 0 1 56 0 V76" fill="none" stroke="#ff8a3a" stroke-width="1.2" stroke-dasharray="2 3" opacity="0.8"/>
+        <circle cx="50" cy="20" r="2.6" fill="#ffb060"/>
+        <path d="M27 76 V34 a23 13 0 0 1 46 0 V76 Z" fill="url(#gateglow)" stroke="#ffc080" stroke-width="1.6"/>
+        <line x1="38" y1="36" x2="38" y2="76" stroke="#1a0c02" stroke-width="3.5"/>
+        <line x1="50" y1="33" x2="50" y2="76" stroke="#1a0c02" stroke-width="3.5"/>
+        <line x1="62" y1="36" x2="62" y2="76" stroke="#1a0c02" stroke-width="3.5"/>
+        <rect x="15" y="75" width="70" height="5" rx="2" fill="#ffc080"/>
+        <text x="50" y="92" text-anchor="middle" font-size="6" fill="rgba(255,150,90,0.65)" font-family="monospace">GATE//AUTH</text>
+      </g>
+    </svg>
+    <div class="style-name">gate</div>
+    <div class="obj-name">approval enforced</div>
+  </div>
+
+  <div class="cell" onclick="pulse(this)">
+    <svg viewBox="0 0 100 100">
+      <defs>
+        <radialGradient id="vaultglow" cx="50%" cy="42%" r="62%">
+          <stop offset="0%" stop-color="#ff7a7a"/>
+          <stop offset="60%" stop-color="#7a1018"/>
+          <stop offset="100%" stop-color="#2e070b"/>
+        </radialGradient>
+      </defs>
+      <g style="filter:drop-shadow(0 0 9px rgba(255,60,60,0.6))">
+        <rect x="16" y="18" width="68" height="64" rx="4" fill="none" stroke="#ff5a5a" stroke-width="1.2" stroke-dasharray="2 3" opacity="0.8"/>
+        <rect x="22" y="24" width="56" height="52" rx="4" fill="url(#vaultglow)" stroke="#ff9a9a" stroke-width="1.6"/>
+        <circle cx="50" cy="50" r="15" fill="#1a0508" stroke="#ffb0b0" stroke-width="1.5"/>
+        <circle cx="50" cy="50" r="15" fill="none" stroke="#ff5a5a" stroke-width="1" stroke-dasharray="3 4"/>
+        <circle cx="50" cy="50" r="4" fill="#ffd0d0"/>
+        <text x="50" y="94" text-anchor="middle" font-size="6" fill="rgba(255,90,90,0.65)" font-family="monospace">STORE//REALITY</text>
+      </g>
+    </svg>
+    <div class="style-name">vault / store</div>
+    <div class="obj-name">physical memory</div>
+  </div>
+
+  <div class="cell" onclick="pulse(this)">
+    <svg viewBox="0 0 100 100">
+      <defs>
+        <radialGradient id="coreglow" cx="50%" cy="50%" r="55%">
+          <stop offset="0%" stop-color="#ff9090"/>
+          <stop offset="55%" stop-color="#8a1820"/>
+          <stop offset="100%" stop-color="#2e070b"/>
+        </radialGradient>
+      </defs>
+      <g style="filter:drop-shadow(0 0 9px rgba(255,60,60,0.6))">
+        <circle cx="50" cy="50" r="32" fill="none" stroke="#ff5a5a" stroke-width="1.2" stroke-dasharray="2 3" opacity="0.8"/>
+        <circle cx="50" cy="50" r="24" fill="url(#coreglow)" stroke="#ff9a9a" stroke-width="1.6"/>
+        <circle cx="50" cy="50" r="24" fill="none" stroke="#ff5a5a" stroke-width="1" stroke-dasharray="4 5"/>
+        <circle cx="50" cy="50" r="8" fill="#ffd0d0"/>
+        <path d="M50 18 L50 26 M50 74 L50 82 M18 50 L26 50 M74 50 L82 50" stroke="#ff8080" stroke-width="1.5"/>
+        <text x="50" y="94" text-anchor="middle" font-size="6" fill="rgba(255,90,90,0.65)" font-family="monospace">CORE//ENGINE</text>
+      </g>
+    </svg>
+    <div class="style-name">core / engine</div>
+    <div class="obj-name">jarvis core</div>
+  </div>
+
+</div>
+
+<div class="note">this is the combined style &mdash; three sample icons. click one to see a reaction. next: the full set in this style.</div>
+
+<script>
+function pulse(el){
+  const svg = el.querySelector('g');
+  svg.animate([
+    { filter:'drop-shadow(0 0 9px rgba(255,90,50,0.6))', transform:'scale(1)' },
+    { filter:'drop-shadow(0 0 22px rgba(255,120,70,1))', transform:'scale(1.12)' },
+    { filter:'drop-shadow(0 0 9px rgba(255,90,50,0.6))', transform:'scale(1)' }
+  ], { duration:520, easing:'ease-out' });
+}
+</script>
+</body>
+</html>
