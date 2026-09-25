@@ -1618,7 +1618,7 @@ Stamp: BUILT    Source: [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A /
 
 ALONE
 - What it is: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Takes in: BUILT — The record’s top-level members. that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
+- Takes in: BUILT — The record’s top-level members in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Must never: NOT DECIDED
@@ -1632,7 +1632,7 @@ TOGETHER
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
-| 1 · BUILT | C-READ.2.1 — Required twelve-field shape | The record’s top-level members. that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 1 · BUILT | C-READ.2.1 — Required twelve-field shape | The record’s top-level members in a form that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: NONE
 
@@ -1664,7 +1664,7 @@ Stamp: BUILT    Source: [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A /
 
 ALONE
 - What it is: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Takes in: BUILT — `reads`. that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
+- Takes in: BUILT — `reads` in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Must never: NOT DECIDED
@@ -1678,7 +1678,7 @@ TOGETHER
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
-| 1 · BUILT | C-READ.2.2 — Non-empty reads list | `reads`. that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 1 · BUILT | C-READ.2.2 — Non-empty reads list | `reads` in a form that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: NONE
 
@@ -1710,7 +1710,7 @@ Stamp: BUILT    Source: [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A /
 
 ALONE
 - What it is: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Takes in: BUILT — `meaning`. that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
+- Takes in: BUILT — `meaning` in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Must never: NOT DECIDED
@@ -1724,7 +1724,7 @@ TOGETHER
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
-| 1 · BUILT | C-READ.2.3 — String meaning | `meaning`. that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 1 · BUILT | C-READ.2.3 — String meaning | `meaning` in a form that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: NONE
 
@@ -1756,7 +1756,7 @@ Stamp: BUILT    Source: [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A /
 
 ALONE
 - What it is: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Takes in: BUILT — `confidence`. that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
+- Takes in: BUILT — `confidence` in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Must never: NOT DECIDED
@@ -1770,7 +1770,7 @@ TOGETHER
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
-| 1 · BUILT | C-READ.2.4 — Two-slot confidence shape | `confidence`. that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 1 · BUILT | C-READ.2.4 — Two-slot confidence shape | `confidence` in a form that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: NONE
 
@@ -1802,7 +1802,7 @@ Stamp: BUILT    Source: [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A /
 
 ALONE
 - What it is: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Takes in: BUILT — `confidence.interpretation_confidence`. that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
+- Takes in: BUILT — `confidence.interpretation_confidence` in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Must never: NOT DECIDED
@@ -1816,7 +1816,7 @@ TOGETHER
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
-| 1 · BUILT | C-READ.2.5 — Interpretation-confidence presence | `confidence.interpretation_confidence`. that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 1 · BUILT | C-READ.2.5 — Interpretation-confidence presence | `confidence.interpretation_confidence` in a form that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: NONE
 
@@ -1848,7 +1848,7 @@ Stamp: BUILT    Source: [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A /
 
 ALONE
 - What it is: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Takes in: BUILT — `confidence.source_reliability`. that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
+- Takes in: BUILT — `confidence.source_reliability` in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Must never: NOT DECIDED
@@ -1862,7 +1862,7 @@ TOGETHER
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
-| 1 · BUILT | C-READ.2.6 — Source-reliability key presence | `confidence.source_reliability`. that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 1 · BUILT | C-READ.2.6 — Source-reliability key presence | `confidence.source_reliability` in a form that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: NONE
 
@@ -1894,7 +1894,7 @@ Stamp: BUILT    Source: [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A /
 
 ALONE
 - What it is: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Takes in: BUILT — `story_layer`. that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
+- Takes in: BUILT — `story_layer` in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Must never: NOT DECIDED
@@ -1908,7 +1908,7 @@ TOGETHER
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
-| 1 · BUILT | C-READ.2.7 — Story list shape | `story_layer`. that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 1 · BUILT | C-READ.2.7 — Story list shape | `story_layer` in a form that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: NONE
 
@@ -1940,7 +1940,7 @@ Stamp: BUILT    Source: [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A /
 
 ALONE
 - What it is: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Takes in: BUILT — Optional members in a story entry. that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
+- Takes in: BUILT — Optional members in a story entry in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Must never: NOT DECIDED
@@ -1954,7 +1954,7 @@ TOGETHER
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
-| 1 · BUILT | C-READ.2.8 — Story omission rule | Optional members in a story entry. that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 1 · BUILT | C-READ.2.8 — Story omission rule | Optional members in a story entry in a form that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: NONE
 
@@ -1986,7 +1986,7 @@ Stamp: BUILT    Source: [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A /
 
 ALONE
 - What it is: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Takes in: BUILT — `mode`. that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
+- Takes in: BUILT — `mode` in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Must never: NOT DECIDED
@@ -2000,7 +2000,7 @@ TOGETHER
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
-| 1 · BUILT | C-READ.2.9 — Mode object shape | `mode`. that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 1 · BUILT | C-READ.2.9 — Mode object shape | `mode` in a form that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: NONE
 
@@ -2032,7 +2032,7 @@ Stamp: BUILT    Source: [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A /
 
 ALONE
 - What it is: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Takes in: BUILT — `produced_by.origin`. that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
+- Takes in: BUILT — `produced_by.origin` in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Must never: NOT DECIDED
@@ -2046,7 +2046,7 @@ TOGETHER
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
-| 1 · BUILT | C-READ.2.10 — Origin vocabulary | `produced_by.origin`. that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 1 · BUILT | C-READ.2.10 — Origin vocabulary | `produced_by.origin` in a form that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: NONE
 
@@ -2078,7 +2078,7 @@ Stamp: BUILT    Source: [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A /
 
 ALONE
 - What it is: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Takes in: BUILT — `schema_version`. that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
+- Takes in: BUILT — `schema_version` in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Must never: NOT DECIDED
@@ -2092,7 +2092,7 @@ TOGETHER
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
-| 1 · BUILT | C-READ.2.11 — Schema-version presence | `schema_version`. that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 1 · BUILT | C-READ.2.11 — Schema-version presence | `schema_version` in a form that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: NONE
 
@@ -2124,7 +2124,7 @@ Stamp: BUILT    Source: [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A /
 
 ALONE
 - What it is: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Takes in: BUILT — `derived_from`. that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
+- Takes in: BUILT — `derived_from` in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Must never: NOT DECIDED
@@ -2138,7 +2138,7 @@ TOGETHER
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
-| 1 · BUILT | C-READ.2.12 — Parent-reading list | `derived_from`. that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 1 · BUILT | C-READ.2.12 — Parent-reading list | `derived_from` in a form that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: NONE
 
@@ -2170,7 +2170,7 @@ Stamp: BUILT    Source: [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A /
 
 ALONE
 - What it is: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Takes in: BUILT — `idempotency_key`. that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
+- Takes in: BUILT — `idempotency_key` in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Must never: NOT DECIDED
@@ -2184,7 +2184,7 @@ TOGETHER
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
-| 1 · BUILT | C-READ.2.13 — Operation-key presence | `idempotency_key`. that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 1 · BUILT | C-READ.2.13 — Operation-key presence | `idempotency_key` in a form that violates the stated shape constraint. | Refuses the malformed record. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: NONE
 
@@ -3675,7 +3675,7 @@ ALONE
 
 TOGETHER
 - Fed by: DECIDED-2026-09-25 — C-READ.7.1 — Raw-root bootstrap basis: Uses raw roots as a main basis of early engine runs. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
-- Fed by: DECIDED-2026-09-25 — C-READ.7.2 — Human-affirmed bootstrap context: Uses the approval only for context. The reading remains dated, weightless and revisable; affirmation is a story-layer event, not a truth button. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / WORDING GUARD]
+- Fed by: ACCEPTED — C-READ.7.2 — Human-affirmed bootstrap context: Uses human-affirmed reading material as interpretive context only; it cannot directly establish a facts-lane claim. [04/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_CANDIDATE.md §1.2] [NHD-B24]
 - Fed by: DECIDED-2026-09-25 — C-READ.7.3 — Prior machine-reading treatment: Excludes them by default, or clearly marks them LOW-TRUST auxiliary context; neither branch supplies independent support. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
 - Gated by: DECIDED-2026-09-25 — C-READ.7.4 — No automatic self-amplification: Prevents it from automatically becoming trusted context; the bootstrap rule acts before downstream lineage analysis. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
 - Changes: NOT DECIDED
@@ -3711,14 +3711,14 @@ USED BY (one row per place; the same part may appear in several paths)
 SUB-PARTS: NONE
 
 ### C-READ.7.2 — Human-affirmed bootstrap context
-Stamp: DECIDED-2026-09-25    Source: [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / WORDING GUARD]
+Stamp: ACCEPTED    Source: [04/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_CANDIDATE.md §1.2] [NHD-B24]
 
 ALONE
-- What it is: DECIDED-2026-09-25 — Uses the approval only for context. The reading remains dated, weightless and revisable; affirmation is a story-layer event, not a truth button. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / WORDING GUARD]
-- Takes in: DECIDED-2026-09-25 — Material explicitly approved by Ness for use as context. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / WORDING GUARD]
-- Does: DECIDED-2026-09-25 — Uses the approval only for context. The reading remains dated, weightless and revisable; affirmation is a story-layer event, not a truth button. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / WORDING GUARD]
-- Gives out: DECIDED-2026-09-25 — Context-approved material that remains an interpretation. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / WORDING GUARD]
-- Must never: DECIDED-2026-09-25 — Silently turn affirmed-for-context into affirmed-as-true. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / WORDING GUARD]
+- What it is: ACCEPTED — Uses human-affirmed reading material as interpretive context only; it cannot directly establish a facts-lane claim. [04/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_CANDIDATE.md §1.2] [NHD-B24]
+- Takes in: ACCEPTED — Human-affirmed prior readings supplied as interpretive context. [04/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_CANDIDATE.md §1.2] [NHD-B24]
+- Does: ACCEPTED — Uses human-affirmed reading material as interpretive context only; it cannot directly establish a facts-lane claim. [04/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_CANDIDATE.md §1.2] [NHD-B24]
+- Gives out: ACCEPTED — Human-affirmed reading material that remains an interpretation. [04/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_CANDIDATE.md §1.2] [NHD-B24]
+- Must never: ACCEPTED — Silently turn affirmed-for-context into affirmed-as-true. [04/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_CANDIDATE.md §1.2] [NHD-B24]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -3729,7 +3729,7 @@ TOGETHER
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
-| 1 · DECIDED-2026-09-25 | C-READ.7 — Bootstrap reading context | Material explicitly approved by Ness for use as context. | Uses the approval only for context. The reading remains dated, weightless and revisable; affirmation is a story-layer event, not a truth button. | Context-approved material that remains an interpretation. | [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / WORDING GUARD] |
+| 1 · ACCEPTED | C-READ.7 — Bootstrap reading context | Human-affirmed prior readings supplied as interpretive context. | Uses human-affirmed reading material as interpretive context only; it cannot directly establish a facts-lane claim. | Human-affirmed reading material that remains an interpretation. | [04/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_CANDIDATE.md §1.2] [NHD-B24] |
 
 SUB-PARTS: NONE
 
@@ -4939,7 +4939,7 @@ Exact wire forms in this register are unfilled in this scoped v1 account; this i
 | FR-ID | Restored content | Landing |
 |---|---|---|
 | FR-0123 | Optional content hash is separate from operation-key retries | C-READ.1.12.1 |
-| FR-0125 | Raw roots and explicitly human-affirmed bootstrap context | C-READ.7.1; C-READ.7.2 |
+| FR-0125 | Raw roots and explicitly human-affirmed bootstrap context | C-READ.7 (main raw-root/human-affirmed input rule); C-READ.7.1 |
 | FR-0126 | Prior machine readings excluded or LOW-TRUST, never independent support | C-READ.7.3 |
 | FR-0127 | Read-only checks during quarantine and periodically afterward | C-READ.8 |
 | FR-0128 | Unclear source | C-READ.8.3 |
@@ -4949,6 +4949,8 @@ Exact wire forms in this register are unfilled in this scoped v1 account; this i
 | FR-0132 | Confidence growth without independent roots | C-READ.8.7 |
 | FR-0133 | Hidden contradiction | C-READ.8.8 |
 | FR-0136 | Interpretation-integrity constraint | C-READ.9 |
+
+Accepted-carriage entry: FR-0608 — Human-affirmed means approved for context, not affirmed as fact — CARRIED; landing C-READ.7.2; stamp ACCEPTED; current behavior source [04/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_CANDIDATE.md §1.2] [NHD-B24]. It is not part of the September 25 restoration. The ledger supplies classification and the accepted-home pointer only; the behavior is checked in B24 §1.2.
 
 ### Cross-piece relationships and path placement
 
@@ -5034,8 +5036,8 @@ All 138 READ-folder file rows and 107 V10 heading rows retain their identifiers.
 | F054 | `04_ACCEPTED_STANDALONE_DESIGNS/NH_B16_QUARANTINE_PROMOTION_EVIDENCE_ARCHITECTURE_v1_0_CANDIDATE.md` | Carried through Chapter 3-a: Earlier Chapter 0 read only; not reread at this pin | NOT PLACED: no Chapters 0–2 (carried placement) behavior is sourced from this file; remaining content belongs to later owning groups or appendices, subject to its read and version check. |
 | F055 | `04_ACCEPTED_STANDALONE_DESIGNS/NH_B1_CONTEXT_RETRIEVAL_PARAMETER_ARCHITECTURE_ACCEPTANCE_RECORD_v1_0.md` | Carried through Chapter 3-a: Not yet read | NOT PLACED: no Chapters 0–2 (carried placement) behavior is sourced from this file; remaining content belongs to later owning groups or appendices, subject to its read and version check. |
 | F056 | `04_ACCEPTED_STANDALONE_DESIGNS/NH_B1_CONTEXT_RETRIEVAL_PARAMETER_ARCHITECTURE_v1_0_CANDIDATE.md` | Carried through Chapter 3-a: Not yet read | NOT PLACED: no Chapters 0–2 (carried placement) behavior is sourced from this file; remaining content belongs to later owning groups or appendices, subject to its read and version check. |
-| F057 | `04_ACCEPTED_STANDALONE_DESIGNS/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_CANDIDATE.md` | Carried through Chapter 3-a: Not yet read | NOT PLACED: no Chapters 0–2 (carried placement) behavior is sourced from this file; remaining content belongs to later owning groups or appendices, subject to its read and version check. |
-| F058 | `04_ACCEPTED_STANDALONE_DESIGNS/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_PACKAGE_COMPLETE_RECORD_v1_0.md` | Carried through Chapter 3-a: Not yet read | NOT PLACED: no Chapters 0–2 (carried placement) behavior is sourced from this file; remaining content belongs to later owning groups or appendices, subject to its read and version check. |
+| F057 | `04_ACCEPTED_STANDALONE_DESIGNS/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_CANDIDATE.md` | Newly read whole for this correction, all 1,938 lines; pinned Git blob verified | C-READ.7.2 and its reciprocal C-READ.7 link: ACCEPTED guard from §1.2 (NHD-B24), matching FR-0608 CARRIED. Remaining B24 behavior NOT PLACED: belongs to later owning templates; no other B24 mechanism added here. |
+| F058 | `04_ACCEPTED_STANDALONE_DESIGNS/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_PACKAGE_COMPLETE_RECORD_v1_0.md` | Newly read whole for this correction, all 132 lines; pinned Git blob verified | §§2–3, 5 and 12 establish the accepted standalone status and exact v7 identity used for C-READ.7.2; no behavior sourced from this receipt. EXCLUDED: closure history/process under §1.3; no implementation or integration claimed. |
 | F059 | `04_ACCEPTED_STANDALONE_DESIGNS/NH_B7_PRIVACY_ENFORCEMENT_AND_PROTECTED_HANDLING_ARCHITECTURE_PACKAGE_COMPLETE_CLOSURE_RECORD_v1_0.md` | Carried through Chapter 3-a: Not yet read | NOT PLACED: no Chapters 0–2 (carried placement) behavior is sourced from this file; remaining content belongs to later owning groups or appendices, subject to its read and version check. |
 | F060 | `04_ACCEPTED_STANDALONE_DESIGNS/NH_B7_PRIVACY_ENFORCEMENT_AND_PROTECTED_HANDLING_ARCHITECTURE_v1_3_CANDIDATE.md` | Carried through Chapter 3-a: Not yet read | NOT PLACED: no Chapters 0–2 (carried placement) behavior is sourced from this file; remaining content belongs to later owning groups or appendices, subject to its read and version check. |
 | F061 | `04_ACCEPTED_STANDALONE_DESIGNS/NH_B9_RETRY_STATE_ARCHITECTURE_PACKAGE_COMPLETE_CLOSURE_RECORD_v1_0.md` | Carried through Chapter 3-a: Not yet read | NOT PLACED: no Chapters 0–2 (carried placement) behavior is sourced from this file; remaining content belongs to later owning groups or appendices, subject to its read and version check. |
@@ -5092,7 +5094,7 @@ All 138 READ-folder file rows and 107 V10 heading rows retain their identifiers.
 | F112 | `05_ACTIVE_CANDIDATE/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md` | Carried through Chapter 3-a: Earlier Chapter 0 read only; not reread at this pin | NOT PLACED: no Chapters 0–2 (carried placement) behavior is sourced from this file; remaining content belongs to later owning groups or appendices, subject to its read and version check. |
 | F113 | `05_ACTIVE_CANDIDATE/NH_B24_REJECTION_CATEGORY_DECISION_2026-09-23_v0_1_CANDIDATE.md` | Carried through Chapter 3-a: Not yet read | NOT PLACED: no Chapters 0–2 (carried placement) behavior is sourced from this file; remaining content belongs to later owning groups or appendices, subject to its read and version check. |
 | F114 | `05_ACTIVE_CANDIDATE/NH_DECISION_INDEX_PROPOSAL_v0_10_CANDIDATE.md` | Carried through Chapter 3-a: Not yet read | NOT PLACED: no Chapters 0–2 (carried placement) behavior is sourced from this file; remaining content belongs to later owning groups or appendices, subject to its read and version check. |
-| F115 | `05_ACTIVE_CANDIDATE/NH_DECISION_INDEX_PROPOSAL_v0_11_CANDIDATE.md` | Carried through Chapter 3-a: Not yet read | NOT PLACED: no Chapters 0–2 (carried placement) behavior is sourced from this file; remaining content belongs to later owning groups or appendices, subject to its read and version check.; Chapter 3-a: Navigation only: NHD-B11 and NHD-BU1; no behavior sourced from the index |
+| F115 | `05_ACTIVE_CANDIDATE/NH_DECISION_INDEX_PROPOSAL_v0_11_CANDIDATE.md` | Carried through Chapter 3-a: Not yet read whole; NHD-B24 row searched for this correction | NOT PLACED: no Chapters 0–2 (carried placement) behavior is sourced from this file; remaining content belongs to later owning groups or appendices, subject to its read and version check.; Chapter 3-a: Navigation only: NHD-B11 and NHD-BU1; no behavior sourced from the index; this correction: NHD-B24 navigation for C-READ.7.2 |
 | F116 | `05_ACTIVE_CANDIDATE/NH_DECISION_INDEX_PROPOSAL_v0_5_ACCEPTANCE_RECORD_v1_0.md` | Carried through Chapter 3-a: Not yet read | NOT PLACED: no Chapters 0–2 (carried placement) behavior is sourced from this file; remaining content belongs to later owning groups or appendices, subject to its read and version check. |
 | F117 | `05_ACTIVE_CANDIDATE/NH_DECISION_INDEX_PROPOSAL_v0_5_ACCEPTANCE_RECORD_v1_2.md` | Carried through Chapter 3-a: Not yet read | NOT PLACED: no Chapters 0–2 (carried placement) behavior is sourced from this file; remaining content belongs to later owning groups or appendices, subject to its read and version check. |
 | F118 | `05_ACTIVE_CANDIDATE/NH_DECISION_INDEX_PROPOSAL_v0_5_CANDIDATE.md` | Carried through Chapter 3-a: Not yet read | NOT PLACED: no Chapters 0–2 (carried placement) behavior is sourced from this file; remaining content belongs to later owning groups or appendices, subject to its read and version check. |
@@ -5104,7 +5106,7 @@ All 138 READ-folder file rows and 107 V10 heading rows retain their identifiers.
 | F124 | `05_ACTIVE_CANDIDATE/NH_DECISION_RECORD_PRE_V10_RECOVERY_2026-09-24_v0_1_CANDIDATE.md` | Carried through Chapter 3-a: Whole file in passed Chapter 2; not a new whole read in that piece | C-7A.10; C-7B and cited sub-parts. Remaining source scope NOT PLACED: belongs to other component groups; history/process excluded under §1.3. |
 | F125 | `05_ACTIVE_CANDIDATE/NH_DESIGN_ANSWERS.md` | Carried through Chapter 3-a: Not yet read | NOT PLACED: no Chapters 0–2 (carried placement) behavior is sourced from this file; remaining content belongs to later owning groups or appendices, subject to its read and version check. |
 | F126 | `05_ACTIVE_CANDIDATE/NH_PERSONAL_IDEA_NOTE_A19_VR_WORLD_ROOMS_OFFLINE_CREATION_v1.md` | Carried through Chapter 3-a: Not yet read | NOT PLACED: no Chapters 0–2 (carried placement) behavior is sourced from this file; remaining content belongs to later owning groups or appendices, subject to its read and version check. |
-| F127 | `05_ACTIVE_CANDIDATE/NH_PRE_V10_HISTORY_VS_V10_FEATURE_RECOVERY_LEDGER_v0_1_CANDIDATE.md` | Carried through Chapter 3-a: Identity/hash verified; Stage 2 reading pending | NOT PLACED: Appendix B requires Stage 2 rows by FR-ID/title only; no behavior sourced from the ledger. |
+| F127 | `05_ACTIVE_CANDIDATE/NH_PRE_V10_HISTORY_VS_V10_FEATURE_RECOVERY_LEDGER_v0_1_CANDIDATE.md` | Carried through Chapter 3-a: Identity/hash verified; Stage 2 reading pending except FR-0125 and FR-0608 rows checked for this correction (classification and accepted-home pointer only) | NOT PLACED: Appendix B requires Stage 2 rows by FR-ID/title only; no behavior sourced from the ledger. |
 | F128 | `05_ACTIVE_CANDIDATE/Other_Future_Feature_Intent_Excerpts.md` | Carried through Chapter 3-a: Not yet read | NOT PLACED: no Chapters 0–2 (carried placement) behavior is sourced from this file; remaining content belongs to later owning groups or appendices, subject to its read and version check. |
 | F129 | `05_ACTIVE_CANDIDATE/Thought_Branches_and_Simulation_Intent.md` | Carried through Chapter 3-a: Not yet read | NOT PLACED: no Chapters 0–2 (carried placement) behavior is sourced from this file; remaining content belongs to later owning groups or appendices, subject to its read and version check. |
 | F130 | `05_INACTIVE_CANDIDATE/NH_FUTURE_MUSIC_UNDERSTANDING_AND_MUSIC_SERVICE_CONNECTIONS_PACKAGE_INTAKE_v1_0_CANDIDATE.md` | Carried through Chapter 3-a: Not yet read | NOT PLACED in Chapters 0–2 (carried placement): intent slot belongs to Appendix C; no mechanism may be sourced. Existing Chapter 1 slots stand. |
@@ -5114,7 +5116,7 @@ All 138 READ-folder file rows and 107 V10 heading rows retain their identifiers.
 | F134 | `05_INACTIVE_CANDIDATE/NH_TOOLS_FOR_NH_CATEGORY_v0_1.md` | Carried through Chapter 3-a: Not yet read | NOT PLACED in Chapters 0–2 (carried placement): intent slot belongs to Appendix C; no mechanism may be sourced. Existing Chapter 1 slots stand. |
 | F135 | `05_INACTIVE_CANDIDATE/NH_VOICE_AND_DELIVERY_DIRECTOR_INTENT_v0_1.md` | Carried through Chapter 3-a: Not yet read | NOT PLACED in Chapters 0–2 (carried placement): intent slot belongs to Appendix C; no mechanism may be sourced. Existing Chapter 1 slots stand. |
 | F136 | `05_INACTIVE_CANDIDATE/NH_VOICE_AND_DELIVERY_DIRECTOR_INTENT_v0_3_CANDIDATE.md` | Carried through Chapter 3-a: Whole-read in Chapter 1; not reread in that piece | NOT PLACED in Chapters 0–2 (carried placement): intent slot belongs to Appendix C; no mechanism may be sourced. Existing Chapter 1 slots stand. |
-| F137 | `05_ACTIVE_CANDIDATE/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md` | Carried through Chapter 3-a: Relevant passages reopened; earlier whole-read credit retained; scoped passages/searches reopened in Chapter 3-b; earlier whole-read credit retained | C-7A.6 and cited sub-parts; C-7A.13 and cited sub-parts; C-7A.15 and cited sub-parts; C-7B and cited sub-parts. Remaining source scope NOT PLACED: belongs to other component groups; history/process excluded under §1.3. Chapter 3-b: C-READ.7 and C-READ.8 (FR-0125–FR-0133); C-READ.1.12.1 (FR-0123); C-READ.9 (FR-0136). |
+| F137 | `05_ACTIVE_CANDIDATE/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md` | Carried through Chapter 3-a: Relevant passages reopened; earlier whole-read credit retained; scoped passages/searches reopened in Chapter 3-b; earlier whole-read credit retained | C-7A.6 and cited sub-parts; C-7A.13 and cited sub-parts; C-7A.15 and cited sub-parts; C-7B and cited sub-parts. Remaining source scope NOT PLACED: belongs to other component groups; history/process excluded under §1.3. Chapter 3-b: C-READ.7 (excluding the ACCEPTED C-READ.7.2 guard) and C-READ.8 (FR-0125–FR-0133); C-READ.1.12.1 (FR-0123); C-READ.9 (FR-0136). |
 | F138 | `05_ACTIVE_CANDIDATE/NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CHAPTERS/NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH00.md` | Carried through Chapter 3-a: Whole-read in Chapter 1; not reread in that piece | Naming/path continuity only; no Chapters 0–2 (carried placement) behavior sourced from this chapter. |
 
 ### Restored archive coverage
@@ -5126,7 +5128,7 @@ All 138 READ-folder file rows and 107 V10 heading rows retain their identifiers.
 | A-ARCH3 | `98_HISTORICAL_SOURCES_PRE_V10/sources/NH_Universal_Filter_RULES.md` | Earlier whole-read credit at the same pin; not newly read whole in this piece | C-7A.6 and cited sub-parts; C-7A.13 and cited sub-parts; C-7A.15 and cited sub-parts; all unrelated archive text excluded from behavior. |
 | A-ARCH4 | `98_HISTORICAL_SOURCES_PRE_V10/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md` | Earlier whole-read credit at the same pin; not newly read whole in this piece | C-7B.10.2 and cited sub-parts; C-7B.10.3 and cited sub-parts; C-7B.10.4 and cited sub-parts; all unrelated archive text excluded from behavior. |
 | A-ARCH5 | `98_HISTORICAL_SOURCES_PRE_V10/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md` | Earlier whole-read credit at the same pin; not newly read whole in this piece | C-7B.10.2 and cited sub-parts; C-7B.10.3 and cited sub-parts; C-7B.10.4 and cited sub-parts; all unrelated archive text excluded from behavior. |
-| A-ARCH6 | `98_HISTORICAL_SOURCES_PRE_V10/sources/NH_MASTER-14_FINAL__2_.md` | Newly read whole, all 434 lines; exact pinned Git blob verified | C-READ.7 and C-READ.8 from §11 item 27 only; every unrelated archive passage excluded from behavior. |
+| A-ARCH6 | `98_HISTORICAL_SOURCES_PRE_V10/sources/NH_MASTER-14_FINAL__2_.md` | Newly read whole, all 434 lines; exact pinned Git blob verified | C-READ.7 (excluding C-READ.7.2) and C-READ.8 from the restored §11 item 27 scope only; WORDING GUARD is excluded as an archive behavior source; C-READ.7.2 uses accepted B24 §1.2 instead. |
 
 ### V10 heading coverage
 
@@ -5250,16 +5252,19 @@ All 138 READ-folder file rows and 107 V10 heading rows retain their identifiers.
 | V10 §7G-A job-level idempotency and Steps 5/5A | C-READ.3 new-root handoff, existing-reading recovery, exact write-failure outcome and checkpoint. |
 | V10 §6A production authorization | C-READ.5 protections and approval scope; coding-process rituals excluded under §1.3. |
 | MAP C-READ; V10 §0B | C-READ.6 operation classes, one-operation/one-log and access boundary. |
-| September 25 record §4 Group 6; named archive §11 item 27 | C-READ.7/C-READ.8; all nine restoration rows FR-0125–FR-0133 explicitly placed. |
+| September 25 record §4 Group 6; named archive §11 item 27 | C-READ.7 (excluding C-READ.7.2)/C-READ.8; all nine restoration rows FR-0125–FR-0133 explicitly placed. |
 | September 25 record §4 Group 5; named archive §6B and §11 item 21 | C-READ.1.12.1 optional hash and C-READ.9 interpretation-integrity requirement; other hardening requirements remain for their owning scope. |
+| [04/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_CANDIDATE.md §1.2] [NHD-B24] | C-READ.7.2 and its reciprocal C-READ.7 link; FR-0608 CARRIED guard, stamped ACCEPTED; not a September 25 restoration. |
 
 ## READ RECORD
 
 ### Files newly read whole for this piece
 
-The archive was read in consecutive ranges 1–115, 116–278, 279–377 and 378–434; only the restored §11 item 27 scope supplies behavior. The normalization file was read whole for accepted-owner navigation, not used as behavioral authority.
+The archive was read in consecutive ranges 1–115, 116–278, 279–377 and 378–434; only the restored §11 item 27 scope supplies behavior. The normalization file was read whole for accepted-owner navigation, not used as behavioral authority. For this correction, B24 v7 was read whole in consecutive ranges 1–370, 371–740, 741–1100, 1101–1400, 1401–1700 and 1701–1938; its package-complete record was read whole, all 132 lines. Only the §1.2 guard is added as behavior, with the receipt supplying acceptance status.
 - `04_ACCEPTED_STANDALONE_DESIGNS/NH_BUNDLE_1_MEMORY_READING_FOUNDATION_NORMALIZATION_AND_CLOSEOUT_CANDIDATE_v1_4.md`
 - `98_HISTORICAL_SOURCES_PRE_V10/sources/NH_MASTER-14_FINAL__2_.md`
+- `04_ACCEPTED_STANDALONE_DESIGNS/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_CANDIDATE.md` (whole read for this correction)
+- `04_ACCEPTED_STANDALONE_DESIGNS/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_PACKAGE_COMPLETE_RECORD_v1_0.md` (whole read for this correction)
 
 Instruction file reopened in full at the start and reopened for the final checklist: `NH_MASTER-21_SYSTEM_BEHAVIOR_BUILD_CONTRACT_FOR_CHATGPT_v1_0.md`; verified SHA-256 `e78c7a8c8a448ff20966002465c8d6a330000900802c0b19a48e8a124e5ceba1`. The attached project instructions, simple-explanation instructions and feasibility/simplicity handoff were read whole as working instructions, not governance behavior sources.
 
@@ -5276,11 +5281,11 @@ Instruction file reopened in full at the start and reopened for the final checkl
 | `04_ACCEPTED_STANDALONE_DESIGNS/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md` | §10 cross-batch reading/index contract; headings; boundary check only. | Passed Chapters 1–3-a at the same pin; no new whole-read claim. |
 | `04_ACCEPTED_STANDALONE_DESIGNS/NH_BUNDLE_6_POLICY_DECISIONS_v1_0_CANDIDATE.md` | Brief navigation excerpt only; no new behavior sourced. | Passed Chapters 1–3-a at the same pin; no new whole-read claim. |
 
-The current decision index was searched only for accepted-package navigation. B16, B24 and A2 mechanisms were not reconstructed from snippets or normalization summaries. The ledger supplied no behavior. Chapter 2 and Chapter 3-a were inspected for canonical names and reciprocal relationships; their bytes were not edited.
+The current decision index was searched only for accepted-package navigation, including NHD-B24 for this correction. B16 and A2 mechanisms were not reconstructed from snippets or normalization summaries. The ledger supplied no behavior; FR-0125 and FR-0608 were checked only for classification and the accepted-home pointer. Chapter 2 and Chapter 3-a were inspected for canonical names and reciprocal relationships; their bytes were not edited.
 
 ### READ-folder files not yet read
 
-103 READ-folder entries retain their earlier pending reading status. This carries the Chapter 3-a list forward and removes only the normalization file newly read whole; the archive is tracked separately. The ledger has the contract’s Stage-2-only exception. No scope or status summary substitutes for reading an outstanding behavior source whole.
+101 READ-folder entries retain their earlier pending reading status. This carries the Chapter 3-a list forward and removes the normalization file and, for this correction, B24 v7 and its package-complete record, newly read whole; the archive is tracked separately. The ledger has the contract’s Stage-2-only exception. No scope or status summary substitutes for reading an outstanding behavior source whole.
 
 - `04_ACCEPTED_STANDALONE_DESIGNS/NH_A15_BOP_ACOUSTIC_CONDITION_NOTES_AMENDMENT_POLICY_PACKAGE_COMPLETE_CLOSURE_RECORD_v1_0.md`
 - `04_ACCEPTED_STANDALONE_DESIGNS/NH_A15_BOP_ACOUSTIC_CONDITION_NOTES_AMENDMENT_POLICY_v1_1_CANDIDATE.md`
@@ -5322,8 +5327,6 @@ The current decision index was searched only for accepted-package navigation. B1
 - `04_ACCEPTED_STANDALONE_DESIGNS/NH_B15_TSC_TRANSACTIONAL_STORE_ARCHITECTURE_v1_4_CANDIDATE.md`
 - `04_ACCEPTED_STANDALONE_DESIGNS/NH_B1_CONTEXT_RETRIEVAL_PARAMETER_ARCHITECTURE_ACCEPTANCE_RECORD_v1_0.md`
 - `04_ACCEPTED_STANDALONE_DESIGNS/NH_B1_CONTEXT_RETRIEVAL_PARAMETER_ARCHITECTURE_v1_0_CANDIDATE.md`
-- `04_ACCEPTED_STANDALONE_DESIGNS/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_CANDIDATE.md`
-- `04_ACCEPTED_STANDALONE_DESIGNS/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_PACKAGE_COMPLETE_RECORD_v1_0.md`
 - `04_ACCEPTED_STANDALONE_DESIGNS/NH_B7_PRIVACY_ENFORCEMENT_AND_PROTECTED_HANDLING_ARCHITECTURE_PACKAGE_COMPLETE_CLOSURE_RECORD_v1_0.md`
 - `04_ACCEPTED_STANDALONE_DESIGNS/NH_B7_PRIVACY_ENFORCEMENT_AND_PROTECTED_HANDLING_ARCHITECTURE_v1_3_CANDIDATE.md`
 - `04_ACCEPTED_STANDALONE_DESIGNS/NH_B9_RETRY_STATE_ARCHITECTURE_PACKAGE_COMPLETE_CLOSURE_RECORD_v1_0.md`
@@ -5400,6 +5403,8 @@ The current decision index was searched only for accepted-package navigation. B1
 | `04_ACCEPTED_STANDALONE_DESIGNS/NH_BUNDLE_6_POLICY_DECISIONS_v1_0_CANDIDATE.md` | 26884 | `b37f965a343dbf86130f96591d58de9288ad0a746a68e8ae8fdd7b66208a63da` | MATCH |
 | `04_ACCEPTED_STANDALONE_DESIGNS/NH_BUNDLE_1_MEMORY_READING_FOUNDATION_NORMALIZATION_AND_CLOSEOUT_CANDIDATE_v1_4.md` | 29919 | `5ebddb536201e8d39794297088752ba4c2925a1be706ff29c55e1a45b42ea6fa` | MATCH |
 | `98_HISTORICAL_SOURCES_PRE_V10/sources/NH_MASTER-14_FINAL__2_.md` | 101638 | `55fab7e730cb1f4b320b02411fbca954fc15259d7f13574b661af5d77c3fd720` | MATCH |
+| `04_ACCEPTED_STANDALONE_DESIGNS/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_CANDIDATE.md` | 137507 | `7f5762e5bc3d7d0fa554ad41426d2cc2f14fb7753a79b67fbd675f6c6b8a2171` | MATCH |
+| `04_ACCEPTED_STANDALONE_DESIGNS/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_PACKAGE_COMPLETE_RECORD_v1_0.md` | 4876 | `83d79db9f5edcad85d603f7cfe93ea3afeeebec6a60f6f4aa64db632b7e5d7e0` | MATCH |
 
 ## CONTRACT CHECK
 
@@ -5407,15 +5412,15 @@ CONTRACT CHECK (against the cloned contract, SHA-256 e78c7a8c8a448ff20966002465c
 §1.3 no history/actions/roles/workflow in this chapter: PASS — the 173 behavior templates contain operational behavior and permissions, with source histories, project roles and build rituals excluded; delivery/read metadata remains separate.
 §1.4 every gap written as NOT DECIDED: PASS — 699 empty template fields and 58 finer schema/behavior gaps are registered by part and field; no unknown source-reliability sentinel or numeric health threshold is supplied.
 §1.5 conflicts marked, none resolved: PASS — C-READ.1.12 preserves the V10 per-store versus cursorrules any-store key-scope conflict, with V10 governing.
-§3 exactly one stamp per line: PASS — 1,007 filled behavior lines and 190 USED BY rows checked; BUILT limited to V10’s built validator/writer/helper/routing/quarantine/engine capabilities; the restored rules use DECIDED-2026-09-25.
-§4 every behavior line cited in the exact format: PASS — all filled template lines and use rows cited; 43 distinct source targets checked, including both the decision record and named archive for every restored part; empty fields have no citation.
+§3 exactly one stamp per line: PASS — 1,007 filled behavior lines and 190 USED BY rows checked; BUILT limited to V10’s built validator/writer/helper/routing/quarantine/engine capabilities; the restored rules use DECIDED-2026-09-25; C-READ.7.2 and its reciprocal link use ACCEPTED from B24 §1.2, with the package-complete record establishing status.
+§4 every behavior line cited in the exact format: PASS — all filled template lines and use rows cited; 43 distinct source targets checked, plus the NHD-B24 navigation ID; C-READ.7.2 cites accepted B24 §1.2, while every restored part retains both its decision-record and named-archive citations; empty fields have no citation.
 §5.4 one name per thing: PASS — C-READ uses the Map name; existing Chapter 2 mode/NOTE IDs and Chapter 3-a common-helper IDs retain their names; new stored-member bindings are identified separately from their producing concepts.
 §6 all template fields present, in order, for every part: PASS — all 173 templates have the nine fields, ALONE, TOGETHER, USED BY and SUB-PARTS, in order.
 §6.3 reciprocity within this chapter: PASS — all 178 internal relationship pairs checked in both directions; seven existing Chapter 2/3-a endpoint relationships reciprocated; future owning-component obligations listed explicitly.
-§6.4 every decided detail written in, no citation used in place of content: PASS — scoped v1 record/write content checked against V10 §6A/6B, the writer preamble, §7F audit and §7G-A write handoff; all FR-0125–FR-0133 details, FR-0123 and FR-0136 written out. Accepted telling identity and promotion/evaluation remain explicitly pending separate pieces, not claimed complete here.
+§6.4 every decided detail written in, no citation used in place of content: PASS — scoped v1 record/write content checked against V10 §6A/6B, the writer preamble, §7F audit and §7G-A write handoff; all FR-0125–FR-0133 details, FR-0123 and FR-0136 written out; FR-0608 is separately carried from accepted B24 §1.2, and archive-only elaboration was removed from C-READ.7.2 and its reciprocal link. Accepted telling identity and promotion/evaluation remain explicitly pending separate pieces, not claimed complete here.
 §6.5 sub-parts recursed to the bottom: PASS — twelve record members and nested provenance/values, writer arguments, shape conditions/refusal outcomes, write-failure fields, production conditions/approval scope, named operation classes, bootstrap alternatives and six health-query classes decomposed. All 173 parts belong to the C-READ tree; no new top-level part or invented path is introduced.
-§9 coverage matrix rows added for every file used: PASS — all 138 READ-folder rows and 107 V10 heading rows retained, current placements added, restored archive coverage added, ten current source identities matched to the pinned Git blobs.
+§9 coverage matrix rows added for every file used: PASS — all 138 READ-folder rows and 107 V10 heading rows retained, current placements added, restored archive coverage added, twelve current source identities matched to the pinned Git blobs.
 §10.11 no recommendation, no sentence addressed to Ness: PASS — checked throughout the behavior text and register contributions.
-Files read whole for this chapter: `04_ACCEPTED_STANDALONE_DESIGNS/NH_BUNDLE_1_MEMORY_READING_FOUNDATION_NORMALIZATION_AND_CLOSEOUT_CANDIDATE_v1_4.md`; `98_HISTORICAL_SOURCES_PRE_V10/sources/NH_MASTER-14_FINAL__2_.md`; instruction file `NH_MASTER-21_SYSTEM_BEHAVIOR_BUILD_CONTRACT_FOR_CHATGPT_v1_0.md`. Earlier whole reads and current scoped rereads are listed separately in READ RECORD.
+Files read whole for this chapter: `04_ACCEPTED_STANDALONE_DESIGNS/NH_BUNDLE_1_MEMORY_READING_FOUNDATION_NORMALIZATION_AND_CLOSEOUT_CANDIDATE_v1_4.md`; `98_HISTORICAL_SOURCES_PRE_V10/sources/NH_MASTER-14_FINAL__2_.md`; `04_ACCEPTED_STANDALONE_DESIGNS/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_CANDIDATE.md`; `04_ACCEPTED_STANDALONE_DESIGNS/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_PACKAGE_COMPLETE_RECORD_v1_0.md` (both read whole for this correction); instruction file `NH_MASTER-21_SYSTEM_BEHAVIOR_BUILD_CONTRACT_FOR_CHATGPT_v1_0.md`. Earlier whole reads and current scoped rereads are listed separately in READ RECORD.
 
 Chapter 3-a remains byte-identical at SHA-256 `d73b9bb7a5cccfcd9cdff79ebb66ccd143de81f2ca4dc1e50558d8ff5fdf5f0d`. This check is the producing assistant’s contract check, not an independent audit or adoption of this candidate.
