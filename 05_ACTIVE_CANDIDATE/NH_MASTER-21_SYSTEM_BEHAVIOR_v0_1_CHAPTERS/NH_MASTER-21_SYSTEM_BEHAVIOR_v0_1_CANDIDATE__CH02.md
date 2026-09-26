@@ -170,11 +170,11 @@ ALONE
 - Does: DESIGNED — Applies one filter without a source-type exemption. [V10 §7A] [MAP C-7A]
 - Gives out: DESIGNED — A reading governed by the same operating rules. [V10 §7A] [MAP C-7A]
 - Must never: DESIGNED — Treat the no-exemption rule as immediate permission to read every captured object. [V10 §7A] [MAP C-7A]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Excludes capture-excluded, unauthorized, malformed, unresolved-speaker or explicitly internal-use-blocked material from ordinary reading. [MAP C-7A]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-7A.16 — Ordinary-reading eligibility: Ordinary reading requires capture eligibility, current-purpose internal-use authorization, root-ingestion eligibility and resolved blockers; TSC material additionally requires fingerprint authorization and promotion. [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -509,7 +509,7 @@ ALONE
 - Does: BUILT — Keeps story_layer as a list of tellings; permits an empty list; omits unknown elements rather than inserting the string “unknown”. [V10 §7A] [V10 §6B / READING record schema]
 - Gives out: BUILT — Tellings with only supported optional elements, preserving clash without choosing a winner. [V10 §7A] [V10 §6B / READING record schema]
 - Must never: BUILT — Force an unknown optional element or insert “unknown”. [V10 §7A] [V10 §6B / READING record schema]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Leaves an unknown optional telling element absent rather than filling it with the string “unknown”. [V10 §6B / READING record schema]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -519,8 +519,8 @@ TOGETHER
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
-| 1 · BUILT | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-A | When this rule’s stated input condition applies:  A telling with any supported subset of whose, stance, firmness, telling, theme and when. | Keeps story_layer as a list of tellings; permits an empty list; omits unknown elements rather than inserting the string “unknown”. | Tellings with only supported optional elements, preserving clash without choosing a winner. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
-| 2 · BUILT | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-B | When this rule’s stated input condition applies:  A telling with any supported subset of whose, stance, firmness, telling, theme and when. | Keeps story_layer as a list of tellings; permits an empty list; omits unknown elements rather than inserting the string “unknown”. | Tellings with only supported optional elements, preserving clash without choosing a winner. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
+| 1 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-A | When this rule’s stated input condition applies:  A telling with any supported subset of whose, stance, firmness, telling, theme and when. | Keeps story_layer as a list of tellings; permits an empty list; omits unknown elements rather than inserting the string “unknown”. | Tellings with only supported optional elements, preserving clash without choosing a winner. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
+| 2 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-B | When this rule’s stated input condition applies:  A telling with any supported subset of whose, stance, firmness, telling, theme and when. | Keeps story_layer as a list of tellings; permits an empty list; omits unknown elements rather than inserting the string “unknown”. | Tellings with only supported optional elements, preserving clash without choosing a winner. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
 
 SUB-PARTS: C-7A.8.1.1 — whose element; C-7A.8.1.2 — stance element; C-7A.8.1.3 — firmness element; C-7A.8.1.4 — telling element; C-7A.8.1.5 — theme element; C-7A.8.1.6 — when element
 
@@ -533,7 +533,7 @@ ALONE
 - Does: BUILT — Includes whose when supported; omits it when unknown. [V10 §7A] [V10 §6B / READING record schema]
 - Gives out: BUILT — The optional whose value or its absence. [V10 §7A] [V10 §6B / READING record schema]
 - Must never: BUILT — Represent unknown content with the string “unknown”. [V10 §7A] [V10 §6B / READING record schema]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Leaves an unknown optional telling element absent rather than filling it with the string “unknown”. [V10 §6B / READING record schema]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -543,8 +543,8 @@ TOGETHER
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
-| 1 · BUILT | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-A | When this rule’s stated input condition applies:  A telling with support for whose. | Includes whose when supported; omits it when unknown. | The optional whose value or its absence. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
-| 2 · BUILT | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-B | When this rule’s stated input condition applies:  A telling with support for whose. | Includes whose when supported; omits it when unknown. | The optional whose value or its absence. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
+| 1 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-A | When this rule’s stated input condition applies:  A telling with support for whose. | Includes whose when supported; omits it when unknown. | The optional whose value or its absence. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
+| 2 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-B | When this rule’s stated input condition applies:  A telling with support for whose. | Includes whose when supported; omits it when unknown. | The optional whose value or its absence. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
 
 SUB-PARTS: NONE
 
@@ -557,7 +557,7 @@ ALONE
 - Does: BUILT — Includes stance when supported; omits it when unknown. [V10 §7A] [V10 §6B / READING record schema]
 - Gives out: BUILT — The optional stance value or its absence. [V10 §7A] [V10 §6B / READING record schema]
 - Must never: BUILT — Represent unknown content with the string “unknown”. [V10 §7A] [V10 §6B / READING record schema]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Leaves an unknown optional telling element absent rather than filling it with the string “unknown”. [V10 §6B / READING record schema]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -567,8 +567,8 @@ TOGETHER
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
-| 1 · BUILT | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-A | When this rule’s stated input condition applies:  A telling with support for stance. | Includes stance when supported; omits it when unknown. | The optional stance value or its absence. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
-| 2 · BUILT | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-B | When this rule’s stated input condition applies:  A telling with support for stance. | Includes stance when supported; omits it when unknown. | The optional stance value or its absence. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
+| 1 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-A | When this rule’s stated input condition applies:  A telling with support for stance. | Includes stance when supported; omits it when unknown. | The optional stance value or its absence. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
+| 2 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-B | When this rule’s stated input condition applies:  A telling with support for stance. | Includes stance when supported; omits it when unknown. | The optional stance value or its absence. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
 
 SUB-PARTS: NONE
 
@@ -581,7 +581,7 @@ ALONE
 - Does: BUILT — Includes firmness when supported; omits it when unknown. [V10 §7A] [V10 §6B / READING record schema]
 - Gives out: BUILT — The optional firmness value or its absence. [V10 §7A] [V10 §6B / READING record schema]
 - Must never: BUILT — Represent unknown content with the string “unknown”. [V10 §7A] [V10 §6B / READING record schema]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Leaves an unknown optional telling element absent rather than filling it with the string “unknown”. [V10 §6B / READING record schema]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -591,8 +591,8 @@ TOGETHER
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
-| 1 · BUILT | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-A | When this rule’s stated input condition applies:  A telling with support for firmness. | Includes firmness when supported; omits it when unknown. | The optional firmness value or its absence. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
-| 2 · BUILT | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-B | When this rule’s stated input condition applies:  A telling with support for firmness. | Includes firmness when supported; omits it when unknown. | The optional firmness value or its absence. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
+| 1 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-A | When this rule’s stated input condition applies:  A telling with support for firmness. | Includes firmness when supported; omits it when unknown. | The optional firmness value or its absence. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
+| 2 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-B | When this rule’s stated input condition applies:  A telling with support for firmness. | Includes firmness when supported; omits it when unknown. | The optional firmness value or its absence. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
 
 SUB-PARTS: NONE
 
@@ -605,7 +605,7 @@ ALONE
 - Does: BUILT — Includes telling when supported; omits it when unknown. [V10 §7A] [V10 §6B / READING record schema]
 - Gives out: BUILT — The optional telling value or its absence. [V10 §7A] [V10 §6B / READING record schema]
 - Must never: BUILT — Represent unknown content with the string “unknown”. [V10 §7A] [V10 §6B / READING record schema]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Leaves an unknown optional telling element absent rather than filling it with the string “unknown”. [V10 §6B / READING record schema]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -615,8 +615,8 @@ TOGETHER
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
-| 1 · BUILT | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-A | When this rule’s stated input condition applies:  A telling with support for telling. | Includes telling when supported; omits it when unknown. | The optional telling value or its absence. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
-| 2 · BUILT | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-B | When this rule’s stated input condition applies:  A telling with support for telling. | Includes telling when supported; omits it when unknown. | The optional telling value or its absence. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
+| 1 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-A | When this rule’s stated input condition applies:  A telling with support for telling. | Includes telling when supported; omits it when unknown. | The optional telling value or its absence. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
+| 2 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-B | When this rule’s stated input condition applies:  A telling with support for telling. | Includes telling when supported; omits it when unknown. | The optional telling value or its absence. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
 
 SUB-PARTS: NONE
 
@@ -629,7 +629,7 @@ ALONE
 - Does: BUILT — Includes theme when supported; omits it when unknown. [V10 §7A] [V10 §6B / READING record schema]
 - Gives out: BUILT — The optional theme value or its absence. [V10 §7A] [V10 §6B / READING record schema]
 - Must never: BUILT — Represent unknown content with the string “unknown”. [V10 §7A] [V10 §6B / READING record schema]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Leaves an unknown optional telling element absent rather than filling it with the string “unknown”. [V10 §6B / READING record schema]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -639,8 +639,8 @@ TOGETHER
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
-| 1 · BUILT | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-A | When this rule’s stated input condition applies:  A telling with support for theme. | Includes theme when supported; omits it when unknown. | The optional theme value or its absence. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
-| 2 · BUILT | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-B | When this rule’s stated input condition applies:  A telling with support for theme. | Includes theme when supported; omits it when unknown. | The optional theme value or its absence. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
+| 1 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-A | When this rule’s stated input condition applies:  A telling with support for theme. | Includes theme when supported; omits it when unknown. | The optional theme value or its absence. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
+| 2 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-B | When this rule’s stated input condition applies:  A telling with support for theme. | Includes theme when supported; omits it when unknown. | The optional theme value or its absence. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
 
 SUB-PARTS: NONE
 
@@ -653,7 +653,7 @@ ALONE
 - Does: BUILT — Includes when when supported; omits it when unknown. [V10 §7A] [V10 §6B / READING record schema]
 - Gives out: BUILT — The optional when value or its absence. [V10 §7A] [V10 §6B / READING record schema]
 - Must never: BUILT — Represent unknown content with the string “unknown”. [V10 §7A] [V10 §6B / READING record schema]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Leaves an unknown optional telling element absent rather than filling it with the string “unknown”. [V10 §6B / READING record schema]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -663,8 +663,8 @@ TOGETHER
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
-| 1 · BUILT | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-A | When this rule’s stated input condition applies:  A telling with support for when. | Includes when when supported; omits it when unknown. | The optional when value or its absence. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
-| 2 · BUILT | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-B | When this rule’s stated input condition applies:  A telling with support for when. | Includes when when supported; omits it when unknown. | The optional when value or its absence. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
+| 1 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-A | When this rule’s stated input condition applies:  A telling with support for when. | Includes when when supported; omits it when unknown. | The optional when value or its absence. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
+| 2 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-B | When this rule’s stated input condition applies:  A telling with support for when. | Includes when when supported; omits it when unknown. | The optional when value or its absence. | [V10 §7A] [V10 §6B / READING record schema] [MAP C-7A] |
 
 SUB-PARTS: NONE
 
@@ -677,11 +677,11 @@ ALONE
 - Does: DESIGNED — Reads absence only if the information was expected, the process was capable of observing it, the absence is relevant and the interpretation is held weak. Distinguishes not_observed, not_evaluated, not_applicable, withheld and collection_failed in processing metadata; a reading blank stays honest. [V10 §7A] [V10 §0A]
 - Gives out: DESIGNED — A weak absence interpretation only under the complete guard, with processing conditions distinguished. [V10 §7A] [V10 §0A]
 - Must never: DESIGNED — Treat a blank as “unknown” or as unguarded evidence of absence. [V10 §7A] [V10 §0A]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Does not interpret absence unless the information was expected, observable by this process and relevant; any such interpretation remains weak. [V10 §0A]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-7A.8.2.1 — Expected information, C-7A.8.2.2 — Observation capability, C-7A.8.2.3 — Relevant absence, C-7A.8.2.4 — Weak absence interpretation: Absence interpretation requires expected information, an observation-capable process, relevance and a weak interpretation. [V10 §0A]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -689,6 +689,10 @@ USED BY (one row per place; the same part may appear in several paths)
 |---|---|---|---|---|---|
 | 1 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-A | When this rule’s stated input condition applies:  Missing information, the expectation of it, the process’s observation capability and its relevance. | Reads absence only if the information was expected, the process was capable of observing it, the absence is relevant and the interpretation is held weak. Distinguishes not_observed, not_evaluated, not_applicable, withheld and collection_failed in processing metadata; a reading blank stays honest. | A weak absence interpretation only under the complete guard, with processing conditions distinguished. | [V10 §7A] [V10 §0A] [MAP C-7A] |
 | 2 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-B | When this rule’s stated input condition applies:  Missing information, the expectation of it, the process’s observation capability and its relevance. | Reads absence only if the information was expected, the process was capable of observing it, the absence is relevant and the interpretation is held weak. Distinguishes not_observed, not_evaluated, not_applicable, withheld and collection_failed in processing metadata; a reading blank stays honest. | A weak absence interpretation only under the complete guard, with processing conditions distinguished. | [V10 §7A] [V10 §0A] [MAP C-7A] |
+| 3 · DESIGNED | C-7A.8.2.1 — Expected information | The source-defined condition governed by C-7A.8.2. | Absence interpretation requires expected information, an observation-capable process, relevance and a weak interpretation. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [V10 §0A] |
+| 4 · DESIGNED | C-7A.8.2.2 — Observation capability | The source-defined condition governed by C-7A.8.2. | Absence interpretation requires expected information, an observation-capable process, relevance and a weak interpretation. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [V10 §0A] |
+| 5 · DESIGNED | C-7A.8.2.3 — Relevant absence | The source-defined condition governed by C-7A.8.2. | Absence interpretation requires expected information, an observation-capable process, relevance and a weak interpretation. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [V10 §0A] |
+| 6 · DESIGNED | C-7A.8.2.4 — Weak absence interpretation | The source-defined condition governed by C-7A.8.2. | Absence interpretation requires expected information, an observation-capable process, relevance and a weak interpretation. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [V10 §0A] |
 
 SUB-PARTS: C-7A.8.2.1 — Expected information; C-7A.8.2.2 — Observation capability; C-7A.8.2.3 — Relevant absence; C-7A.8.2.4 — Weak absence interpretation; C-7A.8.2.5 — Absence processing vocabulary
 
@@ -701,11 +705,11 @@ ALONE
 - Does: DESIGNED — Requires that the system expected the information. [V10 §0A]
 - Gives out: DESIGNED — Absence read only with this condition and all other absence-guard conditions. [V10 §0A]
 - Must never: DESIGNED — Read absence without this condition. [V10 §0A]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Does not interpret absence unless the information was expected, observable by this process and relevant; any such interpretation remains weak. [V10 §0A]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-7A.8.2 — Absence guard: Absence interpretation requires expected information, an observation-capable process, relevance and a weak interpretation. [V10 §0A]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -713,6 +717,7 @@ USED BY (one row per place; the same part may appear in several paths)
 |---|---|---|---|---|---|
 | 1 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-A | When this rule’s stated input condition applies:  The expectation of the missing information. | Requires that the system expected the information. | Absence read only with this condition and all other absence-guard conditions. | [V10 §0A] [MAP C-7A] |
 | 2 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-B | When this rule’s stated input condition applies:  The expectation of the missing information. | Requires that the system expected the information. | Absence read only with this condition and all other absence-guard conditions. | [V10 §0A] [MAP C-7A] |
+| 3 · DESIGNED | C-7A.8.2 — Absence guard | The source-defined condition governed by C-7A.8.2.1. | Absence interpretation requires expected information, an observation-capable process, relevance and a weak interpretation. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [V10 §0A] |
 
 SUB-PARTS: NONE
 
@@ -725,11 +730,11 @@ ALONE
 - Does: DESIGNED — Requires that the process was capable of observing the information. [V10 §0A]
 - Gives out: DESIGNED — Absence read only with this condition and all other absence-guard conditions. [V10 §0A]
 - Must never: DESIGNED — Read absence without this condition. [V10 §0A]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Does not interpret absence unless the information was expected, observable by this process and relevant; any such interpretation remains weak. [V10 §0A]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-7A.8.2 — Absence guard: Absence interpretation requires expected information, an observation-capable process, relevance and a weak interpretation. [V10 §0A]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -737,6 +742,7 @@ USED BY (one row per place; the same part may appear in several paths)
 |---|---|---|---|---|---|
 | 1 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-A | When this rule’s stated input condition applies:  The process’s ability to observe the missing information. | Requires that the process was capable of observing the information. | Absence read only with this condition and all other absence-guard conditions. | [V10 §0A] [MAP C-7A] |
 | 2 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-B | When this rule’s stated input condition applies:  The process’s ability to observe the missing information. | Requires that the process was capable of observing the information. | Absence read only with this condition and all other absence-guard conditions. | [V10 §0A] [MAP C-7A] |
+| 3 · DESIGNED | C-7A.8.2 — Absence guard | The source-defined condition governed by C-7A.8.2.2. | Absence interpretation requires expected information, an observation-capable process, relevance and a weak interpretation. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [V10 §0A] |
 
 SUB-PARTS: NONE
 
@@ -749,11 +755,11 @@ ALONE
 - Does: DESIGNED — Requires that the absence is relevant. [V10 §0A]
 - Gives out: DESIGNED — Absence read only with this condition and all other absence-guard conditions. [V10 §0A]
 - Must never: DESIGNED — Read absence without this condition. [V10 §0A]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Does not interpret absence unless the information was expected, observable by this process and relevant; any such interpretation remains weak. [V10 §0A]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-7A.8.2 — Absence guard: Absence interpretation requires expected information, an observation-capable process, relevance and a weak interpretation. [V10 §0A]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -761,6 +767,7 @@ USED BY (one row per place; the same part may appear in several paths)
 |---|---|---|---|---|---|
 | 1 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-A | When this rule’s stated input condition applies:  The relevance of the missing information. | Requires that the absence is relevant. | Absence read only with this condition and all other absence-guard conditions. | [V10 §0A] [MAP C-7A] |
 | 2 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-B | When this rule’s stated input condition applies:  The relevance of the missing information. | Requires that the absence is relevant. | Absence read only with this condition and all other absence-guard conditions. | [V10 §0A] [MAP C-7A] |
+| 3 · DESIGNED | C-7A.8.2 — Absence guard | The source-defined condition governed by C-7A.8.2.3. | Absence interpretation requires expected information, an observation-capable process, relevance and a weak interpretation. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [V10 §0A] |
 
 SUB-PARTS: NONE
 
@@ -773,11 +780,11 @@ ALONE
 - Does: DESIGNED — Keeps the interpretation weak. [V10 §0A]
 - Gives out: DESIGNED — Absence read only with this condition and all other absence-guard conditions. [V10 §0A]
 - Must never: DESIGNED — Read absence without this condition. [V10 §0A]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Does not interpret absence unless the information was expected, observable by this process and relevant; any such interpretation remains weak. [V10 §0A]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-7A.8.2 — Absence guard: Absence interpretation requires expected information, an observation-capable process, relevance and a weak interpretation. [V10 §0A]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -785,6 +792,7 @@ USED BY (one row per place; the same part may appear in several paths)
 |---|---|---|---|---|---|
 | 1 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-A | When this rule’s stated input condition applies:  The absence interpretation. | Keeps the interpretation weak. | Absence read only with this condition and all other absence-guard conditions. | [V10 §0A] [MAP C-7A] |
 | 2 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-B | When this rule’s stated input condition applies:  The absence interpretation. | Keeps the interpretation weak. | Absence read only with this condition and all other absence-guard conditions. | [V10 §0A] [MAP C-7A] |
+| 3 · DESIGNED | C-7A.8.2 — Absence guard | The source-defined condition governed by C-7A.8.2.4. | Absence interpretation requires expected information, an observation-capable process, relevance and a weak interpretation. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [V10 §0A] |
 
 SUB-PARTS: NONE
 
@@ -967,7 +975,7 @@ ALONE
 - Does: DESIGNED — DUMB adds, points, carries, sorts and gathers without interpreting or closing. SMART reads the person and produces weightless, dated, confidence-tagged, rejectable interpretation; creation never closes into memory as fact. [V10 §7A] [V10 §0A] [V10 §0] [DR §5]
 - Gives out: DESIGNED — Preserved data and non-factual interpretive layers. [V10 §7A] [V10 §0A] [V10 §0] [DR §5]
 - Must never: DESIGNED — Let SMART interpretation close into established memory fact. [V10 §7A] [V10 §0A] [V10 §0] [DR §5]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Keeps the interpretation rejectable and non-decisive; it cannot close into established fact. [V10 §0] [V10 §0A]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1015,7 +1023,7 @@ ALONE
 - Does: DESIGNED — Keeps interpretation weightless, dated, confidence-tagged and rejectable. [V10 §0A] [V10 §0]
 - Gives out: DESIGNED — Interpretation that remains revisable. [V10 §0A] [V10 §0]
 - Must never: DESIGNED — Promote interpretation into established fact or close creation into memory as fact. [V10 §0A] [V10 §0]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Keeps the interpretation rejectable and non-decisive; it cannot close into established fact. [V10 §0] [V10 §0A]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1111,7 +1119,7 @@ ALONE
 - Does: DESIGNED — Keeps SMART interpretation rejectable. [V10 §0A]
 - Gives out: DESIGNED — Rejectable interpretation. [V10 §0A]
 - Must never: DESIGNED — Treat SMART interpretation as a fact. [V10 §0A]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Keeps the interpretation rejectable and non-decisive; it cannot close into established fact. [V10 §0] [V10 §0A]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1523,7 +1531,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-7A.16.1 — Capture eligibility, C-7A.16.2 — Purpose-specific internal authorization, C-7A.16.3 — Root-ingestion gate, C-7A.16.4 — Resolved required blockers, C-7A.16.5 — TSC authorization and promotion: Ordinary reading requires capture eligibility, current-purpose internal-use authorization, root-ingestion eligibility and resolved blockers; TSC material additionally requires fingerprint authorization and promotion. [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -1531,6 +1539,12 @@ USED BY (one row per place; the same part may appear in several paths)
 |---|---|---|---|---|---|
 | 1 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-A | When this rule’s stated input condition applies:  Material proposed for ordinary reading. | Requires capture eligibility and current-purpose internal-use authorization, root-ingestion eligibility and resolved required blockers; TSC material additionally requires fingerprint authorization and promotion. Visible-output restriction is separate from internal-use authorization. | Only material eligible for the current ordinary-reading purpose. | [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] [MAP C-7A] |
 | 2 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-B | When this rule’s stated input condition applies:  Material proposed for ordinary reading. | Requires capture eligibility and current-purpose internal-use authorization, root-ingestion eligibility and resolved required blockers; TSC material additionally requires fingerprint authorization and promotion. Visible-output restriction is separate from internal-use authorization. | Only material eligible for the current ordinary-reading purpose. | [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] [MAP C-7A] |
+| 3 · DESIGNED | C-7A.3 — R1 — One filter for every eligible source | The source-defined condition governed by C-7A.16. | Ordinary reading requires capture eligibility, current-purpose internal-use authorization, root-ingestion eligibility and resolved blockers; TSC material additionally requires fingerprint authorization and promotion. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] |
+| 4 · DESIGNED | C-7A.16.1 — Capture eligibility | The source-defined condition governed by C-7A.16. | Ordinary reading requires capture eligibility, current-purpose internal-use authorization, root-ingestion eligibility and resolved blockers; TSC material additionally requires fingerprint authorization and promotion. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] |
+| 5 · DESIGNED | C-7A.16.2 — Purpose-specific internal authorization | The source-defined condition governed by C-7A.16. | Ordinary reading requires capture eligibility, current-purpose internal-use authorization, root-ingestion eligibility and resolved blockers; TSC material additionally requires fingerprint authorization and promotion. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] |
+| 6 · DESIGNED | C-7A.16.3 — Root-ingestion gate | The source-defined condition governed by C-7A.16. | Ordinary reading requires capture eligibility, current-purpose internal-use authorization, root-ingestion eligibility and resolved blockers; TSC material additionally requires fingerprint authorization and promotion. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] |
+| 7 · DESIGNED | C-7A.16.4 — Resolved required blockers | The source-defined condition governed by C-7A.16. | Ordinary reading requires capture eligibility, current-purpose internal-use authorization, root-ingestion eligibility and resolved blockers; TSC material additionally requires fingerprint authorization and promotion. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] |
+| 8 · DESIGNED | C-7A.16.5 — TSC authorization and promotion | The source-defined condition governed by C-7A.16. | Ordinary reading requires capture eligibility, current-purpose internal-use authorization, root-ingestion eligibility and resolved blockers; TSC material additionally requires fingerprint authorization and promotion. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] |
 
 SUB-PARTS: C-7A.16.1 — Capture eligibility; C-7A.16.2 — Purpose-specific internal authorization; C-7A.16.3 — Root-ingestion gate; C-7A.16.4 — Resolved required blockers; C-7A.16.5 — TSC authorization and promotion; C-7A.16.6 — Visible-output versus internal-use distinction
 
@@ -1547,7 +1561,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-7A.16 — Ordinary-reading eligibility: Ordinary reading requires capture eligibility, current-purpose internal-use authorization, root-ingestion eligibility and resolved blockers; TSC material additionally requires fingerprint authorization and promotion. [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -1555,6 +1569,7 @@ USED BY (one row per place; the same part may appear in several paths)
 |---|---|---|---|---|---|
 | 1 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-A | When this rule’s stated input condition applies:  Material subject to capture exclusions. | Requires passing the applicable capture-exclusion rules. | Material admitted only after this prerequisite and the other required gates pass. | [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] [MAP C-7A] |
 | 2 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-B | When this rule’s stated input condition applies:  Material subject to capture exclusions. | Requires passing the applicable capture-exclusion rules. | Material admitted only after this prerequisite and the other required gates pass. | [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] [MAP C-7A] |
+| 3 · DESIGNED | C-7A.16 — Ordinary-reading eligibility | The source-defined condition governed by C-7A.16.1. | Ordinary reading requires capture eligibility, current-purpose internal-use authorization, root-ingestion eligibility and resolved blockers; TSC material additionally requires fingerprint authorization and promotion. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] |
 
 SUB-PARTS: NONE
 
@@ -1571,7 +1586,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-7A.16 — Ordinary-reading eligibility: Ordinary reading requires capture eligibility, current-purpose internal-use authorization, root-ingestion eligibility and resolved blockers; TSC material additionally requires fingerprint authorization and promotion. [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -1579,6 +1594,7 @@ USED BY (one row per place; the same part may appear in several paths)
 |---|---|---|---|---|---|
 | 1 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-A | When this rule’s stated input condition applies:  Material and its current intended internal-use purpose. | Requires current-purpose internal-use authorization. | Material admitted only after this prerequisite and the other required gates pass. | [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] [MAP C-7A] |
 | 2 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-B | When this rule’s stated input condition applies:  Material and its current intended internal-use purpose. | Requires current-purpose internal-use authorization. | Material admitted only after this prerequisite and the other required gates pass. | [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] [MAP C-7A] |
+| 3 · DESIGNED | C-7A.16 — Ordinary-reading eligibility | The source-defined condition governed by C-7A.16.2. | Ordinary reading requires capture eligibility, current-purpose internal-use authorization, root-ingestion eligibility and resolved blockers; TSC material additionally requires fingerprint authorization and promotion. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] |
 
 SUB-PARTS: NONE
 
@@ -1595,7 +1611,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-7A.16 — Ordinary-reading eligibility: Ordinary reading requires capture eligibility, current-purpose internal-use authorization, root-ingestion eligibility and resolved blockers; TSC material additionally requires fingerprint authorization and promotion. [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -1603,6 +1619,7 @@ USED BY (one row per place; the same part may appear in several paths)
 |---|---|---|---|---|---|
 | 1 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-A | When this rule’s stated input condition applies:  Material proposed for root ingestion. | Requires passing the relevant root-ingestion gate. | Material admitted only after this prerequisite and the other required gates pass. | [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] [MAP C-7A] |
 | 2 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-B | When this rule’s stated input condition applies:  Material proposed for root ingestion. | Requires passing the relevant root-ingestion gate. | Material admitted only after this prerequisite and the other required gates pass. | [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] [MAP C-7A] |
+| 3 · DESIGNED | C-7A.16 — Ordinary-reading eligibility | The source-defined condition governed by C-7A.16.3. | Ordinary reading requires capture eligibility, current-purpose internal-use authorization, root-ingestion eligibility and resolved blockers; TSC material additionally requires fingerprint authorization and promotion. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] |
 
 SUB-PARTS: NONE
 
@@ -1619,7 +1636,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-7A.16 — Ordinary-reading eligibility: Ordinary reading requires capture eligibility, current-purpose internal-use authorization, root-ingestion eligibility and resolved blockers; TSC material additionally requires fingerprint authorization and promotion. [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -1627,6 +1644,7 @@ USED BY (one row per place; the same part may appear in several paths)
 |---|---|---|---|---|---|
 | 1 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-A | When this rule’s stated input condition applies:  Material with required blockers, including unresolved speaker identity. | Requires the blockers to be resolved. | Material admitted only after this prerequisite and the other required gates pass. | [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] [MAP C-7A] |
 | 2 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-B | When this rule’s stated input condition applies:  Material with required blockers, including unresolved speaker identity. | Requires the blockers to be resolved. | Material admitted only after this prerequisite and the other required gates pass. | [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] [MAP C-7A] |
+| 3 · DESIGNED | C-7A.16 — Ordinary-reading eligibility | The source-defined condition governed by C-7A.16.4. | Ordinary reading requires capture eligibility, current-purpose internal-use authorization, root-ingestion eligibility and resolved blockers; TSC material additionally requires fingerprint authorization and promotion. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] |
 
 SUB-PARTS: NONE
 
@@ -1643,7 +1661,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-7A.16 — Ordinary-reading eligibility: Ordinary reading requires capture eligibility, current-purpose internal-use authorization, root-ingestion eligibility and resolved blockers; TSC material additionally requires fingerprint authorization and promotion. [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -1651,6 +1669,7 @@ USED BY (one row per place; the same part may appear in several paths)
 |---|---|---|---|---|---|
 | 1 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-A | When this rule’s stated input condition applies:  TSC-held material. | Requires completed fingerprint authorization and promotion before ordinary reading. | Material admitted only after this prerequisite and the other required gates pass. | [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] [MAP C-7A] |
 | 2 · DESIGNED | C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G); CY-B | When this rule’s stated input condition applies:  TSC-held material. | Requires completed fingerprint authorization and promotion before ordinary reading. | Material admitted only after this prerequisite and the other required gates pass. | [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] [MAP C-7A] |
+| 3 · DESIGNED | C-7A.16 — Ordinary-reading eligibility | The source-defined condition governed by C-7A.16.5. | Ordinary reading requires capture eligibility, current-purpose internal-use authorization, root-ingestion eligibility and resolved blockers; TSC material additionally requires fingerprint authorization and promotion. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [MAP C-7A] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] |
 
 SUB-PARTS: NONE
 
@@ -1691,7 +1710,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-7B.10.8 — Operational-record access boundary: Use of the permanent operation record remains subject to its privacy and identity/security authorization. [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -1715,7 +1734,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-7B.10.8 — Operational-record access boundary: Use of the permanent operation record remains subject to its privacy and identity/security authorization. [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -1739,7 +1758,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-7B.10.8 — Operational-record access boundary: Use of the permanent operation record remains subject to its privacy and identity/security authorization. [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -1763,7 +1782,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-7B.10.8 — Operational-record access boundary: Use of the permanent operation record remains subject to its privacy and identity/security authorization. [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -1910,7 +1929,7 @@ ALONE
 - Does: DESIGNED — Uses the material inside that boundary and releases only the minimum safe result. [V10 §0A]
 - Gives out: DESIGNED — The minimum safe result of authorized use. [V10 §0A]
 - Must never: DESIGNED — Move raw material outside the boundary as part of a result. [V10 §0A]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Withholds unauthorized access; Level 1 raw material stays sealed inside its protected boundary and Level 2 access requires successful identity verification. [V10 §0A]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1956,7 +1975,7 @@ ALONE
 - Does: DESIGNED — Makes the information available to Ness by default after successful identity verification; a separate permission is not required for each access. [V10 §0A]
 - Gives out: DESIGNED — Authenticated private access with protection from unauthorized external access. [V10 §0A]
 - Must never: DESIGNED — Grant unauthorized external access; require a new per-access permission merely because the material is Level 2. [V10 §0A]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Withholds unauthorized access; Level 1 raw material stays sealed inside its protected boundary and Level 2 access requires successful identity verification. [V10 §0A]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -2407,7 +2426,7 @@ ALONE
 - Does: DESIGNED — Reads the piece against the mind behind it as an interpretation. [V10 §7B] [V10 §0A]
 - Gives out: DESIGNED — A weightless, dated, confidence-tagged, rejectable reading of that dimension. [V10 §7B] [V10 §0A]
 - Must never: DESIGNED — Promote this interpretation into a fact. [V10 §7B] [V10 §0A]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Keeps the interpretation rejectable and non-decisive; it cannot close into established fact. [V10 §0] [V10 §0A]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -2884,7 +2903,7 @@ ALONE
 - Does: DESIGNED — Keeps N.H’s own view in the weightless NOTE inside SMART. [V10 §7A] [V10 §0A]
 - Gives out: DESIGNED — A dated, confidence-tagged, rejectable note rather than an N.H story-layer. [V10 §7A] [V10 §0A]
 - Must never: DESIGNED — Give N.H a story-layer or promote its view into a fact. [V10 §7A] [V10 §0A]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Keeps N.H’s own view as a weightless NOTE, excluded from human tellings. [V10 §0A] [V10 §7A]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -2911,13 +2930,14 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-7B.3.3.1 — Evidence basis: Firmness requires a provisional source-evidence basis; unsupported firmness is omitted. [V10 §7K]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
 | # | Used in (part ID, and path ID if path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · DESIGNED | C-7K; CY-A | Observable support in the root: explicit certainty words, hedging, repetition, emphasis, consistency, commitment or doubt. | Reads firmness provisionally and records its evidence basis. Direct self-report of certainty is stronger evidence than tone, wording style or repetition alone; reported speech or uncertain attribution lowers evidential strength. Conflicting signals allow mixed or uncertain firmness, or omission within the corresponding dimension of the C-7B pass. | An evidence-based provisional firmness reading; unsupported firmness is omitted. | [V10 §0A] [V10 §7K] [MAP C-7B] [MAP CY-A] |
+| 2 · DESIGNED | C-7B.3.3.1 — Evidence basis | The source-defined condition governed by C-7B.3.3. | Firmness requires a provisional source-evidence basis; unsupported firmness is omitted. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [V10 §7K] |
 
 SUB-PARTS: C-7B.3.3.1 — Evidence basis; C-7B.3.3.2 — Separate model confidence; C-7B.3.3.3 — Direct certainty evidence; C-7B.3.3.4 — Attribution strength; C-7B.3.3.5 — Conflicting firmness signals; C-7B.3.3.6 — Unsupported firmness omission
 
@@ -2934,13 +2954,15 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-7B.3.3 — Firmness reading: Firmness requires a provisional source-evidence basis; unsupported firmness is omitted. [V10 §7K]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
 | # | Used in (part ID, and path ID if path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · DESIGNED | C-7K; CY-A | Explicit certainty words, hedging, repetition, emphasis, consistency within the root, and direct statements of commitment or doubt. | Infers firmness from these observable signals and records the evidence basis for every value within the corresponding dimension of the C-7B pass. | A provisional firmness value with its evidence basis. | [V10 §7K] [MAP C-7B] [MAP CY-A] |
+| 2 · DESIGNED | C-7B.3.3 — Firmness reading | The source-defined condition governed by C-7B.3.3.1. | Firmness requires a provisional source-evidence basis; unsupported firmness is omitted. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [V10 §7K] |
+| 3 · DESIGNED | C-7B.3.3.6 — Unsupported firmness omission | The source-defined condition governed by C-7B.3.3.1. | Firmness requires a provisional source-evidence basis; unsupported firmness is omitted. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [V10 §7K] |
 
 SUB-PARTS: NONE
 
@@ -2999,7 +3021,7 @@ ALONE
 - Does: DESIGNED — Lowers the evidential strength of the firmness inference. [V10 §7K]
 - Gives out: DESIGNED — A weaker evidence basis for the provisional firmness reading. [V10 §7K]
 - Must never: DESIGNED — Treat reported speech as direct access to the reported person’s internal state. [V10 §7K]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Lowers the evidential strength of the firmness inference. [V10 §7K]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3022,7 +3044,7 @@ ALONE
 - Does: DESIGNED — Produces mixed firmness, uncertain firmness, or omission without forcing a resolution. [V10 §7K]
 - Gives out: DESIGNED — A mixed or uncertain value, or an omitted value. [V10 §7K]
 - Must never: DESIGNED — Force one firmness conclusion from conflicting signals. [V10 §7K]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Produces mixed firmness, uncertain firmness, or omission without forcing a resolution. [V10 §7K]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3049,7 +3071,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-7B.3.3.1 — Evidence basis: Firmness requires a provisional source-evidence basis; unsupported firmness is omitted. [V10 §7K]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -3240,7 +3262,7 @@ ALONE
 - Does: ACCEPTED — Hold only if a specific missing condition is recordable and realistically obtainable later. Otherwise produce the separate honest `insufficient_context` reading through the existing reading machinery. The substantive grounded-enough threshold is not selected by this policy. [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §2]
 - Gives out: ACCEPTED — Either a legitimate waiting condition or a valid completed, revisable reading that honestly records insufficient context. [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §2]
 - Must never: ACCEPTED — Infer insufficiency from rejection count; create an indefinite hold with no useful condition; reinterpret a rejected proposal as the fallback reading. [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Hold only if a specific missing condition is recordable and realistically obtainable later. Otherwise produce the separate honest `insufficient_context` reading through the existing reading machinery. The substantive grounded-enough threshold is not selected by this policy. [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3252,6 +3274,10 @@ USED BY (one row per place)
 | # | Used in (part ID, and path ID if path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-7B.7 | A responsible-read failure already established by the owning acceptance machinery, together with what is missing and whether it can plausibly arrive. | Hold only if a specific missing condition is recordable and realistically obtainable later. Otherwise produce the separate honest `insufficient_context` reading through the existing reading machinery. The substantive grounded-enough threshold is not selected by this policy. | Either a legitimate waiting condition or a valid completed, revisable reading that honestly records insufficient context. | [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §2] |
+| 2 · ACCEPTED | C-7B.7.1.4 — No forever-hold | The source-defined condition governed by C-7B.7.1. | A legitimate hold requires a genuine specific condition whose later satisfaction remains plausible. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §2.4] |
+| 3 · ACCEPTED | C-7B.7.1.7 — Grounding-status independence | The source-defined condition governed by C-7B.7.1. | The specificity/obtainability test and evidence-verified lifecycle govern hold opening and release; grounding_status alone does not. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_A31_GROUNDED_ENOUGH_THRESHOLD_POLICY_v1_0_CANDIDATE.md §6] |
+| 4 · ACCEPTED | C-7B.7.2.3.1 — Hold-reason class vocabulary | The source-defined condition governed by C-7B.7.1. | The awaiting_policy_condition class requires the adopted A29 specificity/obtainability policy and its evidence record. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §2.1] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3] |
+| 5 · ACCEPTED | C-7B.7.2.3.2 — Hold-reason condition content | The source-defined condition governed by C-7B.7.1. | The awaiting_policy_condition class requires the adopted A29 specificity/obtainability policy and its evidence record. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §2.1] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3] |
 
 SUB-PARTS: C-7B.7.1.1 — Specific missing condition; C-7B.7.1.2 — Realistic obtainability; C-7B.7.1.3 — Honest insufficient-context branch; C-7B.7.1.4 — No forever-hold; C-7B.7.1.5 — Automatic hold handling; C-7B.7.1.6 — Hold distinctions; C-7B.7.1.7 — Grounding-status independence; C-7B.7.1.8 — Live-hold fallback exclusion
 
@@ -3316,7 +3342,7 @@ ALONE
 - Does: ACCEPTED — Open no hold and persist no indefinite hold on this basis. In the reading pass, produce a separate honest `insufficient_context` fallback reading: record insufficient context, mark it revisable, and mark it limited/ungrounded where appropriate using the existing reading contract. It is a valid completed outcome, never a refusal or the rejected proposal itself. Later genuinely new triggers produce new readings beside it, never edits. [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §2.2]
 - Gives out: ACCEPTED — The separate honest completed reading; its insufficiency and revisability are retained. [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §2.2]
 - Must never: ACCEPTED — Invent a marking field; edit the honest reading on later rereading; use rejection count as evidence of genuine insufficiency. [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §2.2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Open no hold and persist no indefinite hold on this basis. In the reading pass, produce a separate honest `insufficient_context` fallback reading: record insufficient context, mark it revisable, and mark it limited/ungrounded where appropriate using the existing reading contract. It is a valid completed outcome, never a refusal or the rejected proposal itself. Later genuinely new triggers produce new readings beside it, never edits. [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §2.2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3342,11 +3368,11 @@ ALONE
 - Does: NOT DECIDED
 - Gives out: ACCEPTED — The policy requirement for an honest insufficient-context outcome instead of an invalid indefinite wait. [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §2.4]
 - Must never: ACCEPTED — Invent an expiry duration, an unsatisfiability detector, or a transition mechanism. [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §2.4]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Do not keep the item held indefinitely on that basis; follow the honest insufficient-context branch. A legitimate hold lasts only while its condition remains genuine, specific, and plausibly satisfiable. [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §2.4]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.1 — Hold-versus-reading policy: A legitimate hold requires a genuine specific condition whose later satisfaction remains plausible. [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §2.4]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -3367,7 +3393,7 @@ ALONE
 - Does: ACCEPTED — Track the condition automatically, check for release automatically when the adopted condition is met, and release automatically only when the required evidence record exists and binds to the hold. Keep holds visible through the read-only Log; surface the specific gap by name, keep running, and block nothing on manual review. [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §3] [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §4]
 - Gives out: ACCEPTED — A tracked hold and visible lifecycle outcomes without requiring manual review, approval, or triage. [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §3] [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §4]
 - Must never: ACCEPTED — Require per-hold manual handling by default; treat looking at the Log as approving; require later voluntary evidence as a manual lifecycle step. [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §3] [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §4]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Track the condition automatically, check for release automatically when the adopted condition is met, and release automatically only when the required evidence record exists and binds to the hold. Keep holds visible through the read-only Log; surface the specific gap by name, keep running, and block nothing on manual review. [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §3] [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §4]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3469,7 +3495,7 @@ ALONE
 - Does: ACCEPTED — A hold defers new reading/use and produces no reading. Acceptance rejection is a terminal quality verdict on a produced proposal. B9 retries the same failed/incomplete operation to complete its one outcome and cannot add a layer. B10 creates a new reading operation under a recorded trigger and adds beside history without completing or replacing an old outcome. B16 `dependency_blocked_held` is a promotion-side view of the hold fact. The `insufficient_context` reading is written, honest, revisable, and complete. Pre-ingest holding belongs to the raw-capture seam before root ingestion. TSC authorization holding belongs to the separate sealed-cache authorization/promotion seam. [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §2.3] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
 - Gives out: ACCEPTED — Distinct interpretations of these conditions without merging their lifecycles. [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §2.3] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
 - Must never: ACCEPTED — Use a hold to park a rejected proposal; create a TSC path or read sealed TSC content; treat scheduled automatic retry as rereading while the original operation is still open. [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §2.3] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Keeps held sources unavailable to retry, reread and promotion; acceptance rejection remains terminal and cannot be delayed into a hold. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §6] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3499,7 +3525,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.5 — Blocked-use enforcement: Any live hold blocks new use; release of one hold does not bypass another live hold. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §6]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -3520,7 +3546,7 @@ ALONE
 - Does: ACCEPTED — Preserve the terminal quality verdict on that output; never park it in a hold until it appears fresh. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
 - Gives out: ACCEPTED — The terminal rejected outcome remains terminal. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
 - Must never: ACCEPTED — Conflate the named outcome or seam with a hold, or bypass its own authority boundary. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Preserve the terminal quality verdict on that output; never park it in a hold until it appears fresh. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3545,11 +3571,11 @@ ALONE
 - Does: ACCEPTED — A retry completes that original operation’s one outcome and adds no layer; while the source is held, refuse retry admission. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
 - Gives out: ACCEPTED — Retry remains completion of past work, not deferral of future work. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
 - Must never: ACCEPTED — Conflate the named outcome or seam with a hold, or bypass its own authority boundary. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — A retry completes that original operation’s one outcome and adds no layer; while the source is held, refuse retry admission. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.5 — Blocked-use enforcement: Any live hold blocks new use; release of one hold does not bypass another live hold. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §6]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -3570,11 +3596,11 @@ ALONE
 - Does: ACCEPTED — A reread creates a new operation and adds a new layer beside untouched history; it cannot complete or replace the old operation’s outcome. Held sources block its claim. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
 - Gives out: ACCEPTED — A distinct reread identity and layer only when permitted. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
 - Must never: ACCEPTED — Conflate the named outcome or seam with a hold, or bypass its own authority boundary. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — A reread creates a new operation and adds a new layer beside untouched history; it cannot complete or replace the old operation’s outcome. Held sources block its claim. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.5 — Blocked-use enforcement: Any live hold blocks new use; release of one hold does not bypass another live hold. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §6]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -3595,11 +3621,11 @@ ALONE
 - Does: ACCEPTED — Keep this status as the promotion-side view of the authoritative hold fact, not the hold lifecycle itself. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
 - Gives out: ACCEPTED — A consumer-side promotion block. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
 - Must never: ACCEPTED — Conflate the named outcome or seam with a hold, or bypass its own authority boundary. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Keep this status as the promotion-side view of the authoritative hold fact, not the hold lifecycle itself. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.5 — Blocked-use enforcement: Any live hold blocks new use; release of one hold does not bypass another live hold. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §6]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -3620,7 +3646,7 @@ ALONE
 - Does: ACCEPTED — Keep it as a valid completed outcome: the read occurred and recorded its limit. Later re-examination requires a new reread trigger rather than retrying an already completed reading. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
 - Gives out: ACCEPTED — The completed honest reading remains beside history. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
 - Must never: ACCEPTED — Conflate the named outcome or seam with a hold, or bypass its own authority boundary. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Keep it as a valid completed outcome: the read occurred and recorded its limit. Later re-examination requires a new reread trigger rather than retrying an already completed reading. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3670,7 +3696,7 @@ ALONE
 - Does: ACCEPTED — Leave that authorization seam separate; the item hold creates no TSC path and reads no sealed TSC content. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
 - Gives out: ACCEPTED — A preserved sealed-cache boundary. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
 - Must never: ACCEPTED — Conflate the named outcome or seam with a hold, or bypass its own authority boundary. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Leave that authorization seam separate; the item hold creates no TSC path and reads no sealed TSC content. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §7] [04/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md §2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3695,11 +3721,11 @@ ALONE
 - Does: ACCEPTED — Keep current grounding assessment separate from whether waiting is useful. A `grounding_status` value alone never opens, blocks, or releases a hold; the specificity/obtainability test and evidence-verified lifecycle govern it. When waiting cannot help, use the honest insufficient-context outcome through its machinery, or `not_grounded_enough` where a proposal claims beyond support. [04/NH_A31_GROUNDED_ENOUGH_THRESHOLD_POLICY_v1_0_CANDIDATE.md §6]
 - Gives out: ACCEPTED — A hold decision governed by its own policy and lifecycle, never by a grounding label alone. [04/NH_A31_GROUNDED_ENOUGH_THRESHOLD_POLICY_v1_0_CANDIDATE.md §6]
 - Must never: ACCEPTED — Open, block, or release a hold solely from `grounding_status`; park a rejection as a hold. [04/NH_A31_GROUNDED_ENOUGH_THRESHOLD_POLICY_v1_0_CANDIDATE.md §6]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Keep current grounding assessment separate from whether waiting is useful. A `grounding_status` value alone never opens, blocks, or releases a hold; the specificity/obtainability test and evidence-verified lifecycle govern it. When waiting cannot help, use the honest insufficient-context outcome through its machinery, or `not_grounded_enough` where a proposal claims beyond support. [04/NH_A31_GROUNDED_ENOUGH_THRESHOLD_POLICY_v1_0_CANDIDATE.md §6]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.1 — Hold-versus-reading policy: The specificity/obtainability test and evidence-verified lifecycle govern hold opening and release; grounding_status alone does not. [04/NH_A31_GROUNDED_ENOUGH_THRESHOLD_POLICY_v1_0_CANDIDATE.md §6]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -3724,7 +3750,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.5 — Blocked-use enforcement: A live hold blocks insufficiency assessment and deterministic fallback; nonretryability alone is no fallback authorization. [04/NH_B9_RETRY_VALUES_WIRING_INTO_B9_B10_BHOLD_B24_v1_4_CANDIDATE.md §13]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -3757,6 +3783,9 @@ USED BY (one row per place)
 | # | Used in (part ID, and path ID if path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-7B.7 | An item identity, a recorded hold reason, and hold/release operation identities. | Reference the held item without touching it; establish one live hold per item/reason pair; allow distinct reasons to coexist as separate holds; use parent and child operation identities for separately executed work. | Identity-linked external hold records and distinguishable real operations. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3] |
+| 2 · ACCEPTED | C-7B.7.3.1.1 — H1 claim to requested hold | The source-defined condition governed by C-7B.7.2. | A new hold requires its own identity and standing reason record; a released hold is never resurrected. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8] |
+| 3 · ACCEPTED | C-7B.7.3.4.1 — Released-to-new-hold boundary | The source-defined condition governed by C-7B.7.2. | A new hold requires its own identity and standing reason record; a released hold is never resurrected. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8] |
+| 4 · ACCEPTED | C-7B.7.6.7 — New-hold-after-release identity | The source-defined condition governed by C-7B.7.2. | A new hold requires its own identity and standing reason record; a released hold is never resurrected. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8] |
 
 SUB-PARTS: C-7B.7.2.1 — hold_id; C-7B.7.2.2 — held_item_ref; C-7B.7.2.3 — hold_reason_id; C-7B.7.2.4 — Canonical hold claim; C-7B.7.2.5 — Hold operation identities
 
@@ -3796,7 +3825,7 @@ ALONE
 - Does: ACCEPTED — Point at the item at the location already owned by its existing seam; retain the typed class and identity, with the class-specific integrity reference when carried. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3]
 - Gives out: ACCEPTED — `held_item_ref` containing `item_class`, item identity, and the applicable integrity reference. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3]
 - Must never: ACCEPTED — Treat the reference as permission to move, copy, edit, re-store, or rewrite the item. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Rejects a request whose held-item identity cannot be verified; an existing hold on a missing or unreadable item remains standing and use stays blocked. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3846,7 +3875,7 @@ ALONE
 - Does: ACCEPTED — Reference the item by that identity without changing the item. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3]
 - Gives out: ACCEPTED — The item-identity component of `held_item_ref`. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3]
 - Must never: ACCEPTED — Copy the item into the hold record. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Rejects a request whose held-item identity cannot be verified; an existing hold on a missing or unreadable item remains standing and use stays blocked. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3925,7 +3954,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.1 — Hold-versus-reading policy: The awaiting_policy_condition class requires the adopted A29 specificity/obtainability policy and its evidence record. [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §2.1] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -3950,7 +3979,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.1 — Hold-versus-reading policy: The awaiting_policy_condition class requires the adopted A29 specificity/obtainability policy and its evidence record. [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §2.1] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -3971,7 +4000,7 @@ ALONE
 - Does: ACCEPTED — Maintain one live hold per pair; absorb duplicate requests against it. Distinct reasons on the same item are separate coexisting holds, each released independently on its evidence. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3]
 - Gives out: ACCEPTED — At most one live hold for each item/reason pair; potentially several live holds on one item for distinct reasons. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3]
 - Must never: ACCEPTED — Resolve different reasons as a conflict; make the item usable while any live hold remains. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Maintain one live hold per pair; absorb duplicate requests against it. Distinct reasons on the same item are separate coexisting holds, each released independently on its evidence. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -4021,7 +4050,7 @@ ALONE
 - Does: ACCEPTED — Identify the parent hold operation; its single terminal log is committed at H3 before acknowledgement. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5]
 - Gives out: ACCEPTED — `hold_operation_id` and its single parent terminal. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5]
 - Must never: ACCEPTED — Acknowledge before the terminal exists; emit duplicate parent terminals. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Withholds acknowledgement until the single matching parent terminal is durable; recovery appends only a missing terminal. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -4046,7 +4075,7 @@ ALONE
 - Does: ACCEPTED — Identify the parent release operation; its single terminal log is committed at HR3 before acknowledgement. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5]
 - Gives out: ACCEPTED — `release_operation_id` and its single parent terminal. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5]
 - Must never: ACCEPTED — Acknowledge before the terminal exists; emit duplicate parent terminals. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Withholds acknowledgement until the single matching parent terminal is durable; recovery appends only a missing terminal. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -4121,7 +4150,7 @@ ALONE
 - Does: ACCEPTED — Derive `hold_requested` before the enforcement record commits. H1 commits the claim; H2 is the boundary that makes blocking effective. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Gives out: ACCEPTED — A requested-but-not-enforcing hold. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Must never: ACCEPTED — Claim existence alone must not be reported as already enforcing. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Before H2 commits, the request is not enforcing; recovery resumes H2 idempotently under the claim or rejects with recorded cause. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -4146,11 +4175,11 @@ ALONE
 - Does: ACCEPTED — Atomically establish one claim containing `hold_id`, verified `held_item_ref`, `hold_reason_id`, and requester operation ref; H2 has not yet committed. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Gives out: ACCEPTED — `hold_requested`; no enforcement record yet. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Must never: ACCEPTED — Commit an unverifiable item claim or a second winning claim for the same item/reason pair. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Before H2 commits, the request is not enforcing; recovery resumes H2 idempotently under the claim or rejects with recorded cause. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.2 — Hold identities: A new hold requires its own identity and standing reason record; a released hold is never resurrected. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -4171,7 +4200,7 @@ ALONE
 - Does: ACCEPTED — Append the blocked-marking record idempotently under the claim; only that commit establishes enforcement. Recovery may instead reject with recorded cause. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Gives out: ACCEPTED — `held` once H2 commits; before it, honestly requested but not enforcing. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Must never: ACCEPTED — If H2 is absent, do not claim an enforced block. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Append the blocked-marking record idempotently under the claim; only that commit establishes enforcement. Recovery may instead reject with recorded cause. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -4221,7 +4250,7 @@ ALONE
 - Does: ACCEPTED — Record the release request while retaining the live hold and all use blocks. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Gives out: ACCEPTED — `release_requested`, still held. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Must never: ACCEPTED — A release request cannot itself release the hold. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Record the release request while retaining the live hold and all use blocks. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -4271,11 +4300,11 @@ ALONE
 - Does: ACCEPTED — Verify existence, integrity, and binding to this hold; successful verification leaves the hold live until HR2. Missing/unbound evidence refuses release; contradictory evidence requires indeterminate recovery. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Gives out: ACCEPTED — Verified release eligibility or a recorded refusal/indeterminate condition; no release yet. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Must never: ACCEPTED — No partial release or interpretation of the condition’s substantive content. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Verify existence, integrity, and binding to this hold; successful verification leaves the hold live until HR2. Missing/unbound evidence refuses release; contradictory evidence requires indeterminate recovery. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.4.6 — HR1 Release-evidence verification: Release-evidence verification requires existing intact evidence bound to this hold and the required evidence class. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -4296,11 +4325,11 @@ ALONE
 - Does: ACCEPTED — Immediately re-verify liveness and binding, then atomically append one release event by compare-and-commit; a racing second release absorbs. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Gives out: ACCEPTED — `released` for this hold; item usable only at zero live holds. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Must never: ACCEPTED — Treat a hold as released before HR2 commits. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Immediately re-verify liveness and binding, then atomically append one release event by compare-and-commit; a racing second release absorbs. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.4.6 — HR1 Release-evidence verification, C-7B.7.4.7 — HR2 Release commit: Release requires existing intact evidence bound to this hold and the required evidence class; immediately before commit the hold must still be live and evidence still bound. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -4321,7 +4350,7 @@ ALONE
 - Does: ACCEPTED — End this hold; the item becomes usable only once zero live holds remain. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Gives out: ACCEPTED — This hold is terminal. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Must never: ACCEPTED — Do not resurrect this hold or release another hold merely because this one ended. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — End this hold; the item becomes usable only once zero live holds remain. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -4346,11 +4375,11 @@ ALONE
 - Does: ACCEPTED — Create a new `hold_id` only when the new request’s own standing reason record exists. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Gives out: ACCEPTED — A new hold request with a new identity, never a reopened terminal hold. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Must never: ACCEPTED — Never resurrect the released hold. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Create a new `hold_id` only when the new request’s own standing reason record exists. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.2 — Hold identities: A new hold requires its own identity and standing reason record; a released hold is never resurrected. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -4396,7 +4425,7 @@ ALONE
 - Does: ACCEPTED — Record refusal and its cause rather than an enforcing hold. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Gives out: ACCEPTED — `hold_request_rejected`. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Must never: ACCEPTED — No false success or bypass of authorization. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Record refusal and its cause rather than an enforcing hold. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -4446,11 +4475,11 @@ ALONE
 - Does: ACCEPTED — Fail closed for use purposes while the evidence is indeterminate; unreadable lookup evidence produces no new commit. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Gives out: ACCEPTED — The item is treated as held pending proof. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Must never: ACCEPTED — Do not silently release or invent a resolution transition. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Fail closed for use purposes while the evidence is indeterminate; unreadable lookup evidence produces no new commit. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §4] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.4.6 — HR1 Release-evidence verification, C-7B.7.4.7 — HR2 Release commit: Release requires provable item/hold state and existing intact evidence bound to this hold; contradictory or missing proof does not release it. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -4732,6 +4761,16 @@ USED BY (one row per place)
 | # | Used in (part ID, and path ID if path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-7B.7.4 | The required release-evidence reference bound to this hold. | Verify evidence existence, integrity, and binding without judging condition content; use the recorded A29-condition-met record for `awaiting_policy_condition`, authorized-release record for `authorized_manual_hold`, and named-dependency-resolution record for `dependency`. | A verified evidence binding for this hold, or recorded refusal/indeterminate result. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] |
+| 2 · ACCEPTED | C-7B.7.3.3.1 — HR1 release-evidence check transition | The source-defined condition governed by C-7B.7.4.6. | Release-evidence verification requires existing intact evidence bound to this hold and the required evidence class. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] |
+| 3 · ACCEPTED | C-7B.7.3.3.2 — HR2 release-requested-to-released transition | The source-defined condition governed by C-7B.7.4.6. | Release requires existing intact evidence bound to this hold and the required evidence class; immediately before commit the hold must still be live and evidence still bound. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] |
+| 4 · ACCEPTED | C-7B.7.4.6.1 — Release-evidence existence | The source-defined condition governed by C-7B.7.4.6. | Release-evidence verification requires existing intact evidence bound to this hold and the required evidence class. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] |
+| 5 · ACCEPTED | C-7B.7.4.6.2 — Release-evidence integrity | The source-defined condition governed by C-7B.7.4.6. | Release-evidence verification requires existing intact evidence bound to this hold and the required evidence class. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] |
+| 6 · ACCEPTED | C-7B.7.4.6.3 — Release-evidence binding | The source-defined condition governed by C-7B.7.4.6. | Release-evidence verification requires existing intact evidence bound to this hold and the required evidence class. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] |
+| 7 · ACCEPTED | C-7B.7.4.6.4 — Release-evidence class requirement | The source-defined condition governed by C-7B.7.4.6. | Release-evidence verification requires existing intact evidence bound to this hold and the required evidence class. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] |
+| 8 · ACCEPTED | C-7B.7.3.6.1 — Evidence uncertainty to use-block transition | The source-defined condition governed by C-7B.7.4.6. | Release requires provable item/hold state and existing intact evidence bound to this hold; contradictory or missing proof does not release it. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9] |
+| 9 · ACCEPTED | C-7B.7.7.7 — Release without evidence | The source-defined condition governed by C-7B.7.4.6. | Release requires provable item/hold state and existing intact evidence bound to this hold; contradictory or missing proof does not release it. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9] |
+| 10 · ACCEPTED | C-7B.7.7.11 — A29-gated release without adopted record type | The source-defined condition governed by C-7B.7.4.6. | Release requires provable item/hold state and existing intact evidence bound to this hold; contradictory or missing proof does not release it. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9] |
+| 11 · ACCEPTED | C-7B.7.7.12 — Held item missing or unreadable | The source-defined condition governed by C-7B.7.4.6. | Release requires provable item/hold state and existing intact evidence bound to this hold; contradictory or missing proof does not release it. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9] |
 
 SUB-PARTS: C-7B.7.4.6.1 — Release-evidence existence; C-7B.7.4.6.2 — Release-evidence integrity; C-7B.7.4.6.3 — Release-evidence binding; C-7B.7.4.6.4 — Release-evidence class requirement
 
@@ -4750,7 +4789,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.4.6 — HR1 Release-evidence verification: Release-evidence verification requires existing intact evidence bound to this hold and the required evidence class. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -4775,7 +4814,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.4.6 — HR1 Release-evidence verification: Release-evidence verification requires existing intact evidence bound to this hold and the required evidence class. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -4800,7 +4839,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.4.6 — HR1 Release-evidence verification: Release-evidence verification requires existing intact evidence bound to this hold and the required evidence class. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -4826,7 +4865,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.4.6 — HR1 Release-evidence verification: Release-evidence verification requires existing intact evidence bound to this hold and the required evidence class. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -4858,6 +4897,10 @@ USED BY (one row per place)
 | # | Used in (part ID, and path ID if path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-7B.7.4 | The live hold and exact bound evidence reference. | Immediately before committing, verify again that the hold is live and the evidence binds; atomically append the release event by one compare-and-commit. | Exactly one release ever per hold; a racing second release absorbs. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] |
+| 2 · ACCEPTED | C-7B.7.3.3.2 — HR2 release-requested-to-released transition | The source-defined condition governed by C-7B.7.4.7. | Release requires existing intact evidence bound to this hold and the required evidence class; immediately before commit the hold must still be live and evidence still bound. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] |
+| 3 · ACCEPTED | C-7B.7.3.6.1 — Evidence uncertainty to use-block transition | The source-defined condition governed by C-7B.7.4.7. | Release requires provable item/hold state and existing intact evidence bound to this hold; contradictory or missing proof does not release it. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9] |
+| 4 · ACCEPTED | C-7B.7.7.8 — Evidence without release commit | The source-defined condition governed by C-7B.7.4.7. | Release requires provable item/hold state and existing intact evidence bound to this hold; contradictory or missing proof does not release it. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9] |
+| 5 · ACCEPTED | C-7B.7.7.12 — Held item missing or unreadable | The source-defined condition governed by C-7B.7.4.7. | Release requires provable item/hold state and existing intact evidence bound to this hold; contradictory or missing proof does not release it. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9] |
 
 SUB-PARTS: C-7B.7.4.7.1 — Release-to-retry boundary
 
@@ -4872,7 +4915,7 @@ ALONE
 - Does: ACCEPTED — Manufacture no success and fire no automatic retry from the release event. Any later admission is a fresh R0/R1 evaluation: attempt counts and anchors stand; exhaustion and early stops stand; a real-change record remains required where the retry continuation rule requires one. [04/NH_B9_RETRY_VALUES_WIRING_INTO_B9_B10_BHOLD_B24_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — The released hold’s outcome, with retry admission still governed by its own recorded state. [04/NH_B9_RETRY_VALUES_WIRING_INTO_B9_B10_BHOLD_B24_v1_4_CANDIDATE.md §12]
 - Must never: ACCEPTED — Treat release as success, an automatic retry trigger, a counter reset, an anchor reset, or an exemption from the real-change requirement. [04/NH_B9_RETRY_VALUES_WIRING_INTO_B9_B10_BHOLD_B24_v1_4_CANDIDATE.md §12]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Manufacture no success and fire no automatic retry from the release event. Any later admission is a fresh R0/R1 evaluation: attempt counts and anchors stand; exhaustion and early stops stand; a real-change record remains required where the retry continuation rule requires one. [04/NH_B9_RETRY_VALUES_WIRING_INTO_B9_B10_BHOLD_B24_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -4933,6 +4976,17 @@ USED BY (one row per place)
 | # | Used in (part ID, and path ID if path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-7B.7 | The H2 enforcement fact and a proposed new consuming use. | Exclude ordinary reading, promotion, retry, reread, and retrieval/output surfacing fail-closed; refuse silent use as a logged violation. The enforcement record is the authority, never a best-effort filter. | A refused/excluded consuming attempt with its recorded outcome. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §6] |
+| 2 · ACCEPTED | C-7B.7.1.6.1 — Hold without a reading | The source-defined condition governed by C-7B.7.5. | Any live hold blocks new use; release of one hold does not bypass another live hold. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §6] |
+| 3 · ACCEPTED | C-7B.7.1.6.3 — Retry boundary | The source-defined condition governed by C-7B.7.5. | Any live hold blocks new use; release of one hold does not bypass another live hold. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §6] |
+| 4 · ACCEPTED | C-7B.7.1.6.4 — Reread boundary | The source-defined condition governed by C-7B.7.5. | Any live hold blocks new use; release of one hold does not bypass another live hold. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §6] |
+| 5 · ACCEPTED | C-7B.7.1.6.5 — Promotion held-status boundary | The source-defined condition governed by C-7B.7.5. | Any live hold blocks new use; release of one hold does not bypass another live hold. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §3] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §6] |
+| 6 · ACCEPTED | C-7B.7.1.8 — Live-hold fallback exclusion | The source-defined condition governed by C-7B.7.5. | A live hold blocks insufficiency assessment and deterministic fallback; nonretryability alone is no fallback authorization. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B9_RETRY_VALUES_WIRING_INTO_B9_B10_BHOLD_B24_v1_4_CANDIDATE.md §13] |
+| 7 · ACCEPTED | C-7B.7.7.14 — Ordinary-reading attempt while held | The source-defined condition governed by C-7B.7.5. | The committed live-hold enforcement record blocks the attempted new use. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §6] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9] |
+| 8 · ACCEPTED | C-7B.7.7.15 — Promotion attempt while held | The source-defined condition governed by C-7B.7.5. | The committed live-hold enforcement record blocks the attempted new use. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §6] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9] |
+| 9 · ACCEPTED | C-7B.7.7.16 — Retrieval or output attempt while held | The source-defined condition governed by C-7B.7.5. | The committed live-hold enforcement record blocks the attempted new use. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §6] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9] |
+| 10 · ACCEPTED | C-7B.7.7.17 — Retry request while held | The source-defined condition governed by C-7B.7.5. | The committed live-hold enforcement record blocks the attempted new use. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §6] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9] |
+| 11 · ACCEPTED | C-7B.7.7.18 — Reread request while held | The source-defined condition governed by C-7B.7.5. | The committed live-hold enforcement record blocks the attempted new use. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §6] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9] |
+| 12 · ACCEPTED | C-7B.7.7.20 — Attempted silent use while held | The source-defined condition governed by C-7B.7.5. | The committed live-hold enforcement record blocks the attempted new use. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §6] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9] |
 
 SUB-PARTS: C-7B.7.5.1 — Ordinary-reading exclusion; C-7B.7.5.2 — Promotion exclusion; C-7B.7.5.3 — Retry exclusion; C-7B.7.5.4 — Reread exclusion; C-7B.7.5.5 — Retrieval and output exclusion; C-7B.7.5.6 — Silent-use violation
 
@@ -5048,7 +5102,7 @@ ALONE
 - Does: ACCEPTED — Consume no attempt count, start no gap anchor, open no episode, and touch no hold record. Hold time neither expands, resets, nor consumes a hidden retry budget; the retry budget is not silently drained by waiting. [04/NH_B9_RETRY_VALUES_WIRING_INTO_B9_B10_BHOLD_B24_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — The prior attempt count, anchors, episode state, and hold records unchanged by the refused request. [04/NH_B9_RETRY_VALUES_WIRING_INTO_B9_B10_BHOLD_B24_v1_4_CANDIDATE.md §12]
 - Must never: ACCEPTED — Charge a held refusal to retry allowance or mutate either lifecycle as a side effect. [04/NH_B9_RETRY_VALUES_WIRING_INTO_B9_B10_BHOLD_B24_v1_4_CANDIDATE.md §12]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Consume no attempt count, start no gap anchor, open no episode, and touch no hold record. Hold time neither expands, resets, nor consumes a hidden retry budget; the retry budget is not silently drained by waiting. [04/NH_B9_RETRY_VALUES_WIRING_INTO_B9_B10_BHOLD_B24_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -5148,7 +5202,7 @@ ALONE
 - Does: ACCEPTED — Use the declared canonical keys to absorb duplicates and make repeated recovery a no-op, preserving one real operation/one log. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
 - Gives out: ACCEPTED — No duplicated live hold, enforcement record, release, terminal, child log, or recovery application. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
 - Must never: ACCEPTED — Resurrect a released hold or use retries to create a second canonical outcome. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Use the declared canonical keys to absorb duplicates and make repeated recovery a no-op, preserving one real operation/one log. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -5173,7 +5227,7 @@ ALONE
 - Does: ACCEPTED — Maintain one live hold per pair; absorb duplicates. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
 - Gives out: ACCEPTED — One canonical live hold per pair. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
 - Must never: ACCEPTED — Create a duplicate canonical outcome for this key. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Maintain one live hold per pair; absorb duplicates. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -5248,7 +5302,7 @@ ALONE
 - Does: ACCEPTED — Permit exactly one release ever; absorb duplicate releases. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
 - Gives out: ACCEPTED — One release for that hold. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
 - Must never: ACCEPTED — Create a duplicate canonical outcome for this key. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Permit exactly one release ever; absorb duplicate releases. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -5273,7 +5327,7 @@ ALONE
 - Does: ACCEPTED — Write one terminal for each parent operation. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
 - Gives out: ACCEPTED — One H3 or HR3 terminal per parent. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
 - Must never: ACCEPTED — Create a duplicate canonical outcome for this key. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Withholds acknowledgement until the single matching parent terminal is durable; recovery appends only a missing terminal. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -5323,11 +5377,11 @@ ALONE
 - Does: ACCEPTED — Require the new identity and standing reason; never resurrect the released hold. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
 - Gives out: ACCEPTED — A distinct new hold only on its own standing reason. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
 - Must never: ACCEPTED — Create a duplicate canonical outcome for this key. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Require the new identity and standing reason; never resurrect the released hold. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.2 — Hold identities: A new hold requires its own identity and standing reason record; a released hold is never resurrected. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -5348,7 +5402,7 @@ ALONE
 - Does: ACCEPTED — Read committed state first; repeat runs apply nothing again. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
 - Gives out: ACCEPTED — Repeated recovery is a no-op. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
 - Must never: ACCEPTED — Create a duplicate canonical outcome for this key. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Read committed state first; repeat runs apply nothing again. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §8]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -5552,7 +5606,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.4.6 — HR1 Release-evidence verification: Release requires provable item/hold state and existing intact evidence bound to this hold; contradictory or missing proof does not release it. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -5577,7 +5631,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.4.7 — HR2 Release commit: Release requires provable item/hold state and existing intact evidence bound to this hold; contradictory or missing proof does not release it. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -5652,7 +5706,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.4.6 — HR1 Release-evidence verification: Release requires provable item/hold state and existing intact evidence bound to this hold; contradictory or missing proof does not release it. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -5677,7 +5731,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.4.6 — HR1 Release-evidence verification, C-7B.7.4.7 — HR2 Release commit: Release requires provable item/hold state and existing intact evidence bound to this hold; contradictory or missing proof does not release it. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -5727,7 +5781,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.5 — Blocked-use enforcement: The committed live-hold enforcement record blocks the attempted new use. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §6] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -5752,7 +5806,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.5 — Blocked-use enforcement: The committed live-hold enforcement record blocks the attempted new use. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §6] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -5777,7 +5831,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.5 — Blocked-use enforcement: The committed live-hold enforcement record blocks the attempted new use. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §6] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -5802,7 +5856,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.5 — Blocked-use enforcement: The committed live-hold enforcement record blocks the attempted new use. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §6] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -5827,7 +5881,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.5 — Blocked-use enforcement: The committed live-hold enforcement record blocks the attempted new use. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §6] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -5877,7 +5931,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.7.5 — Blocked-use enforcement: The committed live-hold enforcement record blocks the attempted new use. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §6] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 - Changes: NOT DECIDED
 
 USED BY (one row per place)
@@ -5898,7 +5952,7 @@ ALONE
 - Does: ACCEPTED — Keep claims, enforcement records, and evidence bindings as canonical state records rather than operational logs. Emit exactly one operational log per real operation under its own identity; child logs reference the parent, and H3/HR3 are single parent terminals. Record hold opening, condition recording, every automatic check with result, every block/release, and every recovery step. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10] [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §4.5]
 - Gives out: ACCEPTED — Identity-linked append-only state records and one-operation/one-log outcomes using the event vocabulary below. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10] [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §4.5]
 - Must never: ACCEPTED — Treat records or repeated checks/blocks/holds as additional certainty, truth, importance, or evidential votes; duplicate the evidence record into a second vote. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10] [04/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md §4.5]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Records refusals with their causes and attempted use class; unreadable hold evidence keeps use blocked, missing or unbound release evidence keeps the hold live, and silent bypass is a logged violation. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -5924,7 +5978,7 @@ ALONE
 - Does: ACCEPTED — Record the request outcome; request existence alone does not enforce a block. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
 - Gives out: ACCEPTED — An identity-linked `hold_requested` record for the named outcome. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
 - Must never: ACCEPTED — Duplicate an operational log or use the record as an extra evidential vote. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Records refusals with their causes and attempted use class; unreadable hold evidence keeps use blocked, missing or unbound release evidence keeps the hold live, and silent bypass is a logged violation. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -5999,7 +6053,7 @@ ALONE
 - Does: ACCEPTED — Record the rejection and its cause. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
 - Gives out: ACCEPTED — An identity-linked `hold_request_rejected` record for the named outcome. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
 - Must never: ACCEPTED — Duplicate an operational log or use the record as an extra evidential vote. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Records refusals with their causes and attempted use class; unreadable hold evidence keeps use blocked, missing or unbound release evidence keeps the hold live, and silent bypass is a logged violation. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6024,7 +6078,7 @@ ALONE
 - Does: ACCEPTED — Record the enforcement fact every consuming gate consults. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
 - Gives out: ACCEPTED — An identity-linked `hold_enforcement_marked` record for the named outcome. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
 - Must never: ACCEPTED — Duplicate an operational log or use the record as an extra evidential vote. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Records refusals with their causes and attempted use class; unreadable hold evidence keeps use blocked, missing or unbound release evidence keeps the hold live, and silent bypass is a logged violation. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6149,7 +6203,7 @@ ALONE
 - Does: ACCEPTED — Record the refusal; missing evidence refusal names the missing evidence class. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
 - Gives out: ACCEPTED — An identity-linked `release_refused` record for the named outcome. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
 - Must never: ACCEPTED — Duplicate an operational log or use the record as an extra evidential vote. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Records refusals with their causes and attempted use class; unreadable hold evidence keeps use blocked, missing or unbound release evidence keeps the hold live, and silent bypass is a logged violation. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6174,7 +6228,7 @@ ALONE
 - Does: ACCEPTED — Record the single parent terminal before acknowledgement. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
 - Gives out: ACCEPTED — An identity-linked `hold_terminal` record for the named outcome. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
 - Must never: ACCEPTED — Duplicate an operational log or use the record as an extra evidential vote. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Withholds acknowledgement until the single matching parent terminal is durable; recovery appends only a missing terminal. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6199,7 +6253,7 @@ ALONE
 - Does: ACCEPTED — Record the single parent terminal before acknowledgement. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
 - Gives out: ACCEPTED — An identity-linked `release_terminal` record for the named outcome. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
 - Must never: ACCEPTED — Duplicate an operational log or use the record as an extra evidential vote. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Withholds acknowledgement until the single matching parent terminal is durable; recovery appends only a missing terminal. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §5] [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6224,7 +6278,7 @@ ALONE
 - Does: ACCEPTED — Record the refusal with the attempted class named; silent bypass is recorded as a violation. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
 - Gives out: ACCEPTED — An identity-linked `blocked_use_refused` record for the named outcome. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
 - Must never: ACCEPTED — Duplicate an operational log or use the record as an extra evidential vote. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Records refusals with their causes and attempted use class; unreadable hold evidence keeps use blocked, missing or unbound release evidence keeps the hold live, and silent bypass is a logged violation. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6299,7 +6353,7 @@ ALONE
 - Does: ACCEPTED — Record the fail-closed occurrence under the applicable gate visibility rules. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
 - Gives out: ACCEPTED — An identity-linked `fail_closed_event` record for the named outcome. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
 - Must never: ACCEPTED — Duplicate an operational log or use the record as an extra evidential vote. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Records refusals with their causes and attempted use class; unreadable hold evidence keeps use blocked, missing or unbound release evidence keeps the hold live, and silent bypass is a logged violation. [04/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md §10]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6349,7 +6403,7 @@ ALONE
 - Does: DESIGNED — Surfaces the specific gap by name: which web, on which piece, and exactly what is missing. [SOURCE CONFLICT: V10 §2 says otherwise] [V10 §7B]
 - Gives out: DESIGNED — An explicit, re-checkable gap. [V10 §7B]
 - Must never: DESIGNED — Silently auto-stamp “unknown” without naming the gap. [V10 §7B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Surfaces the specific gap by name: which web, on which piece, and exactly what is missing. [SOURCE CONFLICT: V10 §2 says otherwise] [V10 §7B]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6372,7 +6426,7 @@ ALONE
 - Does: DESIGNED — Keeps running without stopping to ask, solicit a decision or queue approval. [V10 §7B]
 - Gives out: DESIGNED — A running engine with the gap retained. [V10 §7B]
 - Must never: DESIGNED — Block on Ness or turn information into an approval task. [V10 §7B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Keeps running without stopping to ask, solicit a decision or queue approval. [V10 §7B]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6418,7 +6472,7 @@ ALONE
 - Does: DESIGNED — Permits the catalog to ask Ness for required capture clarification. Unattended unresolved speaker or thread remains held rather than guessed. [V10 §7B] [V10 §7E]
 - Gives out: DESIGNED — Capture clarification, or a held unresolved capture. [V10 §7B] [V10 §7E]
 - Must never: DESIGNED — Infer source role or replace uncertain thread grouping with an invented topic. [V10 §7B] [V10 §7E]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Permits the catalog to ask Ness for required capture clarification. Unattended unresolved speaker or thread remains held rather than guessed. [V10 §7B] [V10 §7E]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6441,7 +6495,7 @@ ALONE
 - Does: DESIGNED — Ordinary real-reading paths do not use simulation scratch space. Wonder mode may use it. Scratch-space output cannot enter memory directly. [V10 §11 item 30] [MAP C-7B]
 - Gives out: DESIGNED — A scratch-space boundary that keeps ordinary real readings separate from Wonder and prohibits direct scratch-to-memory entry. [V10 §11 item 30] [MAP C-7B]
 - Must never: DESIGNED — Let an ordinary real-reading path use simulation scratch space or let scratch-space output enter memory directly. [V10 §11 item 30] [MAP C-7B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Ordinary real-reading paths do not use simulation scratch space. Wonder mode may use it. Scratch-space output cannot enter memory directly. [V10 §11 item 30] [MAP C-7B]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6468,7 +6522,7 @@ ALONE
 - Does: DESIGNED — Keeps simulation scratch space unavailable to the ordinary real-reading path. [V10 §11 item 30] [MAP C-7B]
 - Gives out: DESIGNED — An ordinary real-reading path that does not use simulation scratch material. [V10 §11 item 30] [MAP C-7B]
 - Must never: DESIGNED — Use simulation scratch space in an ordinary real-reading path. [V10 §11 item 30] [MAP C-7B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Keeps simulation scratch space unavailable to the ordinary real-reading path. [V10 §11 item 30] [MAP C-7B]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6495,7 +6549,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — Only Wonder mode may use simulation scratch space; ordinary real-reading paths cannot. [V10 §11 item 30]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -6514,7 +6568,7 @@ ALONE
 - Does: DESIGNED — Keeps Wonder weightless, dated, confidence-tagged, and rejectable; keeps wonders shown without closing them into decided facts. [V10 §0] [V10 §0A] [V10 §10]
 - Gives out: DESIGNED — Wonder material that remains a non-decisive, accreting interpretation. [V10 §0] [V10 §0A] [V10 §10]
 - Must never: DESIGNED — Promote Wonder or its confidence into a fact or close an interpretation into truth-for-everyone. [V10 §0] [V10 §0A] [V10 §10]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Keeps the interpretation rejectable and non-decisive; it cannot close into established fact. [V10 §0] [V10 §0A]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6537,7 +6591,7 @@ ALONE
 - Does: DECIDED-2026-09-24 — Provides no code path that moves scratch to memory. Any re-entry is fresh raw input through the front door. [DR §4] [98/sources/NH_MASTER-14_FINAL.md §7B / Part 6.5]
 - Gives out: DECIDED-2026-09-24 — Separation between scratch and memory, with fresh raw front-door re-entry as the only allowed re-entry form. [DR §4] [98/sources/NH_MASTER-14_FINAL.md §7B / Part 6.5]
 - Must never: DECIDED-2026-09-24 — Treat scratch as memory directly or bypass fresh raw front-door intake. [DR §4] [98/sources/NH_MASTER-14_FINAL.md §7B / Part 6.5]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DECIDED-2026-09-24 — Provides no code path that moves scratch to memory. Any re-entry is fresh raw input through the front door. [DR §4] [98/sources/NH_MASTER-14_FINAL.md §7B / Part 6.5]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6561,7 +6615,7 @@ ALONE
 - Does: DECIDED-2026-09-24 — Keeps scratch from being moved into memory by a code path. [DR §4] [98/sources/NH_MASTER-14_FINAL.md §7B / Part 6.5]
 - Gives out: DECIDED-2026-09-24 — Scratch remains outside direct memory entry. [DR §4] [98/sources/NH_MASTER-14_FINAL.md §7B / Part 6.5]
 - Must never: DECIDED-2026-09-24 — Create or use a code path that moves scratch to memory. [DR §4] [98/sources/NH_MASTER-14_FINAL.md §7B / Part 6.5]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DECIDED-2026-09-24 — Keeps scratch from being moved into memory by a code path. [DR §4] [98/sources/NH_MASTER-14_FINAL.md §7B / Part 6.5]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6584,7 +6638,7 @@ ALONE
 - Does: DECIDED-2026-09-24 — Requires re-entry as fresh raw input through the front door. [DR §4] [98/sources/NH_MASTER-14_FINAL.md §7B / Part 6.5]
 - Gives out: DECIDED-2026-09-24 — Fresh raw input at the front door, without a direct scratch-to-memory move. [DR §4] [98/sources/NH_MASTER-14_FINAL.md §7B / Part 6.5]
 - Must never: DECIDED-2026-09-24 — Treat selection or re-entry as permission to bypass the front door. [DR §4] [98/sources/NH_MASTER-14_FINAL.md §7B / Part 6.5]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DECIDED-2026-09-24 — Requires re-entry as fresh raw input through the front door. [DR §4] [98/sources/NH_MASTER-14_FINAL.md §7B / Part 6.5]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6607,7 +6661,7 @@ ALONE
 - Does: DECIDED-2026-09-24 — Excludes scratch from default reads and runs real reads as a fresh pass. [DR §4] [98/sources/NH_MASTER-14_FINAL.md §7B / Part 6.5]
 - Gives out: DECIDED-2026-09-24 — Real-reading context that has not inherited Wonder scratch through default reads. [DR §4] [98/sources/NH_MASTER-14_FINAL.md §7B / Part 6.5]
 - Must never: DECIDED-2026-09-24 — Let default context reads include scratch or substitute a Wonder scratch pass for a fresh real pass. [DR §4] [98/sources/NH_MASTER-14_FINAL.md §7B / Part 6.5]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DECIDED-2026-09-24 — Excludes scratch from default reads and runs real reads as a fresh pass. [DR §4] [98/sources/NH_MASTER-14_FINAL.md §7B / Part 6.5]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6632,7 +6686,7 @@ ALONE
 - Does: DECIDED-2026-09-24 — Excludes scratch from default reads. [DR §4] [98/sources/NH_MASTER-14_FINAL.md §7B / Part 6.5]
 - Gives out: DECIDED-2026-09-24 — Default context without Wonder scratch. [DR §4] [98/sources/NH_MASTER-14_FINAL.md §7B / Part 6.5]
 - Must never: DECIDED-2026-09-24 — Include scratch in default context reads. [DR §4] [98/sources/NH_MASTER-14_FINAL.md §7B / Part 6.5]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DECIDED-2026-09-24 — Excludes scratch from default reads. [DR §4] [98/sources/NH_MASTER-14_FINAL.md §7B / Part 6.5]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6655,7 +6709,7 @@ ALONE
 - Does: DECIDED-2026-09-24 — Runs the real read as a fresh pass. [DR §4] [98/sources/NH_MASTER-14_FINAL.md §7B / Part 6.5]
 - Gives out: DECIDED-2026-09-24 — A fresh real-reading pass. [DR §4] [98/sources/NH_MASTER-14_FINAL.md §7B / Part 6.5]
 - Must never: DECIDED-2026-09-24 — Use a scratch pass in place of a fresh real read. [DR §4] [98/sources/NH_MASTER-14_FINAL.md §7B / Part 6.5]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DECIDED-2026-09-24 — Runs the real read as a fresh pass. [DR §4] [98/sources/NH_MASTER-14_FINAL.md §7B / Part 6.5]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6678,7 +6732,7 @@ ALONE
 - Does: ACCEPTED — Begins only with deliberate Ness selection and deliberate Ness submission. Only the selected material may move toward memory; nothing transfers automatically. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §2] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §3] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4]
 - Gives out: ACCEPTED — Selected material submitted toward normal memory; selection alone is not memory entry. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §2] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §3] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4]
 - Must never: ACCEPTED — Let generation, usefulness, repetition, emotional importance, high confidence, or relevance begin transfer; move unselected surrounding scratch. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §2] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §3] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Begins only with deliberate Ness selection and deliberate Ness submission. Only the selected material may move toward memory; nothing transfers automatically. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §2] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §3] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6701,7 +6755,7 @@ ALONE
 - Does: ACCEPTED — Requires Ness alone to deliberately choose the specific material. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §2]
 - Gives out: ACCEPTED — Ness-selected Wonder material. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §2]
 - Must never: ACCEPTED — Substitute selection by the system or another selector for deliberate Ness selection. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Requires Ness alone to deliberately choose the specific material. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6724,7 +6778,7 @@ ALONE
 - Does: ACCEPTED — Requires a deliberate Ness submission toward normal memory; nothing else begins the route and nothing transfers automatically. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §2] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §3]
 - Gives out: ACCEPTED — Deliberately submitted selected material. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §2] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §3]
 - Must never: ACCEPTED — Start the route automatically or infer submission from the existence of selected material. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §2] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §3]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Requires a deliberate Ness submission toward normal memory; nothing else begins the route and nothing transfers automatically. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §2] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §3]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6735,6 +6789,8 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-7B.9.6, CY-J (Wonder boundary only) | Wonder material deliberately selected by Ness. | Requires a deliberate Ness submission toward normal memory; nothing else begins the route and nothing transfers automatically. | Deliberately submitted selected material. | [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §2] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §3] |
+| 2 · ACCEPTED | C-7B.9.6.3 — Non-transfer triggers | The source-defined condition governed by C-7B.9.6.2. | Only Ness’s deliberate selection and submission begin the route, and only the selected material may move toward memory. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §2] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §3] |
+| 3 · ACCEPTED | C-7B.9.6.4 — Selected-material-only scope | The source-defined condition governed by C-7B.9.6.2. | Only Ness’s deliberate selection and submission begin the route, and only the selected material may move toward memory. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §2] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §3] |
 
 SUB-PARTS: NONE
 
@@ -6747,11 +6803,11 @@ ALONE
 - Does: ACCEPTED — Treats none of generation, usefulness, repetition, emotional weight, confidence, or relevance as selection or a transfer trigger. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §3]
 - Gives out: ACCEPTED — No transfer solely from any of those properties. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §3]
 - Must never: ACCEPTED — Equate any of these properties with deliberate selection or submission. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §3]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Treats none of generation, usefulness, repetition, emotional weight, confidence, or relevance as selection or a transfer trigger. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §3]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.9.6.2 — Deliberate Ness submission: Only Ness’s deliberate selection and submission begin the route, and only the selected material may move toward memory. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §2] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §3]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -6770,11 +6826,11 @@ ALONE
 - Does: ACCEPTED — Allows only selected material to move toward memory. Keeps the unselected surrounding scene, session, thread, and scratch space isolated and unusable by ordinary real-memory reading paths. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §3] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §10]
 - Gives out: ACCEPTED — Selected-material-only scope; unselected scratch remains isolated. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §3] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §10]
 - Must never: ACCEPTED — Transfer surrounding unselected content or let it influence ordinary memory responses. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §3] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §10]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Allows only selected material to move toward memory. Keeps the unselected surrounding scene, session, thread, and scratch space isolated and unusable by ordinary real-memory reading paths. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §3] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §10]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-7B.9.6.2 — Deliberate Ness submission: Only Ness’s deliberate selection and submission begin the route, and only the selected material may move toward memory. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §2] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §3]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -6793,7 +6849,7 @@ ALONE
 - Does: ACCEPTED — Requires the selected material to pass the same normal authorized intake, privacy, provenance, and acceptance protections as any other candidate material. Selection does not create direct memory entry. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4]
 - Gives out: ACCEPTED — A protected, indirect intake boundary for selected material. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4]
 - Must never: ACCEPTED — Weaken an existing gate, bypass Layer 2 while it remains active, or treat selection as direct entry. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Requires the selected material to pass the same normal authorized intake, privacy, provenance, and acceptance protections as any other candidate material. Selection does not create direct memory entry. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6816,7 +6872,7 @@ ALONE
 - Does: ACCEPTED — Applies §7Q privacy and capture-exclusion precedence unchanged, including §7Q precedence before relevance and output. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §9]
 - Gives out: ACCEPTED — Wonder material subject to the same privacy and capture-exclusion protections. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §9]
 - Must never: ACCEPTED — Use Wonder selection to bypass privacy or capture exclusions. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §9]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Applies §7Q privacy and capture-exclusion precedence unchanged, including §7Q precedence before relevance and output. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6839,7 +6895,7 @@ ALONE
 - Does: ACCEPTED — Applies §25 and the accepted B-INT-5 identity and access wiring unchanged. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4]
 - Gives out: ACCEPTED — An intake operation subject to the existing identity and authorization protections. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4]
 - Must never: ACCEPTED — Use Wonder selection to bypass identity or authorization. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Applies §25 and the accepted B-INT-5 identity and access wiring unchanged. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6885,7 +6941,7 @@ ALONE
 - Does: ACCEPTED — Keeps the §7E envelope as the only entry into root stores and permits a future root only through the B11 active writable batch; the sealed 5,521-root batch is never appended to. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §9]
 - Gives out: ACCEPTED — Root-entry constraints that preserve the existing sealed batch. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §9]
 - Must never: ACCEPTED — Append a root to the sealed 5,521-root batch or bypass the envelope and active-writable-batch restrictions. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §9]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Keeps the §7E envelope as the only entry into root stores and permits a future root only through the B11 active writable batch; the sealed 5,521-root batch is never appended to. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6908,7 +6964,7 @@ ALONE
 - Does: ACCEPTED — Requires the §7E envelope as the only entry into root stores. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §9]
 - Gives out: ACCEPTED — Root entry through the existing envelope boundary. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §9]
 - Must never: ACCEPTED — Create a direct Wonder-to-root-store entry outside the envelope. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §9]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Requires the §7E envelope as the only entry into root stores. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6931,7 +6987,7 @@ ALONE
 - Does: ACCEPTED — Uses only the B11 active writable batch for that root. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §9]
 - Gives out: ACCEPTED — A root destination constrained to the active writable batch. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §9]
 - Must never: ACCEPTED — Treat Wonder selection as permission to write a different root batch. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §9]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Uses only the B11 active writable batch for that root. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6954,7 +7010,7 @@ ALONE
 - Does: ACCEPTED — Keeps the sealed 5,521-root batch unavailable for appends. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4]
 - Gives out: ACCEPTED — The sealed 5,521-root batch remains unappended. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4]
 - Must never: ACCEPTED — Append selected Wonder material to the sealed 5,521-root batch. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Keeps the sealed 5,521-root batch unavailable for appends. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6977,7 +7033,7 @@ ALONE
 - Does: ACCEPTED — Keeps `promote_to_memory()` as the one authorized path for unverified content into REALITY. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §9] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §10]
 - Gives out: ACCEPTED — No direct Wonder-to-REALITY path. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §9] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §10]
 - Must never: ACCEPTED — Bypass Layer 2 or any existing memory-entry protection; create a direct Wonder-to-REALITY path. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §9] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §10]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Keeps `promote_to_memory()` as the one authorized path for unverified content into REALITY. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §9] [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §10]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -7000,7 +7056,7 @@ ALONE
 - Does: ACCEPTED — Requires the selected material to pass the normal acceptance protections, the same gates as any other candidate material, unweakened. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4]
 - Gives out: ACCEPTED — Selected material subject to the normal acceptance protections. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4]
 - Must never: ACCEPTED — Make selection create direct memory entry or weaken an acceptance protection. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Requires the selected material to pass the normal acceptance protections, the same gates as any other candidate material, unweakened. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §4]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -7276,7 +7332,7 @@ ALONE
 - Does: ACCEPTED — Keeps Wonder from silently serving as proof of a real event, another person’s beliefs or actions, Ness, or a prediction’s truth. Keeps imagined scenes out of story, person-box, and Living State Web representations as observed reality. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §7]
 - Gives out: ACCEPTED — Possibility material that does not become evidence of observed events or people. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §7]
 - Must never: ACCEPTED — Let an imagined scene become a fact about a real person or enter anyone’s story, person-box, or Living State Web as if observed. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §7]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Keeps Wonder from silently serving as proof of a real event, another person’s beliefs or actions, Ness, or a prediction’s truth. Keeps imagined scenes out of story, person-box, and Living State Web representations as observed reality. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §7]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -7302,7 +7358,7 @@ ALONE
 - Does: ACCEPTED — Keeps it from silently serving as proof of a real event, proof of another person’s beliefs or actions, proof about Ness, or proof that a prediction is true. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §7]
 - Gives out: ACCEPTED — Wonder material whose presence does not establish any of these claims. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §7]
 - Must never: ACCEPTED — Silently use Wonder as proof in any of the four classes. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §7]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Keeps it from silently serving as proof of a real event, proof of another person’s beliefs or actions, proof about Ness, or proof that a prediction is true. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §7]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -7325,7 +7381,7 @@ ALONE
 - Does: ACCEPTED — Keeps the scene as Wonder material about a possibility; it never becomes a fact about that person or enters anyone’s story, person-box, or Living State Web as observed reality. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §7]
 - Gives out: ACCEPTED — A possibility concerning a person without a fabricated observed-reality claim. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §7]
 - Must never: ACCEPTED — Use the scene as observed reality in C-7K, C-7L, or C-7D. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §7]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Keeps the scene as Wonder material about a possibility; it never becomes a fact about that person or enters anyone’s story, person-box, or Living State Web as observed reality. [04/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md §7]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -7533,7 +7589,7 @@ ALONE
 - Does: DESIGNED — Records real events and operations permanently and append-only; exposes the engine history through the Log; makes records internally retrievable, connectable, readable, interpretable and subject to triggered self-examination. [V10 §0B] [V10 §7B / Part 7 — THE LOG] [MAP C-7B]
 - Gives out: DESIGNED — A connected living record and an inspectable subject-indexed history of the engine’s activity. [V10 §0B] [V10 §7B / Part 7 — THE LOG] [MAP C-7B]
 - Must never: DESIGNED — Perform silent operations; destroy records; rewrite the Log; make seeing a Log entry into approving it; treat logged use as additional evidence that the underlying information is correct. [V10 §0B] [V10 §7B / Part 7 — THE LOG] [MAP C-7B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Records failed and refused real operations rather than erasing them; record existence does not bypass the applicable access and authorization boundaries. [V10 §0B]
 
 TOGETHER
 - Fed by: DESIGNED — C-7B supplies each nightly pass, web firing, unknown-flag and later-filled layer for permanent recording; C-7B.8 supplies the unknown-flags and later-filled layers from unfillable-web handling. [V10 §0B] [V10 §7B / Part 7 — THE LOG] [MAP C-7B]
@@ -7835,7 +7891,7 @@ ALONE
 - Does: DECIDED-2026-09-25 — Preserves all ten contents. A record is not complete without them. FR-0112; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / WHAT EVERY RECORD MUST CONTAIN] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F4]
 - Gives out: DECIDED-2026-09-25 — A record retaining production, event, input, outcome, uncertainty, connection and use information. FR-0112; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / WHAT EVERY RECORD MUST CONTAIN] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F4]
 - Must never: DECIDED-2026-09-25 — Treat a record as complete when required content is absent. FR-0112; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / WHAT EVERY RECORD MUST CONTAIN] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F4]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DECIDED-2026-09-25 — Does not count the record as complete without the required contents; omissions, rejections, failures, unknowns and their reasons remain recorded. FR-0112; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / WHAT EVERY RECORD MUST CONTAIN] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F4]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -8019,7 +8075,7 @@ ALONE
 - Does: DECIDED-2026-09-25 — Preserves what was omitted, rejected, failed or left unknown, and why as part of the record. FR-0112; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / WHAT EVERY RECORD MUST CONTAIN] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F4]
 - Gives out: DECIDED-2026-09-25 — The record carries what was omitted, rejected, failed or left unknown, and why. FR-0112; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / WHAT EVERY RECORD MUST CONTAIN] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F4]
 - Must never: DECIDED-2026-09-25 — Treat the record as complete while this required content is absent. FR-0112; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / WHAT EVERY RECORD MUST CONTAIN] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F4]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DECIDED-2026-09-25 — Preserves what was omitted, rejected, failed or left unknown, and why as part of the record. FR-0112; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / WHAT EVERY RECORD MUST CONTAIN] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F4]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -8042,7 +8098,7 @@ ALONE
 - Does: DECIDED-2026-09-25 — Preserves what was omitted, rejected, failed or left unknown as part of the record. FR-0112; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / WHAT EVERY RECORD MUST CONTAIN] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F4]
 - Gives out: DECIDED-2026-09-25 — The record carries what was omitted, rejected, failed or left unknown. FR-0112; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / WHAT EVERY RECORD MUST CONTAIN] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F4]
 - Must never: DECIDED-2026-09-25 — Treat the record as complete while this required content is absent. FR-0112; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / WHAT EVERY RECORD MUST CONTAIN] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F4]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DECIDED-2026-09-25 — Preserves what was omitted, rejected, failed or left unknown as part of the record. FR-0112; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / WHAT EVERY RECORD MUST CONTAIN] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F4]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -8065,7 +8121,7 @@ ALONE
 - Does: DECIDED-2026-09-25 — Preserves why something was omitted, rejected, failed or left unknown as part of the record. FR-0112; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / WHAT EVERY RECORD MUST CONTAIN] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F4]
 - Gives out: DECIDED-2026-09-25 — The record carries why something was omitted, rejected, failed or left unknown. FR-0112; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / WHAT EVERY RECORD MUST CONTAIN] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F4]
 - Must never: DECIDED-2026-09-25 — Treat the record as complete while this required content is absent. FR-0112; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / WHAT EVERY RECORD MUST CONTAIN] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F4]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DECIDED-2026-09-25 — Preserves why something was omitted, rejected, failed or left unknown as part of the record. FR-0112; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / WHAT EVERY RECORD MUST CONTAIN] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F4]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -8272,7 +8328,7 @@ ALONE
 - Does: DECIDED-2026-09-25 — Records every such use event; records a candidate’s non-use with its reason. The use record preserves the seven required content items. FR-0113; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / USE RECORDS — LOGGING EVERY USE AND NON-USE] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F5]
 - Gives out: DECIDED-2026-09-25 — A use record retaining the used record, using component, purpose, contributing decision or output, outcome, unchosen alternatives and reasons, and remaining uncertainty; a non-use record retaining the reason the candidate was not used. FR-0113; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / USE RECORDS — LOGGING EVERY USE AND NON-USE] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F5]
 - Must never: DECIDED-2026-09-25 — Silently omit use events or candidate non-use reasons. FR-0113; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / USE RECORDS — LOGGING EVERY USE AND NON-USE] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F5]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DECIDED-2026-09-25 — Preserves the actual use result and remaining uncertainty; when a candidate was not used, records its non-use and reason. FR-0113; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / USE RECORDS — LOGGING EVERY USE AND NON-USE] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F5]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -8295,7 +8351,7 @@ ALONE
 - Does: DECIDED-2026-09-25 — Records the use event each time one of these operations actually occurs. FR-0113; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / USE RECORDS — LOGGING EVERY USE AND NON-USE] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F5]
 - Gives out: DECIDED-2026-09-25 — A record of that use event. FR-0113; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / USE RECORDS — LOGGING EVERY USE AND NON-USE] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F5]
 - Must never: DECIDED-2026-09-25 — Leave such a use without a record. FR-0113; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / USE RECORDS — LOGGING EVERY USE AND NON-USE] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F5]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DECIDED-2026-09-25 — Preserves the actual use result and remaining uncertainty; when a candidate was not used, records its non-use and reason. FR-0113; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / USE RECORDS — LOGGING EVERY USE AND NON-USE] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F5]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -8571,7 +8627,7 @@ ALONE
 - Does: DECIDED-2026-09-25 — Examines the relevant prior material; uses the results to inform present and future processing; records every examination actually performed, connects it and makes it available for further examination. FR-0114; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / RECURSIVE SELF-EXAMINATION] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F6]
 - Gives out: DECIDED-2026-09-25 — Recorded examination results, their subsequent use, remaining uncertainty and established connections. FR-0114; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / RECURSIVE SELF-EXAMINATION] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F6]
 - Must never: DECIDED-2026-09-25 — Continuously examine every log of every log merely because records exist; run uncontrolled automatic recursion without a trigger. FR-0114; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / RECURSIVE SELF-EXAMINATION] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F6]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DECIDED-2026-09-25 — Does not start examination merely because recording occurred; examination requires a permitted trigger and reaches only the depth genuinely required. FR-0114; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / RECURSIVE SELF-EXAMINATION] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F6]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -8594,7 +8650,7 @@ ALONE
 - Does: DECIDED-2026-09-25 — Starts recursive examination when a permitted trigger occurs. FR-0114; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / RECURSIVE SELF-EXAMINATION] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F6]
 - Gives out: DECIDED-2026-09-25 — An examination grounded in its actual trigger. FR-0114; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / RECURSIVE SELF-EXAMINATION] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F6]
 - Must never: DECIDED-2026-09-25 — Treat record existence alone as an examination trigger. FR-0114; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / RECURSIVE SELF-EXAMINATION] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F6]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DECIDED-2026-09-25 — Without a permitted trigger and genuine purpose, no recursive examination is started or deepened. FR-0114; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / RECURSIVE SELF-EXAMINATION] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F6]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -8755,7 +8811,7 @@ ALONE
 - Does: DECIDED-2026-09-25 — Runs as deep as the trigger genuinely requires; has no fixed maximum depth when deeper examination serves a real purpose. FR-0114; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / RECURSIVE SELF-EXAMINATION] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F6]
 - Gives out: DECIDED-2026-09-25 — An examination connected to the purpose that triggered it. FR-0114; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / RECURSIVE SELF-EXAMINATION] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F6]
 - Must never: DECIDED-2026-09-25 — Run uncontrolled automatic recursion in the absence of a trigger. FR-0114; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / RECURSIVE SELF-EXAMINATION] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F6]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DECIDED-2026-09-25 — Without a permitted trigger and genuine purpose, no recursive examination is started or deepened. FR-0114; [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 10] [98/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md §0B / RECURSIVE SELF-EXAMINATION] [98/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md §5 / F6]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9054,7 +9110,7 @@ ALONE
 - Does: DESIGNED — Starts new logs active; permits an older log to become cold only when it meets its age rule and no longer receives genuine use or valid new links; permits actual reasoning use or a valid new link to reactivate old material. [V10 §0B]
 - Gives out: DESIGNED — Permanently preserved and retrievable logs, with active material easy to retrieve and cold originals unchanged. [V10 §0B]
 - Must never: DESIGNED — Destroy a cold log; move or rewrite the original to reactivate it; treat mere discovery or similarity as sufficient for reactivation or an accepted connection. [V10 §0B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Keeps the log active unless both its declared age condition and the absence of genuine use or valid new links permit cooling. [V10 §0B]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9077,7 +9133,7 @@ ALONE
 - Does: DESIGNED — Keeps the log active until both cooling conditions are satisfied. [V10 §0B]
 - Gives out: DESIGNED — Active log material. [V10 §0B]
 - Must never: DESIGNED — Cool an older log unless it is old under its log-type rule and no longer genuinely used or receiving valid new links. [V10 §0B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Keeps the log active unless both its declared age condition and the absence of genuine use or valid new links permit cooling. [V10 §0B]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9123,7 +9179,7 @@ ALONE
 - Does: DESIGNED — Allows cooling only when both conditions hold: old under that rule, and no longer genuinely used or receiving valid new links. Different log types may use different starting rules; security or high-impact logs may remain active longer than routine operational logs. [V10 §0B]
 - Gives out: DESIGNED — A cold log when both cooling conditions are met; the original remains preserved and retrievable. [V10 §0B]
 - Must never: DESIGNED — Use age alone to cool a log that is still genuinely used or receiving valid new links. [V10 §0B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Keeps the log active unless both its declared age condition and the absence of genuine use or valid new links permit cooling. [V10 §0B]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9146,7 +9202,7 @@ ALONE
 - Does: DESIGNED — Requires the log to be old according to that rule before cooling is permitted. [V10 §0B]
 - Gives out: DESIGNED — The age condition required for cooling. [V10 §0B]
 - Must never: DESIGNED — Treat age as a sufficient condition by itself. [V10 §0B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Keeps the log active unless both its declared age condition and the absence of genuine use or valid new links permit cooling. [V10 §0B]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9169,7 +9225,7 @@ ALONE
 - Does: DESIGNED — Requires the log no longer to be genuinely used and no longer to receive valid new links. [V10 §0B]
 - Gives out: DESIGNED — The activity condition required for cooling. [V10 §0B]
 - Must never: DESIGNED — Cool a log solely because it is old while genuine use or valid new linking continues. [V10 §0B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Keeps the log active unless both its declared age condition and the absence of genuine use or valid new links permit cooling. [V10 §0B]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9353,11 +9409,11 @@ ALONE
 - Does: DESIGNED — Begins with fixed declared rules. Allows N.H to propose a change only with the required evidence; every change requires Ness’s approval. [V10 §0B]
 - Gives out: DESIGNED — An evidence-backed proposal and, when approved, a permitted rule change. [V10 §0B]
 - Must never: DESIGNED — Change the rule autonomously. [V10 §0B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Does not change the cooling rule without approval; a proposal requires frequent-use and genuine-usefulness evidence, quantitative support and concrete real examples. [V10 §0B]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — Every change requires approval; proposal evidence includes quantitative support and concrete examples of frequent, genuine usefulness. [V10 §0B]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -9399,7 +9455,7 @@ ALONE
 - Does: DESIGNED — Permits a proposal only when genuine usefulness and frequent use can be shown; requires both quantitative evidence and concrete real examples in the proposal. [V10 §0B]
 - Gives out: DESIGNED — A proposal carrying the required evidence. [V10 §0B]
 - Must never: DESIGNED — Propose without the stated evidence or silently apply the proposal. [V10 §0B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Does not change the cooling rule without approval; a proposal requires frequent-use and genuine-usefulness evidence, quantitative support and concrete real examples. [V10 §0B]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9422,7 +9478,7 @@ ALONE
 - Does: DESIGNED — Requires the proposal to show that the log type is used often. [V10 §0B]
 - Gives out: DESIGNED — A proposal carrying this required evidence. [V10 §0B]
 - Must never: DESIGNED — Omit this evidence from a cooling-rule-change proposal. [V10 §0B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Does not change the cooling rule without approval; a proposal requires frequent-use and genuine-usefulness evidence, quantitative support and concrete real examples. [V10 §0B]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9445,7 +9501,7 @@ ALONE
 - Does: DESIGNED — Requires the proposal to show that the log type is genuinely useful. [V10 §0B]
 - Gives out: DESIGNED — A proposal carrying this required evidence. [V10 §0B]
 - Must never: DESIGNED — Omit this evidence from a cooling-rule-change proposal. [V10 §0B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Does not change the cooling rule without approval; a proposal requires frequent-use and genuine-usefulness evidence, quantitative support and concrete real examples. [V10 §0B]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9468,7 +9524,7 @@ ALONE
 - Does: DESIGNED — Requires the proposal to show that quantitative evidence is included. [V10 §0B]
 - Gives out: DESIGNED — A proposal carrying this required evidence. [V10 §0B]
 - Must never: DESIGNED — Omit this evidence from a cooling-rule-change proposal. [V10 §0B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Does not change the cooling rule without approval; a proposal requires frequent-use and genuine-usefulness evidence, quantitative support and concrete real examples. [V10 §0B]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9491,7 +9547,7 @@ ALONE
 - Does: DESIGNED — Requires the proposal to show that concrete real examples are included. [V10 §0B]
 - Gives out: DESIGNED — A proposal carrying this required evidence. [V10 §0B]
 - Must never: DESIGNED — Omit this evidence from a cooling-rule-change proposal. [V10 §0B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Does not change the cooling rule without approval; a proposal requires frequent-use and genuine-usefulness evidence, quantitative support and concrete real examples. [V10 §0B]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9514,7 +9570,7 @@ ALONE
 - Does: DESIGNED — Requires approval for each change; N.H cannot change the rule itself. [V10 §0B]
 - Gives out: DESIGNED — An approved change when approval is given. [V10 §0B]
 - Must never: DESIGNED — Change a cooling rule without approval. [V10 §0B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Does not change the cooling rule without approval; a proposal requires frequent-use and genuine-usefulness evidence, quantitative support and concrete real examples. [V10 §0B]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9537,7 +9593,7 @@ ALONE
 - Does: DESIGNED — Applies privacy/protection rules, identity and security authorization, TSC blockers, explicit compartment rules and separate influence-removal instructions. [V10 §0B]
 - Gives out: DESIGNED — Record access only in the form and circumstances authorized by those boundaries. [V10 §0B]
 - Must never: DESIGNED — Treat permanent recording, connection or living-memory status as immediate ordinary runtime access for every component. [V10 §0B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Withholds use outside the applicable privacy, identity/security, protected-boundary, TSC, compartment or influence-removal authorization. [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9548,6 +9604,10 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · DESIGNED | C-7G, CY-A | A connected operational record requested for use. | Preserves the distinction between record existence and access authority. | Living-memory status does not bypass authorization. | [V10 §0B] [V10 §0B] [MAP C-7B] |
+| 2 · DESIGNED | C-7A.17 — Reading-operation recording | The source-defined condition governed by C-7B.10.8. | Use of the permanent operation record remains subject to its privacy and identity/security authorization. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] |
+| 3 · DESIGNED | C-7A.17.1 — Reading laid down | The source-defined condition governed by C-7B.10.8. | Use of the permanent operation record remains subject to its privacy and identity/security authorization. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] |
+| 4 · DESIGNED | C-7A.17.2 — Rereading layer and context | The source-defined condition governed by C-7B.10.8. | Use of the permanent operation record remains subject to its privacy and identity/security authorization. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] |
+| 5 · DESIGNED | C-7A.17.3 — Surfaced gap | The source-defined condition governed by C-7B.10.8. | Use of the permanent operation record remains subject to its privacy and identity/security authorization. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY] |
 
 SUB-PARTS: C-7B.10.8.1 — Privacy authorization condition; C-7B.10.8.2 — Level 1 protected-boundary condition; C-7B.10.8.3 — Level 2 identity condition; C-7B.10.8.4 — Identity and security condition; C-7B.10.8.5 — TSC blocker condition; C-7B.10.8.6 — Explicit compartment condition; C-7B.10.8.7 — Separate influence-removal condition
 
@@ -9560,7 +9620,7 @@ ALONE
 - Does: DESIGNED — Keeps internal-use authorization distinct from visible-output eligibility; each use remains subject to the applicable privacy/protection rules. [V10 §0B]
 - Gives out: DESIGNED — Use governed by the applicable authorization kind. [V10 §0B]
 - Must never: DESIGNED — Assume permission for visible output solely from internal usability. [V10 §0B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Withholds use outside the applicable privacy, identity/security, protected-boundary, TSC, compartment or influence-removal authorization. [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9583,7 +9643,7 @@ ALONE
 - Does: DESIGNED — Processes raw Level 1 content only inside the protected execution boundary; allows only the minimum safe result to leave; references Level 1 material in ordinary records by opaque identifier only. [V10 §0B]
 - Gives out: DESIGNED — A minimum safe result and an opaque reference in ordinary records. [V10 §0B]
 - Must never: DESIGNED — Expose raw Level 1 content under any circumstance; expose physical location or access path in ordinary records. [V10 §0B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Withholds use outside the applicable privacy, identity/security, protected-boundary, TSC, compartment or influence-removal authorization. [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9606,7 +9666,7 @@ ALONE
 - Does: DESIGNED — Makes the material available to Ness by default after successful identity verification, without separate per-access permission; protects it from unauthorized external access. [V10 §0B]
 - Gives out: DESIGNED — Authorized private access after identity verification. [V10 §0B]
 - Must never: DESIGNED — Treat the default private availability as authorization for external exposure. [V10 §0B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Withholds use outside the applicable privacy, identity/security, protected-boundary, TSC, compartment or influence-removal authorization. [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9629,7 +9689,7 @@ ALONE
 - Does: DESIGNED — Keeps the identity and security authorization requirements in force when records are used. [V10 §0B]
 - Gives out: DESIGNED — Use constrained by the applicable identity/security requirements. [V10 §0B]
 - Must never: DESIGNED — Bypass identity or security authorization because a record is permanent or connected. [V10 §0B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Withholds use outside the applicable privacy, identity/security, protected-boundary, TSC, compartment or influence-removal authorization. [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9652,7 +9712,7 @@ ALONE
 - Does: DESIGNED — Keeps the held material unavailable to the Meaning Engine, LMAC, context retrieval and downstream components until its authorization and blockers clear through the normal catalog rules. [V10 §0B]
 - Gives out: DESIGNED — Availability only after normal authorization and blocker clearance. [V10 §0B]
 - Must never: DESIGNED — Use TSC-held material in those components while its governing blockers remain. [V10 §0B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Withholds use outside the applicable privacy, identity/security, protected-boundary, TSC, compartment or influence-removal authorization. [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9675,7 +9735,7 @@ ALONE
 - Does: DESIGNED — Keeps that rule in force for access and use. [V10 §0B]
 - Gives out: DESIGNED — Access subject to the explicit compartment rule. [V10 §0B]
 - Must never: DESIGNED — Use permanent connection as a bypass around a compartment. [V10 §0B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Withholds use outside the applicable privacy, identity/security, protected-boundary, TSC, compartment or influence-removal authorization. [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9698,7 +9758,7 @@ ALONE
 - Does: DESIGNED — Keeps such instructions in force; hiding, restricting or removing visible output alone does not remove internal usability or operational-record presence. [V10 §0B]
 - Gives out: DESIGNED — Preserved records whose internal use remains subject to any separate influence-removal instruction. [V10 §0B]
 - Must never: DESIGNED — Treat visible-output removal as automatic removal of internal usability; ignore a separately applicable influence-removal instruction. [V10 §0B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Withholds use outside the applicable privacy, identity/security, protected-boundary, TSC, compartment or influence-removal authorization. [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9721,7 +9781,7 @@ ALONE
 - Does: DESIGNED — Keeps the view dated, confidence-tagged and rejectable. The why is shown by what a layer points at, not stored as a `reason` or `why` field. [V10 §0A] [V10 §7A] [V10 §6B] [MAP C-7B]
 - Gives out: DESIGNED — A non-decisive note and pointers showing the connection. [V10 §0A] [V10 §7A] [V10 §6B] [MAP C-7B]
 - Must never: DESIGNED — Create an N.H story-layer, close a note into fact, or store the why as an asserted record field. [V10 §0A] [V10 §7A] [V10 §6B] [MAP C-7B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Keeps the interpretation rejectable and non-decisive; it cannot close into established fact. [V10 §0] [V10 §0A]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9744,7 +9804,7 @@ ALONE
 - Does: DESIGNED — Keeps it weightless, dated, confidence-tagged and rejectable inside SMART. [V10 §0A] [V10 §7A]
 - Gives out: DESIGNED — A NOTE rather than a story-layer or fact. [V10 §0A] [V10 §7A]
 - Must never: DESIGNED — Make N.H a teller or close its view into fact. [V10 §0A] [V10 §7A]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Keeps the interpretation rejectable and non-decisive; it cannot close into established fact. [V10 §0] [V10 §0A]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9809,9 +9869,7 @@ SUB-PARTS: NONE
 | C-7A.2.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-7A.2.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.2.3 | TOGETHER / Changes | NOT DECIDED |
-| C-7A.3 | ALONE / Fails closed by | NOT DECIDED |
 | C-7A.3 | TOGETHER / Fed by | NOT DECIDED |
-| C-7A.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.3 | TOGETHER / Changes | NOT DECIDED |
 | C-7A.4 | ALONE / Fails closed by | NOT DECIDED |
 | C-7A.4 | TOGETHER / Fed by | NOT DECIDED |
@@ -9868,53 +9926,36 @@ SUB-PARTS: NONE
 | C-7A.8 | TOGETHER / Fed by | NOT DECIDED |
 | C-7A.8 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.8 | TOGETHER / Changes | NOT DECIDED |
-| C-7A.8.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7A.8.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7A.8.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.8.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7A.8.1.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7A.8.1.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7A.8.1.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.8.1.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7A.8.1.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7A.8.1.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7A.8.1.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.8.1.2 | TOGETHER / Changes | NOT DECIDED |
-| C-7A.8.1.3 | ALONE / Fails closed by | NOT DECIDED |
 | C-7A.8.1.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-7A.8.1.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.8.1.3 | TOGETHER / Changes | NOT DECIDED |
-| C-7A.8.1.4 | ALONE / Fails closed by | NOT DECIDED |
 | C-7A.8.1.4 | TOGETHER / Fed by | NOT DECIDED |
 | C-7A.8.1.4 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.8.1.4 | TOGETHER / Changes | NOT DECIDED |
-| C-7A.8.1.5 | ALONE / Fails closed by | NOT DECIDED |
 | C-7A.8.1.5 | TOGETHER / Fed by | NOT DECIDED |
 | C-7A.8.1.5 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.8.1.5 | TOGETHER / Changes | NOT DECIDED |
-| C-7A.8.1.6 | ALONE / Fails closed by | NOT DECIDED |
 | C-7A.8.1.6 | TOGETHER / Fed by | NOT DECIDED |
 | C-7A.8.1.6 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.8.1.6 | TOGETHER / Changes | NOT DECIDED |
-| C-7A.8.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7A.8.2 | TOGETHER / Fed by | NOT DECIDED |
-| C-7A.8.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.8.2 | TOGETHER / Changes | NOT DECIDED |
-| C-7A.8.2.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7A.8.2.1 | TOGETHER / Fed by | NOT DECIDED |
-| C-7A.8.2.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.8.2.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7A.8.2.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7A.8.2.2 | TOGETHER / Fed by | NOT DECIDED |
-| C-7A.8.2.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.8.2.2 | TOGETHER / Changes | NOT DECIDED |
-| C-7A.8.2.3 | ALONE / Fails closed by | NOT DECIDED |
 | C-7A.8.2.3 | TOGETHER / Fed by | NOT DECIDED |
-| C-7A.8.2.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.8.2.3 | TOGETHER / Changes | NOT DECIDED |
-| C-7A.8.2.4 | ALONE / Fails closed by | NOT DECIDED |
 | C-7A.8.2.4 | TOGETHER / Fed by | NOT DECIDED |
-| C-7A.8.2.4 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.8.2.4 | TOGETHER / Changes | NOT DECIDED |
 | C-7A.8.2.5 | ALONE / Fails closed by | NOT DECIDED |
 | C-7A.8.2.5 | TOGETHER / Fed by | NOT DECIDED |
@@ -9944,7 +9985,6 @@ SUB-PARTS: NONE
 | C-7A.9.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-7A.9.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.9.3 | TOGETHER / Changes | NOT DECIDED |
-| C-7A.10 | ALONE / Fails closed by | NOT DECIDED |
 | C-7A.10 | TOGETHER / Fed by | NOT DECIDED |
 | C-7A.10 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.10 | TOGETHER / Changes | NOT DECIDED |
@@ -9952,7 +9992,6 @@ SUB-PARTS: NONE
 | C-7A.10.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7A.10.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.10.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7A.10.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7A.10.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7A.10.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.10.2 | TOGETHER / Changes | NOT DECIDED |
@@ -9968,7 +10007,6 @@ SUB-PARTS: NONE
 | C-7A.10.2.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-7A.10.2.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.10.2.3 | TOGETHER / Changes | NOT DECIDED |
-| C-7A.10.2.4 | ALONE / Fails closed by | NOT DECIDED |
 | C-7A.10.2.4 | TOGETHER / Fed by | NOT DECIDED |
 | C-7A.10.2.4 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.10.2.4 | TOGETHER / Changes | NOT DECIDED |
@@ -10038,22 +10076,16 @@ SUB-PARTS: NONE
 | C-7A.15.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.15.2 | TOGETHER / Changes | NOT DECIDED |
 | C-7A.16 | TOGETHER / Fed by | NOT DECIDED |
-| C-7A.16 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.16 | TOGETHER / Changes | NOT DECIDED |
 | C-7A.16.1 | TOGETHER / Fed by | NOT DECIDED |
-| C-7A.16.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.16.1 | TOGETHER / Changes | NOT DECIDED |
 | C-7A.16.2 | TOGETHER / Fed by | NOT DECIDED |
-| C-7A.16.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.16.2 | TOGETHER / Changes | NOT DECIDED |
 | C-7A.16.3 | TOGETHER / Fed by | NOT DECIDED |
-| C-7A.16.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.16.3 | TOGETHER / Changes | NOT DECIDED |
 | C-7A.16.4 | TOGETHER / Fed by | NOT DECIDED |
-| C-7A.16.4 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.16.4 | TOGETHER / Changes | NOT DECIDED |
 | C-7A.16.5 | TOGETHER / Fed by | NOT DECIDED |
-| C-7A.16.5 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.16.5 | TOGETHER / Changes | NOT DECIDED |
 | C-7A.16.6 | ALONE / Fails closed by | NOT DECIDED |
 | C-7A.16.6 | TOGETHER / Fed by | NOT DECIDED |
@@ -10061,19 +10093,15 @@ SUB-PARTS: NONE
 | C-7A.16.6 | TOGETHER / Changes | NOT DECIDED |
 | C-7A.17 | ALONE / Fails closed by | NOT DECIDED |
 | C-7A.17 | TOGETHER / Fed by | NOT DECIDED |
-| C-7A.17 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.17 | TOGETHER / Changes | NOT DECIDED |
 | C-7A.17.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7A.17.1 | TOGETHER / Fed by | NOT DECIDED |
-| C-7A.17.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.17.1 | TOGETHER / Changes | NOT DECIDED |
 | C-7A.17.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7A.17.2 | TOGETHER / Fed by | NOT DECIDED |
-| C-7A.17.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.17.2 | TOGETHER / Changes | NOT DECIDED |
 | C-7A.17.3 | ALONE / Fails closed by | NOT DECIDED |
 | C-7A.17.3 | TOGETHER / Fed by | NOT DECIDED |
-| C-7A.17.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-7A.17.3 | TOGETHER / Changes | NOT DECIDED |
 | C-7B | TOGETHER / Changes | NOT DECIDED |
 | C-7B.1 | ALONE / Fails closed by | NOT DECIDED |
@@ -10086,14 +10114,12 @@ SUB-PARTS: NONE
 | C-7B.1.2.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.1.2.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.1.2.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.1.2.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.1.2.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.1.2.2 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.1.2.3 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.1.2.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.1.2.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.1.2.3 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.1.3 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.1.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.1.3 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.1.4 | ALONE / Fails closed by | NOT DECIDED |
@@ -10176,7 +10202,6 @@ SUB-PARTS: NONE
 | C-7B.2.4.4 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.2.4.4 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.2.4.4 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.2.5 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.2.5 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.2.5 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.2.5 | TOGETHER / Changes | NOT DECIDED |
@@ -10254,16 +10279,13 @@ SUB-PARTS: NONE
 | C-7B.3.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.3.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.3.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.3.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.3.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.3.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.3.2 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.3.3 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.3.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.3.3 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.3.3.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.3.3.1 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.3.3.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.3.3.1 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.3.3.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.3.3.2 | TOGETHER / Fed by | NOT DECIDED |
@@ -10273,16 +10295,13 @@ SUB-PARTS: NONE
 | C-7B.3.3.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.3.3.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.3.3.3 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.3.3.4 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.3.3.4 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.3.3.4 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.3.3.4 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.3.3.5 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.3.3.5 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.3.3.5 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.3.3.5 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.3.3.6 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.3.3.6 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.3.3.6 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.3.4 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.3.4 | TOGETHER / Fed by | NOT DECIDED |
@@ -10309,22 +10328,17 @@ SUB-PARTS: NONE
 | C-7B.6 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.6 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.1 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.1.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.1.1 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.1.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.1.2 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.1.3 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.1.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.1.3 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.1.4 | ALONE / Does | NOT DECIDED |
-| C-7B.7.1.4 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.1.4 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.1.4 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.1.4 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.1.5 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.1.5 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.1.5 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.1.5.1 | ALONE / Fails closed by | NOT DECIDED |
@@ -10336,30 +10350,20 @@ SUB-PARTS: NONE
 | C-7B.7.1.5.2 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.1.5.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.1.5.3 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.1.6 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.1.6 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.1.6 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.1.6.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.1.6.1 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.1.6.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.1.6.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.1.6.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.1.6.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.1.6.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.1.6.2 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.1.6.3 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.1.6.3 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.1.6.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.1.6.3 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.1.6.4 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.1.6.4 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.1.6.4 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.1.6.4 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.1.6.5 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.1.6.5 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.1.6.5 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.1.6.5 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.1.6.6 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.1.6.6 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.1.6.6 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.1.6.6 | TOGETHER / Changes | NOT DECIDED |
@@ -10367,16 +10371,12 @@ SUB-PARTS: NONE
 | C-7B.7.1.6.7 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.1.6.7 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.1.6.7 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.1.6.8 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.1.6.8 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.1.6.8 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.1.6.8 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.1.7 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.1.7 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.1.7 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.1.7 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.1.8 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.1.8 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.1.8 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.2 | TOGETHER / Fed by | NOT DECIDED |
@@ -10385,7 +10385,6 @@ SUB-PARTS: NONE
 | C-7B.7.2.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.2.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.2.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.2.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.2.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.2.2 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.2.2.1 | ALONE / Must never | NOT DECIDED |
@@ -10393,7 +10392,6 @@ SUB-PARTS: NONE
 | C-7B.7.2.2.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.2.2.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.2.2.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.2.2.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.2.2.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.2.2.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.2.2.2 | TOGETHER / Changes | NOT DECIDED |
@@ -10407,23 +10405,18 @@ SUB-PARTS: NONE
 | C-7B.7.2.3 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.2.3.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.2.3.1 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.2.3.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.2.3.1 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.2.3.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.2.3.2 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.2.3.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.2.3.2 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.2.4 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.2.4 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.2.4 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.2.5 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.2.5 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.2.5 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.2.5.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.2.5.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.2.5.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.2.5.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.2.5.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.2.5.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.2.5.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.2.5.2 | TOGETHER / Changes | NOT DECIDED |
@@ -10433,51 +10426,36 @@ SUB-PARTS: NONE
 | C-7B.7.2.5.3 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.3 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.3.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.3.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.3.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.3.1.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.3.1.1 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.3.1.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.3.1.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.3.1.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.3.1.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.3.1.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.3.1.2 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.3.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.3.2 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.3.2.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.3.2.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.3.2.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.3.2.1 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.3.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.3.3 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.3.3.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.3.3.1 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.3.3.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.3.3.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.3.3.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.3.3.2 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.3.3.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.3.3.2 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.3.4 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.3.4 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.3.4 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.3.4.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.3.4.1 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.3.4.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.3.4.1 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.3.5 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.3.5 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.3.5.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.3.5.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.3.5.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.3.5.1 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.3.6 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.3.6 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.3.6.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.3.6.1 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.3.6.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.3.6.1 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.4 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.4 | TOGETHER / Changes | NOT DECIDED |
@@ -10514,21 +10492,16 @@ SUB-PARTS: NONE
 | C-7B.7.4.6 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.4.6 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.4.6.1 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.4.6.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.4.6.1 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.4.6.2 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.4.6.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.4.6.2 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.4.6.3 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.4.6.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.4.6.3 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.4.6.4 | ALONE / Takes in | NOT DECIDED |
 | C-7B.7.4.6.4 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.4.6.4 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.4.6.4 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.4.7 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.4.7 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.4.7.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.4.7.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.4.7.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.4.7.1 | TOGETHER / Changes | NOT DECIDED |
@@ -10546,7 +10519,6 @@ SUB-PARTS: NONE
 | C-7B.7.5.3.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.5.3.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.5.3.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.5.3.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.5.3.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.5.3.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.5.3.2 | TOGETHER / Changes | NOT DECIDED |
@@ -10556,10 +10528,8 @@ SUB-PARTS: NONE
 | C-7B.7.5.5 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.5.6 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.5.6 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.6 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.6 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.6 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.6.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.6.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.6.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.6.1 | TOGETHER / Changes | NOT DECIDED |
@@ -10571,11 +10541,9 @@ SUB-PARTS: NONE
 | C-7B.7.6.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.6.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.6.3 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.6.4 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.6.4 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.6.4 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.6.4 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.6.5 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.6.5 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.6.5 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.6.5 | TOGETHER / Changes | NOT DECIDED |
@@ -10583,11 +10551,8 @@ SUB-PARTS: NONE
 | C-7B.7.6.6 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.6.6 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.6.6 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.6.7 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.6.7 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.6.7 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.6.7 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.6.8 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.6.8 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.6.8 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.6.8 | TOGETHER / Changes | NOT DECIDED |
@@ -10612,10 +10577,8 @@ SUB-PARTS: NONE
 | C-7B.7.7.6 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.7.6 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.7.7 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.7.7 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.7.7 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.7.8 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.7.8 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.7.8 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.7.9 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.7.9 | TOGETHER / Gated by | NOT DECIDED |
@@ -10624,38 +10587,28 @@ SUB-PARTS: NONE
 | C-7B.7.7.10 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.7.10 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.7.11 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.7.11 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.7.11 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.7.12 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.7.12 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.7.12 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.7.13 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.7.13 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.7.13 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.7.14 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.7.14 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.7.14 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.7.15 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.7.15 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.7.15 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.7.16 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.7.16 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.7.16 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.7.17 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.7.17 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.7.17 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.7.18 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.7.18 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.7.18 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.7.19 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.7.19 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.7.19 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.7.20 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.7.20 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.7.7.20 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.8 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.8 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.7.8.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.8.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.8.1 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.8.2 | ALONE / Fails closed by | NOT DECIDED |
@@ -10664,10 +10617,8 @@ SUB-PARTS: NONE
 | C-7B.7.8.3 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.8.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.8.3 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.8.4 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.8.4 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.8.4 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.8.5 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.8.5 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.8.5 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.8.6 | ALONE / Fails closed by | NOT DECIDED |
@@ -10682,16 +10633,12 @@ SUB-PARTS: NONE
 | C-7B.7.8.9 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.8.9 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.8.9 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.8.10 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.8.10 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.8.10 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.8.11 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.8.11 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.8.11 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.8.12 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.8.12 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.8.12 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.8.13 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.8.13 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.8.13 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.7.8.14 | ALONE / Fails closed by | NOT DECIDED |
@@ -10700,15 +10647,12 @@ SUB-PARTS: NONE
 | C-7B.7.8.15 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.8.15 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.8.15 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.7.8.16 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.7.8.16 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.7.8.16 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.8 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.8.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.8.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.8.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.8.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.8.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.8.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.8.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.8.2 | TOGETHER / Changes | NOT DECIDED |
@@ -10716,72 +10660,51 @@ SUB-PARTS: NONE
 | C-7B.8.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.8.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.8.3 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.8.4 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.8.4 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.8.4 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.8.4 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.9 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.9 | USED BY row 2 / Takes in there | NOT DECIDED |
-| C-7B.9.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.9.1 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.9.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.2 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.9.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.9.2 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.9.3 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.9.3 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.9.4 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.4 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.4 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.9.4.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.4.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.4.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.9.4.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.9.4.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.4.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.4.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.9.4.2 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.9.5 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.5 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.5 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.9.5.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.5.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.5.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.9.5.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.9.5.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.5.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.5.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.9.5.2 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.9.6 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.6 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.6 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.9.6.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.6.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.6.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.9.6.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.6.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.6.2 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.9.6.3 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.6.3 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.9.6.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.9.6.3 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.9.6.4 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.6.4 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.9.6.4 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.9.6.4 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.9.7 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.7 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.7 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.9.7.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.7.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.7.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.9.7.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.7.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.7.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.9.7.2 | TOGETHER / Changes | NOT DECIDED |
@@ -10789,24 +10712,18 @@ SUB-PARTS: NONE
 | C-7B.9.7.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.7.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.9.7.3 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.9.7.4 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.7.4 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.7.4 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.9.7.4.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.7.4.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.7.4.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.9.7.4.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.7.4.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.7.4.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.9.7.4.2 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.9.7.4.3 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.7.4.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.7.4.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.9.7.4.3 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.9.7.5 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.7.5 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.7.5 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.9.7.6 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.7.6 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.7.6 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.9.7.6 | TOGETHER / Changes | NOT DECIDED |
@@ -10850,14 +10767,11 @@ SUB-PARTS: NONE
 | C-7B.9.10 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.10 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.9.10 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.9.11 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.11 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.11 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.9.11.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.11.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.11.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.9.11.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.9.11.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.9.11.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.11.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.9.11.2 | TOGETHER / Changes | NOT DECIDED |
@@ -10891,7 +10805,6 @@ SUB-PARTS: NONE
 | C-7B.9.12.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.9.12.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.9.12.3 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.10.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.1 | TOGETHER / Fed by | NOT DECIDED |
@@ -10941,7 +10854,6 @@ SUB-PARTS: NONE
 | C-7B.10.1.6.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.1.6.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.10.1.6.3 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.2 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.10.2.1 | ALONE / Takes in | NOT DECIDED |
@@ -10973,15 +10885,12 @@ SUB-PARTS: NONE
 | C-7B.10.2.5 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.2.5 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.10.2.6 | ALONE / Takes in | NOT DECIDED |
-| C-7B.10.2.6 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.2.6 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.2.6 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.10.2.6.1 | ALONE / Takes in | NOT DECIDED |
-| C-7B.10.2.6.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.2.6.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.2.6.1 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.10.2.6.2 | ALONE / Takes in | NOT DECIDED |
-| C-7B.10.2.6.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.2.6.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.2.6.2 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.10.2.7 | ALONE / Takes in | NOT DECIDED |
@@ -11016,11 +10925,9 @@ SUB-PARTS: NONE
 | C-7B.10.2.10.4 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.2.10.4 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.2.10.4 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.3 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.10.3 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.3.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.3.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.3.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.10.3.1 | TOGETHER / Changes | NOT DECIDED |
@@ -11067,10 +10974,8 @@ SUB-PARTS: NONE
 | C-7B.10.3.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.3.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.10.3.3 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.4 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.4 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.4 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.4.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.4.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.4.1 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.10.4.1.1 | ALONE / Fails closed by | NOT DECIDED |
@@ -11091,7 +10996,6 @@ SUB-PARTS: NONE
 | C-7B.10.4.1.6 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.4.1.6 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.4.1.6 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.4.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.4.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.4.2 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.10.4.3 | ALONE / Fails closed by | NOT DECIDED |
@@ -11141,11 +11045,9 @@ SUB-PARTS: NONE
 | C-7B.10.5.4 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.5.4 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.10.5.4 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.6 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.6 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.6 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.10.6 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.6.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.6.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.6.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.10.6.1 | TOGETHER / Changes | NOT DECIDED |
@@ -11153,13 +11055,10 @@ SUB-PARTS: NONE
 | C-7B.10.6.1.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.6.1.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.10.6.1.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.6.1.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.6.1.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.6.1.2 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.6.1.2.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.6.1.2.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.6.1.2.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.6.1.2.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.6.1.2.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.6.1.2.2 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.10.6.2 | ALONE / Fails closed by | NOT DECIDED |
@@ -11186,61 +11085,43 @@ SUB-PARTS: NONE
 | C-7B.10.6.3.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.6.3.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.6.3.2 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.7 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.7 | TOGETHER / Fed by | NOT DECIDED |
-| C-7B.10.7 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.10.7 | TOGETHER / Changes | NOT DECIDED |
 | C-7B.10.7.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.7.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.7.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.10.7.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.7.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.7.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.7.2 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.7.2.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.7.2.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.7.2.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.7.2.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.7.2.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.7.2.2 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.7.2.3 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.7.2.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.7.2.3 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.7.2.4 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.7.2.4 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.7.2.4 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.7.3 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.7.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.7.3 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.8 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.8 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.8 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.8.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.8.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.8.1 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.8.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.8.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.8.2 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.8.3 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.8.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.8.3 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.8.4 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.8.4 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.8.4 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.8.5 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.8.5 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.8.5 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.8.6 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.8.6 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.8.6 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.10.8.7 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.10.8.7 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.10.8.7 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.11 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.11 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.11 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.11 | TOGETHER / Changes | NOT DECIDED |
-| C-7B.11.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-7B.11.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-7B.11.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-7B.11.1 | TOGETHER / Changes | NOT DECIDED |
@@ -11974,16 +11855,16 @@ Instruction file read whole: `NH_MASTER-21_SYSTEM_BEHAVIOR_BUILD_CONTRACT_FOR_CH
 ## CONTRACT CHECK
 
 CONTRACT CHECK (against the cloned contract, SHA-256 e78c7a8c8a448ff20966002465c8d6a330000900802c0b19a48e8a124e5ceba1)
-§1.3 no history/actions/roles/workflow in this chapter: PASS — all 407 part templates and register contributions checked; source-inventory labels and required read/check metadata are kept outside behavior.
-§1.4 every gap written as NOT DECIDED: PASS — 1,458 unknown template fields and one unknown USED BY cell are listed in Appendix A; specific open mechanics and K6/K7/K8 retain their separate NOT DECIDED entries.
+§1.3 no history/actions/roles/workflow in this chapter: PASS — all 407 cards checked. Corrections place source-decided prohibitions, failure outcomes and gating conditions in their matching boxes; correction history is confined to this check and the separate changed-lines file.
+§1.4 every gap written as NOT DECIDED: PASS — all 1,221 Must never / Fails closed by / Gated by placements reviewed. 179 false empty fields filled; 1,279 NOT DECIDED template entries and 1 NOT DECIDED USED BY cells remain registered (1,275 wholly empty template fields). Other original open-detail gaps are preserved. The changed-lines report gives a reason for every retained empty reviewed box.
 §1.5 conflicts marked, none resolved: PASS — the §2/§7B wording conflict and Map/A17 route-status conflict remain marked in their behavior lines and the conflict register.
-§3 exactly one stamp per line: PASS — one explicit stamp per behavior field or using-place row; build-state shapes, designed rules, accepted policies and both recovery dates remain distinct.
-§4 every behavior line cited in the exact format: PASS — every decided behavior field and all 550 using-place rows carry section citations; restored material carries the decision-record and authorized archive citations, with its FR-ID where one exists.
+§3 exactly one stamp per line: PASS — 2,406 populated field lines and 610 USED BY rows checked. BUILT applies only to the exact behavior supported by V10’s authoritative status table; design and accepted-package behavior and links retain their own status.
+§4 every behavior line cited in the exact format: PASS — all added behavior and reciprocal rows carry the relevant source-section citations. Unchanged lines retain their original citations; original source coverage is preserved.
 §5.4 one name per thing: PASS — exact Map names for C-7A/C-7B and fixed IDs/names for every sub-part; no new top-level part or path.
-§6 all template fields present, in order, for every part: PASS — all 407 templates include all nine fields in order, ALONE, TOGETHER, USED BY and complete immediate SUB-PARTS declarations.
-§6.3 reciprocity within this chapter: PASS — every asserted in-chapter relationship has the reciprocal exact-ID entry; remaining external endpoints are listed as cross-chapter obligations.
-§6.4 every decided detail written in, no citation used in place of content: PASS — source-content review covers the full rules/webs, both Wonder walls and all 15 A17 policy decisions, the hold states/transitions/recovery/events, and all restored record contents and recursion triggers; no citation substitutes for their text.
+§6 all template fields present, in order, for every part: PASS — all 407 cards retain the nine fields in order, ALONE, TOGETHER, USED BY and SUB-PARTS. IDs, names, Does text and child lists remain byte-identical.
+§6.3 reciprocity within this chapter: PASS — every newly named internal gate has an existing or added reciprocal USED BY row (60 added). Previously asserted relationships and external relationship-accounting entries remain intact.
+§6.4 every decided detail written in, no citation used in place of content: PASS — all cards reviewed for source-decided prohibition, failure and gating text left outside its dedicated box. The new boxes state the behavior; no new threshold, retry policy, schema, sentinel or runtime mechanism is selected.
 §6.5 sub-parts recursed to the bottom: PASS — rule conditions, record contents, schema fields, state transitions, recovery cases and event labels are written recursively as part templates; undecided mechanics remain gaps.
-§9 coverage matrix rows added for every file used: PASS — all 138 READ-folder rows, all 107 V10 headings and five authorized archive rows are accounted for; all 22 current source/prerequisite files checked against the pin.
+§9 coverage matrix rows added for every file used: PASS — the original coverage matrix is byte-identical; corrections use sources and receipts already covered there. Pinned sources were reopened for the correction review; no new whole-read credit is claimed.
 §10.11 no recommendation, no sentence addressed to Ness: PASS — no recommendation or sentence addressed to Ness; the quoted discourse-deixis example remains a source example.
 Files read whole for this chapter: `04_ACCEPTED_STANDALONE_DESIGNS/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_COMPLETE_CLOSURE_RECORD_v1_0.md`; `04_ACCEPTED_STANDALONE_DESIGNS/NH_A17_WONDER_TO_MEMORY_POLICY_PACKAGE_v1_0_CANDIDATE.md`; `04_ACCEPTED_STANDALONE_DESIGNS/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_PACKAGE_COMPLETE_CLOSURE_RECORD_v1_0 .md`; `04_ACCEPTED_STANDALONE_DESIGNS/NH_A29_HOLD_UNTIL_ENOUGH_POLICY_v1_0_CANDIDATE.md`; `04_ACCEPTED_STANDALONE_DESIGNS/NH_A31_GROUNDED_ENOUGH_THRESHOLD_POLICY_PACKAGE_COMPLETE_CLOSURE_RECORD_v1_0.md`; `04_ACCEPTED_STANDALONE_DESIGNS/NH_A31_GROUNDED_ENOUGH_THRESHOLD_POLICY_v1_0_CANDIDATE.md`; `04_ACCEPTED_STANDALONE_DESIGNS/NH_B9_RETRY_VALUES_WIRING_INTO_B9_B10_BHOLD_B24_PACKAGE_COMPLETE_CLOSURE_RECORD_v1_0.md`; `04_ACCEPTED_STANDALONE_DESIGNS/NH_B9_RETRY_VALUES_WIRING_INTO_B9_B10_BHOLD_B24_v1_4_CANDIDATE.md`; `04_ACCEPTED_STANDALONE_DESIGNS/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_PACKAGE_COMPLETE_CLOSURE_RECORD_v1_0.md`; `04_ACCEPTED_STANDALONE_DESIGNS/NH_BHOLD_HOLD_UNTIL_ENOUGH_LIFECYCLE_v1_0_CANDIDATE.md`; `04_ACCEPTED_STANDALONE_DESIGNS/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_PACKAGE_COMPLETE_CLOSURE_RECORD_v1_0.md`; `04_ACCEPTED_STANDALONE_DESIGNS/NH_BUNDLE1_B9_B10_BHOLD_COORDINATION_NOTE_v1_0_CANDIDATE.md`; `05_ACTIVE_CANDIDATE/NH_DECISION_RECORD_PRE_V10_RECOVERY_2026-09-24_v0_1_CANDIDATE.md`; `98_HISTORICAL_SOURCES_PRE_V10/sources/NH_MASTER-11.md`; `98_HISTORICAL_SOURCES_PRE_V10/sources/NH_MASTER-14_FINAL.md`; `98_HISTORICAL_SOURCES_PRE_V10/sources/NH_Universal_Filter_RULES.md`; `98_HISTORICAL_SOURCES_PRE_V10/sources_recovered/NH_FINAL_MASTER_RECOVERY_STAGE_3A_SUPPLEMENTAL_CANDIDATE_INTAKE_v1_1.md`; `98_HISTORICAL_SOURCES_PRE_V10/sources_recovered/NH_MASTER-19_CORRECTED_v8(1).md`; instruction file `NH_MASTER-21_SYSTEM_BEHAVIOR_BUILD_CONTRACT_FOR_CHATGPT_v1_0.md`.

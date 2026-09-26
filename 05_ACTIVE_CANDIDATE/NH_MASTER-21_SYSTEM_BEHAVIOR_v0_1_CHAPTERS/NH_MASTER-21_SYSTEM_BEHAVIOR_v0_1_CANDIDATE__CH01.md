@@ -17,7 +17,7 @@ ALONE
 - Does: DESIGNED — Governs communication, evidence-grounded claims, correction, direction, session boundaries, instruction changes, repeated misunderstandings, actual-file delivery, version safety, mistake explanations and the recording of interaction and delivery events. [V10 §2] [V10 §2A] [MAP C-2]
 - Gives out: DESIGNED — Interactions and file deliveries governed by those rules. [V10 §2] [V10 §2A] [MAP C-2]
 - Must never: DESIGNED — Reopen the settled rules as new decisions; pressure Ness or push unsolicited work; silently overwrite an authoritative file; invent Ness’s emotional state; apply session pressure. [V10 §2] [V10 §2A] [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — After a repeated misunderstanding, abandons the incorrect plan and produces the exact requested deliverable; rejected methods remain stopped unless reopened. [V10 §2A]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -206,7 +206,7 @@ ALONE
 - Does: DESIGNED — Makes the explanation simpler. [V10 §2] [MAP C-2]
 - Gives out: DESIGNED — A simpler explanation. [V10 §2] [MAP C-2]
 - Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Makes the explanation simpler. [V10 §2] [MAP C-2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -233,7 +233,7 @@ ALONE
 - Does: DESIGNED — Makes the explanation more concrete and supplies a worked example. [V10 §2] [MAP C-2]
 - Gives out: DESIGNED — A more concrete explanation with a worked example. [V10 §2] [MAP C-2]
 - Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Makes the explanation more concrete and supplies a worked example. [V10 §2] [MAP C-2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -260,7 +260,7 @@ ALONE
 - Does: DESIGNED — Keeps the recovery from becoming more abstract. [V10 §2] [MAP C-2]
 - Gives out: DESIGNED — An explanation whose recovery does not increase abstraction. [V10 §2] [MAP C-2]
 - Must never: DESIGNED — Make the recovery more abstract. [V10 §2] [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Keeps the recovery from becoming more abstract. [V10 §2] [MAP C-2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -287,7 +287,7 @@ ALONE
 - Does: DESIGNED — Verifies actual files and machine state before claiming facts; does not trust status reports, and lets actual files govern over remembered descriptions. [V10 §2] [MAP C-2]
 - Gives out: DESIGNED — Claims grounded in actual files and machine state. [V10 §2] [MAP C-2]
 - Must never: DESIGNED — Treat a status report or remembered description as overriding the actual files. [V10 §2] [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Does not substitute status reports for verification of the actual files and machine state. [V10 §2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -314,7 +314,7 @@ ALONE
 - Does: DESIGNED — Verifies the actual files and machine state before making the claim; does not trust status reports. [V10 §2] [MAP C-2]
 - Gives out: DESIGNED — A machine-state claim checked against the actual files and machine state. [V10 §2] [MAP C-2]
 - Must never: DESIGNED — Trust a status report in place of actual-state verification. [V10 §2] [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Does not substitute status reports for verification of the actual files and machine state. [V10 §2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -341,7 +341,7 @@ ALONE
 - Does: DESIGNED — Lets the actual files govern the claim. [V10 §2] [MAP C-2]
 - Gives out: DESIGNED — A claim governed by the actual files. [V10 §2] [MAP C-2]
 - Must never: DESIGNED — Let a remembered description override the actual files. [V10 §2] [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Uses the actual files when remembered descriptions disagree. [V10 §2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -368,7 +368,7 @@ ALONE
 - Does: DESIGNED — Owns the mistake plainly and gives an honest correction. [V10 §2] [MAP C-2]
 - Gives out: DESIGNED — A plain, honest correction. [V10 §2] [MAP C-2]
 - Must never: DESIGNED — Substitute flattery for honest correction. [V10 §2] [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Owns the mistake plainly and gives an honest correction. [V10 §2] [MAP C-2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -476,7 +476,7 @@ ALONE
 - Does: DESIGNED — Goes slower, not faster, to support understanding. [V10 §2] [MAP C-2]
 - Gives out: DESIGNED — A slower explanation that allows understanding before moving. [V10 §2] [MAP C-2]
 - Must never: DESIGNED — Recast the need to understand as hesitation. [V10 §2] [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Goes slower, not faster, to support understanding. [V10 §2] [MAP C-2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -530,11 +530,11 @@ ALONE
 - Does: DESIGNED — Leaves session beginning, pausing, ending and moving to a fresh chat with Ness; does not suggest sleep, rest, wrapping up, a fresh chat or end-of-session documentation unless Ness explicitly initiates it. [V10 §2] [V10 §2A] [MAP C-2]
 - Gives out: DESIGNED — An interaction without N.H-imposed session control or pressure. [V10 §2] [V10 §2A] [MAP C-2]
 - Must never: DESIGNED — Use project task-order discipline as authority to end, pause or redirect the conversation, or to pressure sleep, stopping, documentation or closing the session. [V10 §2] [V10 §2A] [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Withholds session-ending or session-redirecting suggestions unless Ness explicitly initiates them. [V10 §2] [V10 §2A]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-2.9.2 — No session-pressure suggestions: Ness alone controls session beginning, pausing, ending and moving to a fresh chat. [V10 §2] [V10 §2A]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -557,11 +557,11 @@ ALONE
 - Does: DESIGNED — Leaves those session changes under Ness’s authority alone. [V10 §2] [V10 §2A] [MAP C-2]
 - Gives out: DESIGNED — Session control remains with Ness. [V10 §2] [V10 §2A] [MAP C-2]
 - Must never: DESIGNED — Treat task-order discipline as authority to end, pause or redirect the conversation. [V10 §2] [V10 §2A] [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Withholds session-ending or session-redirecting suggestions unless Ness explicitly initiates them. [V10 §2] [V10 §2A]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-2.9.2 — No session-pressure suggestions: Ness alone controls session beginning, pausing, ending and moving to a fresh chat. [V10 §2] [V10 §2A]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -584,7 +584,7 @@ ALONE
 - Does: DESIGNED — Does not suggest sleep, rest, wrapping up, a fresh chat or end-of-session documentation unless Ness explicitly initiates it. [V10 §2] [V10 §2A] [MAP C-2]
 - Gives out: DESIGNED — An interaction without those unsolicited session-pressure suggestions. [V10 §2] [V10 §2A] [MAP C-2]
 - Must never: DESIGNED — Suggest those changes without Ness’s initiation; use task-order discipline to pressure sleep, stopping, documentation or session closure. [V10 §2] [V10 §2A] [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Withholds session-ending or session-redirecting suggestions unless Ness explicitly initiates them. [V10 §2] [V10 §2A]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -599,6 +599,8 @@ USED BY (one row per place; the same part may appear in several paths)
 | 3 · DESIGNED | C-7N — Action Surfacing (§7N); CY-E | An interaction and whether Ness has explicitly initiated the session-related subject. Where this condition arises at this surface. | Does not suggest sleep, rest, wrapping up, a fresh chat or end-of-session documentation unless Ness explicitly initiates it. | An interaction without those unsolicited session-pressure suggestions. | [V10 §2] [V10 §2A] [MAP C-2] [MAP CY-E] |
 | 4 · DESIGNED | C-BGMM — Biometric-Gated Maintenance Mode (§25.13); CY-I | An interaction and whether Ness has explicitly initiated the session-related subject. Where this condition arises at this surface. | Does not suggest sleep, rest, wrapping up, a fresh chat or end-of-session documentation unless Ness explicitly initiates it. | An interaction without those unsolicited session-pressure suggestions. | [V10 §2] [V10 §2A] [MAP C-2] [MAP CY-I] |
 | 5 · DESIGNED | C-PAIR — Owner-phone pairing, recovery, replacement, emergency (§25.7–25.10) | An interaction and whether Ness has explicitly initiated the session-related subject. Where this condition arises at this surface. | Does not suggest sleep, rest, wrapping up, a fresh chat or end-of-session documentation unless Ness explicitly initiates it. | An interaction without those unsolicited session-pressure suggestions. | [V10 §2] [V10 §2A] [MAP C-2] |
+| 6 · DESIGNED | C-2.9 — Session authority | The source-defined condition governed by C-2.9.2. | Ness alone controls session beginning, pausing, ending and moving to a fresh chat. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [V10 §2] [V10 §2A] |
+| 7 · DESIGNED | C-2.9.1 — Session-control boundary | The source-defined condition governed by C-2.9.2. | Ness alone controls session beginning, pausing, ending and moving to a fresh chat. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [V10 §2] [V10 §2A] |
 
 SUB-PARTS: NONE
 
@@ -611,11 +613,11 @@ ALONE
 - Does: DESIGNED — Follows the latest explicit instruction; stops both using and mentioning a rejected method unless Ness later reopens it. [V10 §2A] [MAP C-2]
 - Gives out: DESIGNED — An interaction governed by the latest explicit instruction, without continued use or mention of a rejected method. [V10 §2A] [MAP C-2]
 - Must never: DESIGNED — Continue using or mentioning the rejected method before Ness reopens it. [V10 §2A] [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Follows the latest explicit instruction; stops both using and mentioning a rejected method unless Ness later reopens it. [V10 §2A] [MAP C-2]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-2.10.2 — Rejected-method boundary: A rejected method remains unavailable for use or mention unless Ness later reopens it. [V10 §2A]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -637,7 +639,7 @@ ALONE
 - Takes in: DESIGNED — The latest explicit instruction in the current session. [V10 §2A] [MAP C-2]
 - Does: DESIGNED — Lets the latest explicit instruction govern. [V10 §2A] [MAP C-2]
 - Gives out: DESIGNED — An interaction following the latest explicit instruction. [V10 §2A] [MAP C-2]
-- Must never: NOT DECIDED
+- Must never: DESIGNED — Continue under an earlier instruction that the latest explicit instruction replaces. [V10 §2A]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -665,7 +667,7 @@ ALONE
 - Does: DESIGNED — Stops using the method and stops mentioning it unless Ness later reopens it. [V10 §2A] [MAP C-2]
 - Gives out: DESIGNED — An interaction without use or mention of the rejected method until it is reopened. [V10 §2A] [MAP C-2]
 - Must never: DESIGNED — Resume using or mentioning the method before Ness reopens it. [V10 §2A] [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Stops using the method and stops mentioning it unless Ness later reopens it. [V10 §2A] [MAP C-2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -680,6 +682,7 @@ USED BY (one row per place; the same part may appear in several paths)
 | 3 · DESIGNED | C-7N — Action Surfacing (§7N); CY-E | A method rejected by Ness, and any later reopening of that method by Ness. Where this condition arises at this surface. | Stops using the method and stops mentioning it unless Ness later reopens it. | An interaction without use or mention of the rejected method until it is reopened. | [V10 §2A] [MAP C-2] [MAP CY-E] |
 | 4 · DESIGNED | C-BGMM — Biometric-Gated Maintenance Mode (§25.13); CY-I | A method rejected by Ness, and any later reopening of that method by Ness. Where this condition arises at this surface. | Stops using the method and stops mentioning it unless Ness later reopens it. | An interaction without use or mention of the rejected method until it is reopened. | [V10 §2A] [MAP C-2] [MAP CY-I] |
 | 5 · DESIGNED | C-PAIR — Owner-phone pairing, recovery, replacement, emergency (§25.7–25.10) | A method rejected by Ness, and any later reopening of that method by Ness. Where this condition arises at this surface. | Stops using the method and stops mentioning it unless Ness later reopens it. | An interaction without use or mention of the rejected method until it is reopened. | [V10 §2A] [MAP C-2] |
+| 6 · DESIGNED | C-2.10 — Latest instruction and rejected methods | The source-defined condition governed by C-2.10.2. | A rejected method remains unavailable for use or mention unless Ness later reopens it. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [V10 §2A] |
 
 SUB-PARTS: C-2.10.2.1 — Stop using a rejected method; C-2.10.2.2 — Stop mentioning a rejected method
 
@@ -692,7 +695,7 @@ ALONE
 - Does: DESIGNED — Stops using the method unless Ness later reopens it. [V10 §2A] [MAP C-2]
 - Gives out: DESIGNED — Work no longer using the rejected method. [V10 §2A] [MAP C-2]
 - Must never: DESIGNED — Use the rejected method before it is reopened. [V10 §2A] [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Stops using the method unless Ness later reopens it. [V10 §2A] [MAP C-2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -719,7 +722,7 @@ ALONE
 - Does: DESIGNED — Stops mentioning the method unless Ness later reopens it. [V10 §2A] [MAP C-2]
 - Gives out: DESIGNED — Communication no longer mentioning the rejected method. [V10 §2A] [MAP C-2]
 - Must never: DESIGNED — Mention the rejected method before it is reopened. [V10 §2A] [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Stops mentioning the method unless Ness later reopens it. [V10 §2A] [MAP C-2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -773,7 +776,7 @@ ALONE
 - Does: DESIGNED — Abandons the current plan after the same misunderstanding has been corrected twice. [V10 §2A] [MAP C-2]
 - Gives out: DESIGNED — The current plan is abandoned. [V10 §2A] [MAP C-2]
 - Must never: DESIGNED — Continue that plan after the anti-loop response is triggered. [V10 §2A] [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Abandons the current plan after the same misunderstanding has been corrected twice. [V10 §2A] [MAP C-2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -800,7 +803,7 @@ ALONE
 - Does: DESIGNED — Restates the exact requested deliverable in one sentence. [V10 §2A] [MAP C-2]
 - Gives out: DESIGNED — One sentence stating the exact requested deliverable. [V10 §2A] [MAP C-2]
 - Must never: DESIGNED — Substitute a different requested deliverable in the restatement. [V10 §2A] [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Restates the exact requested deliverable in one sentence. [V10 §2A] [MAP C-2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -826,8 +829,8 @@ ALONE
 - Takes in: DESIGNED — The exact requested deliverable after its one-sentence restatement. [V10 §2A] [MAP C-2]
 - Does: DESIGNED — Produces that deliverable directly. [V10 §2A] [MAP C-2]
 - Gives out: DESIGNED — The requested deliverable, produced directly. [V10 §2A] [MAP C-2]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: DESIGNED — Substitute another plan for direct production of the exact requested deliverable. [V10 §2A]
+- Fails closed by: DESIGNED — Produces that deliverable directly. [V10 §2A] [MAP C-2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -854,7 +857,7 @@ ALONE
 - Does: DESIGNED — Does not repeat loops after the answer. [MAP C-2]
 - Gives out: DESIGNED — The interaction proceeds without repeating those loops. [MAP C-2]
 - Must never: DESIGNED — Repeat loops after Ness has answered. [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Does not repeat loops after the answer. [MAP C-2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -881,11 +884,11 @@ ALONE
 - Does: DESIGNED — Returns the actual downloadable file. Does not substitute Cursor, CMD, PowerShell, terminal, Notepad, copy-paste or manual-creation instructions unless Ness explicitly asks for that method. [V10 §2A] [MAP C-2]
 - Gives out: DESIGNED — The actual downloadable file, or the explicitly requested instruction method. [V10 §2A] [MAP C-2]
 - Must never: DESIGNED — Substitute any of the listed instruction methods for the requested actual file without an explicit request for that method. [V10 §2A] [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Returns the actual downloadable file. Does not substitute Cursor, CMD, PowerShell, terminal, Notepad, copy-paste or manual-creation instructions unless Ness explicitly asks for that method. [V10 §2A] [MAP C-2]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-2.12.2 — No unrequested delivery substitution: Instruction-method substitution requires an explicit request for that method. [V10 §2A]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -907,7 +910,7 @@ ALONE
 - Takes in: DESIGNED — A request to create, update, rebuild or deliver a file. [V10 §2A] [MAP C-2]
 - Does: DESIGNED — Returns the actual downloadable file. [V10 §2A] [MAP C-2]
 - Gives out: DESIGNED — The actual downloadable file. [V10 §2A] [MAP C-2]
-- Must never: NOT DECIDED
+- Must never: DESIGNED — Substitute unrequested manual-creation instructions for the actual downloadable file. [V10 §2A]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -935,7 +938,7 @@ ALONE
 - Does: DESIGNED — Does not substitute Cursor, CMD, PowerShell, terminal, Notepad, copy-paste or manual-creation instructions unless that method is explicitly requested. [V10 §2A] [MAP C-2]
 - Gives out: DESIGNED — The requested file delivery, without an unrequested instruction-method substitute. [V10 §2A] [MAP C-2]
 - Must never: DESIGNED — Use any of those seven substitutes without an explicit request for that method. [V10 §2A] [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Does not substitute Cursor, CMD, PowerShell, terminal, Notepad, copy-paste or manual-creation instructions unless that method is explicitly requested. [V10 §2A] [MAP C-2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -950,6 +953,7 @@ USED BY (one row per place; the same part may appear in several paths)
 | 3 · DESIGNED | C-7N — Action Surfacing (§7N); CY-E | A request for a file and whether Ness explicitly asked for an instruction method. Where this condition arises at this surface. | Does not substitute Cursor, CMD, PowerShell, terminal, Notepad, copy-paste or manual-creation instructions unless that method is explicitly requested. | The requested file delivery, without an unrequested instruction-method substitute. | [V10 §2A] [MAP C-2] [MAP CY-E] |
 | 4 · DESIGNED | C-BGMM — Biometric-Gated Maintenance Mode (§25.13); CY-I | A request for a file and whether Ness explicitly asked for an instruction method. Where this condition arises at this surface. | Does not substitute Cursor, CMD, PowerShell, terminal, Notepad, copy-paste or manual-creation instructions unless that method is explicitly requested. | The requested file delivery, without an unrequested instruction-method substitute. | [V10 §2A] [MAP C-2] [MAP CY-I] |
 | 5 · DESIGNED | C-PAIR — Owner-phone pairing, recovery, replacement, emergency (§25.7–25.10) | A request for a file and whether Ness explicitly asked for an instruction method. Where this condition arises at this surface. | Does not substitute Cursor, CMD, PowerShell, terminal, Notepad, copy-paste or manual-creation instructions unless that method is explicitly requested. | The requested file delivery, without an unrequested instruction-method substitute. | [V10 §2A] [MAP C-2] |
+| 6 · DESIGNED | C-2.12 — Actual-file delivery | The source-defined condition governed by C-2.12.2. | Instruction-method substitution requires an explicit request for that method. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [V10 §2A] |
 
 SUB-PARTS: NONE
 
@@ -962,11 +966,11 @@ ALONE
 - Does: DESIGNED — Creates a new versioned file; never silently overwrites, renames, deletes or replaces the previous authoritative master. The previous master retains authority until Ness reviews and adopts the new one. [V10 §2A] [MAP C-2]
 - Gives out: DESIGNED — A new versioned file with the previous authoritative master preserved and still authoritative until review and adoption. [V10 §2A] [MAP C-2]
 - Must never: DESIGNED — Silently overwrite, rename, delete or replace the previous authoritative master; treat the new file as authoritative before review and adoption. [V10 §2A] [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Creates a new versioned file; never silently overwrites, renames, deletes or replaces the previous authoritative master. The previous master retains authority until Ness reviews and adopts the new one. [V10 §2A] [MAP C-2]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-2.13.3 — Prior authority until review and adoption: The prior master retains authority until Ness reviews and adopts the new version. [V10 §2A]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -988,7 +992,7 @@ ALONE
 - Takes in: DESIGNED — A file being created under version safety. [V10 §2A] [MAP C-2]
 - Does: DESIGNED — Creates a new versioned file. [V10 §2A] [MAP C-2]
 - Gives out: DESIGNED — A new versioned file. [V10 §2A] [MAP C-2]
-- Must never: NOT DECIDED
+- Must never: DESIGNED — Silently overwrite, rename, delete or replace the previous authoritative master. [V10 §2A]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -1016,7 +1020,7 @@ ALONE
 - Does: DESIGNED — Preserves the previous authoritative master against silent overwrite, rename, deletion or replacement. [V10 §2A] [MAP C-2]
 - Gives out: DESIGNED — The previous authoritative master preserved. [V10 §2A] [MAP C-2]
 - Must never: DESIGNED — Silently overwrite, rename, delete or replace that master. [V10 §2A] [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Preserves the previous authoritative master against silent overwrite, rename, deletion or replacement. [V10 §2A] [MAP C-2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1043,7 +1047,7 @@ ALONE
 - Does: DESIGNED — Keeps the previous master authoritative until Ness reviews and adopts the new one. [V10 §2A] [MAP C-2]
 - Gives out: DESIGNED — The previous master remains authoritative before both conditions are satisfied. [V10 §2A] [MAP C-2]
 - Must never: DESIGNED — Treat creation or delivery alone as changing the authoritative master. [V10 §2A] [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Keeps the previous master authoritative until Ness reviews and adopts the new one. [V10 §2A] [MAP C-2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1058,6 +1062,7 @@ USED BY (one row per place; the same part may appear in several paths)
 | 3 · DESIGNED | C-7N — Action Surfacing (§7N); CY-E | The previous authoritative master, the new file, and whether the new file has been both reviewed and adopted by Ness. Where this condition arises at this surface. | Keeps the previous master authoritative until Ness reviews and adopts the new one. | The previous master remains authoritative before both conditions are satisfied. | [V10 §2A] [MAP C-2] [MAP CY-E] |
 | 4 · DESIGNED | C-BGMM — Biometric-Gated Maintenance Mode (§25.13); CY-I | The previous authoritative master, the new file, and whether the new file has been both reviewed and adopted by Ness. Where this condition arises at this surface. | Keeps the previous master authoritative until Ness reviews and adopts the new one. | The previous master remains authoritative before both conditions are satisfied. | [V10 §2A] [MAP C-2] [MAP CY-I] |
 | 5 · DESIGNED | C-PAIR — Owner-phone pairing, recovery, replacement, emergency (§25.7–25.10) | The previous authoritative master, the new file, and whether the new file has been both reviewed and adopted by Ness. Where this condition arises at this surface. | Keeps the previous master authoritative until Ness reviews and adopts the new one. | The previous master remains authoritative before both conditions are satisfied. | [V10 §2A] [MAP C-2] |
+| 6 · DESIGNED | C-2.13 — Version safety | The source-defined condition governed by C-2.13.3. | The prior master retains authority until Ness reviews and adopts the new version. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [V10 §2A] |
 
 SUB-PARTS: C-2.13.3.1 — Review condition; C-2.13.3.2 — Adoption condition
 
@@ -1070,7 +1075,7 @@ ALONE
 - Does: DESIGNED — Retains the previous master’s authority while the review prerequisite is unsatisfied. [V10 §2A] [MAP C-2]
 - Gives out: DESIGNED — The previous master remains authoritative in the absence of review. [V10 §2A] [MAP C-2]
 - Must never: DESIGNED — Treat the new file as authoritative without review. [V10 §2A] [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Retains the previous master’s authority while the review prerequisite is unsatisfied. [V10 §2A] [MAP C-2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1097,7 +1102,7 @@ ALONE
 - Does: DESIGNED — Retains the previous master’s authority while the adoption prerequisite is unsatisfied. [V10 §2A] [MAP C-2]
 - Gives out: DESIGNED — The previous master remains authoritative in the absence of adoption. [V10 §2A] [MAP C-2]
 - Must never: DESIGNED — Treat the new file as authoritative without adoption. [V10 §2A] [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Retains the previous master’s authority while the adoption prerequisite is unsatisfied. [V10 §2A] [MAP C-2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1124,7 +1129,7 @@ ALONE
 - Does: DESIGNED — Does not explain mistakes by claiming tiredness, impatience, being “on fumes” or “losing it”; states plainly that the instruction was misread or an incorrect plan was repeated. Does not invent Ness’s emotional state. [V10 §2A] [MAP C-2]
 - Gives out: DESIGNED — A plain account of the misread instruction or repeated incorrect plan, without an invented human-state explanation. [V10 §2A] [MAP C-2]
 - Must never: DESIGNED — Use those human-state excuses or invent Ness’s emotional state. [V10 §2A] [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Does not explain mistakes by claiming tiredness, impatience, being “on fumes” or “losing it”; states plainly that the instruction was misread or an incorrect plan was repeated. Does not invent Ness’s emotional state. [V10 §2A] [MAP C-2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1151,7 +1156,7 @@ ALONE
 - Does: DESIGNED — Does not explain the mistake through tiredness, impatience, being “on fumes” or “losing it.” [V10 §2A] [MAP C-2]
 - Gives out: DESIGNED — A mistake explanation without those human-state excuses. [V10 §2A] [MAP C-2]
 - Must never: DESIGNED — Claim tiredness, impatience, being “on fumes” or “losing it” to explain the mistake. [V10 §2A] [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Does not explain the mistake through tiredness, impatience, being “on fumes” or “losing it.” [V10 §2A] [MAP C-2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1177,8 +1182,8 @@ ALONE
 - Takes in: DESIGNED — An instruction that was misread or an incorrect plan that was repeated. [V10 §2A] [MAP C-2]
 - Does: DESIGNED — States plainly that the instruction was misread or that an incorrect plan was repeated. [V10 §2A] [MAP C-2]
 - Gives out: DESIGNED — A plain account of the misread instruction or repeated incorrect plan. [V10 §2A] [MAP C-2]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: DESIGNED — Use tiredness, impatience, being on fumes or losing it as the explanation for a mistake. [V10 §2A]
+- Fails closed by: DESIGNED — States plainly that the instruction was misread or that an incorrect plan was repeated. [V10 §2A] [MAP C-2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1232,7 +1237,7 @@ ALONE
 - Does: DESIGNED — Records both kinds of event; keeps their records subject to §7Q access and authorization and applicable §25 identity/security authorization. [MAP C-2]
 - Gives out: DESIGNED — Records of interaction and delivery events under the applicable access and authorization boundaries. [MAP C-2]
 - Must never: DESIGNED — Treat record existence as exemption from the stated access and authorization boundaries. [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Record existence does not authorize access: use remains unavailable where the applicable privacy or identity/security authorization does not permit it. [MAP C-2] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1258,8 +1263,8 @@ ALONE
 - Takes in: DESIGNED — An interaction event. [MAP C-2]
 - Does: DESIGNED — Records the interaction event like other internal operations. [MAP C-2]
 - Gives out: DESIGNED — A record of the interaction event. [MAP C-2]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: DESIGNED — Exempt the event record from its applicable privacy and identity/security authorization. [MAP C-2]
+- Fails closed by: DESIGNED — Record existence does not authorize access: use remains unavailable where the applicable privacy or identity/security authorization does not permit it. [MAP C-2] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1285,8 +1290,8 @@ ALONE
 - Takes in: DESIGNED — A file-delivery event. [MAP C-2]
 - Does: DESIGNED — Records the delivery event like other internal operations. [MAP C-2]
 - Gives out: DESIGNED — A record of the delivery event. [MAP C-2]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: DESIGNED — Exempt the event record from its applicable privacy and identity/security authorization. [MAP C-2]
+- Fails closed by: DESIGNED — Record existence does not authorize access: use remains unavailable where the applicable privacy or identity/security authorization does not permit it. [MAP C-2] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1313,7 +1318,7 @@ ALONE
 - Does: DESIGNED — Keeps the records subject to §7Q access and authorization and §25 identity/security authorization where applicable. [MAP C-2]
 - Gives out: DESIGNED — Interaction and delivery records that remain subject to those boundaries. [MAP C-2]
 - Must never: DESIGNED — Exempt those records from applicable access and authorization rules. [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Record existence does not authorize access: use remains unavailable where the applicable privacy or identity/security authorization does not permit it. [MAP C-2] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1340,7 +1345,7 @@ ALONE
 - Does: DESIGNED — Keeps the record subject to §7Q access and authorization. [MAP C-2]
 - Gives out: DESIGNED — The record remains subject to the privacy access and authorization boundary. [MAP C-2]
 - Must never: DESIGNED — Bypass §7Q for those records. [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Record existence does not authorize access: use remains unavailable where the applicable privacy or identity/security authorization does not permit it. [MAP C-2] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1367,7 +1372,7 @@ ALONE
 - Does: DESIGNED — Keeps the record subject to the applicable identity/security authorization. [MAP C-2]
 - Gives out: DESIGNED — The record remains subject to applicable identity/security authorization. [MAP C-2]
 - Must never: DESIGNED — Bypass applicable §25 authorization for those records. [MAP C-2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Record existence does not authorize access: use remains unavailable where the applicable privacy or identity/security authorization does not permit it. [MAP C-2] [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1389,7 +1394,6 @@ SUB-PARTS: NONE
 
 | Part ID | Field or unresolved detail | Disposition |
 |---|---|---|
-| C-2 | ALONE / Fails closed by | NOT DECIDED |
 | C-2 | TOGETHER / Fed by | NOT DECIDED |
 | C-2 | TOGETHER / Changes | NOT DECIDED |
 | C-2 | Specific §25 part owning each interaction-record authorization condition | NOT DECIDED |
@@ -1420,32 +1424,25 @@ SUB-PARTS: NONE
 | C-2.1.5 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.1.5 | TOGETHER / Changes | NOT DECIDED |
 | C-2.1.5.1 | ALONE / Must never | NOT DECIDED |
-| C-2.1.5.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.1.5.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.1.5.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.1.5.1 | TOGETHER / Changes | NOT DECIDED |
 | C-2.1.5.2 | ALONE / Must never | NOT DECIDED |
-| C-2.1.5.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.1.5.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.1.5.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.1.5.2 | TOGETHER / Changes | NOT DECIDED |
-| C-2.1.5.3 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.1.5.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.1.5.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.1.5.3 | TOGETHER / Changes | NOT DECIDED |
-| C-2.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.2 | TOGETHER / Changes | NOT DECIDED |
-| C-2.2.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.2.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.2.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.2.1 | TOGETHER / Changes | NOT DECIDED |
-| C-2.2.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.2.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.2.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.2.2 | TOGETHER / Changes | NOT DECIDED |
-| C-2.3 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.3 | TOGETHER / Changes | NOT DECIDED |
@@ -1463,7 +1460,6 @@ SUB-PARTS: NONE
 | C-2.6 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.6 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.6 | TOGETHER / Changes | NOT DECIDED |
-| C-2.7 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.7 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.7 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.7 | TOGETHER / Changes | NOT DECIDED |
@@ -1472,102 +1468,71 @@ SUB-PARTS: NONE
 | C-2.8 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.8 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.8 | TOGETHER / Changes | NOT DECIDED |
-| C-2.9 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.9 | TOGETHER / Fed by | NOT DECIDED |
-| C-2.9 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.9 | TOGETHER / Changes | NOT DECIDED |
-| C-2.9.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.9.1 | TOGETHER / Fed by | NOT DECIDED |
-| C-2.9.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.9.1 | TOGETHER / Changes | NOT DECIDED |
-| C-2.9.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.9.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.9.2 | TOGETHER / Changes | NOT DECIDED |
-| C-2.10 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.10 | TOGETHER / Fed by | NOT DECIDED |
-| C-2.10 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.10 | TOGETHER / Changes | NOT DECIDED |
-| C-2.10.1 | ALONE / Must never | NOT DECIDED |
 | C-2.10.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.10.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.10.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.10.1 | TOGETHER / Changes | NOT DECIDED |
-| C-2.10.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.10.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.10.2 | TOGETHER / Changes | NOT DECIDED |
-| C-2.10.2.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.10.2.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.10.2.1 | TOGETHER / Changes | NOT DECIDED |
-| C-2.10.2.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.10.2.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.10.2.2 | TOGETHER / Changes | NOT DECIDED |
 | C-2.11 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.11 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.11 | TOGETHER / Changes | NOT DECIDED |
 | C-2.11 | Detection, stored count, counting window and reset rule | NOT DECIDED |
-| C-2.11.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.11.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.11.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.11.1 | TOGETHER / Changes | NOT DECIDED |
-| C-2.11.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.11.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.11.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.11.2 | TOGETHER / Changes | NOT DECIDED |
-| C-2.11.3 | ALONE / Must never | NOT DECIDED |
-| C-2.11.3 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.11.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.11.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.11.3 | TOGETHER / Changes | NOT DECIDED |
-| C-2.11.4 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.11.4 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.11.4 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.11.4 | TOGETHER / Changes | NOT DECIDED |
-| C-2.12 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.12 | TOGETHER / Fed by | NOT DECIDED |
-| C-2.12 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.12 | TOGETHER / Changes | NOT DECIDED |
 | C-2.12 | File transport, delivery-failure classes, retry and recovery | NOT DECIDED |
-| C-2.12.1 | ALONE / Must never | NOT DECIDED |
 | C-2.12.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.12.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.12.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.12.1 | TOGETHER / Changes | NOT DECIDED |
-| C-2.12.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.12.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.12.2 | TOGETHER / Changes | NOT DECIDED |
-| C-2.13 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.13 | TOGETHER / Fed by | NOT DECIDED |
-| C-2.13 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.13 | TOGETHER / Changes | NOT DECIDED |
 | C-2.13 | Version-name format and collision handling | NOT DECIDED |
-| C-2.13.1 | ALONE / Must never | NOT DECIDED |
 | C-2.13.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.13.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.13.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.13.1 | TOGETHER / Changes | NOT DECIDED |
-| C-2.13.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.13.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.13.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.13.2 | TOGETHER / Changes | NOT DECIDED |
-| C-2.13.3 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.13.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.13.3 | TOGETHER / Changes | NOT DECIDED |
-| C-2.13.3.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.13.3.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.13.3.1 | TOGETHER / Changes | NOT DECIDED |
-| C-2.13.3.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.13.3.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.13.3.2 | TOGETHER / Changes | NOT DECIDED |
-| C-2.14 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.14 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.14 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.14 | TOGETHER / Changes | NOT DECIDED |
-| C-2.14.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.14.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.14.1 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.14.1 | TOGETHER / Changes | NOT DECIDED |
-| C-2.14.2 | ALONE / Must never | NOT DECIDED |
-| C-2.14.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.14.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.14.2 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.14.2 | TOGETHER / Changes | NOT DECIDED |
@@ -1575,26 +1540,18 @@ SUB-PARTS: NONE
 | C-2.14.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.14.3 | TOGETHER / Gated by | NOT DECIDED |
 | C-2.14.3 | TOGETHER / Changes | NOT DECIDED |
-| C-2.15 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.15 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.15 | TOGETHER / Changes | NOT DECIDED |
 | C-2.15 | C-2-specific event names, record fields, types, requiredness and permitted values | NOT DECIDED |
 | C-2.15 | C-2-specific event-write failure, retry and recovery behavior | NOT DECIDED |
-| C-2.15.1 | ALONE / Must never | NOT DECIDED |
-| C-2.15.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.15.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.15.1 | TOGETHER / Changes | NOT DECIDED |
-| C-2.15.2 | ALONE / Must never | NOT DECIDED |
-| C-2.15.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.15.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.15.2 | TOGETHER / Changes | NOT DECIDED |
-| C-2.15.3 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.15.3 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.15.3 | TOGETHER / Changes | NOT DECIDED |
-| C-2.15.3.1 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.15.3.1 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.15.3.1 | TOGETHER / Changes | NOT DECIDED |
-| C-2.15.3.2 | ALONE / Fails closed by | NOT DECIDED |
 | C-2.15.3.2 | TOGETHER / Fed by | NOT DECIDED |
 | C-2.15.3.2 | TOGETHER / Changes | NOT DECIDED |
 | C-2 | Owning part ID and path ID for additional artifact/file-delivery paths not assigned an owner in the C-2 card | NOT DECIDED |
@@ -2067,16 +2024,16 @@ The following 116 files have no whole-read credit across Chapters 0–1. Togethe
 ## CONTRACT CHECK
 
 CONTRACT CHECK (against the cloned contract, SHA-256 e78c7a8c8a448ff20966002465c8d6a330000900802c0b19a48e8a124e5ceba1)
-§1.3 no history/actions/roles/workflow in this chapter: PASS — checked all C-2 templates, registers and coverage prose; runtime rules retained, personal/history/process material excluded; required source-inventory labels and delivery records kept separate.
-§1.4 every gap written as NOT DECIDED: PASS — all 200 unresolved template fields appear in §1.2, with the additional unspecified details; K6/K7/K8 remain open in §1.3 and the source-wording relationship remains open in §1.5.
+§1.3 no history/actions/roles/workflow in this chapter: PASS — all 51 cards checked. Corrections place source-decided prohibitions, failure outcomes and gating conditions in their matching boxes; correction history is confined to this check and the separate changed-lines file.
+§1.4 every gap written as NOT DECIDED: PASS — all 153 Must never / Fails closed by / Gated by placements reviewed. 48 false empty fields filled; 152 NOT DECIDED template entries and 0 NOT DECIDED USED BY cells remain registered (152 wholly empty template fields). Other original open-detail gaps are preserved. The changed-lines report gives a reason for every retained empty reviewed box.
 §1.5 conflicts marked, none resolved: PASS — the §2 / §7B Part 6 wording tension is marked at the affected C-2.4 lines and retained in §1.5 without a scope resolution.
-§3 exactly one stamp per line: PASS — every behavior line carries one stamp; C-2 rules use DESIGNED under the current §3 clarification; intent slots remain INTENT with NOT DESIGNED.
-§4 every behavior line cited in the exact format: PASS — all decided fields and all 255 USED BY rows cite the pinned sources; intent and unresolved-record provenance resolves; empty template fields carry no citation.
+§3 exactly one stamp per line: PASS — 307 populated field lines and 260 USED BY rows checked. BUILT applies only to the exact behavior supported by V10’s authoritative status table; design and accepted-package behavior and links retain their own status.
+§4 every behavior line cited in the exact format: PASS — all added behavior and reciprocal rows carry the relevant source-section citations. Unchanged lines retain their original citations; original source coverage is preserved.
 §5.4 one name per thing: PASS — all 51 part names and all external component names match their fixed naming entries; no new top-level component or path.
-§6 all template fields present, in order, for every part: PASS — all 51 templates contain the nine fields in order, USED BY and SUB-PARTS.
-§6.3 reciprocity within this chapter: PASS — no asserted operational edges join two C-2 templates; SUB-PARTS is containment. External reciprocal entries are explicitly accounted for in Relationship accounting and are not claimed complete.
-§6.4 every decided detail written in, no citation used in place of content: PASS — checked the source atom inventory, exact thresholds, ordered anti-loop actions, complete request/substitution/prohibition lists, exceptions, authority conditions and component-specific event recording.
+§6 all template fields present, in order, for every part: PASS — all 51 cards retain the nine fields in order, ALONE, TOGETHER, USED BY and SUB-PARTS. IDs, names, Does text and child lists remain byte-identical.
+§6.3 reciprocity within this chapter: PASS — every newly named internal gate has an existing or added reciprocal USED BY row (5 added). Previously asserted relationships and external relationship-accounting entries remain intact.
+§6.4 every decided detail written in, no citation used in place of content: PASS — all cards reviewed for source-decided prohibition, failure and gating text left outside its dedicated box. The new boxes state the behavior; no new threshold, retry policy, schema, sentinel or runtime mechanism is selected.
 §6.5 sub-parts recursed to the bottom: PASS — compound rules are split through their decided actions and conditions, including separate review and adoption conditions; no record schema or mechanism invented.
-§9 coverage matrix rows added for every file used: PASS — 138 unique READ-folder rows and 107 exact V10 heading rows; all sources used and all excluded or unplaced material accounted for with reasons.
+§9 coverage matrix rows added for every file used: PASS — the original coverage matrix is byte-identical; corrections use sources and receipts already covered there. Pinned sources were reopened for the correction review; no new whole-read credit is claimed.
 §10.11 no recommendation, no sentence addressed to Ness: PASS — checked behavior, registers, coverage and delivery records.
 Files read whole for this chapter: `01_AUTHORITATIVE/NH_DECISION_DEFAULTS-S19_v2_2.md`; `01_AUTHORITATIVE/NH_MASTER-20_CORRECTED_v10.md`; `01_AUTHORITATIVE/NH_PROJECT_COMPANION_GOVERNANCE_AND_ARCHIVE_v1.md`; `01_AUTHORITATIVE/cursorrules`; `02_WORKING_MAP/NH_COMPLETE_DESIGN_AND_WIRING_MAP_v1_6_CANDIDATE.md`; `05_ACTIVE_CANDIDATE/NH_DECISION_PACKAGE_LIVE_DUAL_MODEL_HANDOFF_v1.md`; `05_ACTIVE_CANDIDATE/NH_DECISION_PACKAGE_MODEL_CANDOR_AND_HONESTY_STACK_v1_CANDIDATE.md`; `05_ACTIVE_CANDIDATE/NH_DECISION_RECORD_PRE_V10_RECOVERY_2026-09-24_v0_1_CANDIDATE.md`; `05_ACTIVE_CANDIDATE/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md`; `05_ACTIVE_CANDIDATE/NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CHAPTERS/NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH00.md`; `05_INACTIVE_CANDIDATE/NH_ISSUE_CHANNEL_INTENT_v0_1.md`; `05_INACTIVE_CANDIDATE/NH_VOICE_AND_DELIVERY_DIRECTOR_INTENT_v0_3_CANDIDATE.md`; instruction file `NH_MASTER-21_SYSTEM_BEHAVIOR_BUILD_CONTRACT_FOR_CHATGPT_v1_0.md`.

@@ -79,7 +79,7 @@ ALONE
 - Does: DESIGNED — Preserves one immutable reading beside the roots. `reads` points to roots; `derived_from` points to prior readings; producer provenance and operation identity remain distinct. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: DESIGNED — A reading representation whose data contract is checked before append. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Must never: DESIGNED — Copy root text; add a `reason` or `why` field; rewrite a prior reading to turn it into a new interpretation. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Rejects malformed reading structure before append. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: DESIGNED — C-READ.1.1 — reading.id: carries this member as part of the containing record. [V10 §6B / READING record schema] [V10 / THE ONE AUTHORITATIVE STATUS TABLE]
@@ -94,7 +94,7 @@ TOGETHER
 - Fed by: DESIGNED — C-READ.1.10 — reading.schema_version: carries this member as part of the containing record. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fed by: DESIGNED — C-READ.1.11 — reading.derived_from: carries this member as part of the containing record. [V10 §6B / READING record schema]
 - Fed by: DESIGNED — C-READ.1.12 — reading.idempotency_key: carries this member as part of the containing record. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2 — _validate_reading: The twelve-field representation must pass the reading shape validator. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -115,11 +115,11 @@ ALONE
 - Does: DESIGNED — Identifies the reading record; the operation identity is separate in `idempotency_key`. Shared common validation checks this member. [V10 §6B / READING record schema] [V10 / THE ONE AUTHORITATIVE STATUS TABLE]
 - Gives out: DESIGNED — Required reading identity. [V10 §6B / READING record schema] [V10 / THE ONE AUTHORITATIVE STATUS TABLE]
 - Must never: DESIGNED — Omit the required member. [V10 §6B / READING record schema] [V10 / THE ONE AUTHORITATIVE STATUS TABLE]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Rejects malformed reading identity through shared common validation before append. [V10 §6B / READING record schema] [V10 / THE ONE AUTHORITATIVE STATUS TABLE]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-STORE.3.1 — _check_common: Shared common validation must accept this reading member. [V10 §6B / READING record schema] [V10 / THE ONE AUTHORITATIVE STATUS TABLE]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -138,11 +138,11 @@ ALONE
 - Does: DESIGNED — Points to source roots instead of copying their text. Every referenced root must exist in the sealed store before commit. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: DESIGNED — Required, non-empty list of root IDs. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Must never: DESIGNED — Use an empty list or invent a root reference. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Refuses a reading whose reads list is empty or whose referenced root does not exist before commit. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.2 — Non-empty reads list: Requires a non-empty reads list; the writer also verifies every root reference. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -161,11 +161,11 @@ ALONE
 - Does: DESIGNED — Carries the interpretation. An honest insufficient-context meaning is valid; inability to interpret is recorded honestly and remains revisable. [V10 §6B / READING record schema]
 - Gives out: DESIGNED — Required string. [V10 §6B / READING record schema]
 - Must never: DESIGNED — Treat honest inability to interpret as an absent or invalid meaning solely because it is uncertain. [V10 §6B / READING record schema]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Rejects a non-string meaning as malformed; honest insufficient-context meaning remains valid. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.3 — String meaning: Requires a meaning string without rejecting honest uncertainty. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -184,7 +184,7 @@ ALONE
 - Does: DESIGNED — Keeps interpretation confidence and source reliability separate; both keys exist on every reading. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: DESIGNED — Required two-slot object `{interpretation_confidence, source_reliability}`. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Must never: DESIGNED — Replace the object with one blended score. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Rejects a bare number or a confidence object missing either required key. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: DESIGNED — C-READ.1.4.1 — reading.confidence.interpretation_confidence: carries this member as part of the containing record. [V10 §6B / READING record schema] [DD §3A. The reading record]
@@ -211,11 +211,11 @@ ALONE
 - Does: DESIGNED — Expresses how sure the engine is of this reading. Presence/non-emptiness is checked without choosing a numeric scale. [V10 §6B / READING record schema] [DD §3A. The reading record]
 - Gives out: DESIGNED — Required, filled value; value-form deliberately loose. [V10 §6B / READING record schema] [DD §3A. The reading record]
 - Must never: DESIGNED — Omit the required member. [V10 §6B / READING record schema] [DD §3A. The reading record]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Rejects a missing or empty interpretation_confidence; no numeric scale is selected. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.5 — Interpretation-confidence presence: Requires presence and non-emptiness of interpretation_confidence. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -234,11 +234,11 @@ ALONE
 - Does: DESIGNED — Expresses how trustworthy the source was. The value representation when that is not yet knowable is unverified; no sentinel is selected. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: DESIGNED — Required key from the first reading. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Must never: DESIGNED — Invent null, an empty string, `"unknown"`, an empty object, or another sentinel as the unverified not-yet-knowable representation. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Rejects omission of the source_reliability key; the not-yet-knowable value form remains unverified. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.6 — Source-reliability key presence: Requires key presence; it supplies no unverified sentinel. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -256,7 +256,7 @@ ALONE
 - Takes in: DESIGNED — Readings that repeat an earlier error. [V10 §6B / READING record schema]
 - Does: DESIGNED — Does not increase confidence because the error was repeated. [V10 §6B / READING record schema]
 - Gives out: DESIGNED — Repetition supplies no confidence increase. [V10 §6B / READING record schema]
-- Must never: NOT DECIDED
+- Must never: DESIGNED — Raise confidence merely because a prior error is repeated. [V10 §6B / READING record schema]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -279,7 +279,7 @@ ALONE
 - Takes in: DESIGNED — An earlier reading and a new reading. [V10 §6B / READING record schema]
 - Does: DESIGNED — Does not silently copy the earlier confidence into the new reading. [V10 §6B / READING record schema]
 - Gives out: DESIGNED — Each reading retains its own confidence assessment. [V10 §6B / READING record schema]
-- Must never: NOT DECIDED
+- Must never: DESIGNED — Silently inherit an earlier reading’s confidence. [V10 §6B / READING record schema]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -302,7 +302,7 @@ ALONE
 - Takes in: DESIGNED — Reading confidence, story firmness, retrieval relevance and local mode confidence. [V10 §6B / READING record schema]
 - Does: DESIGNED — Keeps `story_layer[].firmness` within the telling; computes retrieval relevance at search time and never stores it as reading confidence; keeps `mode.classification_confidence` local. [V10 §6B / READING record schema]
 - Gives out: DESIGNED — Distinct dimensions, without a blended confidence number. [V10 §6B / READING record schema]
-- Must never: NOT DECIDED
+- Must never: DESIGNED — Blend story firmness, retrieval relevance or local mode confidence into reading confidence; store retrieval relevance in the reading. [V10 §6B / READING record schema]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -326,11 +326,11 @@ ALONE
 - Does: DESIGNED — Does not accept a reading solely because the model claims certainty; grounding and explicit evidence govern acceptance. [V10 §7G]
 - Gives out: DESIGNED — Model confidence remains metadata. [V10 §7G]
 - Must never: DESIGNED — Use model confidence as an independent truth or acceptance authority. [V10 §7G]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Rejects or downgrades unsupported certainty through the acceptance layer; model confidence alone cannot yield acceptance. [V10 §7G]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G): Acceptance requires root/context grounding and explicit evidence, never model confidence alone. [V10 §7G]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -349,11 +349,11 @@ ALONE
 - Does: DESIGNED — Carries who spoke from the root. This is not the person whose perspective a telling represents. [V10 §6B / READING record schema] [V10 §7K / STRUCTURED PERSPECTIVE MODEL]
 - Gives out: DESIGNED — Required source-carried speaker attribution. [V10 §6B / READING record schema] [V10 §7K / STRUCTURED PERSPECTIVE MODEL]
 - Must never: DESIGNED — Assume that speaker, subject and perspective owner are the same person. [V10 §6B / READING record schema] [V10 §7K / STRUCTURED PERSPECTIVE MODEL]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Rejects a reading missing its required source-carried role member. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.1 — Required twelve-field shape: Requires role in the twelve-field record. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -372,7 +372,7 @@ ALONE
 - Does: DESIGNED — Keeps tellings alongside one another, including conflict. The six v1 optional members are `whose`, `stance`, `firmness`, `telling`, `theme`, `when`. Unknown optional values are omitted. [V10 §6B / READING record schema]
 - Gives out: DESIGNED — Required list of embedded tellings; `[]` is valid. [V10 §6B / READING record schema]
 - Must never: DESIGNED — Pick a winning telling, merge conflicting tellings, or fill an unknown optional member with `"unknown"`. [V10 §6B / READING record schema]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Rejects non-list story_layer; the empty list remains valid. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: DESIGNED — C-READ.1.6.1 — reading.story_layer[].whose: carries this member as part of the containing record. [V10 §6B / READING record schema] [V10 §7K]
@@ -383,7 +383,7 @@ TOGETHER
 - Fed by: DESIGNED — C-READ.1.6.6 — reading.story_layer[].when: carries this member as part of the containing record. [V10 §6B / READING record schema]
 - Fed by: DESIGNED — C-READ.1.6.7 — Empty story_layer: Keeps `story_layer=[]` valid. [V10 §6B / READING record schema]
 - Fed by: DESIGNED — C-READ.1.6.8 — Embedded v1 telling boundary: Keeps the telling embedded in its immutable parent reading; the v1 built schema does not establish a standalone first-class telling store. [V10 §7K / OBJECT-IDENTITY SEAM — EXPLICITLY UNRESOLVED]
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.7 — Story list shape: Requires a story list and permits an empty list. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -402,11 +402,11 @@ ALONE
 - Does: DESIGNED — Carries the telling’s perspective attribution; this is separate from the reading’s source speaker in `role`. [V10 §6B / READING record schema] [V10 §7K]
 - Gives out: DESIGNED — Optional member; omitted when unknown. [V10 §6B / READING record schema] [V10 §7K]
 - Must never: DESIGNED — Substitute `"unknown"` for an omitted unknown value. [V10 §6B / READING record schema] [V10 §7K]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Omits the optional member when its value is unknown; it is never filled with the placeholder string "unknown". [V10 §6B / READING record schema]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.8 — Story omission rule: Unknown optional story members remain omitted. [V10 §6B / READING record schema]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -425,11 +425,11 @@ ALONE
 - Does: DESIGNED — Carries the stance in the telling when supported. [V10 §6B / READING record schema]
 - Gives out: DESIGNED — Optional member; omitted when unknown. [V10 §6B / READING record schema]
 - Must never: DESIGNED — Substitute `"unknown"` for an omitted unknown value. [V10 §6B / READING record schema]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Omits the optional member when its value is unknown; it is never filled with the placeholder string "unknown". [V10 §6B / READING record schema]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.8 — Story omission rule: Unknown optional story members remain omitted. [V10 §6B / READING record schema]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -448,11 +448,11 @@ ALONE
 - Does: DESIGNED — Carries how strongly the perspective owner appears to hold the stance; this is separate from the engine’s confidence in its interpretation. [V10 §6B / READING record schema] [V10 §7K]
 - Gives out: DESIGNED — Optional member; omitted when unknown. [V10 §6B / READING record schema] [V10 §7K]
 - Must never: DESIGNED — Substitute `"unknown"` for an omitted unknown value. [V10 §6B / READING record schema] [V10 §7K]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Omits the optional member when its value is unknown; it is never filled with the placeholder string "unknown". [V10 §6B / READING record schema]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.8 — Story omission rule: Unknown optional story members remain omitted. [V10 §6B / READING record schema]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -471,11 +471,11 @@ ALONE
 - Does: DESIGNED — Carries the telling inside its parent reading’s list. [V10 §6B / READING record schema]
 - Gives out: DESIGNED — Optional member; omitted when unknown. [V10 §6B / READING record schema]
 - Must never: DESIGNED — Substitute `"unknown"` for an omitted unknown value. [V10 §6B / READING record schema]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Omits the optional member when its value is unknown; it is never filled with the placeholder string "unknown". [V10 §6B / READING record schema]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.8 — Story omission rule: Unknown optional story members remain omitted. [V10 §6B / READING record schema]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -494,11 +494,11 @@ ALONE
 - Does: DESIGNED — Carries theme membership when present; the Story Layer keeps navigation categories separate from facts. [V10 §6B / READING record schema] [V10 §7K]
 - Gives out: DESIGNED — Optional member; omitted when unknown. [V10 §6B / READING record schema] [V10 §7K]
 - Must never: DESIGNED — Substitute `"unknown"` for an omitted unknown value. [V10 §6B / READING record schema] [V10 §7K]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Omits the optional member when its value is unknown; it is never filled with the placeholder string "unknown". [V10 §6B / READING record schema]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.8 — Story omission rule: Unknown optional story members remain omitted. [V10 §6B / READING record schema]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -517,11 +517,11 @@ ALONE
 - Does: DESIGNED — Carries the telling’s temporal member when known; it is distinct from the reading’s creation timestamp. [V10 §6B / READING record schema]
 - Gives out: DESIGNED — Optional member; omitted when unknown. [V10 §6B / READING record schema]
 - Must never: DESIGNED — Substitute `"unknown"` for an omitted unknown value. [V10 §6B / READING record schema]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Omits the optional member when its value is unknown; it is never filled with the placeholder string "unknown". [V10 §6B / READING record schema]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.8 — Story omission rule: Unknown optional story members remain omitted. [V10 §6B / READING record schema]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -587,11 +587,11 @@ ALONE
 - Does: DESIGNED — `label` is an open word with examples `chat`, `composed`, `story`, `question`; `classification_confidence` is local confidence in that label, never top-level reading confidence. [V10 §6B / READING record schema]
 - Gives out: DESIGNED — Required object `{label, classification_confidence}`. [V10 §6B / READING record schema]
 - Must never: DESIGNED — Treat the open register label as the closed retrieval-mode vocabulary `bare`, `local-context`, `associative`, `combined`. [V10 §6B / READING record schema]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Rejects malformed mode structure; an open label is not a fixed menu. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.9 — Mode object shape: Requires the mode object with its local classification confidence. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -610,11 +610,11 @@ ALONE
 - Does: DESIGNED — Records when this reading was created, not source time, event time or ingest time; shared `_check_common` validation checks it. [V10 §6B / READING record schema] [V10 / THE ONE AUTHORITATIVE STATUS TABLE]
 - Gives out: DESIGNED — Required creation timestamp. [V10 §6B / READING record schema] [V10 / THE ONE AUTHORITATIVE STATUS TABLE]
 - Must never: DESIGNED — Omit the required member. [V10 §6B / READING record schema] [V10 / THE ONE AUTHORITATIVE STATUS TABLE]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Rejects malformed creation timestamp through shared common validation before append. [V10 §6B / READING record schema] [V10 / THE ONE AUTHORITATIVE STATUS TABLE]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-STORE.3.1 — _check_common: Shared common validation must accept this reading member. [V10 §6B / READING record schema] [V10 / THE ONE AUTHORITATIVE STATUS TABLE]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -634,7 +634,7 @@ ALONE
 - Does: DESIGNED — The source’s abbreviated names `digest` and `when` are preserved here as provenance member labels; they do not select an unverified runtime key spelling. [V10 §6B / READING record schema]
 - Gives out: DESIGNED — Required reproducibility-grade producer provenance. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Must never: DESIGNED — Omit the required member. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Rejects missing or out-of-vocabulary origin in produced_by. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: DESIGNED — C-READ.1.9.1 — reading.produced_by.origin: carries this member as part of the containing record. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
@@ -648,7 +648,7 @@ TOGETHER
 - Fed by: DESIGNED — C-READ.1.9.9 — human_annotation.when: carries this member as part of the containing record. [V10 §6B / READING record schema]
 - Fed by: DESIGNED — C-READ.1.9.10 — human_annotation.context_version: carries this member as part of the containing record. [V10 §6B / READING record schema]
 - Fed by: DESIGNED — C-READ.1.9.11 — human_annotation.change_reason: carries this member as part of the containing record. [V10 §6B / READING record schema]
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.10 — Origin vocabulary: Requires origin from the six-member provenance vocabulary. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -667,7 +667,7 @@ ALONE
 - Does: DESIGNED — Records the information-path origin using the six-member controlled vocabulary. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: DESIGNED — Required member; one of `observed`, `imported`, `simulated`, `generated`, `reaction`, `human_annotation`. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Must never: DESIGNED — Treat an allowed origin value as authorization for that material to enter ordinary memory. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Rejects a missing or out-of-vocabulary origin. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: DESIGNED — C-READ.1.9.1.1 — origin=observed: Allows the exact vocabulary member `observed`. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
@@ -676,7 +676,7 @@ TOGETHER
 - Fed by: DESIGNED — C-READ.1.9.1.4 — origin=generated: Allows the exact vocabulary member `generated`. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fed by: DESIGNED — C-READ.1.9.1.5 — origin=reaction: Allows the exact vocabulary member `reaction`. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fed by: DESIGNED — C-READ.1.9.1.6 — origin=human_annotation: Allows the exact vocabulary member `human_annotation`. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.10 — Origin vocabulary: Requires an allowed origin value; vocabulary membership does not grant authorization. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -855,7 +855,7 @@ ALONE
 - Takes in: DESIGNED — Engine provenance member. [V10 §6B / READING record schema]
 - Does: DESIGNED — Carries the producer digest; a model name alone is not the full producer provenance. [V10 §6B / READING record schema]
 - Gives out: DESIGNED — Engine provenance member. [V10 §6B / READING record schema]
-- Must never: NOT DECIDED
+- Must never: DESIGNED — Treat a model name alone as complete producer provenance. [V10 §6B / READING record schema]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -1069,7 +1069,7 @@ ALONE
 - Takes in: DESIGNED — The particular pass attempt’s `pass_id`. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY]
 - Does: DESIGNED — Identifies the pass attempt, separately from the stable job-level reading idempotency key. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY]
 - Gives out: DESIGNED — The particular pass attempt’s `pass_id`. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY]
-- Must never: NOT DECIDED
+- Must never: DESIGNED — Use the pass-specific identity in place of the stable job-level reading operation key. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -1372,11 +1372,11 @@ ALONE
 - Does: DESIGNED — Identifies the contract under which the record was written; it cannot be retrofitted into immutable old records. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: DESIGNED — Required on every new reading; first reading schema is `v1`. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Must never: DESIGNED — Change an older reading in place to give it a newer schema_version. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Rejects a new reading missing schema_version; earlier readings are never retrofitted. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.11 — Schema-version presence: Requires schema_version on every new reading. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -1395,12 +1395,12 @@ ALONE
 - Does: DESIGNED — Names prior readings from which this reading derives; roots themselves are referenced in `reads`. [V10 §6B / READING record schema]
 - Gives out: DESIGNED — Required list of parent reading IDs; `[]` when fresh directly from roots. [V10 §6B / READING record schema]
 - Must never: DESIGNED — Confuse parent reading IDs with source root IDs. [V10 §6B / READING record schema]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Rejects a non-list derived_from; a fresh-from-roots reading may carry the empty list. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: DESIGNED — C-READ.1.11.1 — Fresh-from-roots lineage: Stores the empty list in `derived_from`; the roots remain identified by `reads`. [V10 §6B / READING record schema]
 - Fed by: DESIGNED — C-READ.1.11.2 — Parent-reading lineage: Carries the parent reading IDs in `derived_from`. [V10 §6B / READING record schema]
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.12 — Parent-reading list: Requires a parent-reading list and permits an empty list. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -1418,7 +1418,7 @@ ALONE
 - Takes in: DESIGNED — A reading produced directly from roots without parent readings. [V10 §6B / READING record schema]
 - Does: DESIGNED — Stores the empty list in `derived_from`; the roots remain identified by `reads`. [V10 §6B / READING record schema]
 - Gives out: DESIGNED — `derived_from=[]`. [V10 §6B / READING record schema]
-- Must never: NOT DECIDED
+- Must never: DESIGNED — Insert source root IDs as parent reading IDs or invent parent-reading lineage for a fresh-from-roots reading. [V10 §6B / READING record schema]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -1441,7 +1441,7 @@ ALONE
 - Takes in: DESIGNED — A reading derived from earlier readings. [V10 §6B / READING record schema]
 - Does: DESIGNED — Carries the parent reading IDs in `derived_from`. [V10 §6B / READING record schema]
 - Gives out: DESIGNED — The reading’s prior-reading lineage is inspectable. [V10 §6B / READING record schema]
-- Must never: NOT DECIDED
+- Must never: DESIGNED — Substitute source root IDs for the parent reading IDs in derived_from. [V10 §6B / READING record schema]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -1466,7 +1466,7 @@ ALONE
 - Does: DESIGNED — Uniqueness is per store under V10. [SOURCE CONFLICT: CR §1C — ACCRETIVE STORE PROHIBITIONS forbids reuse of a key already committed to any readings store; V10 §6A / SCHEMA CONSTRAINTS specifies uniqueness per store] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: DESIGNED — Required operation identity, separate from record `id`; unique per store. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Must never: DESIGNED — Omit the key or substitute record identity for operation identity. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Rejects an already-committed operation key in the target store before append. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1587,6 +1587,10 @@ USED BY (one row per place; the same part may appear in several paths)
 |---|---|---|---|---|---|
 | 1 · BUILT | C-READ — Reading record, validator, writer (§6B) | A proposed reading. | Checks the required twelve-field shape. | Malformed data is refused; well-formed uncertain data can proceed. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6B / READING record schema] |
 | 2 · BUILT | C-READ.3 — append_reading | The assembled record. | Runs `_validate_reading()`. | Invalid shape stops the append. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] |
+| 3 · BUILT | C-READ.1 — Twelve-field reading representation v1 | The twelve named members, including their nested values. | The twelve-field representation must pass the reading shape validator. | A reading representation whose data contract is checked before append. | [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 4 · BUILT | C-READ.3.6 — Shared write boundary | Any reading write request. | The shared write boundary must run the reading shape validator before append. | One designated reading write boundary. | [V10 §6B / READING record schema] [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] |
+| 5 · DESIGNED | C-READ.3.7 — New-root worker reading-write handoff | The new-root operation’s `enqueue_key`, the current `pass_id`, accepted reading data or a separate honest fallback reading, and retrieval audit content. | The assembled twelve-field record must pass validation before append. | A newly written or recovered `reading_id` for the following worker checkpoint. | [V10 §7G-A / Step 5 — Write the reading record] |
+| 6 · DESIGNED | C-READ.3.7.5 — New-reading commit | No reading with the computed key; assembled twelve-field record. | Validation must pass before the new quarantine reading is appended. | A newly committed quarantine reading. | [V10 §7G-A / Step 5 — Write the reading record] |
 
 SUB-PARTS: C-READ.2.1 — Required twelve-field shape; C-READ.2.2 — Non-empty reads list; C-READ.2.3 — String meaning; C-READ.2.4 — Two-slot confidence shape; C-READ.2.5 — Interpretation-confidence presence; C-READ.2.6 — Source-reliability key presence; C-READ.2.7 — Story list shape; C-READ.2.8 — Story omission rule; C-READ.2.9 — Mode object shape; C-READ.2.10 — Origin vocabulary; C-READ.2.11 — Schema-version presence; C-READ.2.12 — Parent-reading list; C-READ.2.13 — Operation-key presence; C-READ.2.14 — Low confidence remains valid; C-READ.2.15 — Weak interpretation remains valid; C-READ.2.16 — Empty story remains valid; C-READ.2.17 — Insufficient-context meaning remains valid
 
@@ -1598,7 +1602,7 @@ ALONE
 - Takes in: BUILT — The record’s top-level members. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Requires `id`, `reads`, `meaning`, `confidence`, `role`, `story_layer`, `mode`, `timestamp`, `produced_by`, `schema_version`, `derived_from`, `idempotency_key`. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — This portion of the shape contract passes, or the malformed record is refused. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Accept a reading missing any of the twelve required fields. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Rejects a malformed reading before append. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
@@ -1610,6 +1614,8 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · BUILT | C-READ.2 — _validate_reading | The record’s top-level members. | Requires `id`, `reads`, `meaning`, `confidence`, `role`, `story_layer`, `mode`, `timestamp`, `produced_by`, `schema_version`, `derived_from`, `idempotency_key`. | This portion of the shape contract passes, or the malformed record is refused. | [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 2 · BUILT | C-READ.1.5 — reading.role | Required source-carried speaker attribution. | Requires role in the twelve-field record. | Required source-carried speaker attribution. | [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 3 · BUILT | C-READ.2.1.1 — Required twelve-field shape refusal | The record’s top-level members in a form that violates the stated shape constraint. | Requires `id`, `reads`, `meaning`, `confidence`, `role`, `story_layer`, `mode`, `timestamp`, `produced_by`, `schema_version`, `derived_from`, `idempotency_key`. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: C-READ.2.1.1 — Required twelve-field shape refusal
 
@@ -1621,12 +1627,12 @@ ALONE
 - Takes in: BUILT — The record’s top-level members in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Allow the refused malformed reading to reach append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Stops this append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.1 — Required twelve-field shape: Requires `id`, `reads`, `meaning`, `confidence`, `role`, `story_layer`, `mode`, `timestamp`, `produced_by`, `schema_version`, `derived_from`, `idempotency_key`. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -1644,7 +1650,7 @@ ALONE
 - Takes in: BUILT — `reads`. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Requires a non-empty list of root IDs. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — This portion of the shape contract passes, or the malformed record is refused. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Accept an empty reads list. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Rejects a malformed reading before append. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
@@ -1656,6 +1662,8 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · BUILT | C-READ.2 — _validate_reading | `reads`. | Requires a non-empty list of root IDs. | This portion of the shape contract passes, or the malformed record is refused. | [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 2 · BUILT | C-READ.1.2 — reading.reads | Required, non-empty list of root IDs. | Requires a non-empty reads list; the writer also verifies every root reference. | Required, non-empty list of root IDs. | [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 3 · BUILT | C-READ.2.2.1 — Non-empty reads list refusal | `reads` in a form that violates the stated shape constraint. | Requires a non-empty list of root IDs. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: C-READ.2.2.1 — Non-empty reads list refusal
 
@@ -1667,12 +1675,12 @@ ALONE
 - Takes in: BUILT — `reads` in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Allow the refused malformed reading to reach append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Stops this append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.2 — Non-empty reads list: Requires a non-empty list of root IDs. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -1690,7 +1698,7 @@ ALONE
 - Takes in: BUILT — `meaning`. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Requires the interpretation string; an honest insufficient-context meaning is valid. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — This portion of the shape contract passes, or the malformed record is refused. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Accept a non-string meaning or reject an honest insufficient-context string solely for uncertainty. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Rejects a malformed reading before append. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
@@ -1702,6 +1710,8 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · BUILT | C-READ.2 — _validate_reading | `meaning`. | Requires the interpretation string; an honest insufficient-context meaning is valid. | This portion of the shape contract passes, or the malformed record is refused. | [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 2 · BUILT | C-READ.1.3 — reading.meaning | Required string. | Requires a meaning string without rejecting honest uncertainty. | Required string. | [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 3 · BUILT | C-READ.2.3.1 — String meaning refusal | `meaning` in a form that violates the stated shape constraint. | Requires the interpretation string; an honest insufficient-context meaning is valid. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: C-READ.2.3.1 — String meaning refusal
 
@@ -1713,12 +1723,12 @@ ALONE
 - Takes in: BUILT — `meaning` in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Allow the refused malformed reading to reach append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Stops this append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.3 — String meaning: Requires the interpretation string; an honest insufficient-context meaning is valid. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -1736,7 +1746,7 @@ ALONE
 - Takes in: BUILT — `confidence`. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Requires an object with both `interpretation_confidence` and `source_reliability`; never accepts a bare blended number. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — This portion of the shape contract passes, or the malformed record is refused. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Accept a bare blended number or a confidence object missing either required slot. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Rejects a malformed reading before append. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
@@ -1748,6 +1758,7 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · BUILT | C-READ.2 — _validate_reading | `confidence`. | Requires an object with both `interpretation_confidence` and `source_reliability`; never accepts a bare blended number. | This portion of the shape contract passes, or the malformed record is refused. | [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 2 · BUILT | C-READ.2.4.1 — Two-slot confidence shape refusal | `confidence` in a form that violates the stated shape constraint. | Requires an object with both `interpretation_confidence` and `source_reliability`; never accepts a bare blended number. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: C-READ.2.4.1 — Two-slot confidence shape refusal
 
@@ -1759,12 +1770,12 @@ ALONE
 - Takes in: BUILT — `confidence` in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Allow the refused malformed reading to reach append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Stops this append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.4 — Two-slot confidence shape: Requires an object with both `interpretation_confidence` and `source_reliability`; never accepts a bare blended number. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -1782,7 +1793,7 @@ ALONE
 - Takes in: BUILT — `confidence.interpretation_confidence`. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Checks presence and non-emptiness without imposing a fixed numeric scale. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — This portion of the shape contract passes, or the malformed record is refused. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Accept missing or empty interpretation_confidence, or impose an unchosen numeric scale. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Rejects a malformed reading before append. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
@@ -1794,6 +1805,8 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · BUILT | C-READ.2 — _validate_reading | `confidence.interpretation_confidence`. | Checks presence and non-emptiness without imposing a fixed numeric scale. | This portion of the shape contract passes, or the malformed record is refused. | [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 2 · BUILT | C-READ.1.4.1 — reading.confidence.interpretation_confidence | Required, filled value; value-form deliberately loose. | Requires presence and non-emptiness of interpretation_confidence. | Required, filled value; value-form deliberately loose. | [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 3 · BUILT | C-READ.2.5.1 — Interpretation-confidence presence refusal | `confidence.interpretation_confidence` in a form that violates the stated shape constraint. | Checks presence and non-emptiness without imposing a fixed numeric scale. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: C-READ.2.5.1 — Interpretation-confidence presence refusal
 
@@ -1805,12 +1818,12 @@ ALONE
 - Takes in: BUILT — `confidence.interpretation_confidence` in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Allow the refused malformed reading to reach append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Stops this append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.5 — Interpretation-confidence presence: Checks presence and non-emptiness without imposing a fixed numeric scale. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -1828,7 +1841,7 @@ ALONE
 - Takes in: BUILT — `confidence.source_reliability`. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Requires the key; does not resolve the unverified not-yet-knowable value form. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — This portion of the shape contract passes, or the malformed record is refused. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Accept omission of source_reliability or invent its unverified not-yet-knowable representation. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Rejects a malformed reading before append. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
@@ -1840,6 +1853,8 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · BUILT | C-READ.2 — _validate_reading | `confidence.source_reliability`. | Requires the key; does not resolve the unverified not-yet-knowable value form. | This portion of the shape contract passes, or the malformed record is refused. | [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 2 · BUILT | C-READ.1.4.2 — reading.confidence.source_reliability | Required key from the first reading. | Requires key presence; it supplies no unverified sentinel. | Required key from the first reading. | [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 3 · BUILT | C-READ.2.6.1 — Source-reliability key presence refusal | `confidence.source_reliability` in a form that violates the stated shape constraint. | Requires the key; does not resolve the unverified not-yet-knowable value form. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: C-READ.2.6.1 — Source-reliability key presence refusal
 
@@ -1851,12 +1866,12 @@ ALONE
 - Takes in: BUILT — `confidence.source_reliability` in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Allow the refused malformed reading to reach append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Stops this append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.6 — Source-reliability key presence: Requires the key; does not resolve the unverified not-yet-knowable value form. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -1874,7 +1889,7 @@ ALONE
 - Takes in: BUILT — `story_layer`. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Requires a list and permits the empty list. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — This portion of the shape contract passes, or the malformed record is refused. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Accept non-list story_layer or reject the valid empty list. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Rejects a malformed reading before append. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
@@ -1886,6 +1901,8 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · BUILT | C-READ.2 — _validate_reading | `story_layer`. | Requires a list and permits the empty list. | This portion of the shape contract passes, or the malformed record is refused. | [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 2 · BUILT | C-READ.1.6 — reading.story_layer | Required list of embedded tellings; `[]` is valid. | Requires a story list and permits an empty list. | Required list of embedded tellings; `[]` is valid. | [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 3 · BUILT | C-READ.2.7.1 — Story list shape refusal | `story_layer` in a form that violates the stated shape constraint. | Requires a list and permits the empty list. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: C-READ.2.7.1 — Story list shape refusal
 
@@ -1897,12 +1914,12 @@ ALONE
 - Takes in: BUILT — `story_layer` in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Allow the refused malformed reading to reach append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Stops this append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.7 — Story list shape: Requires a list and permits the empty list. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -1920,7 +1937,7 @@ ALONE
 - Takes in: BUILT — Optional members in a story entry. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Keeps unknown optional members omitted instead of filled with `"unknown"`. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — This portion of the shape contract passes, or the malformed record is refused. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Fill an unknown optional story member with "unknown" instead of omitting it. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Rejects a malformed reading before append. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
@@ -1932,6 +1949,13 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · BUILT | C-READ.2 — _validate_reading | Optional members in a story entry. | Keeps unknown optional members omitted instead of filled with `"unknown"`. | This portion of the shape contract passes, or the malformed record is refused. | [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 2 · BUILT | C-READ.1.6.1 — reading.story_layer[].whose | Optional member; omitted when unknown. | Unknown optional story members remain omitted. | Optional member; omitted when unknown. | [V10 §6B / READING record schema] |
+| 3 · BUILT | C-READ.1.6.2 — reading.story_layer[].stance | Optional member; omitted when unknown. | Unknown optional story members remain omitted. | Optional member; omitted when unknown. | [V10 §6B / READING record schema] |
+| 4 · BUILT | C-READ.1.6.3 — reading.story_layer[].firmness | Optional member; omitted when unknown. | Unknown optional story members remain omitted. | Optional member; omitted when unknown. | [V10 §6B / READING record schema] |
+| 5 · BUILT | C-READ.1.6.4 — reading.story_layer[].telling | Optional member; omitted when unknown. | Unknown optional story members remain omitted. | Optional member; omitted when unknown. | [V10 §6B / READING record schema] |
+| 6 · BUILT | C-READ.1.6.5 — reading.story_layer[].theme | Optional member; omitted when unknown. | Unknown optional story members remain omitted. | Optional member; omitted when unknown. | [V10 §6B / READING record schema] |
+| 7 · BUILT | C-READ.1.6.6 — reading.story_layer[].when | Optional member; omitted when unknown. | Unknown optional story members remain omitted. | Optional member; omitted when unknown. | [V10 §6B / READING record schema] |
+| 8 · BUILT | C-READ.2.8.1 — Story omission rule refusal | Optional members in a story entry in a form that violates the stated shape constraint. | Keeps unknown optional members omitted instead of filled with `"unknown"`. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: C-READ.2.8.1 — Story omission rule refusal
 
@@ -1943,12 +1967,12 @@ ALONE
 - Takes in: BUILT — Optional members in a story entry in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Allow the refused malformed reading to reach append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Stops this append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.8 — Story omission rule: Keeps unknown optional members omitted instead of filled with `"unknown"`. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -1966,7 +1990,7 @@ ALONE
 - Takes in: BUILT — `mode`. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Carries `label` as an open word and `classification_confidence` as its local confidence. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — This portion of the shape contract passes, or the malformed record is refused. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Replace the open mode label with a fixed menu or confuse its local confidence with reading confidence. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Rejects a malformed reading before append. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
@@ -1978,6 +2002,8 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · BUILT | C-READ.2 — _validate_reading | `mode`. | Carries `label` as an open word and `classification_confidence` as its local confidence. | This portion of the shape contract passes, or the malformed record is refused. | [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 2 · BUILT | C-READ.1.7 — reading.mode binding | Required object `{label, classification_confidence}`. | Requires the mode object with its local classification confidence. | Required object `{label, classification_confidence}`. | [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 3 · BUILT | C-READ.2.9.1 — Mode object shape refusal | `mode` in a form that violates the stated shape constraint. | Carries `label` as an open word and `classification_confidence` as its local confidence. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: C-READ.2.9.1 — Mode object shape refusal
 
@@ -1989,12 +2015,12 @@ ALONE
 - Takes in: BUILT — `mode` in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Allow the refused malformed reading to reach append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Stops this append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.9 — Mode object shape: Carries `label` as an open word and `classification_confidence` as its local confidence. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -2012,7 +2038,7 @@ ALONE
 - Takes in: BUILT — `produced_by.origin`. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Requires one of `observed`, `imported`, `simulated`, `generated`, `reaction`, `human_annotation`. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — This portion of the shape contract passes, or the malformed record is refused. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Accept an origin outside observed, imported, simulated, generated, reaction, human_annotation. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Rejects a malformed reading before append. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
@@ -2024,6 +2050,9 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · BUILT | C-READ.2 — _validate_reading | `produced_by.origin`. | Requires one of `observed`, `imported`, `simulated`, `generated`, `reaction`, `human_annotation`. | This portion of the shape contract passes, or the malformed record is refused. | [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 2 · BUILT | C-READ.1.9 — reading.produced_by | Required reproducibility-grade producer provenance. | Requires origin from the six-member provenance vocabulary. | Required reproducibility-grade producer provenance. | [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 3 · BUILT | C-READ.1.9.1 — reading.produced_by.origin | Required member; one of `observed`, `imported`, `simulated`, `generated`, `reaction`, `human_annotation`. | Requires an allowed origin value; vocabulary membership does not grant authorization. | Required member; one of `observed`, `imported`, `simulated`, `generated`, `reaction`, `human_annotation`. | [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 4 · BUILT | C-READ.2.10.1 — Origin vocabulary refusal | `produced_by.origin` in a form that violates the stated shape constraint. | Requires one of `observed`, `imported`, `simulated`, `generated`, `reaction`, `human_annotation`. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: C-READ.2.10.1 — Origin vocabulary refusal
 
@@ -2035,12 +2064,12 @@ ALONE
 - Takes in: BUILT — `produced_by.origin` in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Allow the refused malformed reading to reach append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Stops this append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.10 — Origin vocabulary: Requires one of `observed`, `imported`, `simulated`, `generated`, `reaction`, `human_annotation`. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -2058,7 +2087,7 @@ ALONE
 - Takes in: BUILT — `schema_version`. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Requires the contract-version member on every new reading. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — This portion of the shape contract passes, or the malformed record is refused. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Accept a new reading without schema_version. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Rejects a malformed reading before append. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
@@ -2070,6 +2099,8 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · BUILT | C-READ.2 — _validate_reading | `schema_version`. | Requires the contract-version member on every new reading. | This portion of the shape contract passes, or the malformed record is refused. | [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 2 · BUILT | C-READ.1.10 — reading.schema_version | Required on every new reading; first reading schema is `v1`. | Requires schema_version on every new reading. | Required on every new reading; first reading schema is `v1`. | [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 3 · BUILT | C-READ.2.11.1 — Schema-version presence refusal | `schema_version` in a form that violates the stated shape constraint. | Requires the contract-version member on every new reading. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: C-READ.2.11.1 — Schema-version presence refusal
 
@@ -2081,12 +2112,12 @@ ALONE
 - Takes in: BUILT — `schema_version` in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Allow the refused malformed reading to reach append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Stops this append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.11 — Schema-version presence: Requires the contract-version member on every new reading. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -2104,7 +2135,7 @@ ALONE
 - Takes in: BUILT — `derived_from`. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Carries the parent reading IDs as a list and permits `[]` when fresh from roots. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — This portion of the shape contract passes, or the malformed record is refused. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Accept a non-list derived_from or reject its valid empty fresh-from-roots list. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Rejects a malformed reading before append. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
@@ -2116,6 +2147,8 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · BUILT | C-READ.2 — _validate_reading | `derived_from`. | Carries the parent reading IDs as a list and permits `[]` when fresh from roots. | This portion of the shape contract passes, or the malformed record is refused. | [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 2 · BUILT | C-READ.1.11 — reading.derived_from | Required list of parent reading IDs; `[]` when fresh directly from roots. | Requires a parent-reading list and permits an empty list. | Required list of parent reading IDs; `[]` when fresh directly from roots. | [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 3 · BUILT | C-READ.2.12.1 — Parent-reading list refusal | `derived_from` in a form that violates the stated shape constraint. | Carries the parent reading IDs as a list and permits `[]` when fresh from roots. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: C-READ.2.12.1 — Parent-reading list refusal
 
@@ -2127,12 +2160,12 @@ ALONE
 - Takes in: BUILT — `derived_from` in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Allow the refused malformed reading to reach append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Stops this append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.12 — Parent-reading list: Carries the parent reading IDs as a list and permits `[]` when fresh from roots. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -2150,7 +2183,7 @@ ALONE
 - Takes in: BUILT — `idempotency_key`. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Requires the operation identity for the reading. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — This portion of the shape contract passes, or the malformed record is refused. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Accept a reading without its operation idempotency key. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Rejects a malformed reading before append. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
@@ -2162,6 +2195,7 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · BUILT | C-READ.2 — _validate_reading | `idempotency_key`. | Requires the operation identity for the reading. | This portion of the shape contract passes, or the malformed record is refused. | [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS] |
+| 2 · BUILT | C-READ.2.13.1 — Operation-key presence refusal | `idempotency_key` in a form that violates the stated shape constraint. | Requires the operation identity for the reading. | No reading append from that malformed record. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS] |
 
 SUB-PARTS: C-READ.2.13.1 — Operation-key presence refusal
 
@@ -2173,12 +2207,12 @@ ALONE
 - Takes in: BUILT — `idempotency_key` in a form that violates the stated shape constraint. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses the malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append from that malformed record. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Allow the refused malformed reading to reach append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Stops this append. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2.13 — Operation-key presence: Requires the operation identity for the reading. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -2319,7 +2353,7 @@ ALONE
 - Takes in: BUILT — `reads`, `meaning`, `confidence`, `role`, `story_layer`, `mode`, `produced_by`, `schema_version`, `derived_from`, `idempotency_key`, `record_id`, `timestamp`, and a target-path selection. [V10 / THE ONE AUTHORITATIVE STATUS TABLE] [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER]
 - Does: BUILT — Accepts the reading-shaped arguments at the shared write boundary; the path argument determines the destination. [V10 / THE ONE AUTHORITATIVE STATUS TABLE] [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER]
 - Gives out: BUILT — Reading data, record-identity input, creation-time input and destination supplied to the writer. [V10 / THE ONE AUTHORITATIVE STATUS TABLE] [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER]
-- Must never: NOT DECIDED
+- Must never: DESIGNED — Treat the supplied destination path as production authorization. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -2630,12 +2664,12 @@ ALONE
 - Takes in: BUILT — Caller-supplied destination path. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER]
 - Does: BUILT — Selects the quarantine or production reading path; path routing itself supplies no production authorization. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER]
 - Gives out: BUILT — Caller-supplied destination path. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: DESIGNED — Treat quarantine/production path selection as permission to create or write production. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
+- Fails closed by: DESIGNED — Blocks production writing without both production protections; the marker check is designed, not claimed implemented. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-READ.5 — Production readings authorization: Production selection still requires both production protections. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -2653,8 +2687,8 @@ ALONE
 - Takes in: BUILT — Every ID in `reads`. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 / THE ONE AUTHORITATIVE STATUS TABLE] [V10 §6B / READING record schema]
 - Does: BUILT — Verifies each ID exists in the sealed roots before commit. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 / THE ONE AUTHORITATIVE STATUS TABLE] [V10 §6B / READING record schema]
 - Gives out: BUILT — The references are verified or the append is refused. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 / THE ONE AUTHORITATIVE STATUS TABLE] [V10 §6B / READING record schema]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: BUILT — Commit a reading whose referenced roots have not all been verified to exist. [V10 §6B / READING record schema] [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER]
+- Fails closed by: BUILT — Refuses commit when any referenced root is missing; no root is altered. [V10 §6B / READING record schema] [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER]
 
 TOGETHER
 - Fed by: BUILT — C-READ.3.2.1 — Missing-root refusal: Refuses commit until every referenced root exists. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
@@ -2665,6 +2699,7 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · BUILT | C-READ.3 — append_reading | Every ID in `reads`. | Verifies each ID exists in the sealed roots before commit. | The references are verified or the append is refused. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 / THE ONE AUTHORITATIVE STATUS TABLE] [V10 §6B / READING record schema] |
+| 2 · BUILT | C-READ.3.6 — Shared write boundary | Any reading write request. | Every referenced root must be verified to exist before commit. | One designated reading write boundary. | [V10 §6B / READING record schema] [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] |
 
 SUB-PARTS: C-READ.3.2.1 — Missing-root refusal
 
@@ -2676,7 +2711,7 @@ ALONE
 - Takes in: BUILT — A `reads` ID with no corresponding sealed root. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Refuses commit until every referenced root exists. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No reading append with that missing reference. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Commit a reading whose referenced roots have not all been verified to exist. [V10 §6B / READING record schema] [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER]
 - Fails closed by: BUILT — Stops the append; the roots remain unchanged. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
@@ -2699,8 +2734,8 @@ ALONE
 - Takes in: BUILT — `idempotency_key` and existing committed keys in the target store. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 / THE ONE AUTHORITATIVE STATUS TABLE] [V10 §6B / READING record schema]
 - Does: BUILT — Rejects an already-committed key; the operation key is separate from record ID. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 / THE ONE AUTHORITATIVE STATUS TABLE] [V10 §6B / READING record schema]
 - Gives out: BUILT — No second append for the committed key. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 / THE ONE AUTHORITATIVE STATUS TABLE] [V10 §6B / READING record schema]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: BUILT — Append a second reading for an operation key already committed in the target store. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
+- Fails closed by: BUILT — Rejects the already-committed key and stops the duplicate append. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: BUILT — C-READ.3.3.1 — Already-committed-key outcome: Rejects the duplicate operation key. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
@@ -2711,6 +2746,9 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · BUILT | C-READ.3 — append_reading | `idempotency_key` and existing committed keys in the target store. | Rejects an already-committed key; the operation key is separate from record ID. | No second append for the committed key. | [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 / THE ONE AUTHORITATIVE STATUS TABLE] [V10 §6B / READING record schema] |
+| 2 · BUILT | C-READ.3.6 — Shared write boundary | Any reading write request. | An already-committed target-store operation key is rejected before append. | One designated reading write boundary. | [V10 §6B / READING record schema] [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] |
+| 3 · DESIGNED | C-READ.3.7 — New-root worker reading-write handoff | The new-root operation’s `enqueue_key`, the current `pass_id`, accepted reading data or a separate honest fallback reading, and retrieval audit content. | A committed operation key is recovered instead of writing a duplicate. | A newly written or recovered `reading_id` for the following worker checkpoint. | [V10 §7G-A / Step 5 — Write the reading record] |
+| 4 · DESIGNED | C-READ.3.7.5 — New-reading commit | No reading with the computed key; assembled twelve-field record. | An existing operation key takes the existing-reading recovery branch. | A newly committed quarantine reading. | [V10 §7G-A / Step 5 — Write the reading record] |
 
 SUB-PARTS: C-READ.3.3.1 — Already-committed-key outcome
 
@@ -2722,7 +2760,7 @@ ALONE
 - Takes in: BUILT — A key already committed in the target store. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Does: BUILT — Rejects the duplicate operation key. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — No duplicate reading appended. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
-- Must never: NOT DECIDED
+- Must never: BUILT — Append a second reading for an operation key already committed in the target store. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: BUILT — Stops this duplicate append. [V10 §6B / READING record schema] [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
@@ -2745,7 +2783,7 @@ ALONE
 - Takes in: BUILT — A shape-valid reading whose root references and key have passed. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 / THE ONE AUTHORITATIVE STATUS TABLE] [V10 §6B / READING record schema] [V10 / THE READING RECORD IS BUILT — VALIDATOR + WRITER LIVE ON DISK]
 - Does: BUILT — Appends atomically, with flush and fsync, preserving append-only records. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 / THE ONE AUTHORITATIVE STATUS TABLE] [V10 §6B / READING record schema] [V10 / THE READING RECORD IS BUILT — VALIDATOR + WRITER LIVE ON DISK]
 - Gives out: BUILT — A committed reading. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 / THE ONE AUTHORITATIVE STATUS TABLE] [V10 §6B / READING record schema] [V10 / THE READING RECORD IS BUILT — VALIDATOR + WRITER LIVE ON DISK]
-- Must never: NOT DECIDED
+- Must never: BUILT — Overwrite or modify an earlier stored reading during the append. [V10 §6B / READING record schema] [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -2769,7 +2807,7 @@ ALONE
 - Takes in: BUILT — The reading append. [V10 / THE READING RECORD IS BUILT — VALIDATOR + WRITER LIVE ON DISK]
 - Does: BUILT — Flushes the append as part of the atomic reading write. [V10 / THE READING RECORD IS BUILT — VALIDATOR + WRITER LIVE ON DISK]
 - Gives out: BUILT — The append has been flushed. [V10 / THE READING RECORD IS BUILT — VALIDATOR + WRITER LIVE ON DISK]
-- Must never: NOT DECIDED
+- Must never: BUILT — Overwrite or modify an earlier stored reading during the append. [V10 §6B / READING record schema] [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -2792,7 +2830,7 @@ ALONE
 - Takes in: BUILT — The reading append. [V10 / THE READING RECORD IS BUILT — VALIDATOR + WRITER LIVE ON DISK]
 - Does: BUILT — Uses fsync as part of the atomic reading write. [V10 / THE READING RECORD IS BUILT — VALIDATOR + WRITER LIVE ON DISK]
 - Gives out: BUILT — The append has passed the writer’s fsync operation. [V10 / THE READING RECORD IS BUILT — VALIDATOR + WRITER LIVE ON DISK]
-- Must never: NOT DECIDED
+- Must never: BUILT — Overwrite or modify an earlier stored reading during the append. [V10 §6B / READING record schema] [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -2815,12 +2853,12 @@ ALONE
 - Takes in: BUILT — The supplied target path. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 / THE ONE AUTHORITATIVE STATUS TABLE] [V10 §6B / READING record schema]
 - Does: BUILT — Routes the append to the chosen readings destination; the built A/B output target is quarantine. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 / THE ONE AUTHORITATIVE STATUS TABLE] [V10 §6B / READING record schema]
 - Gives out: BUILT — A reading in the designated readings file, never mixed into roots. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 / THE ONE AUTHORITATIVE STATUS TABLE] [V10 §6B / READING record schema]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: DESIGNED — Treat routing to a production path as authorization to write production or create its store. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
+- Fails closed by: DESIGNED — Blocks production writing without both protections; the production marker check remains a designed requirement. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-READ.5 — Production readings authorization: Production writes require both protections; built A/B output remains quarantine. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -2839,11 +2877,13 @@ ALONE
 - Does: DESIGNED — Uses `append_reading()` and the validated functions in `nh_accretive_store.py`; direct opens for append or overwrite are prohibited. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [CR §1C — ACCRETIVE STORE PROHIBITIONS]
 - Gives out: DESIGNED — One designated reading write boundary. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [CR §1C — ACCRETIVE STORE PROHIBITIONS]
 - Must never: DESIGNED — Use a parallel write-validation implementation or direct file writes. [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [CR §1C — ACCRETIVE STORE PROHIBITIONS]
-- Fails closed by: NOT DECIDED
+- Fails closed by: BUILT — Rejects malformed readings, nonexistent referenced roots and already-committed target-store operation keys before append; direct file writes cannot bypass the shared boundary. [V10 §6B / READING record schema] [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER] [V10 / THE ONE AUTHORITATIVE STATUS TABLE]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: BUILT — C-READ.2 — _validate_reading: The shared write boundary must run the reading shape validator before append. [V10 §6B / READING record schema] [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER]
+- Gated by: BUILT — C-READ.3.2 — Referenced-root verification: Every referenced root must be verified to exist before commit. [V10 §6B / READING record schema] [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER]
+- Gated by: BUILT — C-READ.3.3 — Committed-key rejection: An already-committed target-store operation key is rejected before append. [V10 §6B / READING record schema] [V10 §6A / SOVEREIGNTY BOUNDARIES BY LAYER]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -2862,7 +2902,7 @@ ALONE
 - Does: DESIGNED — Computes `reading_idempotency_key = stable_hash(enqueue_key + "reading_v1")`; checks for an existing committed reading; otherwise assembles the twelve-field record, validates it and writes quarantine. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record]
 - Gives out: DESIGNED — A newly written or recovered `reading_id` for the following worker checkpoint. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record]
 - Must never: DESIGNED — Derive the key from random `job_id`; add `reading_idempotency_key` as a thirteenth reading field; write production here. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Closes the pass with event_type="failed", failure_stage="write", is_technical_and_potentially_retryable=true; leaves the queue job in_progress, releases the OS lock cleanly and stops. [V10 §7G-A / Step 5 — Write the reading record]
 
 TOGETHER
 - Fed by: DESIGNED — C-READ.3.7.1 — Stable new-root reading key: Computes `stable_hash(enqueue_key + "reading_v1")`; sets the existing reading-record `idempotency_key` to this result. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
@@ -2872,7 +2912,8 @@ TOGETHER
 - Fed by: DESIGNED — C-READ.3.7.5 — New-reading commit: Validates and calls `append_reading()` with the quarantine destination `.nh_readings_quarantine.jsonl`. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
 - Fed by: DESIGNED — C-READ.3.7.6 — reading_written checkpoint: Appends `job_stage_event` with `stage="reading_written"` and `reading_id` to `.nh_reading_queue.jsonl`; the job remains `in_progress`. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
 - Fed by: DESIGNED — C-READ.3.7.7 — Worker write failure: Closes the pass with `event_type="failed"`, `failure_stage="write"`, `is_technical_and_potentially_retryable=true`; the queue job stays `in_progress`; releases the OS lock cleanly and stops. [V10 §7G-A / Step 5 — Write the reading record]
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-READ.2 — _validate_reading: The assembled twelve-field record must pass validation before append. [V10 §7G-A / Step 5 — Write the reading record]
+- Gated by: DESIGNED — C-READ.3.3 — Committed-key rejection: A committed operation key is recovered instead of writing a duplicate. [V10 §7G-A / Step 5 — Write the reading record]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -2890,7 +2931,7 @@ ALONE
 - Takes in: DESIGNED — `enqueue_key`. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
 - Does: DESIGNED — Computes `stable_hash(enqueue_key + "reading_v1")`; sets the existing reading-record `idempotency_key` to this result. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
 - Gives out: DESIGNED — A stable key across attempts and accidental duplicate jobs. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
-- Must never: NOT DECIDED
+- Must never: DESIGNED — Derive the stable reading key from random job_id, or add a thirteenth reading field for reading_idempotency_key. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -2913,7 +2954,7 @@ ALONE
 - Takes in: DESIGNED — The current pass attempt. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
 - Does: DESIGNED — Sets `produced_by.config.pass_id` to this attempt’s `pass_id`. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
 - Gives out: DESIGNED — Attempt provenance separate from operation identity. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
-- Must never: NOT DECIDED
+- Must never: DESIGNED — Replace the job-level idempotency key with pass_id; pass_id remains attempt-specific. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -2936,7 +2977,7 @@ ALONE
 - Takes in: DESIGNED — The §7F retrieval audit. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
 - Does: DESIGNED — Sets `produced_by.retrieval_inputs` to the mode, parameters, system/model/index version, exact roots, scores/positions, exclusions/truncation and execution timestamp. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
 - Gives out: DESIGNED — The actual retrieval provenance used for this reading. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
-- Must never: NOT DECIDED
+- Must never: DESIGNED — Omit the mode, parameters, system/model/index version, exact roots, scores/positions, exclusions/truncation or execution timestamp from the retrieval audit. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -2959,8 +3000,8 @@ ALONE
 - Takes in: DESIGNED — A committed reading matching the computed key. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
 - Does: DESIGNED — Recovers its `reading_id`, does not rewrite the reading, restores missing queue checkpoints with that ID, and continues at the next correct stage; `recovery_of_pass_id` is unchanged. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
 - Gives out: DESIGNED — The existing reading identity and repaired missing checkpoints. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: DESIGNED — Rewrite an already committed reading, change recovery_of_pass_id, or create a duplicate reading while restoring its checkpoint. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
+- Fails closed by: DESIGNED — When the operation key already has a committed reading, recovers its reading_id, restores only missing queue checkpoints and continues at the next correct stage; it never rewrites or duplicates the reading. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -2982,12 +3023,13 @@ ALONE
 - Takes in: DESIGNED — No reading with the computed key; assembled twelve-field record. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
 - Does: DESIGNED — Validates and calls `append_reading()` with the quarantine destination `.nh_readings_quarantine.jsonl`. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
 - Gives out: DESIGNED — A newly committed quarantine reading. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: DESIGNED — Bypass validation or write the production destination from this new-root worker handoff. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
+- Fails closed by: DESIGNED — Closes the pass with event_type="failed", failure_stage="write", is_technical_and_potentially_retryable=true; leaves the queue job in_progress, releases the OS lock cleanly and stops. [V10 §7G-A / Step 5 — Write the reading record]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-READ.2 — _validate_reading: Validation must pass before the new quarantine reading is appended. [V10 §7G-A / Step 5 — Write the reading record]
+- Gated by: DESIGNED — C-READ.3.3 — Committed-key rejection: An existing operation key takes the existing-reading recovery branch. [V10 §7G-A / Step 5 — Write the reading record]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -3005,7 +3047,7 @@ ALONE
 - Takes in: DESIGNED — A new or recovered `reading_id`. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
 - Does: DESIGNED — Appends `job_stage_event` with `stage="reading_written"` and `reading_id` to `.nh_reading_queue.jsonl`; the job remains `in_progress`. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
 - Gives out: DESIGNED — The durable reading-written checkpoint. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
-- Must never: NOT DECIDED
+- Must never: DESIGNED — Mark the queue job completed merely because reading_written was checkpointed; the job remains in_progress. [V10 §7G-A / JOB-LEVEL READING IDEMPOTENCY] [V10 §7G-A / Step 5 — Write the reading record] [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -3029,7 +3071,7 @@ ALONE
 - Takes in: DESIGNED — `stage="reading_written"`. [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
 - Does: DESIGNED — Identifies the reading-written stage in the worker’s checkpoint. [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
 - Gives out: DESIGNED — `stage="reading_written"`. [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
-- Must never: NOT DECIDED
+- Must never: DESIGNED — Use reading_written as a terminal completed job status. [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -3052,7 +3094,7 @@ ALONE
 - Takes in: DESIGNED — The new or recovered `reading_id`. [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
 - Does: DESIGNED — Points the checkpoint to the committed reading without writing another reading. [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
 - Gives out: DESIGNED — The new or recovered `reading_id`. [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
-- Must never: NOT DECIDED
+- Must never: DESIGNED — Write another reading to obtain the checkpoint’s reading_id; use the committed reading identity. [V10 §7G-A / Step 5A — Checkpoint: `reading_written`]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -3075,7 +3117,7 @@ ALONE
 - Takes in: DESIGNED — A failure writing the reading. [V10 §7G-A / Step 5 — Write the reading record]
 - Does: DESIGNED — Closes the pass with `event_type="failed"`, `failure_stage="write"`, `is_technical_and_potentially_retryable=true`; the queue job stays `in_progress`; releases the OS lock cleanly and stops. [V10 §7G-A / Step 5 — Write the reading record]
 - Gives out: DESIGNED — A failed pass and retained in-progress job, not a completed reading pass. [V10 §7G-A / Step 5 — Write the reading record]
-- Must never: NOT DECIDED
+- Must never: DESIGNED — Report a completed pass or terminal substantive queue failure for this technical write failure. [V10 §7G-A / Step 5 — Write the reading record]
 - Fails closed by: DESIGNED — Stops this pass after recording the technical write failure. [V10 §7G-A / Step 5 — Write the reading record]
 
 TOGETHER
@@ -3101,8 +3143,8 @@ ALONE
 - Takes in: DESIGNED — `"failed"`. [V10 §7G-A / Step 5 — Write the reading record]
 - Does: DESIGNED — Carries this exact write-failure outcome value. [V10 §7G-A / Step 5 — Write the reading record]
 - Gives out: DESIGNED — `"failed"`. [V10 §7G-A / Step 5 — Write the reading record]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: DESIGNED — Record event_type="completed" for a failed write. [V10 §7G-A / Step 5 — Write the reading record]
+- Fails closed by: DESIGNED — Records event_type="failed" when the write fails; the pass stops. [V10 §7G-A / Step 5 — Write the reading record]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3124,8 +3166,8 @@ ALONE
 - Takes in: DESIGNED — `"write"`. [V10 §7G-A / Step 5 — Write the reading record]
 - Does: DESIGNED — Carries this exact write-failure outcome value. [V10 §7G-A / Step 5 — Write the reading record]
 - Gives out: DESIGNED — `"write"`. [V10 §7G-A / Step 5 — Write the reading record]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: DESIGNED — Mislabel a write failure as a different stage. [V10 §7G-A / Step 5 — Write the reading record]
+- Fails closed by: DESIGNED — Records failure_stage="write" for the write failure; the pass stops. [V10 §7G-A / Step 5 — Write the reading record]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3147,8 +3189,8 @@ ALONE
 - Takes in: DESIGNED — `true`. [V10 §7G-A / Step 5 — Write the reading record]
 - Does: DESIGNED — Carries this exact write-failure outcome value. [V10 §7G-A / Step 5 — Write the reading record]
 - Gives out: DESIGNED — `true`. [V10 §7G-A / Step 5 — Write the reading record]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: DESIGNED — Mark this technical write failure as a terminal substantive rejection. [V10 §7G-A / Step 5 — Write the reading record]
+- Fails closed by: DESIGNED — Records is_technical_and_potentially_retryable=true for this technical write failure. [V10 §7G-A / Step 5 — Write the reading record]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3170,8 +3212,8 @@ ALONE
 - Takes in: DESIGNED — `"in_progress"`. [V10 §7G-A / Step 5 — Write the reading record]
 - Does: DESIGNED — Carries this exact write-failure outcome value. [V10 §7G-A / Step 5 — Write the reading record]
 - Gives out: DESIGNED — `"in_progress"`. [V10 §7G-A / Step 5 — Write the reading record]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: DESIGNED — Mark the job completed or terminally failed merely because the write failed technically. [V10 §7G-A / Step 5 — Write the reading record]
+- Fails closed by: DESIGNED — Keeps the queue job in_progress after the failed pass; releases the OS lock cleanly and stops. [V10 §7G-A / Step 5 — Write the reading record]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3218,11 +3260,11 @@ ALONE
 - Does: DESIGNED — Keeps `.nh_readings_store.jsonl` absent until production authorization; quarantine output does not establish production readiness. [V10 §5] [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Gives out: DESIGNED — Test output remains separate. [V10 §5] [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Must never: DESIGNED — Create production as an engine-test side effect. [V10 §5] [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Keeps production unavailable without both protections; quarantine output cannot authorize production. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — C-READ.5 — Production readings authorization: Creation or writing of production requires both production protections. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -3255,6 +3297,9 @@ USED BY (one row per place; the same part may appear in several paths)
 |---|---|---|---|---|---|
 | 1 · DESIGNED | C-READ — Reading record, validator, writer (§6B) | A production-directed write. | Checks the two required protections. | No production write outside the authorized scope. | [V10 §6A / PRODUCTION READINGS AUTHORIZATION] |
 | 2 · DESIGNED | C-READ.3 — append_reading | A production-directed append. | Requires both protections before production use. | Production remains blocked when a protection is absent. | [V10 §6A / PRODUCTION READINGS AUTHORIZATION] |
+| 3 · DESIGNED | C-READ.3.1.13 — append_reading target-path selection | Caller-supplied destination path. | Production selection still requires both production protections. | Caller-supplied destination path. | [V10 §6A / PRODUCTION READINGS AUTHORIZATION] |
+| 4 · DESIGNED | C-READ.3.5 — Destination routing | The supplied target path. | Production writes require both protections; built A/B output remains quarantine. | A reading in the designated readings file, never mixed into roots. | [V10 §6A / PRODUCTION READINGS AUTHORIZATION] |
+| 5 · DESIGNED | C-READ.4.1 — Production remains absent | The roots/quarantine/production file separation. | Creation or writing of production requires both production protections. | Test output remains separate. | [V10 §6A / PRODUCTION READINGS AUTHORIZATION] |
 
 SUB-PARTS: C-READ.5.1 — Physical production marker; C-READ.5.2 — Specific production-write approval
 
@@ -3290,7 +3335,7 @@ ALONE
 - Does: DESIGNED — Requires approval covering the production store, exact writer, source of readings, schema version, promotion-review evidence, duplicate/idempotency handling, rollback handling, and completed quarantine tests/manual inspection. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Gives out: DESIGNED — Approval specific to the write path and session, distinct from marker existence. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Must never: DESIGNED — Treat the marker as approval for a particular write session. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Blocks the production write when the required specific approval is absent or does not cover that write. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 
 TOGETHER
 - Fed by: DESIGNED — C-READ.5.2.1 — Approval scope — production store: carries this member as part of the containing record. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
@@ -3320,7 +3365,7 @@ ALONE
 - Does: DESIGNED — The approval identifies production store. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Gives out: DESIGNED — Required approval scope item. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Must never: DESIGNED — Omit the required member. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — A production approval missing this required scope item does not satisfy the specific-write authorization; production remains blocked. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3343,7 +3388,7 @@ ALONE
 - Does: DESIGNED — The approval identifies exact writer function. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Gives out: DESIGNED — Required approval scope item. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Must never: DESIGNED — Omit the required member. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — A production approval missing this required scope item does not satisfy the specific-write authorization; production remains blocked. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3366,7 +3411,7 @@ ALONE
 - Does: DESIGNED — The approval identifies source of the readings. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Gives out: DESIGNED — Required approval scope item. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Must never: DESIGNED — Omit the required member. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — A production approval missing this required scope item does not satisfy the specific-write authorization; production remains blocked. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3389,7 +3434,7 @@ ALONE
 - Does: DESIGNED — The approval identifies schema version. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Gives out: DESIGNED — Required approval scope item. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Must never: DESIGNED — Omit the required member. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — A production approval missing this required scope item does not satisfy the specific-write authorization; production remains blocked. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3412,7 +3457,7 @@ ALONE
 - Does: DESIGNED — The approval identifies promotion-review evidence. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Gives out: DESIGNED — Required approval scope item. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Must never: DESIGNED — Omit the required member. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — A production approval missing this required scope item does not satisfy the specific-write authorization; production remains blocked. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3435,7 +3480,7 @@ ALONE
 - Does: DESIGNED — The approval identifies duplicate and idempotency handling. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Gives out: DESIGNED — Required approval scope item. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Must never: DESIGNED — Omit the required member. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — A production approval missing this required scope item does not satisfy the specific-write authorization; production remains blocked. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3458,7 +3503,7 @@ ALONE
 - Does: DESIGNED — The approval identifies rollback handling. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Gives out: DESIGNED — Required approval scope item. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Must never: DESIGNED — Omit the required member. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — A production approval missing this required scope item does not satisfy the specific-write authorization; production remains blocked. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3481,7 +3526,7 @@ ALONE
 - Does: DESIGNED — The approval identifies quarantine tests and manual inspection complete. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Gives out: DESIGNED — Required approval scope item. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Must never: DESIGNED — Omit the required member. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — A production approval missing this required scope item does not satisfy the specific-write authorization; production remains blocked. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3503,8 +3548,8 @@ ALONE
 - Takes in: DESIGNED — A production marker that is removed. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Does: DESIGNED — Disables future production writes and preserves readings already stored. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 - Gives out: DESIGNED — Future production writes disabled; existing readings unchanged. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: DESIGNED — Alter or invalidate already stored readings merely because the production marker is removed. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
+- Fails closed by: DESIGNED — Disables future production writes when the marker is removed, preserving existing readings. [V10 §6A / PRODUCTION READINGS AUTHORIZATION]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3528,7 +3573,7 @@ ALONE
 - Gives out: DESIGNED — Permanent connected operational records subject to privacy and identity authorization. [MAP C-READ] [V10 §0B]
 - Must never: DESIGNED — Leave an operation silent, add evidence weight merely because it was logged, erase records, or start an automatic log-about-log chain. [MAP C-READ] [V10 §0B]
 - Must never: DESIGNED — Expose raw Level 1 content or its physical location/access path; bypass identity/security authorization, TSC blockers or explicit compartment rules because a record exists. [V10 §0B / ACCESS AND AUTHORIZATION BOUNDARY]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Records validation failures with their reasons and idempotency rejections as failed/refused operations; they are not silent or successful reading writes. [V10 §0B] [V10 §6B / READING record schema]
 
 TOGETHER
 - Fed by: DESIGNED — C-READ.6.1 — Validation pass record: Records the validation pass and its reason. [MAP C-READ] [V10 §0B]
@@ -3555,7 +3600,7 @@ ALONE
 - Takes in: DESIGNED — A successful reading validation. [MAP C-READ] [V10 §0B]
 - Does: DESIGNED — Records the validation pass and its reason. [MAP C-READ] [V10 §0B]
 - Gives out: DESIGNED — One permanent connected record of this real operation. [MAP C-READ] [V10 §0B]
-- Must never: NOT DECIDED
+- Must never: DESIGNED — Leave this real operation unrecorded, erase or rewrite its record, count the log as independent evidence, or recursively log the act of logging. [V10 §0B]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -3578,8 +3623,8 @@ ALONE
 - Takes in: DESIGNED — A refused reading validation. [MAP C-READ] [V10 §0B]
 - Does: DESIGNED — Records the validation failure and its reason. [MAP C-READ] [V10 §0B]
 - Gives out: DESIGNED — One permanent connected record of this real operation. [MAP C-READ] [V10 §0B]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: DESIGNED — Leave this real operation unrecorded, erase or rewrite its record, count the log as independent evidence, or recursively log the act of logging. [V10 §0B]
+- Fails closed by: DESIGNED — Preserves the validation failure and reason as one permanent operation record; malformed input is refused before append. [V10 §0B] [V10 §6B / READING record schema]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3601,7 +3646,7 @@ ALONE
 - Takes in: DESIGNED — A committed quarantine reading write. [MAP C-READ] [V10 §0B]
 - Does: DESIGNED — Records the quarantine write. [MAP C-READ] [V10 §0B]
 - Gives out: DESIGNED — One permanent connected record of this real operation. [MAP C-READ] [V10 §0B]
-- Must never: NOT DECIDED
+- Must never: DESIGNED — Leave this real operation unrecorded, erase or rewrite its record, count the log as independent evidence, or recursively log the act of logging. [V10 §0B]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -3624,7 +3669,7 @@ ALONE
 - Takes in: DESIGNED — An authorized production reading write. [MAP C-READ] [V10 §0B]
 - Does: DESIGNED — Records the production write; this design does not assert a built production store. [MAP C-READ] [V10 §0B]
 - Gives out: DESIGNED — One permanent connected record of this real operation. [MAP C-READ] [V10 §0B]
-- Must never: NOT DECIDED
+- Must never: DESIGNED — Leave this real operation unrecorded, erase or rewrite its record, count the log as independent evidence, or recursively log the act of logging. [V10 §0B]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -3647,8 +3692,8 @@ ALONE
 - Takes in: DESIGNED — An already-committed operation key rejected by the writer. [MAP C-READ] [V10 §0B]
 - Does: DESIGNED — Records the idempotency rejection. [MAP C-READ] [V10 §0B]
 - Gives out: DESIGNED — One permanent connected record of this real operation. [MAP C-READ] [V10 §0B]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: DESIGNED — Leave this real operation unrecorded, erase or rewrite its record, count the log as independent evidence, or recursively log the act of logging. [V10 §0B]
+- Fails closed by: DESIGNED — Preserves the already-committed-key rejection as one permanent operation record; the duplicate append is refused. [V10 §0B] [V10 §6B / READING record schema]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3671,7 +3716,7 @@ ALONE
 - Does: DECIDED-2026-09-25 — Early engine runs read mainly raw roots and explicitly human-affirmed material; prior machine-generated readings are excluded by default or clearly LOW-TRUST auxiliary context, never independent support. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
 - Gives out: DECIDED-2026-09-25 — Bootstrap context with source evidence and prior interpretations kept distinguishable. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
 - Must never: DECIDED-2026-09-25 — Automatically turn a machine reading into trusted context for the next reading and let it amplify itself. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DECIDED-2026-09-25 — Excludes prior machine readings by default; any auxiliary inclusion stays clearly LOW-TRUST and supplies no independent support. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
 
 TOGETHER
 - Fed by: DECIDED-2026-09-25 — C-READ.7.1 — Raw-root bootstrap basis: Uses raw roots as a main basis of early engine runs. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
@@ -3695,7 +3740,7 @@ ALONE
 - Takes in: DECIDED-2026-09-25 — Raw source roots. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
 - Does: DECIDED-2026-09-25 — Uses raw roots as a main basis of early engine runs. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
 - Gives out: DECIDED-2026-09-25 — Source-grounded early-reading context. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
-- Must never: NOT DECIDED
+- Must never: DECIDED-2026-09-25 — Replace the raw-root/human-affirmed bootstrap basis with automatically trusted prior machine readings. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -3719,7 +3764,7 @@ ALONE
 - Does: ACCEPTED — Uses human-affirmed reading material as interpretive context only; it cannot directly establish a facts-lane claim. [04/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_CANDIDATE.md §1.2] [NHD-B24]
 - Gives out: ACCEPTED — Human-affirmed reading material that remains an interpretation. [04/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_CANDIDATE.md §1.2] [NHD-B24]
 - Must never: ACCEPTED — Silently turn affirmed-for-context into affirmed-as-true. [04/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_CANDIDATE.md §1.2] [NHD-B24]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Disallows using human-affirmed interpretive context to directly establish a facts-lane claim. [04/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_CANDIDATE.md §1.2] [NHD-B24]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3742,7 +3787,7 @@ ALONE
 - Does: DECIDED-2026-09-25 — Excludes them by default, or clearly marks them LOW-TRUST auxiliary context; neither branch supplies independent support. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
 - Gives out: DECIDED-2026-09-25 — Excluded material or explicitly low-trust auxiliary context. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
 - Must never: DECIDED-2026-09-25 — Count a prior machine reading as independent support for the interpretation that produced it. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DECIDED-2026-09-25 — Excludes them by default, or clearly marks them LOW-TRUST auxiliary context; neither branch supplies independent support. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
 
 TOGETHER
 - Fed by: DECIDED-2026-09-25 — C-READ.7.3.1 — Default exclusion: Excludes it from early-run context by default. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
@@ -3765,8 +3810,8 @@ ALONE
 - Takes in: DECIDED-2026-09-25 — A prior machine-generated reading. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
 - Does: DECIDED-2026-09-25 — Excludes it from early-run context by default. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
 - Gives out: DECIDED-2026-09-25 — No default inclusion. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: DECIDED-2026-09-25 — Admit prior machine readings as automatically trusted bootstrap context. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
+- Fails closed by: DECIDED-2026-09-25 — Excludes the prior machine reading from early-run context by default. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3789,7 +3834,7 @@ ALONE
 - Does: DECIDED-2026-09-25 — Keeps it clearly LOW-TRUST and never independent support. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
 - Gives out: DECIDED-2026-09-25 — Explicitly low-trust auxiliary interpretation. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
 - Must never: DECIDED-2026-09-25 — Treat auxiliary inclusion as evidence of truth. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DECIDED-2026-09-25 — Withholds independent evidential support from auxiliary machine readings; they remain clearly LOW-TRUST. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3812,7 +3857,7 @@ ALONE
 - Does: DECIDED-2026-09-25 — Prevents it from automatically becoming trusted context; the bootstrap rule acts before downstream lineage analysis. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
 - Gives out: DECIDED-2026-09-25 — No automatic input-side corroboration loop. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
 - Must never: DECIDED-2026-09-25 — Make repeated machine output its own independent confirmation. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DECIDED-2026-09-25 — Prevents a machine reading from automatically becoming trusted input for the next reading. [05/NH_DECISION_RECORD_PRE_V10_RECOVERY_BUCKETS_2026-09-25_v0_2_CANDIDATE.md §4 / Group 6] [98/sources/NH_MASTER-14_FINAL__2_.md §11 item 27 / BOOTSTRAP RETRIEVAL RULE]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -4227,80 +4272,46 @@ SUB-PARTS: NONE
 | C-READ.9.3 | Does — exact operational measure or implementation of easier | NOT DECIDED |
 | C-READ.9.4 | Does — exact operational measure or implementation of easier | NOT DECIDED |
 | C-READ | Changes | NOT DECIDED |
-| C-READ.1 | Fails closed by | NOT DECIDED |
-| C-READ.1 | Gated by | NOT DECIDED |
 | C-READ.1 | Changes | NOT DECIDED |
-| C-READ.1.1 | Fails closed by | NOT DECIDED |
 | C-READ.1.1 | Fed by | NOT DECIDED |
-| C-READ.1.1 | Gated by | NOT DECIDED |
 | C-READ.1.1 | Changes | NOT DECIDED |
-| C-READ.1.2 | Fails closed by | NOT DECIDED |
 | C-READ.1.2 | Fed by | NOT DECIDED |
-| C-READ.1.2 | Gated by | NOT DECIDED |
 | C-READ.1.2 | Changes | NOT DECIDED |
-| C-READ.1.3 | Fails closed by | NOT DECIDED |
 | C-READ.1.3 | Fed by | NOT DECIDED |
-| C-READ.1.3 | Gated by | NOT DECIDED |
 | C-READ.1.3 | Changes | NOT DECIDED |
-| C-READ.1.4 | Fails closed by | NOT DECIDED |
 | C-READ.1.4 | Changes | NOT DECIDED |
-| C-READ.1.4.1 | Fails closed by | NOT DECIDED |
 | C-READ.1.4.1 | Fed by | NOT DECIDED |
-| C-READ.1.4.1 | Gated by | NOT DECIDED |
 | C-READ.1.4.1 | Changes | NOT DECIDED |
-| C-READ.1.4.2 | Fails closed by | NOT DECIDED |
 | C-READ.1.4.2 | Fed by | NOT DECIDED |
-| C-READ.1.4.2 | Gated by | NOT DECIDED |
 | C-READ.1.4.2 | Changes | NOT DECIDED |
-| C-READ.1.4.3 | Must never | NOT DECIDED |
 | C-READ.1.4.3 | Fails closed by | NOT DECIDED |
 | C-READ.1.4.3 | Fed by | NOT DECIDED |
 | C-READ.1.4.3 | Gated by | NOT DECIDED |
 | C-READ.1.4.3 | Changes | NOT DECIDED |
-| C-READ.1.4.4 | Must never | NOT DECIDED |
 | C-READ.1.4.4 | Fails closed by | NOT DECIDED |
 | C-READ.1.4.4 | Fed by | NOT DECIDED |
 | C-READ.1.4.4 | Gated by | NOT DECIDED |
 | C-READ.1.4.4 | Changes | NOT DECIDED |
-| C-READ.1.4.5 | Must never | NOT DECIDED |
 | C-READ.1.4.5 | Fails closed by | NOT DECIDED |
 | C-READ.1.4.5 | Fed by | NOT DECIDED |
 | C-READ.1.4.5 | Gated by | NOT DECIDED |
 | C-READ.1.4.5 | Changes | NOT DECIDED |
-| C-READ.1.4.6 | Fails closed by | NOT DECIDED |
 | C-READ.1.4.6 | Fed by | NOT DECIDED |
-| C-READ.1.4.6 | Gated by | NOT DECIDED |
 | C-READ.1.4.6 | Changes | NOT DECIDED |
-| C-READ.1.5 | Fails closed by | NOT DECIDED |
 | C-READ.1.5 | Fed by | NOT DECIDED |
-| C-READ.1.5 | Gated by | NOT DECIDED |
 | C-READ.1.5 | Changes | NOT DECIDED |
-| C-READ.1.6 | Fails closed by | NOT DECIDED |
-| C-READ.1.6 | Gated by | NOT DECIDED |
 | C-READ.1.6 | Changes | NOT DECIDED |
-| C-READ.1.6.1 | Fails closed by | NOT DECIDED |
 | C-READ.1.6.1 | Fed by | NOT DECIDED |
-| C-READ.1.6.1 | Gated by | NOT DECIDED |
 | C-READ.1.6.1 | Changes | NOT DECIDED |
-| C-READ.1.6.2 | Fails closed by | NOT DECIDED |
 | C-READ.1.6.2 | Fed by | NOT DECIDED |
-| C-READ.1.6.2 | Gated by | NOT DECIDED |
 | C-READ.1.6.2 | Changes | NOT DECIDED |
-| C-READ.1.6.3 | Fails closed by | NOT DECIDED |
 | C-READ.1.6.3 | Fed by | NOT DECIDED |
-| C-READ.1.6.3 | Gated by | NOT DECIDED |
 | C-READ.1.6.3 | Changes | NOT DECIDED |
-| C-READ.1.6.4 | Fails closed by | NOT DECIDED |
 | C-READ.1.6.4 | Fed by | NOT DECIDED |
-| C-READ.1.6.4 | Gated by | NOT DECIDED |
 | C-READ.1.6.4 | Changes | NOT DECIDED |
-| C-READ.1.6.5 | Fails closed by | NOT DECIDED |
 | C-READ.1.6.5 | Fed by | NOT DECIDED |
-| C-READ.1.6.5 | Gated by | NOT DECIDED |
 | C-READ.1.6.5 | Changes | NOT DECIDED |
-| C-READ.1.6.6 | Fails closed by | NOT DECIDED |
 | C-READ.1.6.6 | Fed by | NOT DECIDED |
-| C-READ.1.6.6 | Gated by | NOT DECIDED |
 | C-READ.1.6.6 | Changes | NOT DECIDED |
 | C-READ.1.6.7 | Fails closed by | NOT DECIDED |
 | C-READ.1.6.7 | Fed by | NOT DECIDED |
@@ -4310,19 +4321,11 @@ SUB-PARTS: NONE
 | C-READ.1.6.8 | Fed by | NOT DECIDED |
 | C-READ.1.6.8 | Gated by | NOT DECIDED |
 | C-READ.1.6.8 | Changes | NOT DECIDED |
-| C-READ.1.7 | Fails closed by | NOT DECIDED |
 | C-READ.1.7 | Fed by | NOT DECIDED |
-| C-READ.1.7 | Gated by | NOT DECIDED |
 | C-READ.1.7 | Changes | NOT DECIDED |
-| C-READ.1.8 | Fails closed by | NOT DECIDED |
 | C-READ.1.8 | Fed by | NOT DECIDED |
-| C-READ.1.8 | Gated by | NOT DECIDED |
 | C-READ.1.8 | Changes | NOT DECIDED |
-| C-READ.1.9 | Fails closed by | NOT DECIDED |
-| C-READ.1.9 | Gated by | NOT DECIDED |
 | C-READ.1.9 | Changes | NOT DECIDED |
-| C-READ.1.9.1 | Fails closed by | NOT DECIDED |
-| C-READ.1.9.1 | Gated by | NOT DECIDED |
 | C-READ.1.9.1 | Changes | NOT DECIDED |
 | C-READ.1.9.1.1 | Must never | NOT DECIDED |
 | C-READ.1.9.1.1 | Fails closed by | NOT DECIDED |
@@ -4359,7 +4362,6 @@ SUB-PARTS: NONE
 | C-READ.1.9.2 | Fed by | NOT DECIDED |
 | C-READ.1.9.2 | Gated by | NOT DECIDED |
 | C-READ.1.9.2 | Changes | NOT DECIDED |
-| C-READ.1.9.3 | Must never | NOT DECIDED |
 | C-READ.1.9.3 | Fails closed by | NOT DECIDED |
 | C-READ.1.9.3 | Fed by | NOT DECIDED |
 | C-READ.1.9.3 | Gated by | NOT DECIDED |
@@ -4402,7 +4404,6 @@ SUB-PARTS: NONE
 | C-READ.1.9.11 | Fed by | NOT DECIDED |
 | C-READ.1.9.11 | Gated by | NOT DECIDED |
 | C-READ.1.9.11 | Changes | NOT DECIDED |
-| C-READ.1.9.6.1 | Must never | NOT DECIDED |
 | C-READ.1.9.6.1 | Fails closed by | NOT DECIDED |
 | C-READ.1.9.6.1 | Fed by | NOT DECIDED |
 | C-READ.1.9.6.1 | Gated by | NOT DECIDED |
@@ -4454,24 +4455,17 @@ SUB-PARTS: NONE
 | C-READ.1.9.7.8.4 | Fed by | NOT DECIDED |
 | C-READ.1.9.7.8.4 | Gated by | NOT DECIDED |
 | C-READ.1.9.7.8.4 | Changes | NOT DECIDED |
-| C-READ.1.10 | Fails closed by | NOT DECIDED |
 | C-READ.1.10 | Fed by | NOT DECIDED |
-| C-READ.1.10 | Gated by | NOT DECIDED |
 | C-READ.1.10 | Changes | NOT DECIDED |
-| C-READ.1.11 | Fails closed by | NOT DECIDED |
-| C-READ.1.11 | Gated by | NOT DECIDED |
 | C-READ.1.11 | Changes | NOT DECIDED |
-| C-READ.1.11.1 | Must never | NOT DECIDED |
 | C-READ.1.11.1 | Fails closed by | NOT DECIDED |
 | C-READ.1.11.1 | Fed by | NOT DECIDED |
 | C-READ.1.11.1 | Gated by | NOT DECIDED |
 | C-READ.1.11.1 | Changes | NOT DECIDED |
-| C-READ.1.11.2 | Must never | NOT DECIDED |
 | C-READ.1.11.2 | Fails closed by | NOT DECIDED |
 | C-READ.1.11.2 | Fed by | NOT DECIDED |
 | C-READ.1.11.2 | Gated by | NOT DECIDED |
 | C-READ.1.11.2 | Changes | NOT DECIDED |
-| C-READ.1.12 | Fails closed by | NOT DECIDED |
 | C-READ.1.12 | Fed by | NOT DECIDED |
 | C-READ.1.12 | Changes | NOT DECIDED |
 | C-READ.1.12.1 | Fails closed by | NOT DECIDED |
@@ -4486,96 +4480,57 @@ SUB-PARTS: NONE
 | C-READ.1.12.1.2 | Gated by | NOT DECIDED |
 | C-READ.1.12.1.2 | Changes | NOT DECIDED |
 | C-READ.2 | Changes | NOT DECIDED |
-| C-READ.2.1 | Must never | NOT DECIDED |
 | C-READ.2.1 | Gated by | NOT DECIDED |
 | C-READ.2.1 | Changes | NOT DECIDED |
-| C-READ.2.1.1 | Must never | NOT DECIDED |
 | C-READ.2.1.1 | Fed by | NOT DECIDED |
-| C-READ.2.1.1 | Gated by | NOT DECIDED |
 | C-READ.2.1.1 | Changes | NOT DECIDED |
-| C-READ.2.2 | Must never | NOT DECIDED |
 | C-READ.2.2 | Gated by | NOT DECIDED |
 | C-READ.2.2 | Changes | NOT DECIDED |
-| C-READ.2.2.1 | Must never | NOT DECIDED |
 | C-READ.2.2.1 | Fed by | NOT DECIDED |
-| C-READ.2.2.1 | Gated by | NOT DECIDED |
 | C-READ.2.2.1 | Changes | NOT DECIDED |
-| C-READ.2.3 | Must never | NOT DECIDED |
 | C-READ.2.3 | Gated by | NOT DECIDED |
 | C-READ.2.3 | Changes | NOT DECIDED |
-| C-READ.2.3.1 | Must never | NOT DECIDED |
 | C-READ.2.3.1 | Fed by | NOT DECIDED |
-| C-READ.2.3.1 | Gated by | NOT DECIDED |
 | C-READ.2.3.1 | Changes | NOT DECIDED |
-| C-READ.2.4 | Must never | NOT DECIDED |
 | C-READ.2.4 | Gated by | NOT DECIDED |
 | C-READ.2.4 | Changes | NOT DECIDED |
-| C-READ.2.4.1 | Must never | NOT DECIDED |
 | C-READ.2.4.1 | Fed by | NOT DECIDED |
-| C-READ.2.4.1 | Gated by | NOT DECIDED |
 | C-READ.2.4.1 | Changes | NOT DECIDED |
-| C-READ.2.5 | Must never | NOT DECIDED |
 | C-READ.2.5 | Gated by | NOT DECIDED |
 | C-READ.2.5 | Changes | NOT DECIDED |
-| C-READ.2.5.1 | Must never | NOT DECIDED |
 | C-READ.2.5.1 | Fed by | NOT DECIDED |
-| C-READ.2.5.1 | Gated by | NOT DECIDED |
 | C-READ.2.5.1 | Changes | NOT DECIDED |
-| C-READ.2.6 | Must never | NOT DECIDED |
 | C-READ.2.6 | Gated by | NOT DECIDED |
 | C-READ.2.6 | Changes | NOT DECIDED |
-| C-READ.2.6.1 | Must never | NOT DECIDED |
 | C-READ.2.6.1 | Fed by | NOT DECIDED |
-| C-READ.2.6.1 | Gated by | NOT DECIDED |
 | C-READ.2.6.1 | Changes | NOT DECIDED |
-| C-READ.2.7 | Must never | NOT DECIDED |
 | C-READ.2.7 | Gated by | NOT DECIDED |
 | C-READ.2.7 | Changes | NOT DECIDED |
-| C-READ.2.7.1 | Must never | NOT DECIDED |
 | C-READ.2.7.1 | Fed by | NOT DECIDED |
-| C-READ.2.7.1 | Gated by | NOT DECIDED |
 | C-READ.2.7.1 | Changes | NOT DECIDED |
-| C-READ.2.8 | Must never | NOT DECIDED |
 | C-READ.2.8 | Gated by | NOT DECIDED |
 | C-READ.2.8 | Changes | NOT DECIDED |
-| C-READ.2.8.1 | Must never | NOT DECIDED |
 | C-READ.2.8.1 | Fed by | NOT DECIDED |
-| C-READ.2.8.1 | Gated by | NOT DECIDED |
 | C-READ.2.8.1 | Changes | NOT DECIDED |
-| C-READ.2.9 | Must never | NOT DECIDED |
 | C-READ.2.9 | Gated by | NOT DECIDED |
 | C-READ.2.9 | Changes | NOT DECIDED |
-| C-READ.2.9.1 | Must never | NOT DECIDED |
 | C-READ.2.9.1 | Fed by | NOT DECIDED |
-| C-READ.2.9.1 | Gated by | NOT DECIDED |
 | C-READ.2.9.1 | Changes | NOT DECIDED |
-| C-READ.2.10 | Must never | NOT DECIDED |
 | C-READ.2.10 | Gated by | NOT DECIDED |
 | C-READ.2.10 | Changes | NOT DECIDED |
-| C-READ.2.10.1 | Must never | NOT DECIDED |
 | C-READ.2.10.1 | Fed by | NOT DECIDED |
-| C-READ.2.10.1 | Gated by | NOT DECIDED |
 | C-READ.2.10.1 | Changes | NOT DECIDED |
-| C-READ.2.11 | Must never | NOT DECIDED |
 | C-READ.2.11 | Gated by | NOT DECIDED |
 | C-READ.2.11 | Changes | NOT DECIDED |
-| C-READ.2.11.1 | Must never | NOT DECIDED |
 | C-READ.2.11.1 | Fed by | NOT DECIDED |
-| C-READ.2.11.1 | Gated by | NOT DECIDED |
 | C-READ.2.11.1 | Changes | NOT DECIDED |
-| C-READ.2.12 | Must never | NOT DECIDED |
 | C-READ.2.12 | Gated by | NOT DECIDED |
 | C-READ.2.12 | Changes | NOT DECIDED |
-| C-READ.2.12.1 | Must never | NOT DECIDED |
 | C-READ.2.12.1 | Fed by | NOT DECIDED |
-| C-READ.2.12.1 | Gated by | NOT DECIDED |
 | C-READ.2.12.1 | Changes | NOT DECIDED |
-| C-READ.2.13 | Must never | NOT DECIDED |
 | C-READ.2.13 | Gated by | NOT DECIDED |
 | C-READ.2.13 | Changes | NOT DECIDED |
-| C-READ.2.13.1 | Must never | NOT DECIDED |
 | C-READ.2.13.1 | Fed by | NOT DECIDED |
-| C-READ.2.13.1 | Gated by | NOT DECIDED |
 | C-READ.2.13.1 | Changes | NOT DECIDED |
 | C-READ.2.14 | Fails closed by | NOT DECIDED |
 | C-READ.2.14 | Fed by | NOT DECIDED |
@@ -4593,7 +4548,6 @@ SUB-PARTS: NONE
 | C-READ.2.17 | Fed by | NOT DECIDED |
 | C-READ.2.17 | Gated by | NOT DECIDED |
 | C-READ.2.17 | Changes | NOT DECIDED |
-| C-READ.3.1 | Must never | NOT DECIDED |
 | C-READ.3.1 | Fails closed by | NOT DECIDED |
 | C-READ.3.1 | Gated by | NOT DECIDED |
 | C-READ.3.1 | Changes | NOT DECIDED |
@@ -4657,217 +4611,149 @@ SUB-PARTS: NONE
 | C-READ.3.1.12 | Fed by | NOT DECIDED |
 | C-READ.3.1.12 | Gated by | NOT DECIDED |
 | C-READ.3.1.12 | Changes | NOT DECIDED |
-| C-READ.3.1.13 | Must never | NOT DECIDED |
-| C-READ.3.1.13 | Fails closed by | NOT DECIDED |
 | C-READ.3.1.13 | Fed by | NOT DECIDED |
-| C-READ.3.1.13 | Gated by | NOT DECIDED |
 | C-READ.3.1.13 | Changes | NOT DECIDED |
-| C-READ.3.2 | Must never | NOT DECIDED |
-| C-READ.3.2 | Fails closed by | NOT DECIDED |
 | C-READ.3.2 | Gated by | NOT DECIDED |
 | C-READ.3.2 | Changes | NOT DECIDED |
-| C-READ.3.2.1 | Must never | NOT DECIDED |
 | C-READ.3.2.1 | Fed by | NOT DECIDED |
 | C-READ.3.2.1 | Gated by | NOT DECIDED |
 | C-READ.3.2.1 | Changes | NOT DECIDED |
-| C-READ.3.3 | Must never | NOT DECIDED |
-| C-READ.3.3 | Fails closed by | NOT DECIDED |
 | C-READ.3.3 | Gated by | NOT DECIDED |
 | C-READ.3.3 | Changes | NOT DECIDED |
-| C-READ.3.3.1 | Must never | NOT DECIDED |
 | C-READ.3.3.1 | Fed by | NOT DECIDED |
 | C-READ.3.3.1 | Gated by | NOT DECIDED |
 | C-READ.3.3.1 | Changes | NOT DECIDED |
-| C-READ.3.4 | Must never | NOT DECIDED |
 | C-READ.3.4 | Fails closed by | NOT DECIDED |
 | C-READ.3.4 | Gated by | NOT DECIDED |
 | C-READ.3.4 | Changes | NOT DECIDED |
-| C-READ.3.4.1 | Must never | NOT DECIDED |
 | C-READ.3.4.1 | Fails closed by | NOT DECIDED |
 | C-READ.3.4.1 | Fed by | NOT DECIDED |
 | C-READ.3.4.1 | Gated by | NOT DECIDED |
 | C-READ.3.4.1 | Changes | NOT DECIDED |
-| C-READ.3.4.2 | Must never | NOT DECIDED |
 | C-READ.3.4.2 | Fails closed by | NOT DECIDED |
 | C-READ.3.4.2 | Fed by | NOT DECIDED |
 | C-READ.3.4.2 | Gated by | NOT DECIDED |
 | C-READ.3.4.2 | Changes | NOT DECIDED |
-| C-READ.3.5 | Must never | NOT DECIDED |
-| C-READ.3.5 | Fails closed by | NOT DECIDED |
 | C-READ.3.5 | Fed by | NOT DECIDED |
-| C-READ.3.5 | Gated by | NOT DECIDED |
 | C-READ.3.5 | Changes | NOT DECIDED |
-| C-READ.3.6 | Fails closed by | NOT DECIDED |
 | C-READ.3.6 | Fed by | NOT DECIDED |
-| C-READ.3.6 | Gated by | NOT DECIDED |
 | C-READ.3.6 | Changes | NOT DECIDED |
-| C-READ.3.7 | Fails closed by | NOT DECIDED |
-| C-READ.3.7 | Gated by | NOT DECIDED |
 | C-READ.3.7 | Changes | NOT DECIDED |
-| C-READ.3.7.1 | Must never | NOT DECIDED |
 | C-READ.3.7.1 | Fails closed by | NOT DECIDED |
 | C-READ.3.7.1 | Fed by | NOT DECIDED |
 | C-READ.3.7.1 | Gated by | NOT DECIDED |
 | C-READ.3.7.1 | Changes | NOT DECIDED |
-| C-READ.3.7.2 | Must never | NOT DECIDED |
 | C-READ.3.7.2 | Fails closed by | NOT DECIDED |
 | C-READ.3.7.2 | Fed by | NOT DECIDED |
 | C-READ.3.7.2 | Gated by | NOT DECIDED |
 | C-READ.3.7.2 | Changes | NOT DECIDED |
-| C-READ.3.7.3 | Must never | NOT DECIDED |
 | C-READ.3.7.3 | Fails closed by | NOT DECIDED |
 | C-READ.3.7.3 | Fed by | NOT DECIDED |
 | C-READ.3.7.3 | Gated by | NOT DECIDED |
 | C-READ.3.7.3 | Changes | NOT DECIDED |
-| C-READ.3.7.4 | Must never | NOT DECIDED |
-| C-READ.3.7.4 | Fails closed by | NOT DECIDED |
 | C-READ.3.7.4 | Fed by | NOT DECIDED |
 | C-READ.3.7.4 | Gated by | NOT DECIDED |
 | C-READ.3.7.4 | Changes | NOT DECIDED |
-| C-READ.3.7.5 | Must never | NOT DECIDED |
-| C-READ.3.7.5 | Fails closed by | NOT DECIDED |
 | C-READ.3.7.5 | Fed by | NOT DECIDED |
-| C-READ.3.7.5 | Gated by | NOT DECIDED |
 | C-READ.3.7.5 | Changes | NOT DECIDED |
-| C-READ.3.7.6 | Must never | NOT DECIDED |
 | C-READ.3.7.6 | Fails closed by | NOT DECIDED |
 | C-READ.3.7.6 | Gated by | NOT DECIDED |
 | C-READ.3.7.6 | Changes | NOT DECIDED |
-| C-READ.3.7.6.1 | Must never | NOT DECIDED |
 | C-READ.3.7.6.1 | Fails closed by | NOT DECIDED |
 | C-READ.3.7.6.1 | Fed by | NOT DECIDED |
 | C-READ.3.7.6.1 | Gated by | NOT DECIDED |
 | C-READ.3.7.6.1 | Changes | NOT DECIDED |
-| C-READ.3.7.6.2 | Must never | NOT DECIDED |
 | C-READ.3.7.6.2 | Fails closed by | NOT DECIDED |
 | C-READ.3.7.6.2 | Fed by | NOT DECIDED |
 | C-READ.3.7.6.2 | Gated by | NOT DECIDED |
 | C-READ.3.7.6.2 | Changes | NOT DECIDED |
-| C-READ.3.7.7 | Must never | NOT DECIDED |
 | C-READ.3.7.7 | Gated by | NOT DECIDED |
 | C-READ.3.7.7 | Changes | NOT DECIDED |
-| C-READ.3.7.7.1 | Must never | NOT DECIDED |
-| C-READ.3.7.7.1 | Fails closed by | NOT DECIDED |
 | C-READ.3.7.7.1 | Fed by | NOT DECIDED |
 | C-READ.3.7.7.1 | Gated by | NOT DECIDED |
 | C-READ.3.7.7.1 | Changes | NOT DECIDED |
-| C-READ.3.7.7.2 | Must never | NOT DECIDED |
-| C-READ.3.7.7.2 | Fails closed by | NOT DECIDED |
 | C-READ.3.7.7.2 | Fed by | NOT DECIDED |
 | C-READ.3.7.7.2 | Gated by | NOT DECIDED |
 | C-READ.3.7.7.2 | Changes | NOT DECIDED |
-| C-READ.3.7.7.3 | Must never | NOT DECIDED |
-| C-READ.3.7.7.3 | Fails closed by | NOT DECIDED |
 | C-READ.3.7.7.3 | Fed by | NOT DECIDED |
 | C-READ.3.7.7.3 | Gated by | NOT DECIDED |
 | C-READ.3.7.7.3 | Changes | NOT DECIDED |
-| C-READ.3.7.7.4 | Must never | NOT DECIDED |
-| C-READ.3.7.7.4 | Fails closed by | NOT DECIDED |
 | C-READ.3.7.7.4 | Fed by | NOT DECIDED |
 | C-READ.3.7.7.4 | Gated by | NOT DECIDED |
 | C-READ.3.7.7.4 | Changes | NOT DECIDED |
 | C-READ.4 | Fails closed by | NOT DECIDED |
 | C-READ.4 | Fed by | NOT DECIDED |
 | C-READ.4 | Changes | NOT DECIDED |
-| C-READ.4.1 | Fails closed by | NOT DECIDED |
 | C-READ.4.1 | Fed by | NOT DECIDED |
-| C-READ.4.1 | Gated by | NOT DECIDED |
 | C-READ.4.1 | Changes | NOT DECIDED |
 | C-READ.5 | Fed by | NOT DECIDED |
 | C-READ.5 | Changes | NOT DECIDED |
 | C-READ.5.1 | Gated by | NOT DECIDED |
 | C-READ.5.1 | Changes | NOT DECIDED |
-| C-READ.5.2 | Fails closed by | NOT DECIDED |
 | C-READ.5.2 | Gated by | NOT DECIDED |
 | C-READ.5.2 | Changes | NOT DECIDED |
-| C-READ.5.2.1 | Fails closed by | NOT DECIDED |
 | C-READ.5.2.1 | Fed by | NOT DECIDED |
 | C-READ.5.2.1 | Gated by | NOT DECIDED |
 | C-READ.5.2.1 | Changes | NOT DECIDED |
-| C-READ.5.2.2 | Fails closed by | NOT DECIDED |
 | C-READ.5.2.2 | Fed by | NOT DECIDED |
 | C-READ.5.2.2 | Gated by | NOT DECIDED |
 | C-READ.5.2.2 | Changes | NOT DECIDED |
-| C-READ.5.2.3 | Fails closed by | NOT DECIDED |
 | C-READ.5.2.3 | Fed by | NOT DECIDED |
 | C-READ.5.2.3 | Gated by | NOT DECIDED |
 | C-READ.5.2.3 | Changes | NOT DECIDED |
-| C-READ.5.2.4 | Fails closed by | NOT DECIDED |
 | C-READ.5.2.4 | Fed by | NOT DECIDED |
 | C-READ.5.2.4 | Gated by | NOT DECIDED |
 | C-READ.5.2.4 | Changes | NOT DECIDED |
-| C-READ.5.2.5 | Fails closed by | NOT DECIDED |
 | C-READ.5.2.5 | Fed by | NOT DECIDED |
 | C-READ.5.2.5 | Gated by | NOT DECIDED |
 | C-READ.5.2.5 | Changes | NOT DECIDED |
-| C-READ.5.2.6 | Fails closed by | NOT DECIDED |
 | C-READ.5.2.6 | Fed by | NOT DECIDED |
 | C-READ.5.2.6 | Gated by | NOT DECIDED |
 | C-READ.5.2.6 | Changes | NOT DECIDED |
-| C-READ.5.2.7 | Fails closed by | NOT DECIDED |
 | C-READ.5.2.7 | Fed by | NOT DECIDED |
 | C-READ.5.2.7 | Gated by | NOT DECIDED |
 | C-READ.5.2.7 | Changes | NOT DECIDED |
-| C-READ.5.2.8 | Fails closed by | NOT DECIDED |
 | C-READ.5.2.8 | Fed by | NOT DECIDED |
 | C-READ.5.2.8 | Gated by | NOT DECIDED |
 | C-READ.5.2.8 | Changes | NOT DECIDED |
-| C-READ.5.1.1 | Must never | NOT DECIDED |
-| C-READ.5.1.1 | Fails closed by | NOT DECIDED |
 | C-READ.5.1.1 | Fed by | NOT DECIDED |
 | C-READ.5.1.1 | Gated by | NOT DECIDED |
 | C-READ.5.1.1 | Changes | NOT DECIDED |
-| C-READ.6 | Fails closed by | NOT DECIDED |
 | C-READ.6 | Changes | NOT DECIDED |
-| C-READ.6.1 | Must never | NOT DECIDED |
 | C-READ.6.1 | Fails closed by | NOT DECIDED |
 | C-READ.6.1 | Fed by | NOT DECIDED |
 | C-READ.6.1 | Gated by | NOT DECIDED |
 | C-READ.6.1 | Changes | NOT DECIDED |
-| C-READ.6.2 | Must never | NOT DECIDED |
-| C-READ.6.2 | Fails closed by | NOT DECIDED |
 | C-READ.6.2 | Fed by | NOT DECIDED |
 | C-READ.6.2 | Gated by | NOT DECIDED |
 | C-READ.6.2 | Changes | NOT DECIDED |
-| C-READ.6.3 | Must never | NOT DECIDED |
 | C-READ.6.3 | Fails closed by | NOT DECIDED |
 | C-READ.6.3 | Fed by | NOT DECIDED |
 | C-READ.6.3 | Gated by | NOT DECIDED |
 | C-READ.6.3 | Changes | NOT DECIDED |
-| C-READ.6.4 | Must never | NOT DECIDED |
 | C-READ.6.4 | Fails closed by | NOT DECIDED |
 | C-READ.6.4 | Fed by | NOT DECIDED |
 | C-READ.6.4 | Gated by | NOT DECIDED |
 | C-READ.6.4 | Changes | NOT DECIDED |
-| C-READ.6.5 | Must never | NOT DECIDED |
-| C-READ.6.5 | Fails closed by | NOT DECIDED |
 | C-READ.6.5 | Fed by | NOT DECIDED |
 | C-READ.6.5 | Gated by | NOT DECIDED |
 | C-READ.6.5 | Changes | NOT DECIDED |
-| C-READ.7 | Fails closed by | NOT DECIDED |
 | C-READ.7 | Changes | NOT DECIDED |
-| C-READ.7.1 | Must never | NOT DECIDED |
 | C-READ.7.1 | Fails closed by | NOT DECIDED |
 | C-READ.7.1 | Fed by | NOT DECIDED |
 | C-READ.7.1 | Gated by | NOT DECIDED |
 | C-READ.7.1 | Changes | NOT DECIDED |
-| C-READ.7.2 | Fails closed by | NOT DECIDED |
 | C-READ.7.2 | Fed by | NOT DECIDED |
 | C-READ.7.2 | Gated by | NOT DECIDED |
 | C-READ.7.2 | Changes | NOT DECIDED |
-| C-READ.7.3 | Fails closed by | NOT DECIDED |
 | C-READ.7.3 | Gated by | NOT DECIDED |
 | C-READ.7.3 | Changes | NOT DECIDED |
-| C-READ.7.3.1 | Must never | NOT DECIDED |
-| C-READ.7.3.1 | Fails closed by | NOT DECIDED |
 | C-READ.7.3.1 | Fed by | NOT DECIDED |
 | C-READ.7.3.1 | Gated by | NOT DECIDED |
 | C-READ.7.3.1 | Changes | NOT DECIDED |
-| C-READ.7.3.2 | Fails closed by | NOT DECIDED |
 | C-READ.7.3.2 | Fed by | NOT DECIDED |
 | C-READ.7.3.2 | Gated by | NOT DECIDED |
 | C-READ.7.3.2 | Changes | NOT DECIDED |
-| C-READ.7.4 | Fails closed by | NOT DECIDED |
 | C-READ.7.4 | Fed by | NOT DECIDED |
 | C-READ.7.4 | Gated by | NOT DECIDED |
 | C-READ.7.4 | Changes | NOT DECIDED |
@@ -4967,6 +4853,16 @@ All new sub-parts belong to C-READ. The record/write foundation participates in 
 | C-7A — Universal Filter (§7A) | C-READ USED BY |
 
 Future owning templates must reciprocate C-READ’s C-ENGINE-AB, C-ENGINE-C, C-7G, C-7GA and C-7H inputs/uses and the C-7J, C-7K, C-7L, C-7M, C-7D and C-7I uses. C-READ.6 also carries a C-7Q access-gate relationship for that owning template. Accepted promotion machinery and telling identity are pending placement, not declared undecided or built.
+
+### Additional reciprocal gate uses recorded in this piece
+
+These entries stay here. Joining pieces concatenates text; it does not edit or merge them into any earlier card.
+
+| Gate owner | USED BY | Takes in there | Does there | Changes there | Source |
+|---|---|---|---|---|---|
+| C-STORE.3.1 — _check_common | C-READ.1.1 — reading.id | BUILT — Required reading identity. | Shared common validation must accept this reading member. | Required reading identity. | [V10 §6B / READING record schema] [V10 / THE ONE AUTHORITATIVE STATUS TABLE] |
+| C-STORE.3.1 — _check_common | C-READ.1.8 — reading.timestamp | BUILT — Required creation timestamp. | Shared common validation must accept this reading member. | Required creation timestamp. | [V10 §6B / READING record schema] [V10 / THE ONE AUTHORITATIVE STATUS TABLE] |
+| C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G) | C-READ.1.4.6 — Confidence is not acceptance authority | DESIGNED — A model’s confidence claim. | Acceptance requires root/context grounding and explicit evidence, never model confidence alone. | Model confidence remains metadata. | [V10 §7G] |
 
 ### Remaining Chapter 3 scope
 
@@ -5281,7 +5177,7 @@ Instruction file reopened in full at the start and reopened for the final checkl
 | `04_ACCEPTED_STANDALONE_DESIGNS/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md` | §10 cross-batch reading/index contract; headings; boundary check only. | Passed Chapters 1–3-a at the same pin; no new whole-read claim. |
 | `04_ACCEPTED_STANDALONE_DESIGNS/NH_BUNDLE_6_POLICY_DECISIONS_v1_0_CANDIDATE.md` | Brief navigation excerpt only; no new behavior sourced. | Passed Chapters 1–3-a at the same pin; no new whole-read claim. |
 
-The current decision index was searched only for accepted-package navigation, including NHD-B24 for this correction. B16 and A2 mechanisms were not reconstructed from snippets or normalization summaries. The ledger supplied no behavior; FR-0125 and FR-0608 were checked only for classification and the accepted-home pointer. Chapter 2 and Chapter 3-a were inspected for canonical names and reciprocal relationships; their bytes were not edited.
+The current decision index was searched only for accepted-package navigation, including NHD-B24 for this correction. B16 and A2 mechanisms were not reconstructed from snippets or normalization summaries. The ledger supplied no behavior; FR-0125 and FR-0608 were checked only for classification and the accepted-home pointer. Chapter 2 and Chapter 3-a were inspected for canonical names and reciprocal relationships; their bytes were not edited. Round 1 rechecked every Chapter 3-b card against its own text and the scoped V10, accepted B24 and restored bootstrap sources. No new whole read is claimed; the original source reading credits and pending list are unchanged.
 
 ### READ-folder files not yet read
 
@@ -5409,17 +5305,17 @@ The current decision index was searched only for accepted-package navigation, in
 ## CONTRACT CHECK
 
 CONTRACT CHECK (against the cloned contract, SHA-256 e78c7a8c8a448ff20966002465c8d6a330000900802c0b19a48e8a124e5ceba1)
-§1.3 no history/actions/roles/workflow in this chapter: PASS — the 173 behavior templates contain operational behavior and permissions, with source histories, project roles and build rituals excluded; delivery/read metadata remains separate.
-§1.4 every gap written as NOT DECIDED: PASS — 699 empty template fields and 58 finer schema/behavior gaps are registered by part and field; no unknown source-reliability sentinel or numeric health threshold is supplied.
+§1.3 no history/actions/roles/workflow in this chapter: PASS — all 173 behavior cards and the added reciprocal table checked; only source-decided prohibitions, refusal outcomes and gates were placed. Existing Does and all other populated fields remain byte-identical.
+§1.4 every gap written as NOT DECIDED: PASS — all 519 Must never / Fails closed by / Gated by placements reviewed against card text and cited sources. 540 empty template fields and the original 58 finer gaps remain registered; obsolete rows for every filled field were removed. The changed-lines report gives a reason for every retained NOT DECIDED box reviewed.
 §1.5 conflicts marked, none resolved: PASS — C-READ.1.12 preserves the V10 per-store versus cursorrules any-store key-scope conflict, with V10 governing.
-§3 exactly one stamp per line: PASS — 1,007 filled behavior lines and 190 USED BY rows checked; BUILT limited to V10’s built validator/writer/helper/routing/quarantine/engine capabilities; the restored rules use DECIDED-2026-09-25; C-READ.7.2 and its reciprocal link use ACCEPTED from B24 §1.2, with the package-complete record establishing status.
-§4 every behavior line cited in the exact format: PASS — all filled template lines and use rows cited; 43 distinct source targets checked, plus the NHD-B24 navigation ID; C-READ.7.2 cites accepted B24 §1.2, while every restored part retains both its decision-record and named-archive citations; empty fields have no citation.
+§3 exactly one stamp per line: PASS — 1170 filled field lines and 231 USED BY rows checked. BUILT remains limited to V10-built machinery; designed production/worker requirements remain DESIGNED; restored bootstrap rules retain DECIDED-2026-09-25; the B24 guard remains ACCEPTED.
+§4 every behavior line cited in the exact format: PASS — all filled fields, reciprocal rows and cross-piece counterparts checked against their cited sections. No citation or source status is inferred from a keyword; all original citations outside the corrected boxes remain intact.
 §5.4 one name per thing: PASS — C-READ uses the Map name; existing Chapter 2 mode/NOTE IDs and Chapter 3-a common-helper IDs retain their names; new stored-member bindings are identified separately from their producing concepts.
-§6 all template fields present, in order, for every part: PASS — all 173 templates have the nine fields, ALONE, TOGETHER, USED BY and SUB-PARTS, in order.
-§6.3 reciprocity within this chapter: PASS — all 178 internal relationship pairs checked in both directions; seven existing Chapter 2/3-a endpoint relationships reciprocated; future owning-component obligations listed explicitly.
-§6.4 every decided detail written in, no citation used in place of content: PASS — scoped v1 record/write content checked against V10 §6A/6B, the writer preamble, §7F audit and §7G-A write handoff; all FR-0125–FR-0133 details, FR-0123 and FR-0136 written out; FR-0608 is separately carried from accepted B24 §1.2, and archive-only elaboration was removed from C-READ.7.2 and its reciprocal link. Accepted telling identity and promotion/evaluation remain explicitly pending separate pieces, not claimed complete here.
+§6 all template fields present, in order, for every part: PASS — all 173 templates retain the nine fields in order, ALONE, TOGETHER, USED BY and SUB-PARTS; all existing IDs, names and child lists are preserved.
+§6.3 reciprocity within this chapter: PASS — 219 internal relationship pairs checked in both directions; every newly named gate has a reciprocal USED BY row. Cross-piece counterparts are recorded here without editing or merging another chapter.
+§6.4 every decided detail written in, no citation used in place of content: PASS — every card was checked for decided failure handling, prohibition and gating left outside its dedicated box; the populated boxes now state that behavior. All original What it is, Takes in, Does and Gives out lines remain byte-identical. No new retry, threshold, sentinel or runtime mechanism is selected.
 §6.5 sub-parts recursed to the bottom: PASS — twelve record members and nested provenance/values, writer arguments, shape conditions/refusal outcomes, write-failure fields, production conditions/approval scope, named operation classes, bootstrap alternatives and six health-query classes decomposed. All 173 parts belong to the C-READ tree; no new top-level part or invented path is introduced.
-§9 coverage matrix rows added for every file used: PASS — all 138 READ-folder rows and 107 V10 heading rows retained, current placements added, restored archive coverage added, twelve current source identities matched to the pinned Git blobs.
+§9 coverage matrix rows added for every file used: PASS — all 138 READ-folder file rows and 107 V10 heading rows retained byte-identically; corrections use their existing cited source coverage. Twelve pinned source identities and the cloned contract verified; no new whole-read credit is claimed.
 §10.11 no recommendation, no sentence addressed to Ness: PASS — checked throughout the behavior text and register contributions.
 Files read whole for this chapter: `04_ACCEPTED_STANDALONE_DESIGNS/NH_BUNDLE_1_MEMORY_READING_FOUNDATION_NORMALIZATION_AND_CLOSEOUT_CANDIDATE_v1_4.md`; `98_HISTORICAL_SOURCES_PRE_V10/sources/NH_MASTER-14_FINAL__2_.md`; `04_ACCEPTED_STANDALONE_DESIGNS/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_CANDIDATE.md`; `04_ACCEPTED_STANDALONE_DESIGNS/NH_B24_VALIDATOR_FIRST_MODEL_BOUNDARY_AND_BENCHMARK_v7_PACKAGE_COMPLETE_RECORD_v1_0.md` (both read whole for this correction); instruction file `NH_MASTER-21_SYSTEM_BEHAVIOR_BUILD_CONTRACT_FOR_CHATGPT_v1_0.md`. Earlier whole reads and current scoped rereads are listed separately in READ RECORD.
 

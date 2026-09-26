@@ -90,11 +90,11 @@ ALONE
 - Does: DESIGNED — Only deliberate removal by Ness plus separately approved ingest permits a future append through the shared boundary under V10. Marker removal alone is not authorization. [SOURCE CONFLICT: 04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5, 04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3 and MAP C-STORE prohibit reopening or future writes to the existing batch; V10 §6A / PROTECTED FILES AND STORES says otherwise] [V10 §6A / PROTECTED FILES AND STORES]
 - Gives out: DESIGNED — Ingest remains unauthorized without the separate session approval. [V10 §6A / PROTECTED FILES AND STORES]
 - Must never: DESIGNED — Delete, rename or write the marker through an ordinary store operation. [V10 §6A / PROTECTED FILES AND STORES]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Keeps append blocked unless the seal is deliberately removed and the ingest separately approved; marker removal alone does not authorize a write. [V10 §6A / PROTECTED FILES AND STORES]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — Both deliberate seal removal and separately approved ingest are required. [V10 §6A / PROTECTED FILES AND STORES]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -142,7 +142,7 @@ ALONE
 - Does: BUILT — The root identity; validated by the shared `_check_common` helper. [V10 §6A / SCHEMA CONSTRAINTS] [V10 §6B]
 - Gives out: BUILT — The `id` value carried by Seven-field root schema v1. [V10 §6A / SCHEMA CONSTRAINTS] [V10 §6B]
 - Must never: BUILT — Omit this required key. [V10 §6A / SCHEMA CONSTRAINTS] [V10 §6B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: BUILT — Rejects malformed identity or timestamp through the shared common validation before append. [V10 §6B] [V10 / THE ONE AUTHORITATIVE STATUS TABLE]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -379,7 +379,7 @@ ALONE
 - Does: BUILT — Carries record creation time; it is not source time, event time or ingest time. [V10 §6A / SCHEMA CONSTRAINTS] [DD §3B. The root record]
 - Gives out: BUILT — The `timestamp` value carried by Seven-field root schema v1. [V10 §6A / SCHEMA CONSTRAINTS] [DD §3B. The root record]
 - Must never: BUILT — Omit this required key. [V10 §6A / SCHEMA CONSTRAINTS] [DD §3B. The root record]
-- Fails closed by: NOT DECIDED
+- Fails closed by: BUILT — Rejects malformed identity or timestamp through the shared common validation before append. [V10 §6B] [V10 / THE ONE AUTHORITATIVE STATUS TABLE]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -448,7 +448,7 @@ ALONE
 - Does: BUILT — The key is required even when a title is unavailable; `None` is permitted. The string `"unknown"` is not a replacement, and the key cannot be omitted. [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — The `source_title` value carried by Seven-field root schema v1. [V10 §6A / SCHEMA CONSTRAINTS]
 - Must never: BUILT — Omit this required key. [V10 §6A / SCHEMA CONSTRAINTS]
-- Fails closed by: NOT DECIDED
+- Fails closed by: BUILT — Rejects a missing source_title key before append; a present None value remains permitted. [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -519,7 +519,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: BUILT — The string `"unknown"` is not used in place of a missing title. [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
+- Must never: BUILT — Substitute the string "unknown" for an unavailable source title. [V10 §6A / SCHEMA CONSTRAINTS]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -542,8 +542,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: BUILT — The key remains present even when its value is `None`. [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: BUILT — Omit the required source_title key even when the title is unavailable. [V10 §6A / SCHEMA CONSTRAINTS]
+- Fails closed by: BUILT — Rejects a missing source_title key before append; a present None value remains permitted. [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -566,7 +566,7 @@ ALONE
 - Does: BUILT — Required on new writes; source-carried attribution is preserved. [V10 §6A / SCHEMA CONSTRAINTS]
 - Gives out: BUILT — The `role` value carried by Seven-field root schema v1. [V10 §6A / SCHEMA CONSTRAINTS]
 - Must never: BUILT — Omit this required key. [V10 §6A / SCHEMA CONSTRAINTS]
-- Fails closed by: NOT DECIDED
+- Fails closed by: BUILT — Rejects a new write missing the required role field. [V10 §6A / SCHEMA CONSTRAINTS]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -589,7 +589,7 @@ ALONE
 - Does: ACCEPTED — A root with `role="unknown"` is not written; speaker resolution remains upstream. [MAP C-STORE] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
 - Gives out: ACCEPTED — No nonconforming root append. [MAP C-STORE] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
 - Must never: ACCEPTED — Invent a speaker to make the root pass. [MAP C-STORE] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refuses a root with role="unknown"; speaker resolution stays upstream. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -612,11 +612,11 @@ ALONE
 - Does: DESIGNED — A root-schema change requires a new schema version and deliberate adoption; no extra field is retrofitted into the seven-field v1 roots. [V10 §6A / SCHEMA CONSTRAINTS] [V10 §6B / subject FIELD AUDIT]
 - Gives out: NOT DECIDED
 - Must never: DESIGNED — Turn `schema_version` into an eighth field of an existing v1 root or silently rename `subject`. [V10 §6A / SCHEMA CONSTRAINTS] [V10 §6B / subject FIELD AUDIT]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Keeps seven-field v1 roots unchanged; no new field is retrofitted without the separately adopted schema. [V10 §6B]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: DESIGNED — A new root schema requires a new schema version and deliberate adoption. [V10 §6B]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -662,7 +662,7 @@ ALONE
 - Does: BUILT — The shared id-and-timestamp checks used by root and reading validation are extracted into `_check_common`; `_validate_record` delegates these checks to it. [V10 / THE ONE AUTHORITATIVE STATUS TABLE / Shared _check_common helper row] [V10 §5 / THE CODEBASE MAP]
 - Gives out: BUILT — Shared validation of these two fields. [V10 / THE ONE AUTHORITATIVE STATUS TABLE / Shared _check_common helper row] [V10 §5 / THE CODEBASE MAP]
 - Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Fails closed by: BUILT — Rejects malformed identity or timestamp through the shared common validation before append. [V10 §6B] [V10 / THE ONE AUTHORITATIVE STATUS TABLE]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -687,7 +687,7 @@ ALONE
 - Does: BUILT — The common helper checks the record identity. [V10 / THE ONE AUTHORITATIVE STATUS TABLE / Shared _check_common helper row]
 - Gives out: NOT DECIDED
 - Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Fails closed by: BUILT — Rejects malformed identity or timestamp through the shared common validation before append. [V10 §6B] [V10 / THE ONE AUTHORITATIVE STATUS TABLE]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -710,7 +710,7 @@ ALONE
 - Does: BUILT — The common helper checks the record timestamp. [V10 / THE ONE AUTHORITATIVE STATUS TABLE / Shared _check_common helper row]
 - Gives out: NOT DECIDED
 - Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Fails closed by: BUILT — Rejects malformed identity or timestamp through the shared common validation before append. [V10 §6B] [V10 / THE ONE AUTHORITATIVE STATUS TABLE]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -779,7 +779,7 @@ ALONE
 - Does: DESIGNED — Every root append and every refused append is recorded with timestamp and outcome; records follow internal-use, visibility, identity and authorization restrictions. [MAP C-STORE] [V10 §0B]
 - Gives out: DESIGNED — One operational record for the real operation. [MAP C-STORE] [V10 §0B]
 - Must never: DESIGNED — Give the log extra evidential weight or create recursive log-about-logging. [MAP C-STORE] [V10 §0B]
-- Fails closed by: NOT DECIDED
+- Fails closed by: DESIGNED — Records the refused append and its reason as a real operation; a refusal is not a successful root write. [V10 §0B] [MAP C-STORE]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -804,7 +804,7 @@ ALONE
 - Takes in: DESIGNED — An append outcome of `root write`. [MAP C-STORE]
 - Does: DESIGNED — The `root write` append outcome is recorded with timestamp and outcome. [MAP C-STORE]
 - Gives out: DESIGNED — An append-only operational record. [MAP C-STORE]
-- Must never: NOT DECIDED
+- Must never: DESIGNED — Omit or erase the real operation record, recursively log its creation, or count it as additional evidence for its subject. [V10 §0B]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -827,8 +827,8 @@ ALONE
 - Takes in: DESIGNED — An append outcome of `seal-blocked`. [MAP C-STORE]
 - Does: DESIGNED — The `seal-blocked` append outcome is recorded with timestamp and outcome. [MAP C-STORE]
 - Gives out: DESIGNED — An append-only operational record. [MAP C-STORE]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: DESIGNED — Omit or erase the real operation record, recursively log its creation, or count it as additional evidence for its subject. [V10 §0B]
+- Fails closed by: DESIGNED — Records the refused append and its reason as a real operation; a refusal is not a successful root write. [V10 §0B] [MAP C-STORE]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -850,8 +850,8 @@ ALONE
 - Takes in: DESIGNED — An append outcome of `schema-invalid`. [MAP C-STORE]
 - Does: DESIGNED — The `schema-invalid` append outcome is recorded with timestamp and outcome. [MAP C-STORE]
 - Gives out: DESIGNED — An append-only operational record. [MAP C-STORE]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: DESIGNED — Omit or erase the real operation record, recursively log its creation, or count it as additional evidence for its subject. [V10 §0B]
+- Fails closed by: DESIGNED — Records the refused append and its reason as a real operation; a refusal is not a successful root write. [V10 §0B] [MAP C-STORE]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -873,8 +873,8 @@ ALONE
 - Takes in: DESIGNED — An append outcome of `duplicate-key`. [MAP C-STORE]
 - Does: DESIGNED — The `duplicate-key` append outcome is recorded with timestamp and outcome. [MAP C-STORE]
 - Gives out: DESIGNED — An append-only operational record. [MAP C-STORE]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: DESIGNED — Omit or erase the real operation record, recursively log its creation, or count it as additional evidence for its subject. [V10 §0B]
+- Fails closed by: DESIGNED — Records the refused append and its reason as a real operation; a refusal is not a successful root write. [V10 §0B] [MAP C-STORE]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -956,7 +956,7 @@ ALONE
 - Does: ACCEPTED — Preserves the sealed roots, seven-field schema, catalog-only boundary, immutable roots, separate stores and one-operation/one-log law. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
 - Gives out: ACCEPTED — Preserved records and boundaries. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
 - Must never: ACCEPTED — Reinterpret root content or bypass the designated boundary. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refuses ordinary appends to the existing sealed batch and preserves the historical bytes, roots and marker. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -986,8 +986,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — The existing seal continues to block ordinary appends; B11 represents the historical batch externally without changing its roots, file or marker. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: The existing seal continues to block ordinary appends; B11 represents the historical batch externally without changing its roots, file or marker. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
+- Fails closed by: ACCEPTED — Refuses ordinary appends to the existing sealed batch and preserves the historical bytes, roots and marker. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1009,8 +1009,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — The seven-field root schema remains unchanged; shape is checked against `schema_compat_ref`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: The seven-field root schema remains unchanged; shape is checked against `schema_compat_ref`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
+- Fails closed by: ACCEPTED — Rejects nonconforming root payloads without changing the seven-field v1 schema or rewriting committed roots. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1032,7 +1032,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Every root producer routes through the catalog internal path and the shared `append_root()` boundary; direct file writes are forbidden. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Every root producer routes through the catalog internal path and the shared `append_root()` boundary; direct file writes are forbidden. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -1055,8 +1055,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Raw capture is not root ingestion. Upstream capture exclusion, authorization, blockers, speaker resolution and eligibility remain upstream. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Raw capture is not root ingestion. Upstream capture exclusion, authorization, blockers, speaker resolution and eligibility remain upstream. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
+- Fails closed by: ACCEPTED — Rejects missing or invalid upstream capture/eligibility evidence; B11 does not substitute its own judgment. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1078,8 +1078,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — No root with `role="unknown"`, no eighth field in v1, no rewrite of a committed root, no destruction. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: No root with `role="unknown"`, no eighth field in v1, no rewrite of a committed root, no destruction. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
+- Fails closed by: ACCEPTED — Rejects nonconforming root payloads without changing the seven-field v1 schema or rewriting committed roots. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1101,8 +1101,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Atomic append, pre-append schema validation, identity idempotency and recorded duplicate-key refusals remain binding. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Atomic append, pre-append schema validation, identity idempotency and recorded duplicate-key refusals remain binding. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
+- Fails closed by: ACCEPTED — Refuses a malformed append or duplicate identity; the refused operation is recorded. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1124,7 +1124,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Roots, readings, quarantine and production remain separate; root evidence and prior-reading context remain separate. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Roots, readings, quarantine and production remain separate; root evidence and prior-reading context remain separate. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -1147,7 +1147,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — One real operation has one append-only operational record; no recursive logging and no double evidence; access follows privacy and identity rules. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: One real operation has one append-only operational record; no recursive logging and no double evidence; access follows privacy and identity rules. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -1170,7 +1170,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — DUMB machinery does not interpret; SMART interpretation does not establish fact. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: DUMB machinery does not interpret; SMART interpretation does not establish fact. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §2]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -1196,7 +1196,7 @@ ALONE
 - Gives out: ACCEPTED — Machine/provenance facts. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §3]
 - Must never: ACCEPTED — Decide capture exclusion, authorization, blockers, speaker resolution or catalog eligibility; interpret meaning, relevance or truth; decide semantic near-duplicates; own retrieval ranking/service failure, reading validation/quarantine/promotion, reread and hold policy, retry policy or values, future root schema, or Person-Box cross-batch policy. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §3]
 - Must never: ACCEPTED — Interpret meaning, establish truth or choose semantic eligibility. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §3]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Blocks ordinary root admission on ambiguous selection, invalid target state, unproven claim/fence or root ownership, and unverified historical identity coverage; records the refusal without guessing or rewriting committed roots. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §3] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1219,7 +1219,7 @@ ALONE
 - Does: ACCEPTED — Keeps permanent identities separate from location and derives activeness only from canonical selection. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4]
 - Gives out: ACCEPTED — Registered batches and a provable active selection. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4]
 - Must never: ACCEPTED — Treat physical existence or a manifest alone as writability. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Blocks ordinary writes on ambiguous current selection, invalid manifest/state or missing committed selection; no guessed target or sealed-batch fallback. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.4]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1270,7 +1270,7 @@ ALONE
 - Takes in: ACCEPTED — Globally unique permanent identity. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.1]
 - Does: ACCEPTED — Permanent, system-generated and globally unique across every batch in the instance, including interrupted, recovered or invalid batches. Never reused, reassigned or derived from location. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.1]
 - Gives out: ACCEPTED — The `batch_id` value carried by Batch identity. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.1]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Permanent, system-generated and globally unique across every batch in the instance, including interrupted, recovered or invalid batches. Never reused, reassigned or derived from location. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.1]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -1293,7 +1293,7 @@ ALONE
 - Takes in: ACCEPTED — Opaque versioned descriptor. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.1]
 - Does: ACCEPTED — Opaque, versioned location. Moving or re-hosting appends a new location record for the same batch identity; manifest chain and root provenance are unaffected. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.1]
 - Gives out: ACCEPTED — The `location_descriptor` value carried by Batch identity. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.1]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Opaque, versioned location. Moving or re-hosting appends a new location record for the same batch identity; manifest chain and root provenance are unaffected. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.1]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -1371,7 +1371,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Version of this manifest record; manifests evolve append-only (a corrected manifest is a new version referencing its predecessor, never an edit) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.2]
 - Gives out: ACCEPTED — The `manifest_version` value carried by Batch manifest. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.2]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Version of this manifest record; manifests evolve append-only (a corrected manifest is a new version referencing its predecessor, never an edit) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.2]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -1394,12 +1394,12 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — The exact root `schema_version` this batch accepts (v1 seven-field for the first successor; changes only via B21 + Ness adoption) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.2]
 - Gives out: ACCEPTED — The `schema_compat_ref` value carried by Batch manifest. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.2]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: The exact root `schema_version` this batch accepts (v1 seven-field for the first successor; changes only via B21 + Ness adoption) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.2]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.5.5 — B21 — Future root schema and pre-ingest schemas: The exact root `schema_version` this batch accepts (v1 seven-field for the first successor; changes only via B21 + Ness adoption) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.2]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -1463,7 +1463,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Pointer into the append-only state chain (§5) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.2]
 - Gives out: ACCEPTED — The `initial_state_event_ref` value carried by Batch manifest. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.2]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Pointer into the append-only state chain (§5) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.2]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -1486,7 +1486,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Populated only at LB6: final `root_count`, content-integrity summary reference, seal timestamp, sealing-operation ref [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.2]
 - Gives out: ACCEPTED — The `seal_summary` value carried by Batch manifest. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.2]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Populated only at LB6: final `root_count`, content-integrity summary reference, seal timestamp, sealing-operation ref [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.2]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -1494,7 +1494,7 @@ TOGETHER
 - Fed by: ACCEPTED — C-STORE.4.3.2.7.2 — content-integrity summary reference: the field value with its stated form and meaning. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.2]
 - Fed by: ACCEPTED — C-STORE.4.3.2.7.3 — seal timestamp: the field value with its stated form and meaning. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.2]
 - Fed by: ACCEPTED — C-STORE.4.3.2.7.4 — sealing-operation ref: the field value with its stated form and meaning. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.2]
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.5.1.7 — LB6 — Seal commit: Populated only at LB6: final `root_count`, content-integrity summary reference, seal timestamp, sealing-operation ref [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.2]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -1604,7 +1604,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Rotation lineage (successor set append-only at LB6/LB4 of the successor) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.2]
 - Gives out: ACCEPTED — The `predecessor_batch_ref` value carried by Batch manifest. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.2]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Rotation lineage (successor set append-only at LB6/LB4 of the successor) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.2]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -1627,7 +1627,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Rotation lineage (successor set append-only at LB6/LB4 of the successor) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.2]
 - Gives out: ACCEPTED — The `successor_batch_ref` value carried by Batch manifest. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.2]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Rotation lineage (successor set append-only at LB6/LB4 of the successor) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.2]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -1725,7 +1725,7 @@ ALONE
 - Does: ACCEPTED — - Manifests are not activeness authority: a batch's own records never make it active; only a current registry selection does. A batch claiming activeness without being the current selection is a mismatch (§12). [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.3]
 - Gives out: ACCEPTED — The highest committed selection in an unbroken chain. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.3]
 - Must never: ACCEPTED — Allow two selectors to commit the same next epoch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.3]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Blocks ordinary writes on ambiguous current selection, invalid manifest/state or missing committed selection; no guessed target or sealed-batch fallback. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.4]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1740,6 +1740,11 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.4.3 — Batch identity and manifest contract | Batch registrations and selection attempts against the expected prior state. | `batch_registry`  — the single durable canonical authority for (a) which batches exist (one append-only `batch_registration` per batch) and (b) which batch is the current active write target: - `active_selection_record` : append-only; carries `selection_epoch`  (strictly monotonic), the selected `batch_id`, the selecting operation ref, and the expected predecessor epoch. - Single-current invariant: exactly one committed selection per epoch; the current selection is the highest committed epoch in an unbroken chain. - Serialized commit: a selection commits through one durable compare-and-commit boundary against the exact expected prior state — the committed predecessor selection at exactly epoch N (rotation and reactivation), or the expected `none/genesis` state for the very first selection (§6.1 LB4 mode A). Two concurrent selectors cannot both commit N+1: the loser observes the winner's committed record and adopts it (idempotent convergence), never creating a rival. - Manifests are not activeness authority: a batch's own records never make it active; only a current registry selection does. A batch claiming activeness without being the current selection is a mismatch (§12). | The highest committed selection in an unbroken chain. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.3] |
+| 2 · ACCEPTED | C-STORE.4.3.3.2.4 — expected predecessor epoch | The source-defined condition governed by C-STORE.4.3.3. | The exact committed prior selection epoch against which compare-and-commit runs; genesis instead uses expected `none/genesis`. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.3] |
+| 3 · ACCEPTED | C-STORE.4.3.3.4 — Serialized selection commit | The source-defined condition governed by C-STORE.4.3.3. | Compare-and-commit uses the exact expected prior state. Two concurrent selectors cannot both commit N+1; the loser adopts the winner. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.3] |
+| 4 · ACCEPTED | C-STORE.4.5.1.5.1 — Mode A — initial/reactivation selection | The source-defined condition governed by C-STORE.4.3.3. | No writable predecessor exists. Verify non-admission and compare-and-commit only the new selection against expected `none/genesis` or the exact existing epoch; create or rewrite no predecessor cutoff and never modify the historical batch. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1] |
+| 5 · ACCEPTED | C-STORE.4.5.1.5.2 — Mode B — rotation cutover | The source-defined condition governed by C-STORE.4.3.3. | The currently selected `active` predecessor still admits writes. Under committed LB-P, atomically commit successor selection at N+1 and predecessor cutoff; new reservations use only the successor, while proved pre-cutoff reservations retain bounded completion. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1] |
+| 6 · ACCEPTED | C-STORE.4.5.2 — Selection of an already-valid active batch | The source-defined condition governed by C-STORE.4.3.3. | Resolve the registry → current selection exists, chain unbroken, selected batch's derived state is `active`, manifest valid → return `{batch_id, selection_epoch}` to the write path. Idempotent and read-only. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.2] |
 
 SUB-PARTS: C-STORE.4.3.3.1 — batch_registration; C-STORE.4.3.3.2 — active_selection_record; C-STORE.4.3.3.3 — Single-current invariant; C-STORE.4.3.3.4 — Serialized selection commit; C-STORE.4.3.3.5 — Manifest is not activeness authority
 
@@ -1751,7 +1756,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — One append-only registration per batch records existence in the canonical registry. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.3]
 - Gives out: ACCEPTED — The batch is registered; registration alone does not make it writable. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.3]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: One append-only registration per batch records existence in the canonical registry. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.3]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -1874,7 +1879,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.3.3 — Canonical active-batch authority: The exact committed prior selection epoch against which compare-and-commit runs; genesis instead uses expected `none/genesis`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.3]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -1892,7 +1897,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Exactly one committed selection exists per epoch; the highest committed epoch in an unbroken chain is current. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.3]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Exactly one committed selection exists per epoch; the highest committed epoch in an unbroken chain is current. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.3]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -1915,12 +1920,12 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Compare-and-commit uses the exact expected prior state. Two concurrent selectors cannot both commit N+1; the loser adopts the winner. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.3]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Compare-and-commit uses the exact expected prior state. Two concurrent selectors cannot both commit N+1; the loser adopts the winner. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.3]
+- Fails closed by: ACCEPTED — Compare-and-commit uses the exact expected prior state. Two concurrent selectors cannot both commit N+1; the loser adopts the winner. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.3]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.3.3 — Canonical active-batch authority: Compare-and-commit uses the exact expected prior state. Two concurrent selectors cannot both commit N+1; the loser adopts the winner. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.3]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -1938,8 +1943,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — A manifest cannot make its batch the active write target. Only the current canonical selection can do so. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.3]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: A manifest cannot make its batch the active write target. Only the current canonical selection can do so. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.3]
+- Fails closed by: ACCEPTED — A manifest cannot make its batch the active write target. Only the current canonical selection can do so. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.3]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -1988,7 +1993,7 @@ ALONE
 - Takes in: ACCEPTED — Two selection records claim the same epoch [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
 - Does: ACCEPTED — Registry chain scan finds a fork [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
 - Gives out: ACCEPTED — Immediate fail-closed for ordinary writes; recovery §11 row 4 — retention only on committed integrity/provenance evidence, never an invented winner; equally valid records leave both batches non-writable pending a later separately authorized repair (§16) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Choose a selection-fork winner by timestamp, identifier, file order or another invented tie-breaker. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Fails closed by: ACCEPTED — Immediate fail-closed for ordinary writes; recovery §11 row 4 — retention only on committed integrity/provenance evidence, never an invented winner; equally valid records leave both batches non-writable pending a later separately authorized repair (§16) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
 
 TOGETHER
@@ -2012,7 +2017,7 @@ ALONE
 - Does: ACCEPTED — Immediate fail-closed for ordinary writes; recovery §11 row 4 — retention only on committed integrity/provenance evidence, never an invented winner; equally valid records leave both batches non-writable pending a later separately authorized repair (§16) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
 - Gives out: ACCEPTED — Immediate fail-closed for ordinary writes; recovery §11 row 4 — retention only on committed integrity/provenance evidence, never an invented winner; equally valid records leave both batches non-writable pending a later separately authorized repair (§16) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Immediate fail-closed for ordinary writes; recovery §11 row 4 — retention only on committed integrity/provenance evidence, never an invented winner; equally valid records leave both batches non-writable pending a later separately authorized repair (§16) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -2058,7 +2063,7 @@ ALONE
 - Does: ACCEPTED — Fail closed; recovery resolves by evidence [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
 - Gives out: ACCEPTED — Fail closed; recovery resolves by evidence [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Fail closed; recovery resolves by evidence [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -2104,7 +2109,7 @@ ALONE
 - Does: ACCEPTED — Reservation refused/`interrupted`; caller re-resolves [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
 - Gives out: ACCEPTED — Reservation refused/`interrupted`; caller re-resolves [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Reservation refused/`interrupted`; caller re-resolves [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -2150,7 +2155,7 @@ ALONE
 - Does: ACCEPTED — No ordinary writes; creation path §6 or recovery §11 row 5 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
 - Gives out: ACCEPTED — No ordinary writes; creation path §6 or recovery §11 row 5 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — No ordinary writes; creation path §6 or recovery §11 row 5 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -2172,7 +2177,7 @@ ALONE
 - Takes in: ACCEPTED — A batch's files/directories exist without a committed manifest + activation + selection [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
 - Does: ACCEPTED — Writability rule §5.3 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
 - Gives out: ACCEPTED — Not writable — existence is never writability [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Treat file or directory existence as authority to write without a valid committed manifest, activation and selection. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3]
 - Fails closed by: ACCEPTED — Not writable — existence is never writability [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
 
 TOGETHER
@@ -2196,7 +2201,7 @@ ALONE
 - Does: ACCEPTED — Not writable — existence is never writability [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
 - Gives out: ACCEPTED — Not writable — existence is never writability [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Not writable — existence is never writability [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.4]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -2246,6 +2251,16 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.4.3 — Batch identity and manifest contract | The existing root-store location and verified existing seal evidence, plus external registration and historical ownership-coverage evidence. | The pre-B11 batch enters the registry through the bootstrap-registration contract — three external append-only records, touching nothing inside the historical batch: 1. External bootstrap registration : assigns the permanent `batch_id`; `origin_class: pre_b11_historical`; references the existing root store (`location_descriptor`) and the existing `.nh_roots.sealed` marker in place as `seal_evidence_ref`; `schema_compat_ref: v1`. The registration record carries no state field — state is never stored in a registration. 2. External bootstrap state event : one append-only `batch_state_event` `{batch_id, from_state: (none — bootstrap), to_state: sealed, cause: bootstrap_records_pre_existing_seal, evidence_refs: [seal_evidence_ref], operation ref, timestamp}`. The event records a pre-existing sealed condition; it performs no sealing and modifies nothing — not the batch, not its store file, not its seal marker. 3. External bootstrap manifest : one append-only `batch_manifest` satisfying the applicable §4.2 machine-fact contract for the historical batch: the permanent `batch_id`; `manifest_version`; `origin_class = pre_b11_historical`; `schema_compat_ref = v1`; the existing location reference (in place); the bootstrap-registration reference; the bootstrap-state-event reference; the verified seal-evidence reference; an externally recorded seal summary with root-count and integrity references; and the explicit statement that the manifest records existing facts and performs no creation or sealing. Bootstrap-completion ordering and status: (1) registration → (2) bootstrap state event → (3) bootstrap manifest referencing both. A separate `bootstrap_completion_status`  — derived from the bootstrap record set and the §8.2B coverage evidence, never a `batch_state` — carries `incomplete` / `complete` / `recovery_required`. Before the bootstrap state event exists, no canonical historical batch state is yet established; after the legal event, the batch state is `sealed` and never changes again. Completion status becomes `complete` only when the registration, the state event, the bootstrap manifest, and the required §8.2B historical root-ownership coverage all validate; until then it is `incomplete` (or `recovery_required` on contradictory evidence), the batch is excluded from completeness claims, and it remains never writable — while its canonical `sealed` state stays accurate. The batch is fully discoverable only at completion status `complete` (§10.1). A crash leaving a partial set never affects historical bytes, never creates writability, and never permits a false completeness claim: recovery resumes the sequence idempotently or the status rests `incomplete` / `recovery_required` (§11 rows 54–55). No partial bootstrap step touches historical roots, files, seal markers, or existing indexes. Legality (the §5.2 bounded historical-bootstrap transition): this event is legal only when all seven conditions hold simultaneously: (1) `origin_class = pre_b11_historical`; (2) the external bootstrap registration is already committed; (3) the existing historical root-store location is referenced in place; (4) the existing `.nh_roots.sealed` evidence is verified and referenced; (5) the event's cause explicitly states that it records a pre-existing sealed condition; (6) no ordinary creation, activation, sealing, LB5, or LB6 operation is being performed; (7) no historical byte, root, store, marker, identity, or index entry is changed. Discovery and recovery validate these conditions whenever the bootstrap event is examined (§10.1). From that event forward, the historical batch participates in the same derived-state and registry-validation rules as every other batch (§5.1): its current state derives from its event chain exactly like any batch, and discovery validates it identically (§10.1). It remains permanently ineligible for active selection or ordinary writes — the registry cannot select a `sealed` batch and the append boundary independently refuses sealed targets (§6.4, §12); `sealed` is terminal for writability (§5.2). | A derived `sealed` state after the legal event and a separate honest bootstrap-completion status. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5] |
+| 2 · ACCEPTED | C-STORE.4.4.2.2 — (none — historical bootstrap) → `sealed` | The source-defined condition governed by C-STORE.4.3.5. | Legal only for the pre-B11 historical batch, under all seven §4.5 legality conditions simultaneously; it records a pre-existing sealed condition and performs nothing. For every non-historical batch, `(none) → sealed` remains illegal. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] |
+| 3 · ACCEPTED | C-STORE.4.3.5.3 — External bootstrap manifest | The source-defined condition governed by C-STORE.4.3.5. | References the committed bootstrap registration and state event, verified seal evidence and externally recorded seal summary. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5] |
+| 4 · ACCEPTED | C-STORE.4.3.5.4.2 — complete | The source-defined condition governed by C-STORE.4.3.5. | Registration, state event, bootstrap manifest and historical root-ownership coverage all validate; full discovery is permitted. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5] |
+| 5 · ACCEPTED | C-STORE.4.3.5.5 — Historical-bootstrap legality condition 1 | The source-defined condition governed by C-STORE.4.3.5. | `origin_class = pre_b11_historical`. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5] |
+| 6 · ACCEPTED | C-STORE.4.3.5.6 — Historical-bootstrap legality condition 2 | The source-defined condition governed by C-STORE.4.3.5. | The external bootstrap registration is already committed. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5] |
+| 7 · ACCEPTED | C-STORE.4.3.5.7 — Historical-bootstrap legality condition 3 | The source-defined condition governed by C-STORE.4.3.5. | The historical root-store location is referenced in place. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5] |
+| 8 · ACCEPTED | C-STORE.4.3.5.8 — Historical-bootstrap legality condition 4 | The source-defined condition governed by C-STORE.4.3.5. | Existing `.nh_roots.sealed` evidence is verified and referenced. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5] |
+| 9 · ACCEPTED | C-STORE.4.3.5.9 — Historical-bootstrap legality condition 5 | The source-defined condition governed by C-STORE.4.3.5. | The cause explicitly records a pre-existing sealed condition. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5] |
+| 10 · ACCEPTED | C-STORE.4.3.5.10 — Historical-bootstrap legality condition 6 | The source-defined condition governed by C-STORE.4.3.5. | No ordinary creation, activation, sealing, LB5 or LB6 operation is performed. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5] |
+| 11 · ACCEPTED | C-STORE.4.3.5.11 — Historical-bootstrap legality condition 7 | The source-defined condition governed by C-STORE.4.3.5. | No historical byte, root, store, marker, identity or index entry changes. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5] |
 
 SUB-PARTS: C-STORE.4.3.5.1 — External bootstrap registration; C-STORE.4.3.5.2 — External bootstrap state event; C-STORE.4.3.5.3 — External bootstrap manifest; C-STORE.4.3.5.4 — bootstrap_completion_status; C-STORE.4.3.5.5 — Historical-bootstrap legality condition 1; C-STORE.4.3.5.6 — Historical-bootstrap legality condition 2; C-STORE.4.3.5.7 — Historical-bootstrap legality condition 3; C-STORE.4.3.5.8 — Historical-bootstrap legality condition 4; C-STORE.4.3.5.9 — Historical-bootstrap legality condition 5; C-STORE.4.3.5.10 — Historical-bootstrap legality condition 6; C-STORE.4.3.5.11 — Historical-bootstrap legality condition 7
 
@@ -2258,7 +2273,7 @@ ALONE
 - Does: ACCEPTED — Assigns identity and references the existing store and seal in place. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Carry a state field or change anything in the historical batch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — An incomplete or contradictory external bootstrap set grants neither writability nor a completeness claim; recovery resumes idempotently or leaves completion incomplete/recovery_required without touching historical bytes. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 
 TOGETHER
 - Fed by: ACCEPTED — C-STORE.4.3.5.1.1 — batch_id: the field value with its stated form and meaning. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
@@ -2400,7 +2415,7 @@ ALONE
 - Does: ACCEPTED — Establishes the derived canonical `sealed` state without performing sealing or modifying historical bytes. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Gives out: ACCEPTED — Canonical historical state `sealed`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Must never: ACCEPTED — Perform creation, activation, LB5 or LB6 on the historical batch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — An incomplete or contradictory external bootstrap set grants neither writability nor a completeness claim; recovery resumes idempotently or leaves completion incomplete/recovery_required without touching historical bytes. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 
 TOGETHER
 - Fed by: ACCEPTED — C-STORE.4.3.5.2.1 — batch_id: the field value with its stated form and meaning. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
@@ -2590,7 +2605,7 @@ ALONE
 - Does: ACCEPTED — References the committed bootstrap registration and state event, verified seal evidence and externally recorded seal summary. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Perform creation or sealing, or change the historical batch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — An incomplete or contradictory external bootstrap set grants neither writability nor a completeness claim; recovery resumes idempotently or leaves completion incomplete/recovery_required without touching historical bytes. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 
 TOGETHER
 - Fed by: ACCEPTED — C-STORE.4.3.5.3.1 — batch_id: the field value with its stated form and meaning. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
@@ -2603,7 +2618,7 @@ TOGETHER
 - Fed by: ACCEPTED — C-STORE.4.3.5.3.8 — verified seal-evidence reference: the field value with its stated form and meaning. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Fed by: ACCEPTED — C-STORE.4.3.5.3.9 — external seal summary: the field value with its stated form and meaning. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Fed by: ACCEPTED — C-STORE.4.3.5.3.10 — records-existing-facts statement: the field value with its stated form and meaning. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.3.5 — The existing 5,521-root batch — represented without modification: References the committed bootstrap registration and state event, verified seal evidence and externally recorded seal summary. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -2644,7 +2659,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Append-only manifest version. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Gives out: ACCEPTED — The `manifest_version` value carried by External bootstrap manifest. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Append-only manifest version. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -2828,7 +2843,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Explicitly records existing facts and performs no creation or sealing. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Gives out: ACCEPTED — The `records-existing-facts statement` value carried by External bootstrap manifest. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Explicitly records existing facts and performs no creation or sealing. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -2876,8 +2891,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — One or more of the four required components has not yet validated; no false completeness or writability. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Gives out: ACCEPTED — `incomplete`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: One or more of the four required components has not yet validated; no false completeness or writability. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
+- Fails closed by: ACCEPTED — One or more of the four required components has not yet validated; no false completeness or writability. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -2904,7 +2919,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.3.5 — The existing 5,521-root batch — represented without modification: Registration, state event, bootstrap manifest and historical root-ownership coverage all validate; full discovery is permitted. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -2922,8 +2937,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Contradictory bootstrap evidence blocks completeness; only external append-only correction may resolve it. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Gives out: ACCEPTED — `recovery_required`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Contradictory bootstrap evidence blocks completeness; only external append-only correction may resolve it. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
+- Fails closed by: ACCEPTED — Contradictory bootstrap evidence blocks completeness; only external append-only correction may resolve it. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -2946,11 +2961,11 @@ ALONE
 - Does: ACCEPTED — `origin_class = pre_b11_historical`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Establish the historical state event unless all seven conditions hold simultaneously. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — An incomplete or contradictory external bootstrap set grants neither writability nor a completeness claim; recovery resumes idempotently or leaves completion incomplete/recovery_required without touching historical bytes. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.3.5 — The existing 5,521-root batch — represented without modification: `origin_class = pre_b11_historical`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -2969,11 +2984,11 @@ ALONE
 - Does: ACCEPTED — The external bootstrap registration is already committed. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Establish the historical state event unless all seven conditions hold simultaneously. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — An incomplete or contradictory external bootstrap set grants neither writability nor a completeness claim; recovery resumes idempotently or leaves completion incomplete/recovery_required without touching historical bytes. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.3.5 — The existing 5,521-root batch — represented without modification: The external bootstrap registration is already committed. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -2992,11 +3007,11 @@ ALONE
 - Does: ACCEPTED — The historical root-store location is referenced in place. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Establish the historical state event unless all seven conditions hold simultaneously. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — An incomplete or contradictory external bootstrap set grants neither writability nor a completeness claim; recovery resumes idempotently or leaves completion incomplete/recovery_required without touching historical bytes. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.3.5 — The existing 5,521-root batch — represented without modification: The historical root-store location is referenced in place. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -3015,11 +3030,11 @@ ALONE
 - Does: ACCEPTED — Existing `.nh_roots.sealed` evidence is verified and referenced. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Establish the historical state event unless all seven conditions hold simultaneously. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — An incomplete or contradictory external bootstrap set grants neither writability nor a completeness claim; recovery resumes idempotently or leaves completion incomplete/recovery_required without touching historical bytes. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.3.5 — The existing 5,521-root batch — represented without modification: Existing `.nh_roots.sealed` evidence is verified and referenced. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -3038,11 +3053,11 @@ ALONE
 - Does: ACCEPTED — The cause explicitly records a pre-existing sealed condition. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Establish the historical state event unless all seven conditions hold simultaneously. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — An incomplete or contradictory external bootstrap set grants neither writability nor a completeness claim; recovery resumes idempotently or leaves completion incomplete/recovery_required without touching historical bytes. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.3.5 — The existing 5,521-root batch — represented without modification: The cause explicitly records a pre-existing sealed condition. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -3061,11 +3076,11 @@ ALONE
 - Does: ACCEPTED — No ordinary creation, activation, sealing, LB5 or LB6 operation is performed. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Establish the historical state event unless all seven conditions hold simultaneously. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — An incomplete or contradictory external bootstrap set grants neither writability nor a completeness claim; recovery resumes idempotently or leaves completion incomplete/recovery_required without touching historical bytes. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.3.5 — The existing 5,521-root batch — represented without modification: No ordinary creation, activation, sealing, LB5 or LB6 operation is performed. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -3084,11 +3099,11 @@ ALONE
 - Does: ACCEPTED — No historical byte, root, store, marker, identity or index entry changes. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Establish the historical state event unless all seven conditions hold simultaneously. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — An incomplete or contradictory external bootstrap set grants neither writability nor a completeness claim; recovery resumes idempotently or leaves completion incomplete/recovery_required without touching historical bytes. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.3.5 — The existing 5,521-root batch — represented without modification: No historical byte, root, store, marker, identity or index entry changes. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.5]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -3107,7 +3122,7 @@ ALONE
 - Does: ACCEPTED — Derives current state and enforces legal transitions and distinct admission/completion rules. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5]
 - Gives out: ACCEPTED — A proved state and the corresponding admission or bounded-completion result. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5]
 - Must never: ACCEPTED — Edit a state event in place. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refuses illegal or unproven state transitions; current state remains derived from the append-only event chain. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3230,7 +3245,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Seal-start committed; no new admission after the cutoff; only validated pre-cutoff completion remains. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3]
 - Gives out: ACCEPTED — `sealing`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Seal-start committed; no new admission after the cutoff; only validated pre-cutoff completion remains. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -3253,7 +3268,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — No ordinary operation restores writability; readable subject to integrity and access rules. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3]
 - Gives out: ACCEPTED — `sealed`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: No ordinary operation restores writability; readable subject to integrity and access rules. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -3276,7 +3291,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Evidence-based recovery is required; it does not confer an append right. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3]
 - Gives out: ACCEPTED — `recovery_required`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Evidence-based recovery is required; it does not confer an append right. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -3299,7 +3314,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Excluded from writable states; integrity marking does not rewrite bytes. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3]
 - Gives out: ACCEPTED — `invalid`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Excluded from writable states; integrity marking does not rewrite bytes. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -3513,7 +3528,7 @@ ALONE
 - Does: ACCEPTED — Admits only the legal, evidence-proven transitions. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Gives out: ACCEPTED — A legal state event or a prohibited transition. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Must never: ACCEPTED — Use a never-selected abandonment transition on an ever-selected batch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refuses illegal or unproven state transitions; current state remains derived from the append-only event chain. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3538,6 +3553,7 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.4.4 — Lifecycle and legal-transition table | Requested from/to state and the required durable evidence. | Admits only the legal, evidence-proven transitions. | A legal state event or a prohibited transition. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] |
+| 2 · ACCEPTED | C-STORE.4.4.2.15 — `sealed` → `invalid` | The source-defined condition governed by C-STORE.4.4.2. | Legal only as an integrity-failure marking (batch flagged, excluded from coverage claims); it never restores writability and never alters the batch's bytes | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] |
 
 SUB-PARTS: C-STORE.4.4.2.1 — (none) → `preparing`; C-STORE.4.4.2.2 — (none — historical bootstrap) → `sealed`; C-STORE.4.4.2.3 — `active` → `invalid` (never-selected abandonment); C-STORE.4.4.2.4 — `preparing` → `active`; C-STORE.4.4.2.5 — `preparing` → `invalid`; C-STORE.4.4.2.6 — `active` → `sealing`; C-STORE.4.4.2.7 — `sealing` → `sealed`; C-STORE.4.4.2.8 — `sealing` → `recovery_required`; C-STORE.4.4.2.9 — any → `recovery_required`; C-STORE.4.4.2.10 — `recovery_required` → the state proven by evidence, or `invalid`; C-STORE.4.4.2.11 — `sealed` → anything writable (`active` / `preparing` / `sealing`); C-STORE.4.4.2.12 — `invalid` → any writable state; C-STORE.4.4.2.13 — `preparing` → `sealed`; C-STORE.4.4.2.14 — `active` → `sealed` (skipping `sealing`); C-STORE.4.4.2.15 — `sealed` → `invalid`
 
@@ -3549,12 +3565,12 @@ ALONE
 - Takes in: ACCEPTED — (none) → `preparing` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Does: ACCEPTED — Legal — only via LB1 plan + LB2 manifest commit [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Gives out: ACCEPTED — Durable evidence: Creation plan + committed manifest [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Legal — only via LB1 plan + LB2 manifest commit [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
+- Fails closed by: ACCEPTED — Does not perform this transition unless its stated legality conditions and durable evidence are satisfied. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.5.1.2 — LB1 — Creation-plan commit, C-STORE.4.5.1.3 — LB2 — Manifest commit: Legal — only via LB1 plan + LB2 manifest commit [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -3572,12 +3588,12 @@ ALONE
 - Takes in: ACCEPTED — (none — historical bootstrap) → `sealed` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Does: ACCEPTED — Legal only for the pre-B11 historical batch, under all seven §4.5 legality conditions simultaneously; it records a pre-existing sealed condition and performs nothing. For every non-historical batch, `(none) → sealed` remains illegal. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Gives out: ACCEPTED — Durable evidence: Committed bootstrap registration + verified `.nh_roots.sealed` reference + the bootstrap state event with its recording cause [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Legal only for the pre-B11 historical batch, under all seven §4.5 legality conditions simultaneously; it records a pre-existing sealed condition and performs nothing. For every non-historical batch, `(none) → sealed` remains illegal. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
+- Fails closed by: ACCEPTED — Does not perform this transition unless its stated legality conditions and durable evidence are satisfied. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.3.5 — The existing 5,521-root batch — represented without modification: Legal only for the pre-B11 historical batch, under all seven §4.5 legality conditions simultaneously; it records a pre-existing sealed condition and performs nothing. For every non-historical batch, `(none) → sealed` remains illegal. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -3595,8 +3611,8 @@ ALONE
 - Takes in: ACCEPTED — `active` → `invalid` (never-selected abandonment) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Does: ACCEPTED — Legal only when all seven are proven: the batch was activated by LB3; it was never the committed selected batch at any epoch; it admitted no WB1 reservation; it committed no root; it owns no unresolved claim generation; a competing valid selection or stale-plan result conclusively prevents it from becoming the intended selection; and the invalidation event records that superseding selection or stale-plan evidence. An `active` batch that was ever selected can never use this transition — it follows normal cutoff, sealing, recovery, or integrity-failure rules. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Gives out: ACCEPTED — Durable evidence: Activation event + absence proofs (zero reservations, zero roots, zero live generations) + the superseding selection or stale-plan evidence, all recorded in the invalidation event [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Legal only when all seven are proven: the batch was activated by LB3; it was never the committed selected batch at any epoch; it admitted no WB1 reservation; it committed no root; it owns no unresolved claim generation; a competing valid selection or stale-plan result conclusively prevents it from becoming the intended selection; and the invalidation event records that superseding selection or stale-plan evidence. An `active` batch that was ever selected can never use this transition — it follows normal cutoff, sealing, recovery, or integrity-failure rules. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
+- Fails closed by: ACCEPTED — Does not perform this transition unless its stated legality conditions and durable evidence are satisfied. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3613,6 +3629,13 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.4.4.2 — Legal and illegal transitions | `active` → `invalid` (never-selected abandonment) | Legal only when all seven are proven: the batch was activated by LB3; it was never the committed selected batch at any epoch; it admitted no WB1 reservation; it committed no root; it owns no unresolved claim generation; a competing valid selection or stale-plan result conclusively prevents it from becoming the intended selection; and the invalidation event records that superseding selection or stale-plan evidence. An `active` batch that was ever selected can never use this transition — it follows normal cutoff, sealing, recovery, or integrity-failure rules. | Durable evidence: Activation event + absence proofs (zero reservations, zero roots, zero live generations) + the superseding selection or stale-plan evidence, all recorded in the invalidation event | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] |
+| 2 · ACCEPTED | C-STORE.4.4.2.3.1 — Never-selected abandonment condition 1 | The source-defined condition governed by C-STORE.4.4.2.3. | LB3 activation exists. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] |
+| 3 · ACCEPTED | C-STORE.4.4.2.3.2 — Never-selected abandonment condition 2 | The source-defined condition governed by C-STORE.4.4.2.3. | The batch was never selected at any epoch. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] |
+| 4 · ACCEPTED | C-STORE.4.4.2.3.3 — Never-selected abandonment condition 3 | The source-defined condition governed by C-STORE.4.4.2.3. | It admitted zero WB1 reservations. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] |
+| 5 · ACCEPTED | C-STORE.4.4.2.3.4 — Never-selected abandonment condition 4 | The source-defined condition governed by C-STORE.4.4.2.3. | It committed zero roots. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] |
+| 6 · ACCEPTED | C-STORE.4.4.2.3.5 — Never-selected abandonment condition 5 | The source-defined condition governed by C-STORE.4.4.2.3. | It owns no unresolved claim generation. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] |
+| 7 · ACCEPTED | C-STORE.4.4.2.3.6 — Never-selected abandonment condition 6 | The source-defined condition governed by C-STORE.4.4.2.3. | A competing valid selection or stale-plan result conclusively prevents the intended selection. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] |
+| 8 · ACCEPTED | C-STORE.4.4.2.3.7 — Never-selected abandonment condition 7 | The source-defined condition governed by C-STORE.4.4.2.3. | The invalidation event records the superseding selection or stale-plan evidence. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] |
 
 SUB-PARTS: C-STORE.4.4.2.3.1 — Never-selected abandonment condition 1; C-STORE.4.4.2.3.2 — Never-selected abandonment condition 2; C-STORE.4.4.2.3.3 — Never-selected abandonment condition 3; C-STORE.4.4.2.3.4 — Never-selected abandonment condition 4; C-STORE.4.4.2.3.5 — Never-selected abandonment condition 5; C-STORE.4.4.2.3.6 — Never-selected abandonment condition 6; C-STORE.4.4.2.3.7 — Never-selected abandonment condition 7
 
@@ -3625,11 +3648,11 @@ ALONE
 - Does: ACCEPTED — LB3 activation exists. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Use never-selected abandonment for an ever-selected batch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Blocks never-selected abandonment when this required proof is absent; an ever-selected active batch cannot take that transition. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.4.2.3 — `active` → `invalid` (never-selected abandonment): LB3 activation exists. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -3648,11 +3671,11 @@ ALONE
 - Does: ACCEPTED — The batch was never selected at any epoch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Use never-selected abandonment for an ever-selected batch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Blocks never-selected abandonment when this required proof is absent; an ever-selected active batch cannot take that transition. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.4.2.3 — `active` → `invalid` (never-selected abandonment): The batch was never selected at any epoch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -3671,11 +3694,11 @@ ALONE
 - Does: ACCEPTED — It admitted zero WB1 reservations. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Use never-selected abandonment for an ever-selected batch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Blocks never-selected abandonment when this required proof is absent; an ever-selected active batch cannot take that transition. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.4.2.3 — `active` → `invalid` (never-selected abandonment): It admitted zero WB1 reservations. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -3694,11 +3717,11 @@ ALONE
 - Does: ACCEPTED — It committed zero roots. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Use never-selected abandonment for an ever-selected batch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Blocks never-selected abandonment when this required proof is absent; an ever-selected active batch cannot take that transition. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.4.2.3 — `active` → `invalid` (never-selected abandonment): It committed zero roots. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -3717,11 +3740,11 @@ ALONE
 - Does: ACCEPTED — It owns no unresolved claim generation. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Use never-selected abandonment for an ever-selected batch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Blocks never-selected abandonment when this required proof is absent; an ever-selected active batch cannot take that transition. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.4.2.3 — `active` → `invalid` (never-selected abandonment): It owns no unresolved claim generation. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -3740,11 +3763,11 @@ ALONE
 - Does: ACCEPTED — A competing valid selection or stale-plan result conclusively prevents the intended selection. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Use never-selected abandonment for an ever-selected batch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Blocks never-selected abandonment when this required proof is absent; an ever-selected active batch cannot take that transition. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.4.2.3 — `active` → `invalid` (never-selected abandonment): A competing valid selection or stale-plan result conclusively prevents the intended selection. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -3763,11 +3786,11 @@ ALONE
 - Does: ACCEPTED — The invalidation event records the superseding selection or stale-plan evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Use never-selected abandonment for an ever-selected batch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Blocks never-selected abandonment when this required proof is absent; an ever-selected active batch cannot take that transition. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.4.2.3 — `active` → `invalid` (never-selected abandonment): The invalidation event records the superseding selection or stale-plan evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -3785,12 +3808,12 @@ ALONE
 - Takes in: ACCEPTED — `preparing` → `active` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Does: ACCEPTED — Legal — only via LB3 validation + activation event, then LB4 selection makes it the write target [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Gives out: ACCEPTED — Durable evidence: Validation results + activation event + (for writes) current selection [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Legal — only via LB3 validation + activation event, then LB4 selection makes it the write target [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
+- Fails closed by: ACCEPTED — Does not perform this transition unless its stated legality conditions and durable evidence are satisfied. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.5.1.4 — LB3 — Activation commit, C-STORE.4.5.1.5 — LB4 — Selection commit — one authority, two mechanically distinct modes: Legal — only via LB3 validation + activation event, then LB4 selection makes it the write target [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -3809,7 +3832,7 @@ ALONE
 - Does: ACCEPTED — Legal (abandoned or failed preparation; cause recorded) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Gives out: ACCEPTED — Durable evidence: Abandonment/failure event [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Legal (abandoned or failed preparation; cause recorded) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3831,12 +3854,12 @@ ALONE
 - Takes in: ACCEPTED — `active` → `sealing` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Does: ACCEPTED — Legal — only via LB5 seal-start within a committed rotation/seal plan [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Gives out: ACCEPTED — Durable evidence: Rotation/seal plan + sealing event [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Legal — only via LB5 seal-start within a committed rotation/seal plan [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
+- Fails closed by: ACCEPTED — Does not perform this transition unless its stated legality conditions and durable evidence are satisfied. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.5.1.6 — LB5 — Seal-start commit: Legal — only via LB5 seal-start within a committed rotation/seal plan [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -3854,12 +3877,12 @@ ALONE
 - Takes in: ACCEPTED — `sealing` → `sealed` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Does: ACCEPTED — Legal — only via LB6 after drain + verification (§9) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Gives out: ACCEPTED — Durable evidence: Drain-complete evidence + verification results + seal event + final manifest version [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Legal — only via LB6 after drain + verification (§9) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
+- Fails closed by: ACCEPTED — Does not perform this transition unless its stated legality conditions and durable evidence are satisfied. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.8.4 — Drain, C-STORE.4.8.5 — Verification before seal: Legal — only via LB6 after drain + verification (§9) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -3878,7 +3901,7 @@ ALONE
 - Does: ACCEPTED — Legal on detected interruption [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Gives out: ACCEPTED — Durable evidence: Recovery-detection event [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Legal on detected interruption [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3901,7 +3924,7 @@ ALONE
 - Does: ACCEPTED — Legal on crash-evidence detection; transient [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Gives out: ACCEPTED — Durable evidence: Detection event [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Legal on crash-evidence detection; transient [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -3923,8 +3946,8 @@ ALONE
 - Takes in: ACCEPTED — `recovery_required` → the state proven by evidence, or `invalid` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Does: ACCEPTED — Legal — recovery resolves only to what committed records prove (§11) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Gives out: ACCEPTED — Durable evidence: Recovery-run records [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Legal — recovery resolves only to what committed records prove (§11) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
+- Fails closed by: ACCEPTED — Legal — recovery resolves only to what committed records prove (§11) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -4038,12 +4061,12 @@ ALONE
 - Takes in: ACCEPTED — `sealed` → `invalid` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Does: ACCEPTED — Legal only as an integrity-failure marking (batch flagged, excluded from coverage claims); it never restores writability and never alters the batch's bytes [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Gives out: ACCEPTED — Durable evidence: Integrity-failure event [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Legal only as an integrity-failure marking (batch flagged, excluded from coverage claims); it never restores writability and never alters the batch's bytes [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
+- Fails closed by: ACCEPTED — Does not perform this transition unless its stated legality conditions and durable evidence are satisfied. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.4.2 — Legal and illegal transitions: Legal only as an integrity-failure marking (batch flagged, excluded from coverage claims); it never restores writability and never alters the batch's bytes [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -4078,6 +4101,9 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.4.4 — Lifecycle and legal-transition table | Manifest, current state, canonical selection epoch and any durable pre-cutoff reservation. | Ordinary write-admission rule: a batch admits a new WB1 reservation iff: a committed valid manifest exists and its derived current state is `active` and it is the current registry selection at the epoch the writer resolved. Pre-cutoff completion rule: a durable WB1 reservation granted before the batch's committed admission cutoff (`admission_cutoff_id` — the LB4 cutover for rotation, the LB5 cutoff for shutdown-seal; §9.2/§9.2A) is a bounded completion right — its WB2 may complete into that exact batch (typically while the batch is `sealing`), subject to the full §7.6 completion validation. This right belongs only to that exact reservation and its exact global claim; no unreserved or newly retried write may use it. No batch becomes writable merely because a file or directory exists. Failing admission while holding no valid pre-cutoff completion right → the write does not proceed (§12). | New reservation only when all admission conditions hold; otherwise only a valid pre-cutoff completion may proceed. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3] |
+| 2 · ACCEPTED | C-STORE.4.4.3.1 — Ordinary write-admission condition 1 | The source-defined condition governed by C-STORE.4.4.3. | A committed valid manifest exists. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3] |
+| 3 · ACCEPTED | C-STORE.4.4.3.2 — Ordinary write-admission condition 2 | The source-defined condition governed by C-STORE.4.4.3. | Derived current state is `active`. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3] |
+| 4 · ACCEPTED | C-STORE.4.4.3.3 — Ordinary write-admission condition 3 | The source-defined condition governed by C-STORE.4.4.3. | The batch is the current registry selection at the writer-resolved epoch. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3] |
 
 SUB-PARTS: C-STORE.4.4.3.1 — Ordinary write-admission condition 1; C-STORE.4.4.3.2 — Ordinary write-admission condition 2; C-STORE.4.4.3.3 — Ordinary write-admission condition 3; C-STORE.4.4.3.4 — admission_cutoff_id
 
@@ -4090,11 +4116,11 @@ ALONE
 - Does: ACCEPTED — A committed valid manifest exists. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Grant a new WB1 reservation unless all three conditions hold. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Without this ordinary-admission condition, no new WB1 reservation is admitted; a separately valid pre-cutoff completion right remains bounded by its own checks. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.4.3 — Writability rules (binding — admission and completion are distinct): A committed valid manifest exists. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -4113,11 +4139,11 @@ ALONE
 - Does: ACCEPTED — Derived current state is `active`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Grant a new WB1 reservation unless all three conditions hold. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Without this ordinary-admission condition, no new WB1 reservation is admitted; a separately valid pre-cutoff completion right remains bounded by its own checks. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.4.3 — Writability rules (binding — admission and completion are distinct): Derived current state is `active`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -4136,11 +4162,11 @@ ALONE
 - Does: ACCEPTED — The batch is the current registry selection at the writer-resolved epoch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Grant a new WB1 reservation unless all three conditions hold. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Without this ordinary-admission condition, no new WB1 reservation is admitted; a separately valid pre-cutoff completion right remains bounded by its own checks. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.4.3 — Writability rules (binding — admission and completion are distinct): The batch is the current registry selection at the writer-resolved epoch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.3]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -4253,7 +4279,7 @@ ALONE
 - Does: ACCEPTED — Selects or creates the active target through the defined lifecycle boundaries. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6]
 - Gives out: ACCEPTED — A current `{batch_id, selection_epoch}` or a refusal. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6]
 - Must never: ACCEPTED — Guess a writable target or fall back to a sealed batch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Stops ordinary selection on ambiguity; a missing or uncommitted prerequisite authorizes no dependent action, and no sealed batch is used as fallback. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.3] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.4]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -4279,7 +4305,7 @@ ALONE
 - Does: ACCEPTED — Commits the LB-P and LB1–LB7 boundaries with the separate LB4 modes and atomic shutdown cutoff. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 - Gives out: ACCEPTED — The committed plan, manifest, activation, selection, seal or index registration for the executed boundary. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 - Must never: ACCEPTED — Execute a plan-dependent action before its plan is durable. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Stops ordinary selection on ambiguity; a missing or uncommitted prerequisite authorizes no dependent action, and no sealed batch is used as fallback. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.3] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.4]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -4308,8 +4334,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — One durable, idempotent plan before any dependent action: plan identity; target active batch; cause class (`rotation` / `shutdown_seal`); expected current selection epoch and active batch; whether a successor is intended; operation identity and provenance; the later configuration/calibration trigger reference (no numerical value invented). No successor creation, cutoff, seal-start, cancellation, or lineage update proceeds without it; a stale plan (expected epoch changed) is superseded and authorizes no new effects (§11 row 34) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 - Gives out: ACCEPTED — One durable, idempotent plan before any dependent action: plan identity; target active batch; cause class (`rotation` / `shutdown_seal`); expected current selection epoch and active batch; whether a successor is intended; operation identity and provenance; the later configuration/calibration trigger reference (no numerical value invented). No successor creation, cutoff, seal-start, cancellation, or lineage update proceeds without it; a stale plan (expected epoch changed) is superseded and authorizes no new effects (§11 row 34) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: One durable, idempotent plan before any dependent action: plan identity; target active batch; cause class (`rotation` / `shutdown_seal`); expected current selection epoch and active batch; whether a successor is intended; operation identity and provenance; the later configuration/calibration trigger reference (no numerical value invented). No successor creation, cutoff, seal-start, cancellation, or lineage update proceeds without it; a stale plan (expected epoch changed) is superseded and authorizes no new effects (§11 row 34) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
+- Fails closed by: ACCEPTED — A stale plan is superseded with no new effects; existing external records remain preserved and no dependent action proceeds without its committed plan. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.1]
 
 TOGETHER
 - Fed by: ACCEPTED — C-STORE.4.5.1.1.1 — plan identity: the field value with its stated form and meaning. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
@@ -4327,6 +4353,9 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.4.5.1 — Lifecycle transaction boundaries | NOT DECIDED | One durable, idempotent plan before any dependent action: plan identity; target active batch; cause class (`rotation` / `shutdown_seal`); expected current selection epoch and active batch; whether a successor is intended; operation identity and provenance; the later configuration/calibration trigger reference (no numerical value invented). No successor creation, cutoff, seal-start, cancellation, or lineage update proceeds without it; a stale plan (expected epoch changed) is superseded and authorizes no new effects (§11 row 34) | One durable, idempotent plan before any dependent action: plan identity; target active batch; cause class (`rotation` / `shutdown_seal`); expected current selection epoch and active batch; whether a successor is intended; operation identity and provenance; the later configuration/calibration trigger reference (no numerical value invented). No successor creation, cutoff, seal-start, cancellation, or lineage update proceeds without it; a stale plan (expected epoch changed) is superseded and authorizes no new effects (§11 row 34) | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1] |
+| 2 · ACCEPTED | C-STORE.4.5.1.2 — LB1 — Creation-plan commit | The source-defined condition governed by C-STORE.4.5.1.1. | New `batch_id`, reason (`no_active` / `rotation`), expected predecessor epoch, creator operation ref. `rotation` successors are created only under the existing committed LB-P rotation plan (plan ref carried); genesis and post-shutdown/reactivation successors use `no_active` — governed solely by this idempotent LB1 creation plan, feeding LB4 mode A (§6.3, §9.2A). `shutdown_seal_successor` is not a permitted reason and cannot authorize a rotation-plan path or a second cutoff. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1] |
+| 3 · ACCEPTED | C-STORE.4.5.1.2.2.2 — rotation | The source-defined condition governed by C-STORE.4.5.1.1. | A rotation successor uses `rotation` only under the existing committed LB-P plan, whose reference is carried. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1] |
+| 4 · ACCEPTED | C-STORE.4.5.1.6 — LB5 — Seal-start commit | The source-defined condition governed by C-STORE.4.5.1.1. | Under the committed LB-P plan: the `sealing` state event. Rotation path: admission was already cut at LB4; LB5 records the transition. Shutdown-seal path (§9.2A): LB5 atomically commits the batch's `admission_cutoff_id` marker + admission stop + `active`→`sealing` + the plan reference — one boundary, so shutdown reservations are classifiable against a durable cutoff | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1] |
 
 SUB-PARTS: C-STORE.4.5.1.1.1 — plan identity; C-STORE.4.5.1.1.2 — target active batch; C-STORE.4.5.1.1.3 — cause class; C-STORE.4.5.1.1.4 — expected current selection epoch and active batch; C-STORE.4.5.1.1.5 — whether a successor is intended; C-STORE.4.5.1.1.6 — operation identity and provenance; C-STORE.4.5.1.1.7 — trigger reference; C-STORE.4.5.1.1.8 — rotation; C-STORE.4.5.1.1.9 — shutdown_seal
 
@@ -4545,8 +4574,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — New `batch_id`, reason (`no_active` / `rotation`), expected predecessor epoch, creator operation ref. `rotation` successors are created only under the existing committed LB-P rotation plan (plan ref carried); genesis and post-shutdown/reactivation successors use `no_active` — governed solely by this idempotent LB1 creation plan, feeding LB4 mode A (§6.3, §9.2A). `shutdown_seal_successor` is not a permitted reason and cannot authorize a rotation-plan path or a second cutoff. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 - Gives out: ACCEPTED — New `batch_id`, reason (`no_active` / `rotation`), expected predecessor epoch, creator operation ref. `rotation` successors are created only under the existing committed LB-P rotation plan (plan ref carried); genesis and post-shutdown/reactivation successors use `no_active` — governed solely by this idempotent LB1 creation plan, feeding LB4 mode A (§6.3, §9.2A). `shutdown_seal_successor` is not a permitted reason and cannot authorize a rotation-plan path or a second cutoff. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: New `batch_id`, reason (`no_active` / `rotation`), expected predecessor epoch, creator operation ref. `rotation` successors are created only under the existing committed LB-P rotation plan (plan ref carried); genesis and post-shutdown/reactivation successors use `no_active` — governed solely by this idempotent LB1 creation plan, feeding LB4 mode A (§6.3, §9.2A). `shutdown_seal_successor` is not a permitted reason and cannot authorize a rotation-plan path or a second cutoff. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
+- Fails closed by: ACCEPTED — New `batch_id`, reason (`no_active` / `rotation`), expected predecessor epoch, creator operation ref. `rotation` successors are created only under the existing committed LB-P rotation plan (plan ref carried); genesis and post-shutdown/reactivation successors use `no_active` — governed solely by this idempotent LB1 creation plan, feeding LB4 mode A (§6.3, §9.2A). `shutdown_seal_successor` is not a permitted reason and cannot authorize a rotation-plan path or a second cutoff. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 
 TOGETHER
 - Fed by: ACCEPTED — C-STORE.4.5.1.2.1 — batch_id: the field value with its stated form and meaning. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
@@ -4554,13 +4583,15 @@ TOGETHER
 - Fed by: ACCEPTED — C-STORE.4.5.1.2.3 — expected predecessor epoch: the field value with its stated form and meaning. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 - Fed by: ACCEPTED — C-STORE.4.5.1.2.4 — creator operation ref: the field value with its stated form and meaning. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 - Fed by: ACCEPTED — C-STORE.4.5.1.2.5 — rotation plan ref: the field value with its stated form and meaning. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.5.1.1 — LB-P — Rotation/seal-plan commit: New `batch_id`, reason (`no_active` / `rotation`), expected predecessor epoch, creator operation ref. `rotation` successors are created only under the existing committed LB-P rotation plan (plan ref carried); genesis and post-shutdown/reactivation successors use `no_active` — governed solely by this idempotent LB1 creation plan, feeding LB4 mode A (§6.3, §9.2A). `shutdown_seal_successor` is not a permitted reason and cannot authorize a rotation-plan path or a second cutoff. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.4.5.1 — Lifecycle transaction boundaries | NOT DECIDED | New `batch_id`, reason (`no_active` / `rotation`), expected predecessor epoch, creator operation ref. `rotation` successors are created only under the existing committed LB-P rotation plan (plan ref carried); genesis and post-shutdown/reactivation successors use `no_active` — governed solely by this idempotent LB1 creation plan, feeding LB4 mode A (§6.3, §9.2A). `shutdown_seal_successor` is not a permitted reason and cannot authorize a rotation-plan path or a second cutoff. | New `batch_id`, reason (`no_active` / `rotation`), expected predecessor epoch, creator operation ref. `rotation` successors are created only under the existing committed LB-P rotation plan (plan ref carried); genesis and post-shutdown/reactivation successors use `no_active` — governed solely by this idempotent LB1 creation plan, feeding LB4 mode A (§6.3, §9.2A). `shutdown_seal_successor` is not a permitted reason and cannot authorize a rotation-plan path or a second cutoff. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1] |
+| 2 · ACCEPTED | C-STORE.4.4.2.1 — (none) → `preparing` | The source-defined condition governed by C-STORE.4.5.1.2. | Legal — only via LB1 plan + LB2 manifest commit | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] |
+| 3 · ACCEPTED | C-STORE.4.5.1.3 — LB2 — Manifest commit | The source-defined condition governed by C-STORE.4.5.1.2. | The §4.2 manifest; state `preparing` | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1] |
 
 SUB-PARTS: C-STORE.4.5.1.2.1 — batch_id; C-STORE.4.5.1.2.2 — reason; C-STORE.4.5.1.2.3 — expected predecessor epoch; C-STORE.4.5.1.2.4 — creator operation ref; C-STORE.4.5.1.2.5 — rotation plan ref
 
@@ -4643,12 +4674,12 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — A rotation successor uses `rotation` only under the existing committed LB-P plan, whose reference is carried. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: A rotation successor uses `rotation` only under the existing committed LB-P plan, whose reference is carried. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.5.1.1 — LB-P — Rotation/seal-plan commit: A rotation successor uses `rotation` only under the existing committed LB-P plan, whose reference is carried. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -4667,7 +4698,7 @@ ALONE
 - Does: ACCEPTED — `shutdown_seal_successor` cannot authorize any creation or rotation-plan path or a second cutoff. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Treat this label as a permitted LB1 reason. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — `shutdown_seal_successor` cannot authorize any creation or rotation-plan path or a second cutoff. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -4763,13 +4794,14 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.5.1.2 — LB1 — Creation-plan commit: The §4.2 manifest; state `preparing` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.4.5.1 — Lifecycle transaction boundaries | NOT DECIDED | The §4.2 manifest; state `preparing` | The §4.2 manifest; state `preparing` | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1] |
+| 2 · ACCEPTED | C-STORE.4.4.2.1 — (none) → `preparing` | The source-defined condition governed by C-STORE.4.5.1.3. | Legal — only via LB1 plan + LB2 manifest commit | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] |
 
 SUB-PARTS: NONE
 
@@ -4782,7 +4814,7 @@ ALONE
 - Does: ACCEPTED — Mechanical validation results (manifest integrity; `schema_compat_ref` matches the currently adopted root schema version; `batch_id` uniqueness) + `activated` state event [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 - Gives out: ACCEPTED — Mechanical validation results (manifest integrity; `schema_compat_ref` matches the currently adopted root schema version; `batch_id` uniqueness) + `activated` state event [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 - Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Does not activate without valid manifest integrity, adopted-schema compatibility and unique batch identity. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -4795,6 +4827,7 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.4.5.1 — Lifecycle transaction boundaries | NOT DECIDED | Mechanical validation results (manifest integrity; `schema_compat_ref` matches the currently adopted root schema version; `batch_id` uniqueness) + `activated` state event | Mechanical validation results (manifest integrity; `schema_compat_ref` matches the currently adopted root schema version; `batch_id` uniqueness) + `activated` state event | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1] |
+| 2 · ACCEPTED | C-STORE.4.4.2.4 — `preparing` → `active` | The source-defined condition governed by C-STORE.4.5.1.4. | Legal — only via LB3 validation + activation event, then LB4 selection makes it the write target | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] |
 
 SUB-PARTS: C-STORE.4.5.1.4.1 — Manifest integrity; C-STORE.4.5.1.4.2 — Schema compatibility; C-STORE.4.5.1.4.3 — Batch identity uniqueness
 
@@ -4807,7 +4840,7 @@ ALONE
 - Does: ACCEPTED — Validate manifest integrity before activation. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Activate without the mechanical validation results. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Does not activate without valid manifest integrity, adopted-schema compatibility and unique batch identity. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -4830,7 +4863,7 @@ ALONE
 - Does: ACCEPTED — Require `schema_compat_ref` to match the adopted root-schema version. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Activate without the mechanical validation results. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Does not activate without valid manifest integrity, adopted-schema compatibility and unique batch identity. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -4853,7 +4886,7 @@ ALONE
 - Does: ACCEPTED — Validate global `batch_id` uniqueness before activation. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Activate without the mechanical validation results. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Does not activate without valid manifest integrity, adopted-schema compatibility and unique batch identity. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -4875,8 +4908,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Mode A — initial/reactivation selection (no writable predecessor exists: no selection record yet, or the current selection points at a batch already proven non-admitting through an existing cutoff, `sealing`, `sealed`, `invalid`, or a governed recovery state): commits only the new active selection via the §4.3 compare-and-commit against expected `none/genesis` (first selection) or the exact existing selection epoch (reactivation); creates or rewrites no predecessor cutoff; never modifies the historical batch; verifies the predecessor cannot admit new reservations. Mode B — rotation cutover (used only while a currently selected `active` predecessor still admits writes): one durable boundary that atomically commits the successor selection at epoch N+1 and the predecessor's admission-cutoff marker , both linked to the committed LB-P rotation plan; from this commit no new reservation may target the predecessor, while durably pre-cutoff reservations retain their §5.3 completion right. In both modes, concurrent selectors produce exactly one winner [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 - Gives out: ACCEPTED — Mode A — initial/reactivation selection (no writable predecessor exists: no selection record yet, or the current selection points at a batch already proven non-admitting through an existing cutoff, `sealing`, `sealed`, `invalid`, or a governed recovery state): commits only the new active selection via the §4.3 compare-and-commit against expected `none/genesis` (first selection) or the exact existing selection epoch (reactivation); creates or rewrites no predecessor cutoff; never modifies the historical batch; verifies the predecessor cannot admit new reservations. Mode B — rotation cutover (used only while a currently selected `active` predecessor still admits writes): one durable boundary that atomically commits the successor selection at epoch N+1 and the predecessor's admission-cutoff marker , both linked to the committed LB-P rotation plan; from this commit no new reservation may target the predecessor, while durably pre-cutoff reservations retain their §5.3 completion right. In both modes, concurrent selectors produce exactly one winner [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Mode A — initial/reactivation selection (no writable predecessor exists: no selection record yet, or the current selection points at a batch already proven non-admitting through an existing cutoff, `sealing`, `sealed`, `invalid`, or a governed recovery state): commits only the new active selection via the §4.3 compare-and-commit against expected `none/genesis` (first selection) or the exact existing selection epoch (reactivation); creates or rewrites no predecessor cutoff; never modifies the historical batch; verifies the predecessor cannot admit new reservations. Mode B — rotation cutover (used only while a currently selected `active` predecessor still admits writes): one durable boundary that atomically commits the successor selection at epoch N+1 and the predecessor's admission-cutoff marker , both linked to the committed LB-P rotation plan; from this commit no new reservation may target the predecessor, while durably pre-cutoff reservations retain their §5.3 completion right. In both modes, concurrent selectors produce exactly one winner [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
+- Fails closed by: ACCEPTED — The compare-and-commit admits one winner; a losing selector adopts the committed winner, and unproven mode preconditions confer no selection or cutoff right. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -4888,6 +4921,7 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.4.5.1 — Lifecycle transaction boundaries | NOT DECIDED | Mode A — initial/reactivation selection (no writable predecessor exists: no selection record yet, or the current selection points at a batch already proven non-admitting through an existing cutoff, `sealing`, `sealed`, `invalid`, or a governed recovery state): commits only the new active selection via the §4.3 compare-and-commit against expected `none/genesis` (first selection) or the exact existing selection epoch (reactivation); creates or rewrites no predecessor cutoff; never modifies the historical batch; verifies the predecessor cannot admit new reservations. Mode B — rotation cutover (used only while a currently selected `active` predecessor still admits writes): one durable boundary that atomically commits the successor selection at epoch N+1 and the predecessor's admission-cutoff marker , both linked to the committed LB-P rotation plan; from this commit no new reservation may target the predecessor, while durably pre-cutoff reservations retain their §5.3 completion right. In both modes, concurrent selectors produce exactly one winner | Mode A — initial/reactivation selection (no writable predecessor exists: no selection record yet, or the current selection points at a batch already proven non-admitting through an existing cutoff, `sealing`, `sealed`, `invalid`, or a governed recovery state): commits only the new active selection via the §4.3 compare-and-commit against expected `none/genesis` (first selection) or the exact existing selection epoch (reactivation); creates or rewrites no predecessor cutoff; never modifies the historical batch; verifies the predecessor cannot admit new reservations. Mode B — rotation cutover (used only while a currently selected `active` predecessor still admits writes): one durable boundary that atomically commits the successor selection at epoch N+1 and the predecessor's admission-cutoff marker , both linked to the committed LB-P rotation plan; from this commit no new reservation may target the predecessor, while durably pre-cutoff reservations retain their §5.3 completion right. In both modes, concurrent selectors produce exactly one winner | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1] |
+| 2 · ACCEPTED | C-STORE.4.4.2.4 — `preparing` → `active` | The source-defined condition governed by C-STORE.4.5.1.5. | Legal — only via LB3 validation + activation event, then LB4 selection makes it the write target | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] |
 
 SUB-PARTS: C-STORE.4.5.1.5.1 — Mode A — initial/reactivation selection; C-STORE.4.5.1.5.2 — Mode B — rotation cutover
 
@@ -4899,12 +4933,12 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — No writable predecessor exists. Verify non-admission and compare-and-commit only the new selection against expected `none/genesis` or the exact existing epoch; create or rewrite no predecessor cutoff and never modify the historical batch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 - Gives out: ACCEPTED — Exactly one committed winner among concurrent selectors. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: No writable predecessor exists. Verify non-admission and compare-and-commit only the new selection against expected `none/genesis` or the exact existing epoch; create or rewrite no predecessor cutoff and never modify the historical batch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
+- Fails closed by: ACCEPTED — The compare-and-commit admits one winner; a losing selector adopts the committed winner, and unproven mode preconditions confer no selection or cutoff right. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.3.3 — Canonical active-batch authority: No writable predecessor exists. Verify non-admission and compare-and-commit only the new selection against expected `none/genesis` or the exact existing epoch; create or rewrite no predecessor cutoff and never modify the historical batch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -4922,12 +4956,12 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — The currently selected `active` predecessor still admits writes. Under committed LB-P, atomically commit successor selection at N+1 and predecessor cutoff; new reservations use only the successor, while proved pre-cutoff reservations retain bounded completion. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 - Gives out: ACCEPTED — Exactly one committed winner among concurrent selectors. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: The currently selected `active` predecessor still admits writes. Under committed LB-P, atomically commit successor selection at N+1 and predecessor cutoff; new reservations use only the successor, while proved pre-cutoff reservations retain bounded completion. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
+- Fails closed by: ACCEPTED — The compare-and-commit admits one winner; a losing selector adopts the committed winner, and unproven mode preconditions confer no selection or cutoff right. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.3.3 — Canonical active-batch authority: The currently selected `active` predecessor still admits writes. Under committed LB-P, atomically commit successor selection at N+1 and predecessor cutoff; new reservations use only the successor, while proved pre-cutoff reservations retain bounded completion. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -4950,13 +4984,14 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.5.1.1 — LB-P — Rotation/seal-plan commit: Under the committed LB-P plan: the `sealing` state event. Rotation path: admission was already cut at LB4; LB5 records the transition. Shutdown-seal path (§9.2A): LB5 atomically commits the batch's `admission_cutoff_id` marker + admission stop + `active`→`sealing` + the plan reference — one boundary, so shutdown reservations are classifiable against a durable cutoff [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.4.5.1 — Lifecycle transaction boundaries | NOT DECIDED | Under the committed LB-P plan: the `sealing` state event. Rotation path: admission was already cut at LB4; LB5 records the transition. Shutdown-seal path (§9.2A): LB5 atomically commits the batch's `admission_cutoff_id` marker + admission stop + `active`→`sealing` + the plan reference — one boundary, so shutdown reservations are classifiable against a durable cutoff | Under the committed LB-P plan: the `sealing` state event. Rotation path: admission was already cut at LB4; LB5 records the transition. Shutdown-seal path (§9.2A): LB5 atomically commits the batch's `admission_cutoff_id` marker + admission stop + `active`→`sealing` + the plan reference — one boundary, so shutdown reservations are classifiable against a durable cutoff | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1] |
+| 2 · ACCEPTED | C-STORE.4.4.2.6 — `active` → `sealing` | The source-defined condition governed by C-STORE.4.5.1.6. | Legal — only via LB5 seal-start within a committed rotation/seal plan | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] |
 
 SUB-PARTS: NONE
 
@@ -4973,13 +5008,14 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.8.4 — Drain, C-STORE.4.8.5 — Verification before seal: Final counts + integrity summary + `sealed` event + final manifest version + successor lineage refs [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.4.5.1 — Lifecycle transaction boundaries | NOT DECIDED | Final counts + integrity summary + `sealed` event + final manifest version + successor lineage refs | Final counts + integrity summary + `sealed` event + final manifest version + successor lineage refs | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1] |
+| 2 · ACCEPTED | C-STORE.4.3.2.7 — seal_summary | The source-defined condition governed by C-STORE.4.5.1.7. | Populated only at LB6: final `root_count`, content-integrity summary reference, seal timestamp, sealing-operation ref | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.2] |
 
 SUB-PARTS: NONE
 
@@ -5019,7 +5055,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.3.3 — Canonical active-batch authority: Resolve the registry → current selection exists, chain unbroken, selected batch's derived state is `active`, manifest valid → return `{batch_id, selection_epoch}` to the write path. Idempotent and read-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.2]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -5038,7 +5074,7 @@ ALONE
 - Does: ACCEPTED — When no valid writable active batch exists (the fresh post-5,521-seal genesis state, or after a shutdown seal or cutoff without a successor): LB1 → LB2 → LB3 → LB4 mode A (initial/reactivation selection), in order, each idempotent under its key (§8.1), each durable before the next begins. This path is governed solely by its idempotent LB1 creation plan (reason `no_active`) — it is a no-valid-active/reactivation creation path, not a sealing operation: it requires no LB-P rotation/seal plan (whose schema targets an active writable batch), it creates no cutoff, and it never adds a second cutoff to a sealed or already-cut-off predecessor, whose prior cutoff remains unchanged. Interruption at any point recovers by lookup-first (§11 rows 1–3, 47–53): a committed step is discovered and continued, an uncommitted step authorizes nothing, and a losing concurrent creator adopts the committed winner — the losing activated-but-never-selected candidate is then closed only through the bounded legal never-selected abandonment transition (§5.2), its invalidation event recording the superseding selection; its `batch_id` is never reused; nothing already recorded is silently erased. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.3]
 - Gives out: ACCEPTED — A committed initial/reactivation selection, or adoption of the concurrent winner. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.3]
 - Must never: ACCEPTED — Create a new cutoff, invoke a rotation plan for `no_active`, or erase a losing candidate record. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.3]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — When no valid writable active batch exists (the fresh post-5,521-seal genesis state, or after a shutdown seal or cutoff without a successor): LB1 → LB2 → LB3 → LB4 mode A (initial/reactivation selection), in order, each idempotent under its key (§8.1), each durable before the next begins. This path is governed solely by its idempotent LB1 creation plan (reason `no_active`) — it is a no-valid-active/reactivation creation path, not a sealing operation: it requires no LB-P rotation/seal plan (whose schema targets an active writable batch), it creates no cutoff, and it never adds a second cutoff to a sealed or already-cut-off predecessor, whose prior cutoff remains unchanged. Interruption at any point recovers by lookup-first (§11 rows 1–3, 47–53): a committed step is discovered and continued, an uncommitted step authorizes nothing, and a losing concurrent creator adopts the committed winner — the losing activated-but-never-selected candidate is then closed only through the bounded legal never-selected abandonment transition (§5.2), its invalidation event recording the superseding selection; its `batch_id` is never reused; nothing already recorded is silently erased. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.3]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -5086,7 +5122,7 @@ ALONE
 - Does: ACCEPTED — Runs global claim lookup, atomic reservation, fenced append, parent terminal log and acknowledgement. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7]
 - Gives out: ACCEPTED — `committed`, `duplicate_absorbed`, `rejected(reason)`, `interrupted` or `indeterminate`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7]
 - Must never: ACCEPTED — Acknowledge a terminal outcome before its WB3 record is durable. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Unproven claim or ownership stops admission; no fenced append proceeds without matching root ownership, and no success is acknowledged before the durable parent terminal. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.4]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -5115,7 +5151,7 @@ ALONE
 - Does: ACCEPTED — §7E — and every future root-producing caller, always via its §7E-side eligibility path — resolves its write through B11 before reaching the shared `append_root()` commit boundary. B11 receives: the prepared root payload (conforming to the seven-field schema per `schema_compat_ref`); committed upstream evidence references (capture authorization, exclusion result, blocker clearance, speaker resolution, §7E eligibility outcome); and a stable caller-domain ingest-identity basis. B11 validates mechanically (existence, shape, identity, target state) and never re-decides upstream meaning or eligibility. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.1]
 - Gives out: ACCEPTED — A mechanically checked write attempt under B11. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.1]
 - Must never: ACCEPTED — Re-decide the meaning of upstream eligibility. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.1]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Rejects missing or invalid upstream capture/eligibility evidence; B11 does not substitute its own judgment. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -5142,7 +5178,7 @@ ALONE
 - Does: ACCEPTED — A committed upstream reference proving capture authorization. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.1]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Substitute B11 interpretation for the upstream decision. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.1]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Rejects missing or invalid upstream capture/eligibility evidence; B11 does not substitute its own judgment. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -5165,7 +5201,7 @@ ALONE
 - Does: ACCEPTED — A committed upstream exclusion-result reference. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.1]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Substitute B11 interpretation for the upstream decision. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.1]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Rejects missing or invalid upstream capture/eligibility evidence; B11 does not substitute its own judgment. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -5188,7 +5224,7 @@ ALONE
 - Does: ACCEPTED — Committed references establishing required blocker clearance. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.1]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Substitute B11 interpretation for the upstream decision. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.1]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Rejects missing or invalid upstream capture/eligibility evidence; B11 does not substitute its own judgment. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -5211,7 +5247,7 @@ ALONE
 - Does: ACCEPTED — A committed upstream speaker-resolution reference. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.1]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Substitute B11 interpretation for the upstream decision. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.1]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Rejects missing or invalid upstream capture/eligibility evidence; B11 does not substitute its own judgment. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -5234,7 +5270,7 @@ ALONE
 - Does: ACCEPTED — A committed catalog eligibility outcome reference. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.1]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Substitute B11 interpretation for the upstream decision. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.1]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Rejects missing or invalid upstream capture/eligibility evidence; B11 does not substitute its own judgment. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -5285,7 +5321,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Attempt-specific parent identity for one caller invocation; it is not the duplicate-prevention key. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.2]
 - Gives out: ACCEPTED — The `ingest_operation_id` value carried by Operation identity and idempotency. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.2]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Attempt-specific parent identity for one caller invocation; it is not the duplicate-prevention key. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.2]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -5308,7 +5344,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Stable unique identity for each separately executed child operation, referencing its parent. Exactly one operational log per child ID. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.2]
 - Gives out: ACCEPTED — The `child_op_id` value carried by Operation identity and idempotency. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.2]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Stable unique identity for each separately executed child operation, referencing its parent. Exactly one operational log per child ID. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.2]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -5354,7 +5390,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Deterministic from authoritative `capture_id` plus the single root-ingestion operation type only; global and epoch-independent. `schema_version` is not a key component. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.2]
 - Gives out: ACCEPTED — The `ingest_idempotency_key` value carried by Operation identity and idempotency. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.2]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Deterministic from authoritative `capture_id` plus the single root-ingestion operation type only; global and epoch-independent. `schema_version` is not a key component. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.2]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -5378,7 +5414,7 @@ ALONE
 - Does: ACCEPTED — Executes the stated atomic commit boundaries and non-gating post-commit registrations. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
 - Gives out: ACCEPTED — A durable root or non-commit outcome, mandatory terminal log and acknowledgement. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
 - Must never: ACCEPTED — Use the rebuildable PR index as the first duplicate defense. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Unproven claim or ownership stops admission; no fenced append proceeds without matching root ownership, and no success is acknowledged before the durable parent terminal. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.4]
 
 TOGETHER
 - Fed by: ACCEPTED — C-STORE.4.6.3.6 — PR — Post-commit rebuildable registrations (non-gating): non-gating post-commit registration and coverage information. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
@@ -5404,7 +5440,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — If no claim exists: atomically establish the one permanent claim in `available_uncommitted`, binding the immutable `claim_key` and the canonical `payload_integrity_ref`. WB0 grants no append right and creates no owner — a crash after WB0 leaves a harmless, reusable `available_uncommitted` claim. Found `committed` with matching payload identity → `duplicate_absorbed` (existing `root_id` + owning batch), no reservation. Found uncommitted with matching integrity → continue to WB1. Found `owned_uncommitted` under another attempt's generation → this attempt appends nothing (`interrupted`, claim ref). Integrity conflict → `rejected` + attached mismatch incident (§8.4). [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
 - Gives out: ACCEPTED — If no claim exists: atomically establish the one permanent claim in `available_uncommitted`, binding the immutable `claim_key` and the canonical `payload_integrity_ref`. WB0 grants no append right and creates no owner — a crash after WB0 leaves a harmless, reusable `available_uncommitted` claim. Found `committed` with matching payload identity → `duplicate_absorbed` (existing `root_id` + owning batch), no reservation. Found uncommitted with matching integrity → continue to WB1. Found `owned_uncommitted` under another attempt's generation → this attempt appends nothing (`interrupted`, claim ref). Integrity conflict → `rejected` + attached mismatch incident (§8.4). [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: If no claim exists: atomically establish the one permanent claim in `available_uncommitted`, binding the immutable `claim_key` and the canonical `payload_integrity_ref`. WB0 grants no append right and creates no owner — a crash after WB0 leaves a harmless, reusable `available_uncommitted` claim. Found `committed` with matching payload identity → `duplicate_absorbed` (existing `root_id` + owning batch), no reservation. Found uncommitted with matching integrity → continue to WB1. Found `owned_uncommitted` under another attempt's generation → this attempt appends nothing (`interrupted`, claim ref). Integrity conflict → `rejected` + attached mismatch incident (§8.4). [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
 - Fails closed by: ACCEPTED — Claim cannot be verified (ledger/coverage cannot show free-or-committed) → new root admission fails closed (§12) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
 
 TOGETHER
@@ -5427,7 +5463,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — One compare-and-commit boundary that simultaneously: transitions the claim `available_uncommitted` → `owned_uncommitted`; creates one new unique `ownership_generation_id` in phase `granted`; commits the matching batch reservation; binds — at the claim's first successful WB1 — one immutable `reserved_root_id` to the permanent claim and atomically reserves that same identity in the canonical root-ownership authority (`reserved_for_claim`; every later generation and retry under this claim must reuse the same `reserved_root_id`; the same claim presenting a different `root_id`, or a different claim presenting this `root_id`, is rejected here — before any append); and binds the reservation to `{batch_id, selection_epoch, payload_integrity_ref, upstream evidence refs, ownership generation, reserved_root_id}` — durable before append; enters the batch's in-flight ledger (§9). It is impossible to have a durable live owner without its matching durable reservation, or a durable reservation without its matching live generation. Concurrent WB1 attempts permit exactly one winner; losers observe the winner and append nothing. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
 - Gives out: ACCEPTED — One compare-and-commit boundary that simultaneously: transitions the claim `available_uncommitted` → `owned_uncommitted`; creates one new unique `ownership_generation_id` in phase `granted`; commits the matching batch reservation; binds — at the claim's first successful WB1 — one immutable `reserved_root_id` to the permanent claim and atomically reserves that same identity in the canonical root-ownership authority (`reserved_for_claim`; every later generation and retry under this claim must reuse the same `reserved_root_id`; the same claim presenting a different `root_id`, or a different claim presenting this `root_id`, is rejected here — before any append); and binds the reservation to `{batch_id, selection_epoch, payload_integrity_ref, upstream evidence refs, ownership generation, reserved_root_id}` — durable before append; enters the batch's in-flight ledger (§9). It is impossible to have a durable live owner without its matching durable reservation, or a durable reservation without its matching live generation. Concurrent WB1 attempts permit exactly one winner; losers observe the winner and append nothing. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: One compare-and-commit boundary that simultaneously: transitions the claim `available_uncommitted` → `owned_uncommitted`; creates one new unique `ownership_generation_id` in phase `granted`; commits the matching batch reservation; binds — at the claim's first successful WB1 — one immutable `reserved_root_id` to the permanent claim and atomically reserves that same identity in the canonical root-ownership authority (`reserved_for_claim`; every later generation and retry under this claim must reuse the same `reserved_root_id`; the same claim presenting a different `root_id`, or a different claim presenting this `root_id`, is rejected here — before any append); and binds the reservation to `{batch_id, selection_epoch, payload_integrity_ref, upstream evidence refs, ownership generation, reserved_root_id}` — durable before append; enters the batch's in-flight ledger (§9). It is impossible to have a durable live owner without its matching durable reservation, or a durable reservation without its matching live generation. Concurrent WB1 attempts permit exactly one winner; losers observe the winner and append nothing. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
 - Fails closed by: ACCEPTED — No committed WB1 → no ownership, no append; ordinary admission refused for a stale epoch or non-`active` batch; refused while the claim is `owned_uncommitted` under another generation; refused on a root-ID conflict (§8.2A) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
 
 TOGETHER
@@ -5444,6 +5480,7 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.4.6.3 — Write-path transaction boundaries | NOT DECIDED | One compare-and-commit boundary that simultaneously: transitions the claim `available_uncommitted` → `owned_uncommitted`; creates one new unique `ownership_generation_id` in phase `granted`; commits the matching batch reservation; binds — at the claim's first successful WB1 — one immutable `reserved_root_id` to the permanent claim and atomically reserves that same identity in the canonical root-ownership authority (`reserved_for_claim`; every later generation and retry under this claim must reuse the same `reserved_root_id`; the same claim presenting a different `root_id`, or a different claim presenting this `root_id`, is rejected here — before any append); and binds the reservation to `{batch_id, selection_epoch, payload_integrity_ref, upstream evidence refs, ownership generation, reserved_root_id}` — durable before append; enters the batch's in-flight ledger (§9). It is impossible to have a durable live owner without its matching durable reservation, or a durable reservation without its matching live generation. Concurrent WB1 attempts permit exactly one winner; losers observe the winner and append nothing. | One compare-and-commit boundary that simultaneously: transitions the claim `available_uncommitted` → `owned_uncommitted`; creates one new unique `ownership_generation_id` in phase `granted`; commits the matching batch reservation; binds — at the claim's first successful WB1 — one immutable `reserved_root_id` to the permanent claim and atomically reserves that same identity in the canonical root-ownership authority (`reserved_for_claim`; every later generation and retry under this claim must reuse the same `reserved_root_id`; the same claim presenting a different `root_id`, or a different claim presenting this `root_id`, is rejected here — before any append); and binds the reservation to `{batch_id, selection_epoch, payload_integrity_ref, upstream evidence refs, ownership generation, reserved_root_id}` — durable before append; enters the batch's in-flight ledger (§9). It is impossible to have a durable live owner without its matching durable reservation, or a durable reservation without its matching live generation. Concurrent WB1 attempts permit exactly one winner; losers observe the winner and append nothing. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3] |
+| 2 · ACCEPTED | C-STORE.4.6.3.4 — WB3 — Parent terminal operation-log commit | The source-defined condition governed by C-STORE.4.6.3.2. | The mandatory §0B single terminal operational record of the parent `ingest_operation_id` — `append_committed` / `append_duplicate_absorbed` / `append_rejected` / `append_interrupted` / `append_indeterminate` — durably appended after the required child operations and canonical state records resolve; exactly one terminal record per parent operation (§14); child-operation logs are not second parent logs, and writing WB3 creates no log-about-logging operation | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3] |
 
 SUB-PARTS: C-STORE.4.6.3.2.1 — batch_id; C-STORE.4.6.3.2.2 — selection_epoch; C-STORE.4.6.3.2.3 — payload_integrity_ref; C-STORE.4.6.3.2.4 — upstream evidence refs; C-STORE.4.6.3.2.5 — ownership generation; C-STORE.4.6.3.2.6 — reserved_root_id
 
@@ -5525,7 +5562,7 @@ ALONE
 - Does: ACCEPTED — Committed capture authorization, exclusion, blocker, speaker and eligibility evidence references. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
 - Gives out: ACCEPTED — The `upstream evidence refs` value carried by WB1 — Atomic ownership-generation + reservation + root-ID commit (§8.0, §8.2A). [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
 - Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Rejects missing or invalid upstream capture/eligibility evidence; B11 does not substitute its own judgment. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -5593,7 +5630,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Entry is one compare-and-commit of the currently effective generation `granted` → `commit_fenced` — the per-generation append commit fence (§8.0). The physical shared `append_root()` boundary (schema-validated, atomic, duplicate-absorbing) then verifies the durable `commit_fenced` generation immediately before committing and requires that the §8.2A root-ownership entry for the reserved `root_id` belongs to this same claim; on success it transitions that entry to `committed_to_batch{batch_id}` and binds the claim's terminal `committed{root_id, batch_id}` transition, recovery-completable from the append evidence. A generation that is not durably `commit_fenced` — stale, cancelled, superseded, pre-fence — can never append. This is the commit point. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
 - Gives out: ACCEPTED — Entry is one compare-and-commit of the currently effective generation `granted` → `commit_fenced` — the per-generation append commit fence (§8.0). The physical shared `append_root()` boundary (schema-validated, atomic, duplicate-absorbing) then verifies the durable `commit_fenced` generation immediately before committing and requires that the §8.2A root-ownership entry for the reserved `root_id` belongs to this same claim; on success it transitions that entry to `committed_to_batch{batch_id}` and binds the claim's terminal `committed{root_id, batch_id}` transition, recovery-completable from the append evidence. A generation that is not durably `commit_fenced` — stale, cancelled, superseded, pre-fence — can never append. This is the commit point. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Entry is one compare-and-commit of the currently effective generation `granted` → `commit_fenced` — the per-generation append commit fence (§8.0). The physical shared `append_root()` boundary (schema-validated, atomic, duplicate-absorbing) then verifies the durable `commit_fenced` generation immediately before committing and requires that the §8.2A root-ownership entry for the reserved `root_id` belongs to this same claim; on success it transitions that entry to `committed_to_batch{batch_id}` and binds the claim's terminal `committed{root_id, batch_id}` transition, recovery-completable from the append evidence. A generation that is not durably `commit_fenced` — stale, cancelled, superseded, pre-fence — can never append. This is the commit point. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
 - Fails closed by: ACCEPTED — Fence not won (cancellation won `granted` → `cancelled`) → no append ever for that generation; append attempted without a durable fence or with a mismatched root-ownership entry → refused and logged; not reached → nothing durable; caller outcome per §7.5 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
 
 TOGETHER
@@ -5605,6 +5642,7 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.4.6.3 — Write-path transaction boundaries | NOT DECIDED | Entry is one compare-and-commit of the currently effective generation `granted` → `commit_fenced` — the per-generation append commit fence (§8.0). The physical shared `append_root()` boundary (schema-validated, atomic, duplicate-absorbing) then verifies the durable `commit_fenced` generation immediately before committing and requires that the §8.2A root-ownership entry for the reserved `root_id` belongs to this same claim; on success it transitions that entry to `committed_to_batch{batch_id}` and binds the claim's terminal `committed{root_id, batch_id}` transition, recovery-completable from the append evidence. A generation that is not durably `commit_fenced` — stale, cancelled, superseded, pre-fence — can never append. This is the commit point. | Entry is one compare-and-commit of the currently effective generation `granted` → `commit_fenced` — the per-generation append commit fence (§8.0). The physical shared `append_root()` boundary (schema-validated, atomic, duplicate-absorbing) then verifies the durable `commit_fenced` generation immediately before committing and requires that the §8.2A root-ownership entry for the reserved `root_id` belongs to this same claim; on success it transitions that entry to `committed_to_batch{batch_id}` and binds the claim's terminal `committed{root_id, batch_id}` transition, recovery-completable from the append evidence. A generation that is not durably `commit_fenced` — stale, cancelled, superseded, pre-fence — can never append. This is the commit point. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3] |
+| 2 · ACCEPTED | C-STORE.4.6.3.4 — WB3 — Parent terminal operation-log commit | The source-defined condition governed by C-STORE.4.6.3.3. | The mandatory §0B single terminal operational record of the parent `ingest_operation_id` — `append_committed` / `append_duplicate_absorbed` / `append_rejected` / `append_interrupted` / `append_indeterminate` — durably appended after the required child operations and canonical state records resolve; exactly one terminal record per parent operation (§14); child-operation logs are not second parent logs, and writing WB3 creates no log-about-logging operation | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3] |
 
 SUB-PARTS: NONE
 
@@ -5616,18 +5654,19 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — The mandatory §0B single terminal operational record of the parent `ingest_operation_id` — `append_committed` / `append_duplicate_absorbed` / `append_rejected` / `append_interrupted` / `append_indeterminate` — durably appended after the required child operations and canonical state records resolve; exactly one terminal record per parent operation (§14); child-operation logs are not second parent logs, and writing WB3 creates no log-about-logging operation [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
 - Gives out: ACCEPTED — The mandatory §0B single terminal operational record of the parent `ingest_operation_id` — `append_committed` / `append_duplicate_absorbed` / `append_rejected` / `append_interrupted` / `append_indeterminate` — durably appended after the required child operations and canonical state records resolve; exactly one terminal record per parent operation (§14); child-operation logs are not second parent logs, and writing WB3 creates no log-about-logging operation [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: The mandatory §0B single terminal operational record of the parent `ingest_operation_id` — `append_committed` / `append_duplicate_absorbed` / `append_rejected` / `append_interrupted` / `append_indeterminate` — durably appended after the required child operations and canonical state records resolve; exactly one terminal record per parent operation (§14); child-operation logs are not second parent logs, and writing WB3 creates no log-about-logging operation [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
 - Fails closed by: ACCEPTED — Root committed but the parent terminal log absent → no success acknowledgement yet; recovery finds the existing logs by operation identity and appends only the missing parent terminal idempotently (§11 row 8); logging failure never deletes or uncommits the root [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.6.3.2 — WB1 — Atomic ownership-generation + reservation + root-ID commit (§8.0, §8.2A), C-STORE.4.6.3.3 — WB2 — Commit-fenced root-append + claim + root-ownership commit: The mandatory §0B single terminal operational record of the parent `ingest_operation_id` — `append_committed` / `append_duplicate_absorbed` / `append_rejected` / `append_interrupted` / `append_indeterminate` — durably appended after the required child operations and canonical state records resolve; exactly one terminal record per parent operation (§14); child-operation logs are not second parent logs, and writing WB3 creates no log-about-logging operation [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.4.6.3 — Write-path transaction boundaries | NOT DECIDED | The mandatory §0B single terminal operational record of the parent `ingest_operation_id` — `append_committed` / `append_duplicate_absorbed` / `append_rejected` / `append_interrupted` / `append_indeterminate` — durably appended after the required child operations and canonical state records resolve; exactly one terminal record per parent operation (§14); child-operation logs are not second parent logs, and writing WB3 creates no log-about-logging operation | The mandatory §0B single terminal operational record of the parent `ingest_operation_id` — `append_committed` / `append_duplicate_absorbed` / `append_rejected` / `append_interrupted` / `append_indeterminate` — durably appended after the required child operations and canonical state records resolve; exactly one terminal record per parent operation (§14); child-operation logs are not second parent logs, and writing WB3 creates no log-about-logging operation | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3] |
+| 2 · ACCEPTED | C-STORE.4.6.3.5 — WB4 — Acknowledgement commit | The source-defined condition governed by C-STORE.4.6.3.4. | The terminal outcome (§7.5) returned to the caller — only after the matching WB3 terminal record is durable (§7.4) | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3] |
 
 SUB-PARTS: NONE
 
@@ -5639,12 +5678,12 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — The terminal outcome (§7.5) returned to the caller — only after the matching WB3 terminal record is durable (§7.4) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
 - Gives out: ACCEPTED — The terminal outcome (§7.5) returned to the caller — only after the matching WB3 terminal record is durable (§7.4) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: The terminal outcome (§7.5) returned to the caller — only after the matching WB3 terminal record is durable (§7.4) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
 - Fails closed by: ACCEPTED — No committed acknowledgement → caller resolves by lookup, never by blind re-send [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.6.3.4 — WB3 — Parent terminal operation-log commit: The terminal outcome (§7.5) returned to the caller — only after the matching WB3 terminal record is durable (§7.4) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -5662,7 +5701,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Global identity-index entry (`root_id` → owning `batch_id`); batch counters/checkpoint; coverage records — recoverable post-commit work, separated from the mandatory terminal log; never the first duplicate defense (§8.3) and never a gate on WB4 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
 - Gives out: ACCEPTED — Global identity-index entry (`root_id` → owning `batch_id`); batch counters/checkpoint; coverage records — recoverable post-commit work, separated from the mandatory terminal log; never the first duplicate defense (§8.3) and never a gate on WB4 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Global identity-index entry (`root_id` → owning `batch_id`); batch counters/checkpoint; coverage records — recoverable post-commit work, separated from the mandatory terminal log; never the first duplicate defense (§8.3) and never a gate on WB4 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
 - Fails closed by: ACCEPTED — Gaps are honest (`partial` coverage) and reconciled idempotently (§11 row 9); the root's durability and the claim's committed state are unaffected [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3]
 
 TOGETHER
@@ -5758,8 +5797,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — The global claim for this `ingest_idempotency_key` is `committed` (found at WB0 or at the WB2 boundary): a root already durably exists in some batch; the existing root identity + owning batch returned; no reservation, no second commit [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.5]
 - Gives out: ACCEPTED — `duplicate_absorbed` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.5]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: The global claim for this `ingest_idempotency_key` is `committed` (found at WB0 or at the WB2 boundary): a root already durably exists in some batch; the existing root identity + owning batch returned; no reservation, no second commit [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.5]
+- Fails closed by: ACCEPTED — The global claim for this `ingest_idempotency_key` is `committed` (found at WB0 or at the WB2 boundary): a root already durably exists in some batch; the existing root identity + owning batch returned; no reservation, no second commit [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.5]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -5781,8 +5820,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Mechanical refusal: schema nonconformance; missing/invalid upstream evidence refs; sealed/stale/invalid target; identity collision (§8.4). Never a semantic judgment. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.5]
 - Gives out: ACCEPTED — `rejected(reason)` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.5]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Mechanical refusal: schema nonconformance; missing/invalid upstream evidence refs; sealed/stale/invalid target; identity collision (§8.4). Never a semantic judgment. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.5]
+- Fails closed by: ACCEPTED — Mechanical refusal: schema nonconformance; missing/invalid upstream evidence refs; sealed/stale/invalid target; identity collision (§8.4). Never a semantic judgment. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.5]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -5805,7 +5844,7 @@ ALONE
 - Does: ACCEPTED — The attempt ended before WB2 with durable evidence of non-commit — including finding the claim `owned_uncommitted` under another attempt's ownership generation (claim ref returned) or having its own generation cancelled at a cutover; safe to retry under the same key, where WB0 lookup-first resolves it against the claim's current status (technical re-attempt; substantive retry policy remains B9's) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.5]
 - Gives out: ACCEPTED — `interrupted` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.5]
 - Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — The attempt ended before WB2 with durable evidence of non-commit — including finding the claim `owned_uncommitted` under another attempt's ownership generation (claim ref returned) or having its own generation cancelled at a cutover; safe to retry under the same key, where WB0 lookup-first resolves it against the claim's current status (technical re-attempt; substantive retry policy remains B9's) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.5]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -5827,8 +5866,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Whether WB2 occurred cannot be safely established; fail closed — no blind retry; resolution only by lookup under the global key (§11 row 7) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.5]
 - Gives out: ACCEPTED — `indeterminate` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.5]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Whether WB2 occurred cannot be safely established; fail closed — no blind retry; resolution only by lookup under the global key (§11 row 7) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.5]
+- Fails closed by: ACCEPTED — Whether WB2 occurred cannot be safely established; fail closed — no blind retry; resolution only by lookup under the global key (§11 row 7) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.5]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -5866,6 +5905,11 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.4.6 — Root-write targeting, transaction boundaries, and outcome contract | A WB1 reservation provably granted before the applicable cutoff. | The applicable admission cutoff (`admission_cutoff_id` — committed at the LB4 cutover for rotation, or atomically inside LB5 for shutdown-seal, §9.2/§9.2A) ends new-reservation admission for the batch. A WB1 reservation durably granted before that cutoff retains the §5.3 bounded completion right; the admission ledger's total order over reservation grants and the cutoff marker makes the pre/post relation provable for every reservation. Each such completion at WB2 must validate all of: (1) the original durable reservation; (2) that the reservation's ownership generation is the claim's currently effective generation and wins the WB2 commit fence (`granted` → `commit_fenced`, §8.0); (3) the payload-integrity reference; (4) the old batch's identity as the reservation recorded it; (5) the cutoff relationship — the grant is provably pre-cutoff. No unreserved or post-cutoff attempt may use this exception; a stale unreserved writer remains refused. A pre-cutoff reservation that is cancelled loses the completion right at the atomic cancellation boundary (§8.0) — which returns the claim to `available_uncommitted` — before any successor WB1 may grant a new generation; the caller receives `interrupted` and retries under the same key — exclusive, non-overlapping generations make exactly one eventual commit possible. LB6 cannot commit while any pre-cutoff reservation is unresolved (§9.3). | Bounded completion, or interrupted retry after atomic cancellation. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6] |
+| 2 · ACCEPTED | C-STORE.4.6.6.1 — Pre-cutoff completion condition 1 | The source-defined condition governed by C-STORE.4.6.6. | The original WB1 reservation is durable. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6] |
+| 3 · ACCEPTED | C-STORE.4.6.6.2 — Pre-cutoff completion condition 2 | The source-defined condition governed by C-STORE.4.6.6. | Its ownership generation is currently effective and wins the WB2 fence `granted → commit_fenced`. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6] |
+| 4 · ACCEPTED | C-STORE.4.6.6.3 — Pre-cutoff completion condition 3 | The source-defined condition governed by C-STORE.4.6.6. | The payload-integrity reference validates. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6] |
+| 5 · ACCEPTED | C-STORE.4.6.6.4 — Pre-cutoff completion condition 4 | The source-defined condition governed by C-STORE.4.6.6. | The target is the exact old batch recorded in the reservation. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6] |
+| 6 · ACCEPTED | C-STORE.4.6.6.5 — Pre-cutoff completion condition 5 | The source-defined condition governed by C-STORE.4.6.6. | The grant is provably before the applicable cutoff under the admission ledger total order. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6] |
 
 SUB-PARTS: C-STORE.4.6.6.1 — Pre-cutoff completion condition 1; C-STORE.4.6.6.2 — Pre-cutoff completion condition 2; C-STORE.4.6.6.3 — Pre-cutoff completion condition 3; C-STORE.4.6.6.4 — Pre-cutoff completion condition 4; C-STORE.4.6.6.5 — Pre-cutoff completion condition 5
 
@@ -5878,11 +5922,11 @@ ALONE
 - Does: ACCEPTED — The original WB1 reservation is durable. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Permit unreserved or post-cutoff attempts to use the completion exception. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refuses pre-cutoff completion unless all five required reservation, ownership/fence, payload, batch and cutoff proofs validate. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.6.6 — Sealing while a write is in flight — pre-cutoff completion: The original WB1 reservation is durable. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -5901,11 +5945,11 @@ ALONE
 - Does: ACCEPTED — Its ownership generation is currently effective and wins the WB2 fence `granted → commit_fenced`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Permit unreserved or post-cutoff attempts to use the completion exception. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refuses pre-cutoff completion unless all five required reservation, ownership/fence, payload, batch and cutoff proofs validate. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.6.6 — Sealing while a write is in flight — pre-cutoff completion: Its ownership generation is currently effective and wins the WB2 fence `granted → commit_fenced`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -5924,11 +5968,11 @@ ALONE
 - Does: ACCEPTED — The payload-integrity reference validates. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Permit unreserved or post-cutoff attempts to use the completion exception. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refuses pre-cutoff completion unless all five required reservation, ownership/fence, payload, batch and cutoff proofs validate. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.6.6 — Sealing while a write is in flight — pre-cutoff completion: The payload-integrity reference validates. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -5947,11 +5991,11 @@ ALONE
 - Does: ACCEPTED — The target is the exact old batch recorded in the reservation. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Permit unreserved or post-cutoff attempts to use the completion exception. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refuses pre-cutoff completion unless all five required reservation, ownership/fence, payload, batch and cutoff proofs validate. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.6.6 — Sealing while a write is in flight — pre-cutoff completion: The target is the exact old batch recorded in the reservation. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -5970,11 +6014,11 @@ ALONE
 - Does: ACCEPTED — The grant is provably before the applicable cutoff under the admission ledger total order. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Permit unreserved or post-cutoff attempts to use the completion exception. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refuses pre-cutoff completion unless all five required reservation, ownership/fence, payload, batch and cutoff proofs validate. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.6.6 — Sealing while a write is in flight — pre-cutoff completion: The grant is provably before the applicable cutoff under the admission ledger total order. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.6]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -6016,7 +6060,7 @@ ALONE
 - Does: ACCEPTED — Serializes ownership across batches and epochs before physical append. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8]
 - Gives out: ACCEPTED — One capture, one permanent claim, one canonical root identity and one owning batch after commit. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8]
 - Must never: ACCEPTED — Repair a duplicate by rewriting an immutable root after append. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Stops new admission when claim status, identity ownership or required coverage cannot be proven; no blind append or guessed identity. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6115,7 +6159,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — The canonical, immutable payload-integrity reference bound at establishment — computed over the complete prepared seven-field root payload (all seven authoritative fields); every later attempt under this key is checked against it (§8.4). `root_id` is additionally bound independently and unambiguously as `reserved_root_id`, never derived solely from this reference [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Gives out: ACCEPTED — The `payload_integrity_ref` value carried by The global ingestion claim — one permanent claim, statuses, and ownership generations. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: The canonical, immutable payload-integrity reference bound at establishment — computed over the complete prepared seven-field root payload (all seven authoritative fields); every later attempt under this key is checked against it (§8.4). `root_id` is additionally bound independently and unambiguously as `reserved_root_id`, never derived solely from this reference [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -6138,7 +6182,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — The one immutable canonical `root_id` of this claim, bound at the claim's first successful WB1 and atomically reserved in the §8.2A authority; every later generation and retry under this claim must reuse it — the claim can never present a second identity [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Gives out: ACCEPTED — The `reserved_root_id` value carried by The global ingestion claim — one permanent claim, statuses, and ownership generations. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: The one immutable canonical `root_id` of this claim, bound at the claim's first successful WB1 and atomically reserved in the §8.2A authority; every later generation and retry under this claim must reuse it — the claim can never present a second identity [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -6161,7 +6205,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Append-only status events (never edited) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Gives out: ACCEPTED — The `claim_status_events` value carried by The global ingestion claim — one permanent claim, statuses, and ownership generations. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Append-only status events (never edited) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -6184,8 +6228,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Append-only generation events — each generation has a unique `ownership_generation_id`  and moves only through the three legal append-only paths: `granted → cancelled` (normal cancellation); `granted → commit_fenced → committed` (successful append); `granted → commit_fenced → recovery_released_no_commit`  (strict recovery-only resolution, §8.0 release rule — a distinct terminal phase, never ordinary `cancelled`); no phase event is ever edited [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Gives out: ACCEPTED — The `ownership_generation_events` value carried by The global ingestion claim — one permanent claim, statuses, and ownership generations. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Append-only generation events — each generation has a unique `ownership_generation_id`  and moves only through the three legal append-only paths: `granted → cancelled` (normal cancellation); `granted → commit_fenced → committed` (successful append); `granted → commit_fenced → recovery_released_no_commit`  (strict recovery-only resolution, §8.0 release rule — a distinct terminal phase, never ordinary `cancelled`); no phase event is ever edited [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
+- Fails closed by: ACCEPTED — A committed root/claim remains committed on a later mismatch; the mismatching attempt is rejected as an attached incident. Missing terminal transitions are completed only from durable append evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.4] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: ACCEPTED — C-STORE.4.7.1.5.1 — ownership_generation_id: the field value with its stated form and meaning. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
@@ -6205,6 +6249,9 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.4.7.1 — The global ingestion claim — one permanent claim, statuses, and ownership generations | NOT DECIDED | Append-only generation events — each generation has a unique `ownership_generation_id`  and moves only through the three legal append-only paths: `granted → cancelled` (normal cancellation); `granted → commit_fenced → committed` (successful append); `granted → commit_fenced → recovery_released_no_commit`  (strict recovery-only resolution, §8.0 release rule — a distinct terminal phase, never ordinary `cancelled`); no phase event is ever edited | The `ownership_generation_events` value carried by The global ingestion claim — one permanent claim, statuses, and ownership generations. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0] |
+| 2 · ACCEPTED | C-STORE.4.7.1.5.8 — granted → commit_fenced | The source-defined condition governed by C-STORE.4.7.1.5. | One compare-and-commit wins against cancellation; the physical append boundary verifies this durable fence immediately before commit. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0] |
+| 3 · ACCEPTED | C-STORE.4.7.1.13.2 — Claim availability | The source-defined condition governed by C-STORE.4.7.1.5. | The claim is `available_uncommitted` before any successor generation is granted. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0] |
+| 4 · ACCEPTED | C-STORE.4.7.4.11 — Fence and matching owner | The source-defined condition governed by C-STORE.4.7.1.5. | WB2 requires both the durable commit fence and an ownership entry belonging to the same claim. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A] |
 
 SUB-PARTS: C-STORE.4.7.1.5.1 — ownership_generation_id; C-STORE.4.7.1.5.2 — granted; C-STORE.4.7.1.5.3 — cancelled; C-STORE.4.7.1.5.4 — commit_fenced; C-STORE.4.7.1.5.5 — committed; C-STORE.4.7.1.5.6 — recovery_released_no_commit; C-STORE.4.7.1.5.7 — granted → cancelled; C-STORE.4.7.1.5.8 — granted → commit_fenced; C-STORE.4.7.1.5.9 — commit_fenced → committed; C-STORE.4.7.1.5.10 — commit_fenced → recovery_released_no_commit; C-STORE.4.7.1.5.11 — Strict recovery-release gate
 
@@ -6262,8 +6309,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Terminal ordinary cancellation; this generation can never fence or append. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Gives out: ACCEPTED — `cancelled`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Terminal ordinary cancellation; this generation can never fence or append. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
+- Fails closed by: ACCEPTED — Terminal ordinary cancellation; this generation can never fence or append. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6285,7 +6332,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — WB2 entry won the phase compare-and-commit; ordinary cancellation and regrant are forbidden. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Gives out: ACCEPTED — `commit_fenced`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: WB2 entry won the phase compare-and-commit; ordinary cancellation and regrant are forbidden. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -6309,7 +6356,7 @@ ALONE
 - Does: ACCEPTED — Terminal successful append for this generation. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Gives out: ACCEPTED — `committed`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — A committed root/claim remains committed on a later mismatch; the mismatching attempt is rejected as an attached incident. Missing terminal transitions are completed only from durable append evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.4] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6331,8 +6378,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Distinct recovery-only terminal phase after all four non-commit proofs; never ordinary cancellation; this generation can never append. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Gives out: ACCEPTED — `recovery_released_no_commit`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Distinct recovery-only terminal phase after all four non-commit proofs; never ordinary cancellation; this generation can never append. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
+- Fails closed by: ACCEPTED — Distinct recovery-only terminal phase after all four non-commit proofs; never ordinary cancellation; this generation can never append. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6382,7 +6429,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.7.1.5 — ownership_generation_events: One compare-and-commit wins against cancellation; the physical append boundary verifies this durable fence immediately before commit. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -6401,7 +6448,7 @@ ALONE
 - Does: ACCEPTED — The fenced append binds the terminal claim and root-ownership commits, recoverable from append evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Gives out: NOT DECIDED
 - Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — A committed root/claim remains committed on a later mismatch; the mismatching attempt is rejected as an attached incident. Missing terminal transitions are completed only from durable append evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.4] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6423,12 +6470,12 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Only strict recovery with all four proofs may release a non-committed fenced generation; its reserved root ID remains bound for retry. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Only strict recovery with all four proofs may release a non-committed fenced generation; its reserved root ID remains bound for retry. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.7.1.5.11 — Strict recovery-release gate: Only strict recovery with all four proofs may release a non-committed fenced generation; its reserved root ID remains bound for retry. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -6461,6 +6508,11 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.4.7.1.5 — ownership_generation_events | NOT DECIDED | Requires all four proofs; releases the generation permanently, extinguishes its reservation and completion right, permits the claim to return to `available_uncommitted`, and preserves its reserved root identity. | NOT DECIDED | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0] |
+| 2 · ACCEPTED | C-STORE.4.7.1.5.11.1 — Recovery-release proof 1 | The source-defined condition governed by C-STORE.4.7.1.5.11. | Exclusive recovery authority is active. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0] |
+| 3 · ACCEPTED | C-STORE.4.7.1.5.11.2 — Recovery-release proof 2 | The source-defined condition governed by C-STORE.4.7.1.5.11. | No live writer can still complete the old operation. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0] |
+| 4 · ACCEPTED | C-STORE.4.7.1.5.11.3 — Recovery-release proof 3 | The source-defined condition governed by C-STORE.4.7.1.5.11. | The exact target batch and reserved `root_id` were checked. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0] |
+| 5 · ACCEPTED | C-STORE.4.7.1.5.11.4 — Recovery-release proof 4 | The source-defined condition governed by C-STORE.4.7.1.5.11. | Root non-commit is conclusively proven. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0] |
+| 6 · ACCEPTED | C-STORE.4.7.1.5.10 — commit_fenced → recovery_released_no_commit | The source-defined condition governed by C-STORE.4.7.1.5.11. | Only strict recovery with all four proofs may release a non-committed fenced generation; its reserved root ID remains bound for retry. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0] |
 
 SUB-PARTS: C-STORE.4.7.1.5.11.1 — Recovery-release proof 1; C-STORE.4.7.1.5.11.2 — Recovery-release proof 2; C-STORE.4.7.1.5.11.3 — Recovery-release proof 3; C-STORE.4.7.1.5.11.4 — Recovery-release proof 4
 
@@ -6473,11 +6525,11 @@ ALONE
 - Does: ACCEPTED — Exclusive recovery authority is active. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Release the fence without all four proofs. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Leaves the claim indeterminate_recovery_required unless all four strict recovery-release proofs hold; no release or regrant is inferred. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.7.1.5.11 — Strict recovery-release gate: Exclusive recovery authority is active. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -6496,11 +6548,11 @@ ALONE
 - Does: ACCEPTED — No live writer can still complete the old operation. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Release the fence without all four proofs. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Leaves the claim indeterminate_recovery_required unless all four strict recovery-release proofs hold; no release or regrant is inferred. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.7.1.5.11 — Strict recovery-release gate: No live writer can still complete the old operation. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -6519,11 +6571,11 @@ ALONE
 - Does: ACCEPTED — The exact target batch and reserved `root_id` were checked. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Release the fence without all four proofs. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Leaves the claim indeterminate_recovery_required unless all four strict recovery-release proofs hold; no release or regrant is inferred. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.7.1.5.11 — Strict recovery-release gate: The exact target batch and reserved `root_id` were checked. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -6542,11 +6594,11 @@ ALONE
 - Does: ACCEPTED — Root non-commit is conclusively proven. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Release the fence without all four proofs. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Leaves the claim indeterminate_recovery_required unless all four strict recovery-release proofs hold; no release or regrant is inferred. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.7.1.5.11 — Strict recovery-release gate: Root non-commit is conclusively proven. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -6564,7 +6616,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — The at most one currently effective generation, if any — derived from the generation events [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Gives out: ACCEPTED — The `current_ownership_generation` value carried by The global ingestion claim — one permanent claim, statuses, and ownership generations. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: The at most one currently effective generation, if any — derived from the generation events [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -6587,8 +6639,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Bound once, at the terminal `committed` transition [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Gives out: ACCEPTED — The `committed_root_id` value carried by The global ingestion claim — one permanent claim, statuses, and ownership generations. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Bound once, at the terminal `committed` transition [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
+- Fails closed by: ACCEPTED — A committed root/claim remains committed on a later mismatch; the mismatching attempt is rejected as an attached incident. Missing terminal transitions are completed only from durable append evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.4] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6610,8 +6662,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Bound once, at the terminal `committed` transition [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Gives out: ACCEPTED — The `owning_batch_id` value carried by The global ingestion claim — one permanent claim, statuses, and ownership generations. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Bound once, at the terminal `committed` transition [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
+- Fails closed by: ACCEPTED — A committed root/claim remains committed on a later mismatch; the mismatching attempt is rejected as an attached incident. Missing terminal transitions are completed only from durable append evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.4] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6656,7 +6708,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Exactly one durable ownership generation and exactly one matching durable WB1 reservation exist — created together in one boundary [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Gives out: ACCEPTED — `owned_uncommitted` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Exactly one durable ownership generation and exactly one matching durable WB1 reservation exist — created together in one boundary [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -6679,8 +6731,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Terminal successful state: one `root_id` in one owning `batch_id`. Never replaced, hidden, weakened, or reopened — by anything, including later mismatch incidents [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Gives out: ACCEPTED — `committed` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Terminal successful state: one `root_id` in one owning `batch_id`. Never replaced, hidden, weakened, or reopened — by anything, including later mismatch incidents [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
+- Fails closed by: ACCEPTED — A committed root/claim remains committed on a later mismatch; the mismatching attempt is rejected as an attached incident. Missing terminal transitions are completed only from durable append evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.4] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6702,8 +6754,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — No new ownership and no append permitted; resolution only through §11 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Gives out: ACCEPTED — `indeterminate_recovery_required` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: No new ownership and no append permitted; resolution only through §11 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
+- Fails closed by: ACCEPTED — No new ownership and no append permitted; resolution only through §11 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -6778,7 +6830,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.7.1.5 — ownership_generation_events: The claim is `available_uncommitted` before any successor generation is granted. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -7136,7 +7188,7 @@ ALONE
 - Does: ACCEPTED — Binds the protected point to the stated identity and compare-and-commit conditions: `ingest_operation_id` — exactly one terminal record per parent operation; child logs are never second parent logs [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.1]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Treat a repeated committed operation as a fresh operation. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.1]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Withholds acknowledgement while the matching parent terminal is absent; recovery locates existing logs by operation identity and appends only the missing terminal, without undoing a durable root. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.4] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -7321,7 +7373,7 @@ ALONE
 - Does: ACCEPTED — `root_id` is unique system-wide across all batches — the existing 5,521 roots keep their identities; every future identity is generated never to collide with any existing root in any batch (uniqueness contract binding). Uniqueness is enforced before append by the canonical root-ownership authority (§8.2A) — one permanent ownership entry per `root_id`; exactly one batch owns each root. The rebuildable retrieval index (§10, PR) serves lookup and is never the uniqueness authority. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2]
 - Gives out: ACCEPTED — Exactly one owning batch per committed root. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2]
 - Must never: ACCEPTED — Use the rebuildable retrieval index as uniqueness authority. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Rejects a different root identity under the same claim or the same identity under another claim before append; contradictory authoritative evidence remains indeterminate_recovery_required. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -7369,6 +7421,7 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.4.7 — Cross-batch identity and duplicate-prevention contract | Root identity, owning claim, canonical payload integrity and fenced append evidence. | - A `root_id` is bound to its claim before any root append: WB1 atomically verifies-or-reserves it for the same claim inside the ownership-generation/reservation boundary (§7.3-WB1). - The binding is one-to-one, enforced in both directions: one `root_id` → one permanent owning claim, and one permanent ingestion claim → one canonical `reserved_root_id` (§8.0), bound immutably at the claim's first successful WB1. A different claim presenting the same `root_id`, or the same claim presenting a different `root_id`, is rejected before WB2 — recorded in the entry's append-only conflict records as an integrity/identity conflict. Where the authoritative evidence itself is contradictory rather than a bad retry, the claim fails closed as `indeterminate_recovery_required` — no identity is guessed. - Cancellation of a generation does not release the `root_id`: the permanent claim retains its reserved identity for safe retries; the identity is never reassigned to another claim. - WB2 may commit only when both hold: the generation holds the commit fence (§8.0), and the root-ownership entry belongs to that same claim. On success WB2 transitions the entry to `committed_to_batch{owning_batch_id}` with the same root and batch. - Registry failure, incomplete coverage, or conflict → admission fails closed (§12). - The PR/global retrieval index remains rebuildable and non-authoritative; it is never the pre-commit uniqueness authority. | `reserved_for_claim` or `committed_to_batch`, with append-only provenance/conflicts. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A] |
+| 2 · ACCEPTED | C-STORE.4.7.4.11 — Fence and matching owner | The source-defined condition governed by C-STORE.4.7.4. | WB2 requires both the durable commit fence and an ownership entry belonging to the same claim. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A] |
 
 SUB-PARTS: C-STORE.4.7.4.1 — root_id; C-STORE.4.7.4.2 — owning_claim_key; C-STORE.4.7.4.3 — payload_integrity_ref; C-STORE.4.7.4.4 — status; C-STORE.4.7.4.5 — owning_batch_id; C-STORE.4.7.4.6 — provenance; C-STORE.4.7.4.7 — conflict records; C-STORE.4.7.4.8 — Claim to root binding; C-STORE.4.7.4.9 — Root to claim binding; C-STORE.4.7.4.10 — Cancellation retains identity; C-STORE.4.7.4.11 — Fence and matching owner
 
@@ -7380,7 +7433,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — The permanent root identity — one ownership entry per `root_id`, ever [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A]
 - Gives out: ACCEPTED — The `root_id` value carried by Canonical root-ownership authority (pre-commit). [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: The permanent root identity — one ownership entry per `root_id`, ever [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -7542,8 +7595,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Append-only; every reservation, commit, and rejected conflicting presentation [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A]
 - Gives out: ACCEPTED — The `provenance` value carried by Canonical root-ownership authority (pre-commit). [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Append-only; every reservation, commit, and rejected conflicting presentation [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A]
+- Fails closed by: ACCEPTED — Records a rejected conflicting identity presentation append-only; contradictory ownership evidence remains indeterminate_recovery_required rather than guessed. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -7565,8 +7618,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Append-only; every reservation, commit, and rejected conflicting presentation [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A]
 - Gives out: ACCEPTED — The `conflict records` value carried by Canonical root-ownership authority (pre-commit). [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Append-only; every reservation, commit, and rejected conflicting presentation [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A]
+- Fails closed by: ACCEPTED — Records a rejected conflicting identity presentation append-only; contradictory ownership evidence remains indeterminate_recovery_required rather than guessed. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -7589,7 +7642,7 @@ ALONE
 - Does: ACCEPTED — One permanent ingestion claim has exactly one immutable `reserved_root_id`, bound at its first successful WB1. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Guess identity or ownership when authoritative evidence conflicts. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Rejects a different root identity under the same claim or the same identity under another claim before append; contradictory authoritative evidence remains indeterminate_recovery_required. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -7612,7 +7665,7 @@ ALONE
 - Does: ACCEPTED — One `root_id` has one permanent owning claim; another claim is rejected before append. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Guess identity or ownership when authoritative evidence conflicts. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Rejects a different root identity under the same claim or the same identity under another claim before append; contradictory authoritative evidence remains indeterminate_recovery_required. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -7662,7 +7715,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.4.7.1.5 — ownership_generation_events, C-STORE.4.7.4 — Canonical root-ownership authority (pre-commit): WB2 requires both the durable commit fence and an ownership entry belonging to the same claim. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -7728,7 +7781,8 @@ ALONE
 - Does: ACCEPTED — - After sealing: claims of sealed roots remain `committed`; a later ingestion attempt of already-sealed material absorbs against the sealed owner at WB0 — it never writes a copy into the active batch. The PR identity index additionally serves lookup and provenance (§10) as rebuildable, non-authoritative material — never the pre-commit uniqueness authority (§8.2A is). [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.3]
 - Gives out: ACCEPTED — Existing root and batch identity with no second commit. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.3]
 - Must never: ACCEPTED — Copy an already-sealed root into the active batch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.3]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — - At write time — the claim decides, pre-commit: WB0 consults the global claim ledger (batch- and epoch-independent). Claim `committed` anywhere → `duplicate_absorbed`, pointing at the owning batch, with no reservation. Claim `owned_uncommitted` → no second ownership generation. Repeated ingestion under the same stable identity therefore commits at most once, ever, anywhere — enforced before any immutable append, not repaired after it. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.3]
+- Fails closed by: ACCEPTED — - After sealing: claims of sealed roots remain `committed`; a later ingestion attempt of already-sealed material absorbs against the sealed owner at WB0 — it never writes a copy into the active batch. The PR identity index additionally serves lookup and provenance (§10) as rebuildable, non-authoritative material — never the pre-commit uniqueness authority (§8.2A is). [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.3]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -7820,7 +7874,7 @@ ALONE
 - Does: ACCEPTED — Cuts off admission, resolves pre-cutoff writes, verifies and seals through the applicable path. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9]
 - Gives out: ACCEPTED — A sealed batch and, when selected, a successor write target. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9]
 - Must never: ACCEPTED — Redirect a write gap into a sealed batch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Does not commit the seal with unresolved reservations or failed verification; no write gap falls back to a sealed batch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.3] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.4] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.5]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -7848,7 +7902,7 @@ ALONE
 - Does: ACCEPTED — Rotation/sealing begins only from a committed rotation/seal plan — the LB-P boundary, before any dependent action. The committed plan carries: plan identity; the target active batch; the cause class (`rotation` — successor intended — or `shutdown_seal` — seal without successor; writes then fail closed until a successor exists); the expected current selection epoch and active batch; whether a successor is intended; operation identity and provenance; and the trigger reference to later declared configuration/calibration — the numerical capacity, time, and performance thresholds are declared later values, not invented here (§16). No successor creation, cutoff, seal-start, cancellation, or lineage update may proceed without the committed plan. A stale plan whose expected epoch has changed is superseded and authorizes no new effects — already-created external candidate records remain preserved; an activated but never-selected candidate closes only through the legal bounded §5.2 abandonment transition; nothing is erased (§11 row 34). [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.1]
 - Gives out: ACCEPTED — A current plan or preserved records with stale-plan refusal. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.1]
 - Must never: ACCEPTED — Erase existing external records when a plan becomes stale. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.1]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — A stale plan is superseded with no new effects; existing external records remain preserved and no dependent action proceeds without its committed plan. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.1]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -7877,7 +7931,7 @@ ALONE
 - Does: ACCEPTED — 7. LB6 seal commit on the old batch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.2]
 - Gives out: ACCEPTED — New admission only to the successor; old batch sealed after bounded completions resolve. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.2]
 - Must never: ACCEPTED — Create a window where both batches admit new reservations. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.2]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Does not commit the seal with unresolved reservations or failed verification; no write gap falls back to a sealed batch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.3] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.4] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.5]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -7905,7 +7959,12 @@ ALONE
 - Does: ACCEPTED — A seal-without-successor path runs LB5 → drain → verification → LB6 directly; ordinary writes fail closed from LB5 until a successor commits LB4. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.2A]
 - Gives out: ACCEPTED — Ordinary writes remain closed until a successor is selected by mode A. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.2A]
 - Must never: ACCEPTED — Create a second cutoff when reactivating after shutdown. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.2A]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — 1. LB-P committed shutdown-seal plan. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.2A]
+- Fails closed by: ACCEPTED — 2. LB5 — one atomic boundary committing together: the batch's `admission_cutoff_id` marker; the admission stop; the transition `active` → `sealing`; and the reference to the committed shutdown-seal plan. Because the cutoff is inside LB5, every reservation is classifiable against a durable cutoff: reservations durably granted before this LB5 cutoff retain their bounded completion right; no reservation may be granted after it. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.2A]
+- Fails closed by: ACCEPTED — 3. Drain (§9.3) against the LB5 cutoff → Verification (§9.4) → LB6 seal commit. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.2A]
+- Fails closed by: ACCEPTED — 4. Ordinary writes fail closed from the LB5 cutoff until a successor commits LB1–LB3 and the LB4 mode-A initial/reactivation selection — a no-valid-active creation path governed solely by its idempotent LB1 creation plan (§6.3), not another rotation/seal plan and not a second cutoff of this batch (its LB5 cutoff remains unchanged) — and never falling back to any sealed batch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.2A]
+- Fails closed by: ACCEPTED — One `admission_cutoff_id` contract: rotation reservations are classified against the LB4 cutoff; shutdown-seal reservations against the LB5 cutoff; the admission ledger's total order over grants and the cutoff marker lets every reservation prove whether it was committed before or after the applicable cutoff; no write gap can fall back to a sealed batch; no unreserved or post-cutoff attempt can use the completion exception (§7.6). [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.2A]
+- Fails closed by: ACCEPTED — A seal-without-successor path runs LB5 → drain → verification → LB6 directly; ordinary writes fail closed from LB5 until a successor commits LB4. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.2A]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -7939,6 +7998,8 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.4.8 — Sealing and rotation contract | Every pre-cutoff WB1 reservation and its current generation evidence. | Every WB1 reservation classified as pre-cutoff against the applicable `admission_cutoff_id` (LB4 for rotation, LB5 for shutdown-seal) is resolved exactly one way: `committed` (its WB2 completed into the old batch under the full §7.6 validation — reservation, currently effective ownership generation, payload integrity, batch identity, cutoff relationship) or cancelled through the atomic per-generation cancellation boundary (§8.0) — legal only while the generation remains `granted` — which proves no root committed under that generation, extinguishes the completion right, and returns the claim to `available_uncommitted`; only then may a later WB1 grant a successor generation; the caller receives `interrupted` and retries under the same key. A reservation whose generation is already `commit_fenced` resolves only by append completion or the strict §8.0 recovery release (row 37) — never by ordinary drain cancellation. LB6 requires every pre-cutoff reservation proven committed or cancelled; an indeterminate reservation blocks the seal and resolves only through §11 row 10 — never by guessing. | Resolved reservations, or a blocked LB6 while any result is indeterminate. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.3] |
+| 2 · ACCEPTED | C-STORE.4.4.2.7 — `sealing` → `sealed` | The source-defined condition governed by C-STORE.4.8.4. | Legal — only via LB6 after drain + verification (§9) | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] |
+| 3 · ACCEPTED | C-STORE.4.5.1.7 — LB6 — Seal commit | The source-defined condition governed by C-STORE.4.8.4. | Final counts + integrity summary + `sealed` event + final manifest version + successor lineage refs | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1] |
 
 SUB-PARTS: NONE
 
@@ -7964,6 +8025,8 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.4.8 — Sealing and rotation contract | Durable batch, reservation/append ledger, integrity and index-coverage evidence. | Durable-batch verification records: root count vs the reservation/append ledger; content-integrity summary computed and referenced; identity-index coverage for the batch complete or honestly marked (§10.4). Verification failure → `recovery_required`, never a forced seal. | Verification records or `recovery_required`. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.4] |
+| 2 · ACCEPTED | C-STORE.4.4.2.7 — `sealing` → `sealed` | The source-defined condition governed by C-STORE.4.8.5. | Legal — only via LB6 after drain + verification (§9) | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] |
+| 3 · ACCEPTED | C-STORE.4.5.1.7 — LB6 — Seal commit | The source-defined condition governed by C-STORE.4.8.5. | Final counts + integrity summary + `sealed` event + final manifest version + successor lineage refs | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §6.1] |
 
 SUB-PARTS: C-STORE.4.8.5.1 — root count; C-STORE.4.8.5.2 — content-integrity summary; C-STORE.4.8.5.3 — identity-index coverage
 
@@ -8021,7 +8084,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Require complete coverage or an honest coverage marking; never force a seal on verification failure. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.4]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Require complete coverage or an honest coverage marking; never force a seal on verification failure. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.4]
 - Fails closed by: ACCEPTED — Verification failure yields `recovery_required`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §9.4]
 
 TOGETHER
@@ -8071,7 +8134,7 @@ ALONE
 - Does: ACCEPTED — Discovers and locates roots across distinct batches without physically merging them. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §10]
 - Gives out: ACCEPTED — Identity, provenance and honest structural coverage. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §10]
 - Must never: ACCEPTED — Choose retrieval ranking or degraded-service policy. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §10]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Marks incomplete or unverifiable coverage honestly; reconciliation scans committed contents idempotently and does not claim completeness or invent missing roots. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §10] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -8144,7 +8207,7 @@ ALONE
 - Does: ACCEPTED — A batch participates in unified reading only after a committed `index_registration`  per index: `{batch_id, index_identity, registered_at, coverage_status, evidence refs}`. Registration is idempotent (§8.1) and reconstructible after a crash by mechanical scan of the batch's committed contents — reconciliation is idempotent and marks coverage honestly while incomplete (§11 row 13). [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §10.3]
 - Gives out: ACCEPTED — A committed `index_registration` with honest coverage. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §10.3]
 - Must never: ACCEPTED — Claim complete coverage while reconciliation is incomplete. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §10.3]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Marks incomplete or unverifiable coverage honestly; reconciliation scans committed contents idempotently and does not claim completeness or invent missing roots. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §10] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -8167,7 +8230,7 @@ ALONE
 - Does: ACCEPTED — Registers idempotently; reconstruction scans committed batch contents and marks incomplete coverage honestly. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §10.3]
 - Gives out: NOT DECIDED
 - Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Marks incomplete or unverifiable coverage honestly; reconciliation scans committed contents idempotently and does not claim completeness or invent missing roots. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §10] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: ACCEPTED — C-STORE.4.9.3.1.1 — batch_id: the field value with its stated form and meaning. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §10.3]
@@ -8309,7 +8372,7 @@ ALONE
 - Does: ACCEPTED — `coverage_status` per batch per index: `complete` / `partial` / `stale` / `missing` / `conflicting`. B11 detects and marks; it never hides a gap, never claims completeness it cannot evidence, and never silently omits a batch. What a retrieval service does with degraded coverage (ranking, failure, degraded-context presentation) is B1/B26, not B11 — B11 supplies the structural truth only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §10.4]
 - Gives out: ACCEPTED — Honest structural coverage status. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §10.4]
 - Must never: ACCEPTED — Hide a gap, silently omit a batch or decide retrieval-service failure policy. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §10.4]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — `coverage_status` per batch per index: `complete` / `partial` / `stale` / `missing` / `conflicting`. B11 detects and marks; it never hides a gap, never claims completeness it cannot evidence, and never silently omits a batch. What a retrieval service does with degraded coverage (ranking, failure, degraded-context presentation) is B1/B26, not B11 — B11 supplies the structural truth only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §10.4]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -8574,7 +8637,7 @@ ALONE
 - Does: ACCEPTED — Plan discovered → complete LB2 idempotently, or close the plan `invalid` (cause: abandoned preparation) if its predecessor epoch moved on; nothing writable existed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Plan discovered → complete LB2 idempotently, or close the plan `invalid` (cause: abandoned preparation) if its predecessor epoch moved on; nothing writable existed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Plan discovered → complete LB2 idempotently, or close the plan `invalid` (cause: abandoned preparation) if its predecessor epoch moved on; nothing writable existed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -8620,7 +8683,7 @@ ALONE
 - Does: ACCEPTED — Validate → LB3 → LB4 via the normal path; or mark `invalid` if superseded; the batch was never writable meanwhile (§5.3) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Validate → LB3 → LB4 via the normal path; or mark `invalid` if superseded; the batch was never writable meanwhile (§5.3) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Validate → LB3 → LB4 via the normal path; or mark `invalid` if superseded; the batch was never writable meanwhile (§5.3) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -8666,7 +8729,7 @@ ALONE
 - Does: ACCEPTED — Retry the applicable LB4 mode under the plan's key; if another selection won the epoch, adopt it and close this never-selected batch only through the bounded legal §5.2 abandonment transition, its invalidation event recording the superseding selection (never two writable selections; nothing silently erased) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Retry the applicable LB4 mode under the plan's key; if another selection won the epoch, adopt it and close this never-selected batch only through the bounded legal §5.2 abandonment transition, its invalidation event recording the superseding selection (never two writable selections; nothing silently erased) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Retry the applicable LB4 mode under the plan's key; if another selection won the epoch, adopt it and close this never-selected batch only through the bounded legal §5.2 abandonment transition, its invalidation event recording the superseding selection (never two writable selections; nothing silently erased) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -8712,7 +8775,7 @@ ALONE
 - Does: ACCEPTED — Ordinary writes block immediately. Recovery may retain one record only when committed integrity/provenance evidence proves the other was never validly committed, is malformed, or fails its required integrity/authorization contract. If both records remain equally valid: no winner is chosen — not by timestamp, batch identifier, file order, lexical order, or any invented tie-breaker; both affected batches remain non-writable or `recovery_required`; existing roots remain preserved; no reservation is cancelled or redirected on a guess; the conflict stays fail-closed for a later separately authorized repair mechanism (§16, not designed here). Valid LB3-activated but never-selected candidates are not a fork and are never treated as one (§6.4) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Ordinary writes block immediately. Recovery may retain one record only when committed integrity/provenance evidence proves the other was never validly committed, is malformed, or fails its required integrity/authorization contract. If both records remain equally valid: no winner is chosen — not by timestamp, batch identifier, file order, lexical order, or any invented tie-breaker; both affected batches remain non-writable or `recovery_required`; existing roots remain preserved; no reservation is cancelled or redirected on a guess; the conflict stays fail-closed for a later separately authorized repair mechanism (§16, not designed here). Valid LB3-activated but never-selected candidates are not a fork and are never treated as one (§6.4) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Ordinary writes block immediately. Recovery may retain one record only when committed integrity/provenance evidence proves the other was never validly committed, is malformed, or fails its required integrity/authorization contract. If both records remain equally valid: no winner is chosen — not by timestamp, batch identifier, file order, lexical order, or any invented tie-breaker; both affected batches remain non-writable or `recovery_required`; existing roots remain preserved; no reservation is cancelled or redirected on a guess; the conflict stays fail-closed for a later separately authorized repair mechanism (§16, not designed here). Valid LB3-activated but never-selected candidates are not a fork and are never treated as one (§6.4) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -8758,7 +8821,7 @@ ALONE
 - Does: ACCEPTED — Ordinary writes fail closed; creation path §6.3 runs; sealed batches are never a fallback [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Ordinary writes fail closed; creation path §6.3 runs; sealed batches are never a fallback [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Ordinary writes fail closed; creation path §6.3 runs; sealed batches are never a fallback [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -8804,7 +8867,7 @@ ALONE
 - Does: ACCEPTED — `recovery_required`; resolve only to the state the committed evidence proves; unresolvable → `invalid` + fail-closed marking; bytes untouched [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — `recovery_required`; resolve only to the state the committed evidence proves; unresolvable → `invalid` + fail-closed marking; bytes untouched [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — `recovery_required`; resolve only to the state the committed evidence proves; unresolvable → `invalid` + fail-closed marking; bytes untouched [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -8850,7 +8913,7 @@ ALONE
 - Does: ACCEPTED — Claim first: the claim's events prove non-commit (`owned_uncommitted`, generation `granted`, no terminal event, append lookup empty) → the generation is cancelled through the atomic §8.0 boundary (claim → `available_uncommitted`), the reservation resolves `interrupted`, and the same key may retry via WB0→WB1. A `commit_fenced` generation never takes this path — it resolves per rows 37–38. If the claim status or append destination cannot be safely read → claim `indeterminate_recovery_required`, outcome `indeterminate`, fail closed; resolve only by later successful lookup [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Claim first: the claim's events prove non-commit (`owned_uncommitted`, generation `granted`, no terminal event, append lookup empty) → the generation is cancelled through the atomic §8.0 boundary (claim → `available_uncommitted`), the reservation resolves `interrupted`, and the same key may retry via WB0→WB1. A `commit_fenced` generation never takes this path — it resolves per rows 37–38. If the claim status or append destination cannot be safely read → claim `indeterminate_recovery_required`, outcome `indeterminate`, fail closed; resolve only by later successful lookup [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Claim first: the claim's events prove non-commit (`owned_uncommitted`, generation `granted`, no terminal event, append lookup empty) → the generation is cancelled through the atomic §8.0 boundary (claim → `available_uncommitted`), the reservation resolves `interrupted`, and the same key may retry via WB0→WB1. A `commit_fenced` generation never takes this path — it resolves per rows 37–38. If the claim status or append destination cannot be safely read → claim `indeterminate_recovery_required`, outcome `indeterminate`, fail closed; resolve only by later successful lookup [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -8896,7 +8959,7 @@ ALONE
 - Does: ACCEPTED — Claim first, then root lookup finds the durable root; the claim's `committed` transition is completed from the append evidence if missing; the missing WB3 terminal record is appended idempotently (exactly one per operation); only then is `committed`/`duplicate_absorbed` acknowledged. Never a second append; a logging gap never uncommits the root [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Claim first, then root lookup finds the durable root; the claim's `committed` transition is completed from the append evidence if missing; the missing WB3 terminal record is appended idempotently (exactly one per operation); only then is `committed`/`duplicate_absorbed` acknowledged. Never a second append; a logging gap never uncommits the root [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Claim first, then root lookup finds the durable root; the claim's `committed` transition is completed from the append evidence if missing; the missing WB3 terminal record is appended idempotently (exactly one per operation); only then is `committed`/`duplicate_absorbed` acknowledged. Never a second append; a logging gap never uncommits the root [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -8942,7 +9005,7 @@ ALONE
 - Does: ACCEPTED — Complete the PR registrations idempotently (identity-index entry, counters, reservation resolution); coverage marked `partial` until done; PR never gates the WB3 terminal log or WB4 acknowledgement; the root's durability is unaffected [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Complete the PR registrations idempotently (identity-index entry, counters, reservation resolution); coverage marked `partial` until done; PR never gates the WB3 terminal log or WB4 acknowledgement; the root's durability is unaffected [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Complete the PR registrations idempotently (identity-index entry, counters, reservation resolution); coverage marked `partial` until done; PR never gates the WB3 terminal log or WB4 acknowledgement; the root's durability is unaffected [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -8988,7 +9051,7 @@ ALONE
 - Does: ACCEPTED — Resume the drain (§9.3): each pre-cutoff reservation resolved `committed` (WB2 + claim evidence exist; §7.6 validation replayed) or `cancelled` (proven absent; ownership durably cancelled before any claim transfer); undeterminable → claim `indeterminate_recovery_required`, reservation `unresolved`, the seal cannot commit; fail closed pending resolution [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Resume the drain (§9.3): each pre-cutoff reservation resolved `committed` (WB2 + claim evidence exist; §7.6 validation replayed) or `cancelled` (proven absent; ownership durably cancelled before any claim transfer); undeterminable → claim `indeterminate_recovery_required`, reservation `unresolved`, the seal cannot commit; fail closed pending resolution [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Resume the drain (§9.3): each pre-cutoff reservation resolved `committed` (WB2 + claim evidence exist; §7.6 validation replayed) or `cancelled` (proven absent; ownership durably cancelled before any claim transfer); undeterminable → claim `indeterminate_recovery_required`, reservation `unresolved`, the seal cannot commit; fail closed pending resolution [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9034,7 +9097,7 @@ ALONE
 - Does: ACCEPTED — Writes fail closed (row 5 behavior); successor creation runs §6.3; the sealed batch never re-admits [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Writes fail closed (row 5 behavior); successor creation runs §6.3; the sealed batch never re-admits [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Writes fail closed (row 5 behavior); successor creation runs §6.3; the sealed batch never re-admits [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9080,7 +9143,7 @@ ALONE
 - Does: ACCEPTED — New writes safely target the successor; the old batch completes drain → verification → LB6, or resolves `recovery_required` per evidence; it never re-admits new reservations (admission stopped at the LB4 cutoff), while surviving pre-cutoff reservations keep only their §7.6-validated completion right [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — New writes safely target the successor; the old batch completes drain → verification → LB6, or resolves `recovery_required` per evidence; it never re-admits new reservations (admission stopped at the LB4 cutoff), while surviving pre-cutoff reservations keep only their §7.6-validated completion right [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — New writes safely target the successor; the old batch completes drain → verification → LB6, or resolves `recovery_required` per evidence; it never re-admits new reservations (admission stopped at the LB4 cutoff), while surviving pre-cutoff reservations keep only their §7.6-validated completion right [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9126,7 +9189,7 @@ ALONE
 - Does: ACCEPTED — Re-run reconciliation idempotently (per-entry keys); coverage stays honestly `partial`/`stale` until complete; no duplicate entries [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Re-run reconciliation idempotently (per-entry keys); coverage stays honestly `partial`/`stale` until complete; no duplicate entries [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Re-run reconciliation idempotently (per-entry keys); coverage stays honestly `partial`/`stale` until complete; no duplicate entries [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9172,7 +9235,7 @@ ALONE
 - Does: ACCEPTED — `recovery_run_id` + per-action lookup-first make the second run a no-op that returns the committed findings [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — `recovery_run_id` + per-action lookup-first make the second run a no-op that returns the committed findings [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — `recovery_run_id` + per-action lookup-first make the second run a no-op that returns the committed findings [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9218,7 +9281,7 @@ ALONE
 - Does: ACCEPTED — The affected batch → `recovery_required`; claims are reduced to what verifiable evidence supports; unverifiable evidence never supports writability or completeness; if integrity cannot be established → `invalid` marking + fail closed; committed roots inside remain preserved and readable to the extent their own integrity verifies; nothing is rewritten or reconstructed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — The affected batch → `recovery_required`; claims are reduced to what verifiable evidence supports; unverifiable evidence never supports writability or completeness; if integrity cannot be established → `invalid` marking + fail closed; committed roots inside remain preserved and readable to the extent their own integrity verifies; nothing is rewritten or reconstructed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — The affected batch → `recovery_required`; claims are reduced to what verifiable evidence supports; unverifiable evidence never supports writability or completeness; if integrity cannot be established → `invalid` marking + fail closed; committed roots inside remain preserved and readable to the extent their own integrity verifies; nothing is rewritten or reconstructed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9264,7 +9327,7 @@ ALONE
 - Does: ACCEPTED — Nothing to undo: the claim is `available_uncommitted` with no owner and no append right — harmless and reusable; the same key's next attempt runs WB0 lookup → WB1 normally [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Nothing to undo: the claim is `available_uncommitted` with no owner and no append right — harmless and reusable; the same key's next attempt runs WB0 lookup → WB1 normally [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Nothing to undo: the claim is `available_uncommitted` with no owner and no append right — harmless and reusable; the same key's next attempt runs WB0 lookup → WB1 normally [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9310,7 +9373,7 @@ ALONE
 - Does: ACCEPTED — The atomic WB1 admits exactly one winner; the loser's attempt has no durable generation and no reservation — it observes the winner (claim `owned_uncommitted`) and resolves `interrupted`, appending nothing [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — The atomic WB1 admits exactly one winner; the loser's attempt has no durable generation and no reservation — it observes the winner (claim `owned_uncommitted`) and resolves `interrupted`, appending nothing [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — The atomic WB1 admits exactly one winner; the loser's attempt has no durable generation and no reservation — it observes the winner (claim `owned_uncommitted`) and resolves `interrupted`, appending nothing [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9356,7 +9419,7 @@ ALONE
 - Does: ACCEPTED — If the generation phase is `granted` (= row 7): cancellation (`granted` → `cancelled`) → claim `available_uncommitted` → retry; or proceed by winning the WB2 fence (`granted` → `commit_fenced`) where the batch still admits the completion right. If the phase is already `commit_fenced`, cancellation is forbidden — resolve per rows 37–38 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — If the generation phase is `granted` (= row 7): cancellation (`granted` → `cancelled`) → claim `available_uncommitted` → retry; or proceed by winning the WB2 fence (`granted` → `commit_fenced`) where the batch still admits the completion right. If the phase is already `commit_fenced`, cancellation is forbidden — resolve per rows 37–38 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — If the generation phase is `granted` (= row 7): cancellation (`granted` → `cancelled`) → claim `available_uncommitted` → retry; or proceed by winning the WB2 fence (`granted` → `commit_fenced`) where the batch still admits the completion right. If the phase is already `commit_fenced`, cancellation is forbidden — resolve per rows 37–38 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9402,7 +9465,7 @@ ALONE
 - Does: ACCEPTED — The claim rests `available_uncommitted` — correct and harmless; a later WB0 lookup → WB1 grants the next generation when an attempt arrives [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — The claim rests `available_uncommitted` — correct and harmless; a later WB0 lookup → WB1 grants the next generation when an attempt arrives [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — The claim rests `available_uncommitted` — correct and harmless; a later WB0 lookup → WB1 grants the next generation when an attempt arrives [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9448,7 +9511,7 @@ ALONE
 - Does: ACCEPTED — The cancellation boundary is atomic: it either committed (generation cancelled; claim `available_uncommitted`) or it did not (the generation remains current and effective) — lookup-first over the claim's events decides; a partially cancelled generation cannot exist; unreadable evidence → `indeterminate_recovery_required`, fail closed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — The cancellation boundary is atomic: it either committed (generation cancelled; claim `available_uncommitted`) or it did not (the generation remains current and effective) — lookup-first over the claim's events decides; a partially cancelled generation cannot exist; unreadable evidence → `indeterminate_recovery_required`, fail closed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — The cancellation boundary is atomic: it either committed (generation cancelled; claim `available_uncommitted`) or it did not (the generation remains current and effective) — lookup-first over the claim's events decides; a partially cancelled generation cannot exist; unreadable evidence → `indeterminate_recovery_required`, fail closed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9494,7 +9557,7 @@ ALONE
 - Does: ACCEPTED — The claim rests `available_uncommitted`; a later WB0 lookup followed by WB1 grants the next generation when an attempt arrives. No ownership remains dangling. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — The claim rests `available_uncommitted`; a later WB0 lookup followed by WB1 grants the next generation when an attempt arrives. No ownership remains dangling. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — The claim rests `available_uncommitted`; a later WB0 lookup followed by WB1 grants the next generation when an attempt arrives. No ownership remains dangling. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9540,7 +9603,7 @@ ALONE
 - Does: ACCEPTED — The fence compare-and-commit refuses it — its durable phase is `cancelled`, not `granted`; the physical append boundary would independently refuse it for lacking a durable `commit_fenced` phase verified immediately before commit; nothing commits; the refusal is logged (§14); the newer generation is unaffected [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — The fence compare-and-commit refuses it — its durable phase is `cancelled`, not `granted`; the physical append boundary would independently refuse it for lacking a durable `commit_fenced` phase verified immediately before commit; nothing commits; the refusal is logged (§14); the newer generation is unaffected [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — The fence compare-and-commit refuses it — its durable phase is `cancelled`, not `granted`; the physical append boundary would independently refuse it for lacking a durable `commit_fenced` phase verified immediately before commit; nothing commits; the refusal is logged (§14); the newer generation is unaffected [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9586,7 +9649,7 @@ ALONE
 - Does: ACCEPTED — The terminal `committed{root_id, batch_id}` transition is completed from the append evidence alone, idempotently (§8.0 linearization rule); then WB3/WB4 proceed per row 8 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — The terminal `committed{root_id, batch_id}` transition is completed from the append evidence alone, idempotently (§8.0 linearization rule); then WB3/WB4 proceed per row 8 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — The terminal `committed{root_id, batch_id}` transition is completed from the append evidence alone, idempotently (§8.0 linearization rule); then WB3/WB4 proceed per row 8 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9632,7 +9695,7 @@ ALONE
 - Does: ACCEPTED — The later attempt is `rejected`; a `mismatch_incident` is attached to the claim; the terminal `committed` state is never replaced, hidden, weakened, or reopened; later valid matching retries still return `duplicate_absorbed` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — The later attempt is `rejected`; a `mismatch_incident` is attached to the claim; the terminal `committed` state is never replaced, hidden, weakened, or reopened; later valid matching retries still return `duplicate_absorbed` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — The later attempt is `rejected`; a `mismatch_incident` is attached to the claim; the terminal `committed` state is never replaced, hidden, weakened, or reopened; later valid matching retries still return `duplicate_absorbed` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9678,7 +9741,7 @@ ALONE
 - Does: ACCEPTED — `recovery_run_id` + per-action lookup-first over the claim's append-only events make every repeat a no-op returning the committed findings — no duplicated ownership, no re-cancellation, no second terminal transition [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — `recovery_run_id` + per-action lookup-first over the claim's append-only events make every repeat a no-op returning the committed findings — no duplicated ownership, no re-cancellation, no second terminal transition [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — `recovery_run_id` + per-action lookup-first over the claim's append-only events make every repeat a no-op returning the committed findings — no duplicated ownership, no re-cancellation, no second terminal transition [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9724,7 +9787,7 @@ ALONE
 - Does: ACCEPTED — Lookup finds the plan → resume LB1 under it, or supersede the plan if its expected epoch has changed (row 34); no effects existed yet [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Lookup finds the plan → resume LB1 under it, or supersede the plan if its expected epoch has changed (row 34); no effects existed yet [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Lookup finds the plan → resume LB1 under it, or supersede the plan if its expected epoch has changed (row 34); no effects existed yet [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9770,7 +9833,7 @@ ALONE
 - Does: ACCEPTED — Lookup-first per boundary (rows 1–2 mechanics) under the plan's identity: complete the next boundary idempotently, or supersede the plan (no new effects) and close the never-selected successor only through the legal §5.2 abandonment transition with the stale-plan evidence recorded; already-created external records remain preserved [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Lookup-first per boundary (rows 1–2 mechanics) under the plan's identity: complete the next boundary idempotently, or supersede the plan (no new effects) and close the never-selected successor only through the legal §5.2 abandonment transition with the stale-plan evidence recorded; already-created external records remain preserved [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Lookup-first per boundary (rows 1–2 mechanics) under the plan's identity: complete the next boundary idempotently, or supersede the plan (no new effects) and close the never-selected successor only through the legal §5.2 abandonment transition with the stale-plan evidence recorded; already-created external records remain preserved [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9816,7 +9879,7 @@ ALONE
 - Does: ACCEPTED — Retry the applicable LB4 mode under the plan (idempotent compare-and-commit); if another selection won the epoch, adopt it, supersede this plan (no new effects), and close the losing never-selected candidate only through the legal §5.2 abandonment transition; the old batch kept admitting until a mode-B cutover actually committed — no cutoff, no orphaned completion rights [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Retry the applicable LB4 mode under the plan (idempotent compare-and-commit); if another selection won the epoch, adopt it, supersede this plan (no new effects), and close the losing never-selected candidate only through the legal §5.2 abandonment transition; the old batch kept admitting until a mode-B cutover actually committed — no cutoff, no orphaned completion rights [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Retry the applicable LB4 mode under the plan (idempotent compare-and-commit); if another selection won the epoch, adopt it, supersede this plan (no new effects), and close the losing never-selected candidate only through the legal §5.2 abandonment transition; the old batch kept admitting until a mode-B cutover actually committed — no cutoff, no orphaned completion rights [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9862,7 +9925,7 @@ ALONE
 - Does: ACCEPTED — The old batch is durably cut off (no new reservations) but not yet `sealing`: commit LB5 idempotently under the plan; pre-cutoff reservations keep their completion rights throughout [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — The old batch is durably cut off (no new reservations) but not yet `sealing`: commit LB5 idempotently under the plan; pre-cutoff reservations keep their completion rights throughout [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — The old batch is durably cut off (no new reservations) but not yet `sealing`: commit LB5 idempotently under the plan; pre-cutoff reservations keep their completion rights throughout [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9908,7 +9971,7 @@ ALONE
 - Does: ACCEPTED — Nothing depended yet: retry the atomic LB5 (cutoff + admission stop + `sealing` + plan ref) idempotently; the batch remains ordinarily writable until LB5 actually commits [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Nothing depended yet: retry the atomic LB5 (cutoff + admission stop + `sealing` + plan ref) idempotently; the batch remains ordinarily writable until LB5 actually commits [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Nothing depended yet: retry the atomic LB5 (cutoff + admission stop + `sealing` + plan ref) idempotently; the batch remains ordinarily writable until LB5 actually commits [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -9954,7 +10017,7 @@ ALONE
 - Does: ACCEPTED — LB5 is one atomic boundary: either the cutoff/stop/`sealing`/plan-ref committed together or none did — lookup decides; if the evidence cannot be safely read, the batch → `recovery_required` and admission fails closed pending resolution; no reservation is classified against an unproven cutoff [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — LB5 is one atomic boundary: either the cutoff/stop/`sealing`/plan-ref committed together or none did — lookup decides; if the evidence cannot be safely read, the batch → `recovery_required` and admission fails closed pending resolution; no reservation is classified against an unproven cutoff [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — LB5 is one atomic boundary: either the cutoff/stop/`sealing`/plan-ref committed together or none did — lookup decides; if the evidence cannot be safely read, the batch → `recovery_required` and admission fails closed pending resolution; no reservation is classified against an unproven cutoff [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -10000,7 +10063,7 @@ ALONE
 - Does: ACCEPTED — Drain per §9.3 against the LB5 `admission_cutoff_id`: each pre-cutoff reservation proven committed or cancelled through the atomic boundary; indeterminate blocks LB6 (row 10 mechanics) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Drain per §9.3 against the LB5 `admission_cutoff_id`: each pre-cutoff reservation proven committed or cancelled through the atomic boundary; indeterminate blocks LB6 (row 10 mechanics) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Drain per §9.3 against the LB5 `admission_cutoff_id`: each pre-cutoff reservation proven committed or cancelled through the atomic boundary; indeterminate blocks LB6 (row 10 mechanics) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -10046,7 +10109,7 @@ ALONE
 - Does: ACCEPTED — The plan identity makes the repeat a no-op returning the committed plan and its progress [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — The plan identity makes the repeat a no-op returning the committed plan and its progress [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — The plan identity makes the repeat a no-op returning the committed plan and its progress [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -10092,7 +10155,7 @@ ALONE
 - Does: ACCEPTED — The plan is superseded and authorizes no new effects: no further successor creation, cutoff, seal-start, cancellation, or lineage update proceeds under it. Already-created external candidate-batch records remain preserved; an activated but never-selected candidate is closed only through the bounded legal §5.2 abandonment transition with the stale-plan evidence recorded; nothing is silently erased; a new plan is required against current state [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — The plan is superseded and authorizes no new effects: no further successor creation, cutoff, seal-start, cancellation, or lineage update proceeds under it. Already-created external candidate-batch records remain preserved; an activated but never-selected candidate is closed only through the bounded legal §5.2 abandonment transition with the stale-plan evidence recorded; nothing is silently erased; a new plan is required against current state [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — The plan is superseded and authorizes no new effects: no further successor creation, cutoff, seal-start, cancellation, or lineage update proceeds under it. Already-created external candidate-batch records remain preserved; an activated but never-selected candidate is closed only through the bounded legal §5.2 abandonment transition with the stale-plan evidence recorded; nothing is silently erased; a new plan is required against current state [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -10138,7 +10201,7 @@ ALONE
 - Does: ACCEPTED — With generation `granted` and no fence event: cancel by compare-and-commit `granted → cancelled`, returning the claim to `available_uncommitted`, or win the WB2 fence `granted → commit_fenced` while the batch admits completion. Nothing was appended and no fence needs clearing. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — With generation `granted` and no fence event: cancel by compare-and-commit `granted → cancelled`, returning the claim to `available_uncommitted`, or win the WB2 fence `granted → commit_fenced` while the batch admits completion. Nothing was appended and no fence needs clearing. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — With generation `granted` and no fence event: cancel by compare-and-commit `granted → cancelled`, returning the claim to `available_uncommitted`, or win the WB2 fence `granted → commit_fenced` while the batch admits completion. Nothing was appended and no fence needs clearing. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -10184,7 +10247,7 @@ ALONE
 - Does: ACCEPTED — The generation phase is authoritative and append-only: lookup decides committed-or-not; if the phase evidence itself is unreadable → claim `indeterminate_recovery_required`, admission for this identity fails closed; no cancellation, no regrant, no append proceeds on a guess [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — The generation phase is authoritative and append-only: lookup decides committed-or-not; if the phase evidence itself is unreadable → claim `indeterminate_recovery_required`, admission for this identity fails closed; no cancellation, no regrant, no append proceeds on a guess [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — The generation phase is authoritative and append-only: lookup decides committed-or-not; if the phase evidence itself is unreadable → claim `indeterminate_recovery_required`, admission for this identity fails closed; no cancellation, no regrant, no append proceeds on a guess [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -10230,7 +10293,7 @@ ALONE
 - Does: ACCEPTED — Recovery may commit the distinct recovery-only terminal transition `commit_fenced` → `recovery_released_no_commit` (§8.0 — never ordinary `cancelled`) only when all four hold: exclusive recovery authority is active; no live writer can still complete the old operation; the exact target batch and reserved `root_id` were checked; and root non-commit is conclusively proven at the append destination. On commit: the released generation is permanently unable to append; its reservation and completion right are extinguished; the claim may return to `available_uncommitted` with its `reserved_root_id` intact for retry. Otherwise the claim remains `indeterminate_recovery_required`. The release never rewrites, reconstructs, or re-appends anything [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Recovery may commit the distinct recovery-only terminal transition `commit_fenced` → `recovery_released_no_commit` (§8.0 — never ordinary `cancelled`) only when all four hold: exclusive recovery authority is active; no live writer can still complete the old operation; the exact target batch and reserved `root_id` were checked; and root non-commit is conclusively proven at the append destination. On commit: the released generation is permanently unable to append; its reservation and completion right are extinguished; the claim may return to `available_uncommitted` with its `reserved_root_id` intact for retry. Otherwise the claim remains `indeterminate_recovery_required`. The release never rewrites, reconstructs, or re-appends anything [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Recovery may commit the distinct recovery-only terminal transition `commit_fenced` → `recovery_released_no_commit` (§8.0 — never ordinary `cancelled`) only when all four hold: exclusive recovery authority is active; no live writer can still complete the old operation; the exact target batch and reserved `root_id` were checked; and root non-commit is conclusively proven at the append destination. On commit: the released generation is permanently unable to append; its reservation and completion right are extinguished; the claim may return to `available_uncommitted` with its `reserved_root_id` intact for retry. Otherwise the claim remains `indeterminate_recovery_required`. The release never rewrites, reconstructs, or re-appends anything [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -10276,7 +10339,7 @@ ALONE
 - Does: ACCEPTED — Complete the claim's `committed{root_id, batch_id}` transition and the §8.2A `committed_to_batch` transition from the append evidence, idempotently; then WB3/WB4 per row 8 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Complete the claim's `committed{root_id, batch_id}` transition and the §8.2A `committed_to_batch` transition from the append evidence, idempotently; then WB3/WB4 per row 8 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Complete the claim's `committed{root_id, batch_id}` transition and the §8.2A `committed_to_batch` transition from the append evidence, idempotently; then WB3/WB4 per row 8 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -10322,7 +10385,7 @@ ALONE
 - Does: ACCEPTED — Claim `indeterminate_recovery_required`; admission for this identity fails closed; no cancellation, regrant, or append until the phase can be proven [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Claim `indeterminate_recovery_required`; admission for this identity fails closed; no cancellation, regrant, or append until the phase can be proven [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Claim `indeterminate_recovery_required`; admission for this identity fails closed; no cancellation, regrant, or append until the phase can be proven [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -10368,7 +10431,7 @@ ALONE
 - Does: ACCEPTED — `recovery_run_id` + lookup-first over the append-only phase events: a repeat run re-reads the same committed phases and re-applies nothing — no second fence, no second append, no second release; a committed `recovery_released_no_commit` is found and returned, never re-executed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — `recovery_run_id` + lookup-first over the append-only phase events: a repeat run re-reads the same committed phases and re-applies nothing — no second fence, no second append, no second release; a committed `recovery_released_no_commit` is found and returned, never re-executed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — `recovery_run_id` + lookup-first over the append-only phase events: a repeat run re-reads the same committed phases and re-applies nothing — no second fence, no second append, no second release; a committed `recovery_released_no_commit` is found and returned, never re-executed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -10414,7 +10477,7 @@ ALONE
 - Does: ACCEPTED — Refused by the phase compare-and-commit — the generation is `commit_fenced`, not `granted`; the claim cannot return to `available_uncommitted`; only append completion or row-37 resolution proceeds; the attempt is logged [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Refused by the phase compare-and-commit — the generation is `commit_fenced`, not `granted`; the claim cannot return to `available_uncommitted`; only append completion or row-37 resolution proceeds; the attempt is logged [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refused by the phase compare-and-commit — the generation is `commit_fenced`, not `granted`; the claim cannot return to `available_uncommitted`; only append completion or row-37 resolution proceeds; the attempt is logged [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -10460,7 +10523,7 @@ ALONE
 - Does: ACCEPTED — Refused: the claim is `owned_uncommitted` (or `indeterminate_recovery_required`) — never `available_uncommitted` while a fenced generation is unresolved; no replacement generation may be granted; resolve rows 37–39 first [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Refused: the claim is `owned_uncommitted` (or `indeterminate_recovery_required`) — never `available_uncommitted` while a fenced generation is unresolved; no replacement generation may be granted; resolve rows 37–39 first [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refused: the claim is `owned_uncommitted` (or `indeterminate_recovery_required`) — never `available_uncommitted` while a fenced generation is unresolved; no replacement generation may be granted; resolve rows 37–39 first [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -10506,7 +10569,7 @@ ALONE
 - Does: ACCEPTED — The entry remains reserved for the same claim (§8.2A — neither cancellation nor the §8.0 recovery release ever frees the `root_id`); the claim's safe retry re-uses the same `reserved_root_id` at the next WB1 — a different identity under this claim is rejected (§8.2A one-to-one); no reassignment to any other claim [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — The entry remains reserved for the same claim (§8.2A — neither cancellation nor the §8.0 recovery release ever frees the `root_id`); the claim's safe retry re-uses the same `reserved_root_id` at the next WB1 — a different identity under this claim is rejected (§8.2A one-to-one); no reassignment to any other claim [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — The entry remains reserved for the same claim (§8.2A — neither cancellation nor the §8.0 recovery release ever frees the `root_id`); the claim's safe retry re-uses the same `reserved_root_id` at the next WB1 — a different identity under this claim is rejected (§8.2A one-to-one); no reassignment to any other claim [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -10552,7 +10615,7 @@ ALONE
 - Does: ACCEPTED — Lookup-first at the append destination decides: root present → complete both transitions from the append evidence (row 38); root conclusively absent → the `committed_to_batch` mark is contradicted by its own required evidence → `indeterminate_recovery_required`, fail closed for this identity; nothing is rewritten [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Lookup-first at the append destination decides: root present → complete both transitions from the append evidence (row 38); root conclusively absent → the `committed_to_batch` mark is contradicted by its own required evidence → `indeterminate_recovery_required`, fail closed for this identity; nothing is rewritten [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Lookup-first at the append destination decides: root present → complete both transitions from the append evidence (row 38); root conclusively absent → the `committed_to_batch` mark is contradicted by its own required evidence → `indeterminate_recovery_required`, fail closed for this identity; nothing is rewritten [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -10598,7 +10661,7 @@ ALONE
 - Does: ACCEPTED — Admission fails closed (§12); committed roots remain preserved and readable per their own integrity; resolution only by restoring provable registry evidence — never by guessing ownership [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Admission fails closed (§12); committed roots remain preserved and readable per their own integrity; resolution only by restoring provable registry evidence — never by guessing ownership [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Admission fails closed (§12); committed roots remain preserved and readable per their own integrity; resolution only by restoring provable registry evidence — never by guessing ownership [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -10644,7 +10707,7 @@ ALONE
 - Does: ACCEPTED — New root writing fails closed until coverage is verified complete or the gap is honestly recorded as fail-closed; no historical byte is touched; no capture claim is invented for a historical root [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — New root writing fails closed until coverage is verified complete or the gap is honestly recorded as fail-closed; no historical byte is touched; no capture claim is invented for a historical root [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — New root writing fails closed until coverage is verified complete or the gap is honestly recorded as fail-closed; no historical byte is touched; no capture claim is invented for a historical root [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -10690,7 +10753,7 @@ ALONE
 - Does: ACCEPTED — LB4 mode A retries idempotently against expected `none/genesis`; no cutoff exists or is created; a crash before commit leaves nothing selected — writes remain fail-closed until the selection commits [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — LB4 mode A retries idempotently against expected `none/genesis`; no cutoff exists or is created; a crash before commit leaves nothing selected — writes remain fail-closed until the selection commits [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — LB4 mode A retries idempotently against expected `none/genesis`; no cutoff exists or is created; a crash before commit leaves nothing selected — writes remain fail-closed until the selection commits [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -10736,7 +10799,7 @@ ALONE
 - Does: ACCEPTED — The §4.3 compare-and-commit admits exactly one; the loser adopts the winner; the losing activated-but-never-selected candidate closes via the legal §5.2 abandonment transition (row 3). The temporary coexistence of activated-but-never-selected candidates is normal and is never a same-epoch selection fork (§6.4, §4.4) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — The §4.3 compare-and-commit admits exactly one; the loser adopts the winner; the losing activated-but-never-selected candidate closes via the legal §5.2 abandonment transition (row 3). The temporary coexistence of activated-but-never-selected candidates is normal and is never a same-epoch selection fork (§6.4, §4.4) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — The §4.3 compare-and-commit admits exactly one; the loser adopts the winner; the losing activated-but-never-selected candidate closes via the legal §5.2 abandonment transition (row 3). The temporary coexistence of activated-but-never-selected candidates is normal and is never a same-epoch selection fork (§6.4, §4.4) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -10782,7 +10845,7 @@ ALONE
 - Does: ACCEPTED — Runs the §6.3 reactivation-creation path under its idempotent LB1 creation plan; LB4 mode A verifies the shut-down predecessor is non-admitting through its existing LB5 cutoff — which remains unchanged; no second cutoff, no rotation/seal plan, no sealing operation [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Runs the §6.3 reactivation-creation path under its idempotent LB1 creation plan; LB4 mode A verifies the shut-down predecessor is non-admitting through its existing LB5 cutoff — which remains unchanged; no second cutoff, no rotation/seal plan, no sealing operation [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Runs the §6.3 reactivation-creation path under its idempotent LB1 creation plan; LB4 mode A verifies the shut-down predecessor is non-admitting through its existing LB5 cutoff — which remains unchanged; no second cutoff, no rotation/seal plan, no sealing operation [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -10828,7 +10891,7 @@ ALONE
 - Does: ACCEPTED — Legal: mode A verifies the predecessor's committed cutoff proves non-admission; the drain of pre-cutoff reservations continues into the old batch under §7.6/§9.3 unaffected by the new selection; LB6 still requires the drain to resolve [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Legal: mode A verifies the predecessor's committed cutoff proves non-admission; the drain of pre-cutoff reservations continues into the old batch under §7.6/§9.3 unaffected by the new selection; LB6 still requires the drain to resolve [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Legal: mode A verifies the predecessor's committed cutoff proves non-admission; the drain of pre-cutoff reservations continues into the old batch under §7.6/§9.3 unaffected by the new selection; LB6 still requires the drain to resolve [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -10874,7 +10937,7 @@ ALONE
 - Does: ACCEPTED — The mode-A compare-and-commit against the exact existing epoch makes the repeat a no-op returning the committed selection [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — The mode-A compare-and-commit against the exact existing epoch makes the repeat a no-op returning the committed selection [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — The mode-A compare-and-commit against the exact existing epoch makes the repeat a no-op returning the committed selection [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -10920,7 +10983,7 @@ ALONE
 - Does: ACCEPTED — Refused by the compare-and-commit; the attempt adopts the actual current selection; nothing is created [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Refused by the compare-and-commit; the attempt adopts the actual current selection; nothing is created [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refused by the compare-and-commit; the attempt adopts the actual current selection; nothing is created [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -10966,7 +11029,7 @@ ALONE
 - Does: ACCEPTED — Refused: mode A creates no cutoff by definition; mode B requires a currently selected `active` predecessor that still admits — a `sealed`, cut-off, `sealing`, or `invalid` predecessor fails that precondition; the existing cutoff remains the only cutoff; the attempt is logged [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Refused: mode A creates no cutoff by definition; mode B requires a currently selected `active` predecessor that still admits — a `sealed`, cut-off, `sealing`, or `invalid` predecessor fails that precondition; the existing cutoff remains the only cutoff; the attempt is logged [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refused: mode A creates no cutoff by definition; mode B requires a currently selected `active` predecessor that still admits — a `sealed`, cut-off, `sealing`, or `invalid` predecessor fails that precondition; the existing cutoff remains the only cutoff; the attempt is logged [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -11012,7 +11075,7 @@ ALONE
 - Does: ACCEPTED — Resume the §4.5 ordering idempotently (registration → state event → manifest) or the separate `bootstrap_completion_status` rests `incomplete` / `recovery_required` (§4.5 — never a `batch_state`): historical bytes untouched; no writability; excluded from completeness claims; no false completeness; the canonical `batch_state` stays accurate — `sealed` once the legal bootstrap state event exists, and none before it [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — Resume the §4.5 ordering idempotently (registration → state event → manifest) or the separate `bootstrap_completion_status` rests `incomplete` / `recovery_required` (§4.5 — never a `batch_state`): historical bytes untouched; no writability; excluded from completeness claims; no false completeness; the canonical `batch_state` stays accurate — `sealed` once the legal bootstrap state event exists, and none before it [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Resume the §4.5 ordering idempotently (registration → state event → manifest) or the separate `bootstrap_completion_status` rests `incomplete` / `recovery_required` (§4.5 — never a `batch_state`): historical bytes untouched; no writability; excluded from completeness claims; no false completeness; the canonical `batch_state` stays accurate — `sealed` once the legal bootstrap state event exists, and none before it [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -11058,7 +11121,7 @@ ALONE
 - Does: ACCEPTED — `bootstrap_completion_status` → `recovery_required`; the batch is excluded from completeness claims; discovery reports the honest completion status while the canonical `batch_state` remains `sealed`; nothing historical is modified; resolution only by correcting the external records through new appends [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Gives out: ACCEPTED — `bootstrap_completion_status` → `recovery_required`; the batch is excluded from completeness claims; discovery reports the honest completion status while the canonical `batch_state` remains `sealed`; nothing historical is modified; resolution only by correcting the external records through new appends [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — `bootstrap_completion_status` → `recovery_required`; the batch is excluded from completeness claims; discovery reports the honest completion status while the canonical `batch_state` remains `sealed`; nothing historical is modified; resolution only by correcting the external records through new appends [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -11119,7 +11182,7 @@ ALONE
 - Takes in: ACCEPTED — Active target ambiguous (§4.4) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Does: ACCEPTED — No reservation issued; caller receives `rejected(ambiguous_target)` or the seam refuses to resolve; recovery §11 row 4/5 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — No reservation issued; caller receives `rejected(ambiguous_target)` or the seam refuses to resolve; recovery §11 row 4/5 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: No reservation issued; caller receives `rejected(ambiguous_target)` or the seam refuses to resolve; recovery §11 row 4/5 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Fails closed by: ACCEPTED — No reservation issued; caller receives `rejected(ambiguous_target)` or the seam refuses to resolve; recovery §11 row 4/5 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
@@ -11143,7 +11206,7 @@ ALONE
 - Does: ACCEPTED — No reservation issued; caller receives `rejected(ambiguous_target)` or the seam refuses to resolve; recovery §11 row 4/5 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — No reservation issued; caller receives `rejected(ambiguous_target)` or the seam refuses to resolve; recovery §11 row 4/5 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — No reservation issued; caller receives `rejected(ambiguous_target)` or the seam refuses to resolve; recovery §11 row 4/5 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -11189,7 +11252,7 @@ ALONE
 - Does: ACCEPTED — Batch excluded from selection and coverage; writes to it refused [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — Batch excluded from selection and coverage; writes to it refused [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Batch excluded from selection and coverage; writes to it refused [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -11211,7 +11274,7 @@ ALONE
 - Takes in: ACCEPTED — Batch `schema_compat_ref` unknown or mismatched to the payload's `schema_version` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Does: ACCEPTED — Write `rejected(schema_incompatible)`; no coercion, no silent conversion [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — Write `rejected(schema_incompatible)`; no coercion, no silent conversion [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Write `rejected(schema_incompatible)`; no coercion, no silent conversion [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Fails closed by: ACCEPTED — Write `rejected(schema_incompatible)`; no coercion, no silent conversion [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
@@ -11235,7 +11298,7 @@ ALONE
 - Does: ACCEPTED — Write `rejected(schema_incompatible)`; no coercion, no silent conversion [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — Write `rejected(schema_incompatible)`; no coercion, no silent conversion [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Write `rejected(schema_incompatible)`; no coercion, no silent conversion [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -11257,7 +11320,7 @@ ALONE
 - Takes in: ACCEPTED — Seal state contradictory [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Does: ACCEPTED — Batch → `recovery_required`; no writes; no forced seal [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — Batch → `recovery_required`; no writes; no forced seal [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Batch → `recovery_required`; no writes; no forced seal [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Fails closed by: ACCEPTED — Batch → `recovery_required`; no writes; no forced seal [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
@@ -11281,7 +11344,7 @@ ALONE
 - Does: ACCEPTED — Batch → `recovery_required`; no writes; no forced seal [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — Batch → `recovery_required`; no writes; no forced seal [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Batch → `recovery_required`; no writes; no forced seal [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -11303,7 +11366,7 @@ ALONE
 - Takes in: ACCEPTED — Global claim ledger or its coverage cannot prove an identity free or already committed (§8.0) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Does: ACCEPTED — New root admission fails closed — no acquisition, no reservation; outcome `indeterminate` only if WB2 status itself is unknowable, otherwise refusal before WB1 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — New root admission fails closed — no acquisition, no reservation; outcome `indeterminate` only if WB2 status itself is unknowable, otherwise refusal before WB1 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: New root admission fails closed — no acquisition, no reservation; outcome `indeterminate` only if WB2 status itself is unknowable, otherwise refusal before WB1 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Fails closed by: ACCEPTED — New root admission fails closed — no acquisition, no reservation; outcome `indeterminate` only if WB2 status itself is unknowable, otherwise refusal before WB1 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
@@ -11327,7 +11390,7 @@ ALONE
 - Does: ACCEPTED — New root admission fails closed — no acquisition, no reservation; outcome `indeterminate` only if WB2 status itself is unknowable, otherwise refusal before WB1 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — New root admission fails closed — no acquisition, no reservation; outcome `indeterminate` only if WB2 status itself is unknowable, otherwise refusal before WB1 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — New root admission fails closed — no acquisition, no reservation; outcome `indeterminate` only if WB2 status itself is unknowable, otherwise refusal before WB1 [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -11349,7 +11412,7 @@ ALONE
 - Takes in: ACCEPTED — Same-epoch selection fork with equally valid records [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Does: ACCEPTED — Ordinary writes blocked on both batches; no invented winner; fail-closed pending the later separately authorized repair (§16) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — Ordinary writes blocked on both batches; no invented winner; fail-closed pending the later separately authorized repair (§16) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Ordinary writes blocked on both batches; no invented winner; fail-closed pending the later separately authorized repair (§16) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Fails closed by: ACCEPTED — Ordinary writes blocked on both batches; no invented winner; fail-closed pending the later separately authorized repair (§16) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
@@ -11373,7 +11436,7 @@ ALONE
 - Does: ACCEPTED — Ordinary writes blocked on both batches; no invented winner; fail-closed pending the later separately authorized repair (§16) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — Ordinary writes blocked on both batches; no invented winner; fail-closed pending the later separately authorized repair (§16) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Ordinary writes blocked on both batches; no invented winner; fail-closed pending the later separately authorized repair (§16) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -11419,7 +11482,7 @@ ALONE
 - Does: ACCEPTED — Refused: fencing requires the durable phase `granted` on the currently effective generation, and the append boundary verifies the durable `commit_fenced` phase immediately before committing; nothing commits; refusal logged [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — Refused: fencing requires the durable phase `granted` on the currently effective generation, and the append boundary verifies the durable `commit_fenced` phase immediately before committing; nothing commits; refusal logged [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refused: fencing requires the durable phase `granted` on the currently effective generation, and the append boundary verifies the durable `commit_fenced` phase immediately before committing; nothing commits; refusal logged [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -11441,7 +11504,7 @@ ALONE
 - Takes in: ACCEPTED — Rotation/seal plan is stale (expected epoch/batch changed) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Does: ACCEPTED — The plan is superseded and authorizes no new effects; already-created external records are preserved; never-selected candidates close only via the legal §5.2 abandonment; nothing silently erased; a new plan is required [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — The plan is superseded and authorizes no new effects; already-created external records are preserved; never-selected candidates close only via the legal §5.2 abandonment; nothing silently erased; a new plan is required [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: The plan is superseded and authorizes no new effects; already-created external records are preserved; never-selected candidates close only via the legal §5.2 abandonment; nothing silently erased; a new plan is required [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Fails closed by: ACCEPTED — The plan is superseded and authorizes no new effects; already-created external records are preserved; never-selected candidates close only via the legal §5.2 abandonment; nothing silently erased; a new plan is required [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
@@ -11465,7 +11528,7 @@ ALONE
 - Does: ACCEPTED — The plan is superseded and authorizes no new effects; already-created external records are preserved; never-selected candidates close only via the legal §5.2 abandonment; nothing silently erased; a new plan is required [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — The plan is superseded and authorizes no new effects; already-created external records are preserved; never-selected candidates close only via the legal §5.2 abandonment; nothing silently erased; a new plan is required [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — The plan is superseded and authorizes no new effects; already-created external records are preserved; never-selected candidates close only via the legal §5.2 abandonment; nothing silently erased; a new plan is required [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -11487,7 +11550,7 @@ ALONE
 - Takes in: ACCEPTED — Fence evidence unreadable, or regrant attempted while a fence is unresolved [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Does: ACCEPTED — Claim `indeterminate_recovery_required`; no cancellation, regrant, or append; admission for this identity fails closed (§11 rows 39, 42) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — Claim `indeterminate_recovery_required`; no cancellation, regrant, or append; admission for this identity fails closed (§11 rows 39, 42) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Claim `indeterminate_recovery_required`; no cancellation, regrant, or append; admission for this identity fails closed (§11 rows 39, 42) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Fails closed by: ACCEPTED — Claim `indeterminate_recovery_required`; no cancellation, regrant, or append; admission for this identity fails closed (§11 rows 39, 42) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
@@ -11511,7 +11574,7 @@ ALONE
 - Does: ACCEPTED — Claim `indeterminate_recovery_required`; no cancellation, regrant, or append; admission for this identity fails closed (§11 rows 39, 42) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — Claim `indeterminate_recovery_required`; no cancellation, regrant, or append; admission for this identity fails closed (§11 rows 39, 42) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Claim `indeterminate_recovery_required`; no cancellation, regrant, or append; admission for this identity fails closed (§11 rows 39, 42) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -11533,7 +11596,7 @@ ALONE
 - Takes in: ACCEPTED — Root-ownership registry failure, incomplete coverage, or conflict (§8.2A) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Does: ACCEPTED — Admission fails closed; committed roots preserved; no ownership guessed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — Admission fails closed; committed roots preserved; no ownership guessed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Admission fails closed; committed roots preserved; no ownership guessed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Fails closed by: ACCEPTED — Admission fails closed; committed roots preserved; no ownership guessed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
@@ -11557,7 +11620,7 @@ ALONE
 - Does: ACCEPTED — Admission fails closed; committed roots preserved; no ownership guessed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — Admission fails closed; committed roots preserved; no ownership guessed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Admission fails closed; committed roots preserved; no ownership guessed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -11579,7 +11642,7 @@ ALONE
 - Takes in: ACCEPTED — The same claim presents a different `root_id`, or the same `root_id` arrives under a different claim (§8.2A one-to-one) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Does: ACCEPTED — Rejected before append as an integrity/identity conflict, recorded append-only; contradictory authoritative evidence → `indeterminate_recovery_required` — no identity guessed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — Rejected before append as an integrity/identity conflict, recorded append-only; contradictory authoritative evidence → `indeterminate_recovery_required` — no identity guessed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Rejected before append as an integrity/identity conflict, recorded append-only; contradictory authoritative evidence → `indeterminate_recovery_required` — no identity guessed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Fails closed by: ACCEPTED — Rejected before append as an integrity/identity conflict, recorded append-only; contradictory authoritative evidence → `indeterminate_recovery_required` — no identity guessed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
@@ -11603,7 +11666,7 @@ ALONE
 - Does: ACCEPTED — Rejected before append as an integrity/identity conflict, recorded append-only; contradictory authoritative evidence → `indeterminate_recovery_required` — no identity guessed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — Rejected before append as an integrity/identity conflict, recorded append-only; contradictory authoritative evidence → `indeterminate_recovery_required` — no identity guessed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Rejected before append as an integrity/identity conflict, recorded append-only; contradictory authoritative evidence → `indeterminate_recovery_required` — no identity guessed [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -11625,7 +11688,7 @@ ALONE
 - Takes in: ACCEPTED — Historical root-ID coverage incomplete or unverifiable (§8.2B) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Does: ACCEPTED — New root writing fails closed until coverage is verified complete or the gap is honestly recorded; the historical `bootstrap_completion_status` stays `incomplete` / `recovery_required` while the canonical `batch_state` remains accurately `sealed`; nothing historical touched [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — New root writing fails closed until coverage is verified complete or the gap is honestly recorded; the historical `bootstrap_completion_status` stays `incomplete` / `recovery_required` while the canonical `batch_state` remains accurately `sealed`; nothing historical touched [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: New root writing fails closed until coverage is verified complete or the gap is honestly recorded; the historical `bootstrap_completion_status` stays `incomplete` / `recovery_required` while the canonical `batch_state` remains accurately `sealed`; nothing historical touched [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Fails closed by: ACCEPTED — New root writing fails closed until coverage is verified complete or the gap is honestly recorded; the historical `bootstrap_completion_status` stays `incomplete` / `recovery_required` while the canonical `batch_state` remains accurately `sealed`; nothing historical touched [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
@@ -11649,7 +11712,7 @@ ALONE
 - Does: ACCEPTED — New root writing fails closed until coverage is verified complete or the gap is honestly recorded; the historical `bootstrap_completion_status` stays `incomplete` / `recovery_required` while the canonical `batch_state` remains accurately `sealed`; nothing historical touched [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — New root writing fails closed until coverage is verified complete or the gap is honestly recorded; the historical `bootstrap_completion_status` stays `incomplete` / `recovery_required` while the canonical `batch_state` remains accurately `sealed`; nothing historical touched [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — New root writing fails closed until coverage is verified complete or the gap is honestly recorded; the historical `bootstrap_completion_status` stays `incomplete` / `recovery_required` while the canonical `batch_state` remains accurately `sealed`; nothing historical touched [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -11671,7 +11734,7 @@ ALONE
 - Takes in: ACCEPTED — Attempt to create a second cutoff for a sealed or already-cut-off predecessor [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Does: ACCEPTED — Refused (mode A creates none; mode B's precondition fails); the existing cutoff stands; attempt logged [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — Refused (mode A creates none; mode B's precondition fails); the existing cutoff stands; attempt logged [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Refused (mode A creates none; mode B's precondition fails); the existing cutoff stands; attempt logged [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Fails closed by: ACCEPTED — Refused (mode A creates none; mode B's precondition fails); the existing cutoff stands; attempt logged [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
@@ -11695,7 +11758,7 @@ ALONE
 - Does: ACCEPTED — Refused (mode A creates none; mode B's precondition fails); the existing cutoff stands; attempt logged [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — Refused (mode A creates none; mode B's precondition fails); the existing cutoff stands; attempt logged [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refused (mode A creates none; mode B's precondition fails); the existing cutoff stands; attempt logged [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -11717,7 +11780,7 @@ ALONE
 - Takes in: ACCEPTED — Shutdown LB5 evidence partially readable / indeterminate [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Does: ACCEPTED — The batch → `recovery_required`; admission fails closed; no reservation is classified against an unproven cutoff [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — The batch → `recovery_required`; admission fails closed; no reservation is classified against an unproven cutoff [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: The batch → `recovery_required`; admission fails closed; no reservation is classified against an unproven cutoff [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Fails closed by: ACCEPTED — The batch → `recovery_required`; admission fails closed; no reservation is classified against an unproven cutoff [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
@@ -11741,7 +11804,7 @@ ALONE
 - Does: ACCEPTED — The batch → `recovery_required`; admission fails closed; no reservation is classified against an unproven cutoff [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — The batch → `recovery_required`; admission fails closed; no reservation is classified against an unproven cutoff [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — The batch → `recovery_required`; admission fails closed; no reservation is classified against an unproven cutoff [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -11763,7 +11826,7 @@ ALONE
 - Takes in: ACCEPTED — Write result indeterminate [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Does: ACCEPTED — `indeterminate`; no blind retry; lookup-first resolution only [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — `indeterminate`; no blind retry; lookup-first resolution only [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: `indeterminate`; no blind retry; lookup-first resolution only [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Fails closed by: ACCEPTED — `indeterminate`; no blind retry; lookup-first resolution only [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
@@ -11787,7 +11850,7 @@ ALONE
 - Does: ACCEPTED — `indeterminate`; no blind retry; lookup-first resolution only [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — `indeterminate`; no blind retry; lookup-first resolution only [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — `indeterminate`; no blind retry; lookup-first resolution only [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -11809,7 +11872,7 @@ ALONE
 - Takes in: ACCEPTED — Required upstream authority/eligibility evidence refs missing [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Does: ACCEPTED — `rejected(upstream_evidence_missing)` — B11 never substitutes its own judgment [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — `rejected(upstream_evidence_missing)` — B11 never substitutes its own judgment [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: `rejected(upstream_evidence_missing)` — B11 never substitutes its own judgment [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Fails closed by: ACCEPTED — `rejected(upstream_evidence_missing)` — B11 never substitutes its own judgment [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
@@ -11833,7 +11896,7 @@ ALONE
 - Does: ACCEPTED — `rejected(upstream_evidence_missing)` — B11 never substitutes its own judgment [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — `rejected(upstream_evidence_missing)` — B11 never substitutes its own judgment [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — `rejected(upstream_evidence_missing)` — B11 never substitutes its own judgment [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -11855,7 +11918,7 @@ ALONE
 - Takes in: ACCEPTED — Recovery would require modifying a sealed batch [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Does: ACCEPTED — The recovery action is refused; the condition is recorded and surfaced; sealed bytes are never touched [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — The recovery action is refused; the condition is recorded and surfaced; sealed bytes are never touched [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: The recovery action is refused; the condition is recorded and surfaced; sealed bytes are never touched [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Fails closed by: ACCEPTED — The recovery action is refused; the condition is recorded and surfaced; sealed bytes are never touched [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
@@ -11879,7 +11942,7 @@ ALONE
 - Does: ACCEPTED — The recovery action is refused; the condition is recorded and surfaced; sealed bytes are never touched [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Gives out: ACCEPTED — The recovery action is refused; the condition is recorded and surfaced; sealed bytes are never touched [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 - Must never: ACCEPTED — Claim a successful operation without the required committed evidence. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — The recovery action is refused; the condition is recorded and surfaced; sealed bytes are never touched [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -11903,7 +11966,7 @@ ALONE
 - Does: ACCEPTED — B11 additionally serves read-side structural consumers (§7F retrieval, audit, B23 later): discovery, identity lookup, provenance, coverage status (§10) — never ranking, never failure policy, never semantic selection. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 - Gives out: ACCEPTED — Write outcomes and identity/provenance/coverage interfaces. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 - Must never: ACCEPTED — Allow a root-producing caller to bypass the shared catalog/B11 boundary. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refuses root admission when shape, committed upstream evidence, identity or target-state checks fail; no producer bypasses the shared catalog/B11 append boundary. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -11934,7 +11997,7 @@ ALONE
 - Does: ACCEPTED — Checks shape against `schema_compat_ref`, evidence-reference existence, identity/idempotency and target state. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 - Gives out: ACCEPTED — Returns the write outcome, root identity and owning `batch_id`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 - Must never: ACCEPTED — Take over caller policy: Eligibility meaning; pre-ingest holding; blocker policy [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refuses root admission when shape, committed upstream evidence, identity or target-state checks fail; no producer bypasses the shared catalog/B11 append boundary. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -11957,7 +12020,7 @@ ALONE
 - Does: ACCEPTED — Checks shape against `schema_compat_ref`, evidence-reference existence, identity/idempotency and target state. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 - Gives out: ACCEPTED — Returns the write outcome, root identity and owning `batch_id`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 - Must never: ACCEPTED — Take over caller policy: Capture policy; provenance-label meaning (A33/B17) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refuses root admission when shape, committed upstream evidence, identity or target-state checks fail; no producer bypasses the shared catalog/B11 append boundary. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -11980,7 +12043,7 @@ ALONE
 - Does: ACCEPTED — Checks shape against `schema_compat_ref`, evidence-reference existence, identity/idempotency and target state. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 - Gives out: ACCEPTED — Returns the write outcome, root identity and owning `batch_id`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 - Must never: ACCEPTED — Take over caller policy: Image capture/eligibility policy [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refuses root admission when shape, committed upstream evidence, identity or target-state checks fail; no producer bypasses the shared catalog/B11 append boundary. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -12003,7 +12066,7 @@ ALONE
 - Does: ACCEPTED — Checks shape against `schema_compat_ref`, evidence-reference existence, identity/idempotency and target state. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 - Gives out: ACCEPTED — Returns the write outcome, root identity and owning `batch_id`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 - Must never: ACCEPTED — Take over caller policy: Isolation rules (B13); research policy [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refuses root admission when shape, committed upstream evidence, identity or target-state checks fail; no producer bypasses the shared catalog/B11 append boundary. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -12026,7 +12089,7 @@ ALONE
 - Does: ACCEPTED — Checks shape against `schema_compat_ref`, evidence-reference existence, identity/idempotency and target state. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 - Gives out: ACCEPTED — Returns the write outcome, root identity and owning `batch_id`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 - Must never: ACCEPTED — Take over caller policy: Sync scope/policy (A20) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refuses root admission when shape, committed upstream evidence, identity or target-state checks fail; no producer bypasses the shared catalog/B11 append boundary. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -12049,7 +12112,7 @@ ALONE
 - Does: ACCEPTED — Checks shape against `schema_compat_ref`, evidence-reference existence, identity/idempotency and target state. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 - Gives out: ACCEPTED — Returns the write outcome, root identity and owning `batch_id`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 - Must never: ACCEPTED — Take over caller policy: TSC authorization, promotion, two-phase rules (settled; B-INT-4) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refuses root admission when shape, committed upstream evidence, identity or target-state checks fail; no producer bypasses the shared catalog/B11 append boundary. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -12072,7 +12135,7 @@ ALONE
 - Does: ACCEPTED — Checks shape against `schema_compat_ref`, evidence-reference existence, identity/idempotency and target state. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 - Gives out: ACCEPTED — Returns the write outcome, root identity and owning `batch_id`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 - Must never: ACCEPTED — Take over caller policy: BOP DUMB capture boundaries [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refuses root admission when shape, committed upstream evidence, identity or target-state checks fail; no producer bypasses the shared catalog/B11 append boundary. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -12095,7 +12158,7 @@ ALONE
 - Does: ACCEPTED — Checks shape against `schema_compat_ref`, evidence-reference existence, identity/idempotency and target state. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 - Gives out: ACCEPTED — Returns the write outcome, root identity and owning `batch_id`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 - Must never: ACCEPTED — Take over caller policy: OOP boundaries [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refuses root admission when shape, committed upstream evidence, identity or target-state checks fail; no producer bypasses the shared catalog/B11 append boundary. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -12118,7 +12181,7 @@ ALONE
 - Does: ACCEPTED — Checks shape against `schema_compat_ref`, evidence-reference existence, identity/idempotency and target state. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 - Gives out: ACCEPTED — Returns the write outcome, root identity and owning `batch_id`. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 - Must never: ACCEPTED — Take over caller policy: Its own policy — B11 designs none of it [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refuses root admission when shape, committed upstream evidence, identity or target-state checks fail; no producer bypasses the shared catalog/B11 append boundary. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §13]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -12142,7 +12205,7 @@ ALONE
 - Does: ACCEPTED — Canonical state records vs §0B operational logs (binding distinction): manifests, batch-state events, claim status events, ownership-generation and fence events, root-ownership entries, and admission-cutoff records are canonical transaction/state records — machine facts required to establish state. They are not additional §0B operational logs and are never additional evidential votes. Separately, every real operation emits exactly one append-only §0B operational log; for an atomic combined boundary, that one log carries all of the boundary's effects: one LB-P plan-commit log (with cause class); one rotation-LB4 log carrying both the successor selection and the predecessor cutoff; one mode-A initial/reactivation log carrying the selection and explicitly recording that no new cutoff was created; one shutdown-LB5 log carrying cutoff, admission stop, and sealing transition; one WB1 log carrying generation grant, root-ID reservation, and batch reservation; one WB2 result for the fence/append/claim/root-ownership commit operation; and one mandatory WB3 terminal outcome log per `ingest_operation_id`. Operation-identity hierarchy (§7.2): the WB0, WB1, WB2, cancellation, recovery-resolution, and target-resolution logs are child-operation logs, each under its own stable `child_op_id` referencing the parent `ingest_operation_id`; WB3 is the single terminal operational record of the parent; a child log is never a second parent log; no operation ID — parent or child — ever carries two operational logs; retries and recovery locate the existing log by operation identity and never append another. Writing a log generates no further log; a genuinely separate later operation receives its own. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — Identity-linked append-only records with no copied root content. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Must never: ACCEPTED — Duplicate a log, log the act of logging or turn records into extra evidential votes. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — A durable root is not undone by missing logging; success acknowledgement waits for the matching durable parent terminal, and recovery appends only what is missing. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.4] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -12185,8 +12248,8 @@ ALONE
 - Takes in: ACCEPTED — The LB1–LB3 lifecycle with reasons [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — The LB1–LB3 lifecycle with reasons [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `batch_creation_requested` / `prepared` / `validated` / `activated` / `rejected` / `failed` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Records the rejected or failed preparation with its reason; failure does not confer activation or writability. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -12213,7 +12276,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `batch_creation_requested` is a named event in this record class. Its class semantics are: The LB1–LB3 lifecycle with reasons [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `batch_creation_requested`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -12236,7 +12299,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `prepared` is a named event in this record class. Its class semantics are: The LB1–LB3 lifecycle with reasons [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `prepared`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -12259,7 +12322,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `validated` is a named event in this record class. Its class semantics are: The LB1–LB3 lifecycle with reasons [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `validated`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -12282,7 +12345,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `activated` is a named event in this record class. Its class semantics are: The LB1–LB3 lifecycle with reasons [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `activated`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -12305,8 +12368,8 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `rejected` is a named event in this record class. Its class semantics are: The LB1–LB3 lifecycle with reasons [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `rejected`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Records the rejected or failed preparation with its reason; failure does not confer activation or writability. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -12328,8 +12391,8 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `failed` is a named event in this record class. Its class semantics are: The LB1–LB3 lifecycle with reasons [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `failed`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Records the rejected or failed preparation with its reason; failure does not confer activation or writability. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §5.2] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -12351,7 +12414,7 @@ ALONE
 - Takes in: ACCEPTED — Rotation mode B: one log carrying both the successor selection and the predecessor's `admission_cutoff_id`, linked to the LB-P plan. Mode A: one log carrying the initial/reactivation selection and explicitly that no new cutoff was created. `selection_not_committed` (incl. adopted-winner convergence) records non-commit outcomes. The selection and cutoff records themselves are canonical state records, not extra logs. The shutdown LB5 cutoff is carried in the LB5 log below [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — Rotation mode B: one log carrying both the successor selection and the predecessor's `admission_cutoff_id`, linked to the LB-P plan. Mode A: one log carrying the initial/reactivation selection and explicitly that no new cutoff was created. `selection_not_committed` (incl. adopted-winner convergence) records non-commit outcomes. The selection and cutoff records themselves are canonical state records, not extra logs. The shutdown LB5 cutoff is carried in the LB5 log below [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — One LB4 operational log per selection boundary [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -12374,7 +12437,7 @@ ALONE
 - Takes in: ACCEPTED — The WB0 establishment/lookup outcomes (no ownership at WB0) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — The WB0 establishment/lookup outcomes (no ownership at WB0) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `claim_established` / `claim_found_committed` / `claim_found_owned` / `claim_found_available` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -12400,7 +12463,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `claim_established` is a named event in this record class. Its class semantics are: The WB0 establishment/lookup outcomes (no ownership at WB0) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `claim_established`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -12423,7 +12486,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `claim_found_committed` is a named event in this record class. Its class semantics are: The WB0 establishment/lookup outcomes (no ownership at WB0) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `claim_found_committed`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -12446,7 +12509,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `claim_found_owned` is a named event in this record class. Its class semantics are: The WB0 establishment/lookup outcomes (no ownership at WB0) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `claim_found_owned`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -12469,7 +12532,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `claim_found_available` is a named event in this record class. Its class semantics are: The WB0 establishment/lookup outcomes (no ownership at WB0) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `claim_found_available`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -12492,8 +12555,8 @@ ALONE
 - Takes in: ACCEPTED — Canonical §8.0 state events (machine facts, not extra operational logs): the WB1 grant, the fence compare-and-commit winner, the per-generation cancellation, the strict recovery-only release, the availability return, the terminal transition, and every refusal of a stale/cancelled/released/unfenced generation at fencing or append [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — Canonical §8.0 state events (machine facts, not extra operational logs): the WB1 grant, the fence compare-and-commit winner, the per-generation cancellation, the strict recovery-only release, the availability return, the terminal transition, and every refusal of a stale/cancelled/released/unfenced generation at fencing or append [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `ownership_generation_granted` / `commit_fence_won` / `ownership_generation_cancelled` / `generation_recovery_released` / `claim_available_again` / `claim_committed` / `stale_or_unfenced_generation_refused` / `claim_indeterminate` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Records stale/unfenced refusal or indeterminate claim state; the affected generation or unresolved claim gains no append right. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -12522,7 +12585,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `ownership_generation_granted` is a named event in this record class. Its class semantics are: Canonical §8.0 state events (machine facts, not extra operational logs): the WB1 grant, the fence compare-and-commit winner, the per-generation cancellation, the strict recovery-only release, the availability return, the terminal transition, and every refusal of a stale/cancelled/released/unfenced generation at fencing or append [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `ownership_generation_granted`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -12545,7 +12608,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `commit_fence_won` is a named event in this record class. Its class semantics are: Canonical §8.0 state events (machine facts, not extra operational logs): the WB1 grant, the fence compare-and-commit winner, the per-generation cancellation, the strict recovery-only release, the availability return, the terminal transition, and every refusal of a stale/cancelled/released/unfenced generation at fencing or append [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `commit_fence_won`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -12568,7 +12631,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `ownership_generation_cancelled` is a named event in this record class. Its class semantics are: Canonical §8.0 state events (machine facts, not extra operational logs): the WB1 grant, the fence compare-and-commit winner, the per-generation cancellation, the strict recovery-only release, the availability return, the terminal transition, and every refusal of a stale/cancelled/released/unfenced generation at fencing or append [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `ownership_generation_cancelled`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -12591,7 +12654,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `generation_recovery_released` is a named event in this record class. Its class semantics are: Canonical §8.0 state events (machine facts, not extra operational logs): the WB1 grant, the fence compare-and-commit winner, the per-generation cancellation, the strict recovery-only release, the availability return, the terminal transition, and every refusal of a stale/cancelled/released/unfenced generation at fencing or append [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `generation_recovery_released`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -12614,7 +12677,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `claim_available_again` is a named event in this record class. Its class semantics are: Canonical §8.0 state events (machine facts, not extra operational logs): the WB1 grant, the fence compare-and-commit winner, the per-generation cancellation, the strict recovery-only release, the availability return, the terminal transition, and every refusal of a stale/cancelled/released/unfenced generation at fencing or append [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `claim_available_again`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -12637,7 +12700,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `claim_committed` is a named event in this record class. Its class semantics are: Canonical §8.0 state events (machine facts, not extra operational logs): the WB1 grant, the fence compare-and-commit winner, the per-generation cancellation, the strict recovery-only release, the availability return, the terminal transition, and every refusal of a stale/cancelled/released/unfenced generation at fencing or append [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `claim_committed`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -12660,8 +12723,8 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `stale_or_unfenced_generation_refused` is a named event in this record class. Its class semantics are: Canonical §8.0 state events (machine facts, not extra operational logs): the WB1 grant, the fence compare-and-commit winner, the per-generation cancellation, the strict recovery-only release, the availability return, the terminal transition, and every refusal of a stale/cancelled/released/unfenced generation at fencing or append [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `stale_or_unfenced_generation_refused`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Records stale/unfenced refusal or indeterminate claim state; the affected generation or unresolved claim gains no append right. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -12683,8 +12746,8 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `claim_indeterminate` is a named event in this record class. Its class semantics are: Canonical §8.0 state events (machine facts, not extra operational logs): the WB1 grant, the fence compare-and-commit winner, the per-generation cancellation, the strict recovery-only release, the availability return, the terminal transition, and every refusal of a stale/cancelled/released/unfenced generation at fencing or append [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `claim_indeterminate`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Records stale/unfenced refusal or indeterminate claim state; the affected generation or unresolved claim gains no append right. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.0] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -12706,8 +12769,8 @@ ALONE
 - Takes in: ACCEPTED — Canonical §8.2A/§8.2B records: each pre-commit `root_id` reservation and commit, each rejected conflicting presentation (append-only conflict records), the external historical registrations, and the operational fail-closed event when coverage cannot be proven [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — Canonical §8.2A/§8.2B records: each pre-commit `root_id` reservation and commit, each rejected conflicting presentation (append-only conflict records), the external historical registrations, and the operational fail-closed event when coverage cannot be proven [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `root_ownership_reserved` / `root_ownership_committed` / `root_identity_conflict` / `historical_root_ownership_registered` / `historical_coverage_gap_fail_closed` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Records rejected identity conflicts and unproven historical coverage; root admission stays fail-closed rather than guessing ownership or completeness. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2B] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -12733,7 +12796,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `root_ownership_reserved` is a named event in this record class. Its class semantics are: Canonical §8.2A/§8.2B records: each pre-commit `root_id` reservation and commit, each rejected conflicting presentation (append-only conflict records), the external historical registrations, and the operational fail-closed event when coverage cannot be proven [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `root_ownership_reserved`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -12756,7 +12819,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `root_ownership_committed` is a named event in this record class. Its class semantics are: Canonical §8.2A/§8.2B records: each pre-commit `root_id` reservation and commit, each rejected conflicting presentation (append-only conflict records), the external historical registrations, and the operational fail-closed event when coverage cannot be proven [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `root_ownership_committed`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -12779,8 +12842,8 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `root_identity_conflict` is a named event in this record class. Its class semantics are: Canonical §8.2A/§8.2B records: each pre-commit `root_id` reservation and commit, each rejected conflicting presentation (append-only conflict records), the external historical registrations, and the operational fail-closed event when coverage cannot be proven [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `root_identity_conflict`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Records rejected identity conflicts and unproven historical coverage; root admission stays fail-closed rather than guessing ownership or completeness. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2B] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -12802,7 +12865,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `historical_root_ownership_registered` is a named event in this record class. Its class semantics are: Canonical §8.2A/§8.2B records: each pre-commit `root_id` reservation and commit, each rejected conflicting presentation (append-only conflict records), the external historical registrations, and the operational fail-closed event when coverage cannot be proven [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `historical_root_ownership_registered`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -12825,8 +12888,8 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `historical_coverage_gap_fail_closed` is a named event in this record class. Its class semantics are: Canonical §8.2A/§8.2B records: each pre-commit `root_id` reservation and commit, each rejected conflicting presentation (append-only conflict records), the external historical registrations, and the operational fail-closed event when coverage cannot be proven [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `historical_coverage_gap_fail_closed`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Records rejected identity conflicts and unproven historical coverage; root admission stays fail-closed rather than guessing ownership or completeness. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2A] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.2B] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -12848,8 +12911,8 @@ ALONE
 - Takes in: ACCEPTED — Each attached integrity incident (§8.4) — linked to the claim, never a status, never touching a terminal `committed` state [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — Each attached integrity incident (§8.4) — linked to the claim, never a status, never touching a terminal `committed` state [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `mismatch_incident_recorded` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Records the incident without changing a committed claim or choosing a winner on a guess; the affected unsafe attempt remains refused. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.4] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -12871,7 +12934,7 @@ ALONE
 - Takes in: ACCEPTED — The single LB-P plan-commit log (with cause class) per plan; `rotation_plan_committed` is not an additional log; each idempotent duplicate no-op; each stale-plan supersession (no new effects; existing records preserved) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — The single LB-P plan-commit log (with cause class) per plan; `rotation_plan_committed` is not an additional log; each idempotent duplicate no-op; each stale-plan supersession (no new effects; existing records preserved) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `plan_committed` / `plan_duplicate_noop` / `plan_superseded` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -12896,7 +12959,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `plan_committed` is a named event in this record class. Its class semantics are: The single LB-P plan-commit log (with cause class) per plan; `rotation_plan_committed` is not an additional log; each idempotent duplicate no-op; each stale-plan supersession (no new effects; existing records preserved) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `plan_committed`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -12919,7 +12982,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `plan_duplicate_noop` is a named event in this record class. Its class semantics are: The single LB-P plan-commit log (with cause class) per plan; `rotation_plan_committed` is not an additional log; each idempotent duplicate no-op; each stale-plan supersession (no new effects; existing records preserved) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `plan_duplicate_noop`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -12942,7 +13005,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `plan_superseded` is a named event in this record class. Its class semantics are: The single LB-P plan-commit log (with cause class) per plan; `rotation_plan_committed` is not an additional log; each idempotent duplicate no-op; each stale-plan supersession (no new effects; existing records preserved) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `plan_superseded`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -12965,8 +13028,8 @@ ALONE
 - Takes in: ACCEPTED — Each same-epoch fork with the evidence findings; never a guessed winner [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — Each same-epoch fork with the evidence findings; never a guessed winner [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `selection_fork_detected` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Records the incident without changing a committed claim or choosing a winner on a guess; the affected unsafe attempt remains refused. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §8.4] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -12988,7 +13051,7 @@ ALONE
 - Takes in: ACCEPTED — Batches evaluated and not selected during selection (use and non-use) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — Batches evaluated and not selected during selection (use and non-use) [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `selection_candidates_evaluated` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13011,7 +13074,7 @@ ALONE
 - Takes in: ACCEPTED — Each write-path resolution `{batch_id, selection_epoch}` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — Each write-path resolution `{batch_id, selection_epoch}` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `append_target_resolved` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13034,7 +13097,7 @@ ALONE
 - Takes in: ACCEPTED — A child-operation log under its own `child_op_id` (parent-referenced), carrying all three atomic effects together: the ownership-generation grant, the §8.2A root-ID reservation, and the batch reservation [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — A child-operation log under its own `child_op_id` (parent-referenced), carrying all three atomic effects together: the ownership-generation grant, the §8.2A root-ID reservation, and the batch reservation [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — One WB1 operational log per reservation boundary [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13057,7 +13120,7 @@ ALONE
 - Takes in: ACCEPTED — WB0 claim establishment/lookup, a cancellation, a recovery resolution, a target resolution — each under its own stable `child_op_id` referencing the parent; exactly one log per child [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — WB0 claim establishment/lookup, a cancellation, a recovery resolution, a target resolution — each under its own stable `child_op_id` referencing the parent; exactly one log per child [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — One operational log per other separately executed child operation [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13080,8 +13143,8 @@ ALONE
 - Takes in: ACCEPTED — A child-operation log under its own `child_op_id` (parent-referenced), carrying the fence win, the physical append, the claim terminal transition, and the root-ownership `committed_to_batch` transition — one atomic operation, one log; the parent's mandatory WB3 terminal follows per `ingest_operation_id` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — A child-operation log under its own `child_op_id` (parent-referenced), carrying the fence win, the physical append, the claim terminal transition, and the root-ownership `committed_to_batch` transition — one atomic operation, one log; the parent's mandatory WB3 terminal follows per `ingest_operation_id` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — One WB2 operational result per commit operation [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — A durable root is not undone by missing logging; success acknowledgement waits for the matching durable parent terminal, and recovery appends only what is missing. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.4] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -13103,8 +13166,8 @@ ALONE
 - Takes in: ACCEPTED — The mandatory WB3 terminal record of the parent ingestion operation — durably appended after the child operations and canonical records resolve and before WB4 returns the outcome; keyed by the parent `ingest_operation_id`; exactly one terminal record per parent operation, duplicates suppressed; child logs are never second parent logs [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — The mandatory WB3 terminal record of the parent ingestion operation — durably appended after the child operations and canonical records resolve and before WB4 returns the outcome; keyed by the parent `ingest_operation_id`; exactly one terminal record per parent operation, duplicates suppressed; child logs are never second parent logs [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `append_committed` / `append_duplicate_absorbed` / `append_rejected` / `append_interrupted` / `append_indeterminate` / `append_recovered` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Withholds acknowledgement while the matching parent terminal is absent; recovery locates existing logs by operation identity and appends only the missing terminal, without undoing a durable root. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.4] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -13131,8 +13194,8 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `append_committed` is a named event in this record class. Its class semantics are: The mandatory WB3 terminal record of the parent ingestion operation — durably appended after the child operations and canonical records resolve and before WB4 returns the outcome; keyed by the parent `ingest_operation_id`; exactly one terminal record per parent operation, duplicates suppressed; child logs are never second parent logs [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `append_committed`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Withholds acknowledgement while the matching parent terminal is absent; recovery locates existing logs by operation identity and appends only the missing terminal, without undoing a durable root. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.4] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -13154,8 +13217,8 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `append_duplicate_absorbed` is a named event in this record class. Its class semantics are: The mandatory WB3 terminal record of the parent ingestion operation — durably appended after the child operations and canonical records resolve and before WB4 returns the outcome; keyed by the parent `ingest_operation_id`; exactly one terminal record per parent operation, duplicates suppressed; child logs are never second parent logs [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `append_duplicate_absorbed`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Withholds acknowledgement while the matching parent terminal is absent; recovery locates existing logs by operation identity and appends only the missing terminal, without undoing a durable root. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.4] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -13177,8 +13240,8 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `append_rejected` is a named event in this record class. Its class semantics are: The mandatory WB3 terminal record of the parent ingestion operation — durably appended after the child operations and canonical records resolve and before WB4 returns the outcome; keyed by the parent `ingest_operation_id`; exactly one terminal record per parent operation, duplicates suppressed; child logs are never second parent logs [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `append_rejected`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Withholds acknowledgement while the matching parent terminal is absent; recovery locates existing logs by operation identity and appends only the missing terminal, without undoing a durable root. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.4] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -13200,8 +13263,8 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `append_interrupted` is a named event in this record class. Its class semantics are: The mandatory WB3 terminal record of the parent ingestion operation — durably appended after the child operations and canonical records resolve and before WB4 returns the outcome; keyed by the parent `ingest_operation_id`; exactly one terminal record per parent operation, duplicates suppressed; child logs are never second parent logs [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `append_interrupted`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Withholds acknowledgement while the matching parent terminal is absent; recovery locates existing logs by operation identity and appends only the missing terminal, without undoing a durable root. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.4] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -13223,8 +13286,8 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `append_indeterminate` is a named event in this record class. Its class semantics are: The mandatory WB3 terminal record of the parent ingestion operation — durably appended after the child operations and canonical records resolve and before WB4 returns the outcome; keyed by the parent `ingest_operation_id`; exactly one terminal record per parent operation, duplicates suppressed; child logs are never second parent logs [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `append_indeterminate`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Withholds acknowledgement while the matching parent terminal is absent; recovery locates existing logs by operation identity and appends only the missing terminal, without undoing a durable root. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.4] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -13246,8 +13309,8 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `append_recovered` is a named event in this record class. Its class semantics are: The mandatory WB3 terminal record of the parent ingestion operation — durably appended after the child operations and canonical records resolve and before WB4 returns the outcome; keyed by the parent `ingest_operation_id`; exactly one terminal record per parent operation, duplicates suppressed; child logs are never second parent logs [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `append_recovered`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Withholds acknowledgement while the matching parent terminal is absent; recovery locates existing logs by operation identity and appends only the missing terminal, without undoing a durable root. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.3] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §7.4] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §11]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -13269,7 +13332,7 @@ ALONE
 - Takes in: ACCEPTED — The LB5–LB6 lifecycle. The shutdown-path LB5 emits one operational log carrying the cutoff (`admission_cutoff_id`), the admission stop, and the sealing transition together [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — The LB5–LB6 lifecycle. The shutdown-path LB5 emits one operational log carrying the cutoff (`admission_cutoff_id`), the admission stop, and the sealing transition together [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `sealing_initiated` / `sealing_blocked` / `sealing_interrupted` / `seal_committed` / `seal_recovered` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13296,7 +13359,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `sealing_initiated` is a named event in this record class. Its class semantics are: The LB5–LB6 lifecycle. The shutdown-path LB5 emits one operational log carrying the cutoff (`admission_cutoff_id`), the admission stop, and the sealing transition together [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `sealing_initiated`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13319,7 +13382,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `sealing_blocked` is a named event in this record class. Its class semantics are: The LB5–LB6 lifecycle. The shutdown-path LB5 emits one operational log carrying the cutoff (`admission_cutoff_id`), the admission stop, and the sealing transition together [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `sealing_blocked`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13342,7 +13405,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `sealing_interrupted` is a named event in this record class. Its class semantics are: The LB5–LB6 lifecycle. The shutdown-path LB5 emits one operational log carrying the cutoff (`admission_cutoff_id`), the admission stop, and the sealing transition together [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `sealing_interrupted`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13365,7 +13428,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `seal_committed` is a named event in this record class. Its class semantics are: The LB5–LB6 lifecycle. The shutdown-path LB5 emits one operational log carrying the cutoff (`admission_cutoff_id`), the admission stop, and the sealing transition together [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `seal_committed`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13388,7 +13451,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `seal_recovered` is a named event in this record class. Its class semantics are: The LB5–LB6 lifecycle. The shutdown-path LB5 emits one operational log carrying the cutoff (`admission_cutoff_id`), the admission stop, and the sealing transition together [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `seal_recovered`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13434,7 +13497,7 @@ ALONE
 - Takes in: ACCEPTED — §9.4 / §10 verification outcomes [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — §9.4 / §10 verification outcomes [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `manifest_verified` / `index_verified` / `verification_failed` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13459,7 +13522,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `manifest_verified` is a named event in this record class. Its class semantics are: §9.4 / §10 verification outcomes [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `manifest_verified`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13482,7 +13545,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `index_verified` is a named event in this record class. Its class semantics are: §9.4 / §10 verification outcomes [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `index_verified`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13505,7 +13568,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `verification_failed` is a named event in this record class. Its class semantics are: §9.4 / §10 verification outcomes [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `verification_failed`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13528,7 +13591,7 @@ ALONE
 - Takes in: ACCEPTED — The §4.5 historical three-record set (canonical state records) and the honest recording of the separate `bootstrap_completion_status` (`incomplete` / `complete` / `recovery_required`) — completion metadata, never a `batch_state` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — The §4.5 historical three-record set (canonical state records) and the honest recording of the separate `bootstrap_completion_status` (`incomplete` / `complete` / `recovery_required`) — completion metadata, never a `batch_state` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `bootstrap_registration_recorded` / `bootstrap_state_event_recorded` / `bootstrap_manifest_recorded` / `bootstrap_completion_status_recorded` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13554,7 +13617,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `bootstrap_registration_recorded` is a named event in this record class. Its class semantics are: The §4.5 historical three-record set (canonical state records) and the honest recording of the separate `bootstrap_completion_status` (`incomplete` / `complete` / `recovery_required`) — completion metadata, never a `batch_state` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `bootstrap_registration_recorded`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13577,7 +13640,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `bootstrap_state_event_recorded` is a named event in this record class. Its class semantics are: The §4.5 historical three-record set (canonical state records) and the honest recording of the separate `bootstrap_completion_status` (`incomplete` / `complete` / `recovery_required`) — completion metadata, never a `batch_state` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `bootstrap_state_event_recorded`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13600,7 +13663,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `bootstrap_manifest_recorded` is a named event in this record class. Its class semantics are: The §4.5 historical three-record set (canonical state records) and the honest recording of the separate `bootstrap_completion_status` (`incomplete` / `complete` / `recovery_required`) — completion metadata, never a `batch_state` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `bootstrap_manifest_recorded`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13623,7 +13686,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `bootstrap_completion_status_recorded` is a named event in this record class. Its class semantics are: The §4.5 historical three-record set (canonical state records) and the honest recording of the separate `bootstrap_completion_status` (`incomplete` / `complete` / `recovery_required`) — completion metadata, never a `batch_state` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `bootstrap_completion_status_recorded`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13646,8 +13709,8 @@ ALONE
 - Takes in: ACCEPTED — Every §4.4 / §8.4 / §12 condition [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — Every §4.4 / §8.4 / §12 condition [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `state_mismatch_detected` / `identity_collision_detected` / `fail_closed_event` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Records the applicable refused append or fail-closed condition; sealed, malformed, conflicting or unproven write paths do not produce a successful append. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -13671,8 +13734,8 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `state_mismatch_detected` is a named event in this record class. Its class semantics are: Every §4.4 / §8.4 / §12 condition [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `state_mismatch_detected`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Records the applicable refused append or fail-closed condition; sealed, malformed, conflicting or unproven write paths do not produce a successful append. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -13694,8 +13757,8 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `identity_collision_detected` is a named event in this record class. Its class semantics are: Every §4.4 / §8.4 / §12 condition [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `identity_collision_detected`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Records the applicable refused append or fail-closed condition; sealed, malformed, conflicting or unproven write paths do not produce a successful append. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -13717,8 +13780,8 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `fail_closed_event` is a named event in this record class. Its class semantics are: Every §4.4 / §8.4 / §12 condition [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `fail_closed_event`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Records the applicable refused append or fail-closed condition; sealed, malformed, conflicting or unproven write paths do not produce a successful append. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -13740,7 +13803,7 @@ ALONE
 - Takes in: ACCEPTED — LB7 and honest coverage transitions [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — LB7 and honest coverage transitions [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `index_registration_committed` / `coverage_status_changed` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13764,7 +13827,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `index_registration_committed` is a named event in this record class. Its class semantics are: LB7 and honest coverage transitions [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `index_registration_committed`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13787,7 +13850,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `coverage_status_changed` is a named event in this record class. Its class semantics are: LB7 and honest coverage transitions [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `coverage_status_changed`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13810,7 +13873,7 @@ ALONE
 - Takes in: ACCEPTED — §11 runs, idempotent actions, and no-op duplicates [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — §11 runs, idempotent actions, and no-op duplicates [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `recovery_run_started` / `recovery_action_applied` / `recovery_noop_duplicate` / `recovery_completed` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13836,7 +13899,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `recovery_run_started` is a named event in this record class. Its class semantics are: §11 runs, idempotent actions, and no-op duplicates [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `recovery_run_started`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13859,7 +13922,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `recovery_action_applied` is a named event in this record class. Its class semantics are: §11 runs, idempotent actions, and no-op duplicates [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `recovery_action_applied`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13882,7 +13945,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `recovery_noop_duplicate` is a named event in this record class. Its class semantics are: §11 runs, idempotent actions, and no-op duplicates [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `recovery_noop_duplicate`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13905,7 +13968,7 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `recovery_completed` is a named event in this record class. Its class semantics are: §11 runs, idempotent actions, and no-op duplicates [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `recovery_completed`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -13928,8 +13991,8 @@ ALONE
 - Takes in: ACCEPTED — The existing refused-append record classes, preserved and generalized across batches [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — The existing refused-append record classes, preserved and generalized across batches [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `refused_append_seal_blocked` / `refused_append_schema_invalid` / `refused_append_duplicate_key` [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Records the applicable refused append or fail-closed condition; sealed, malformed, conflicting or unproven write paths do not produce a successful append. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -13953,8 +14016,8 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `refused_append_seal_blocked` is a named event in this record class. Its class semantics are: The existing refused-append record classes, preserved and generalized across batches [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `refused_append_seal_blocked`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Records the applicable refused append or fail-closed condition; sealed, malformed, conflicting or unproven write paths do not produce a successful append. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -13976,8 +14039,8 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `refused_append_schema_invalid` is a named event in this record class. Its class semantics are: The existing refused-append record classes, preserved and generalized across batches [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `refused_append_schema_invalid`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Records the applicable refused append or fail-closed condition; sealed, malformed, conflicting or unproven write paths do not produce a successful append. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -13999,8 +14062,8 @@ ALONE
 - Takes in: ACCEPTED — The corresponding operation or state event. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Does: ACCEPTED — `refused_append_duplicate_key` is a named event in this record class. Its class semantics are: The existing refused-append record classes, preserved and generalized across batches [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 - Gives out: ACCEPTED — `refused_append_duplicate_key`; identity-linked and append-only. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Copy private root content into an operational log, emit two logs for one real operation, recursively log log creation, or count the record as an extra evidential vote. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
+- Fails closed by: ACCEPTED — Records the applicable refused append or fail-closed condition; sealed, malformed, conflicting or unproven write paths do not produce a successful append. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §12] [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §14]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -14026,7 +14089,7 @@ ALONE
 - Does: ACCEPTED — - No double evidence: §8.5 binds — manifests, logs, indexes, checkpoints, and duplicate-visibility never add evidential weight; one root, one presence, one owner batch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §15]
 - Gives out: ACCEPTED — Authorized internal facts without semantic authority. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §15]
 - Must never: ACCEPTED — Copy root text into manifests, indexes or logs, or touch quarantine/production authorization. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §15]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Refuses access or visible use not authorized by the applicable privacy and identity/security gates. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §15]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -14051,8 +14114,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Internal records follow §7Q internal-use authorization and §25 identity/security authorization; visible surfacing follows the existing output gates. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §15]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Internal records follow §7Q internal-use authorization and §25 identity/security authorization; visible surfacing follows the existing output gates. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §15]
+- Fails closed by: ACCEPTED — Refuses access or visible use not authorized by the applicable privacy and identity/security gates. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §15]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -14074,7 +14137,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — B11 performs identity, state, commit, verification and bookkeeping over recorded facts; no interpretation, relevance, truth or semantic eligibility. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §15]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: B11 performs identity, state, commit, verification and bookkeeping over recorded facts; no interpretation, relevance, truth or semantic eligibility. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §15]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -14097,7 +14160,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — B11 handles root-storage batches only; readings, quarantine and production remain separate components and stores. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §15]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: B11 handles root-storage batches only; readings, quarantine and production remain separate components and stores. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §15]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -14120,7 +14183,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Manifests, logs, indexes, checkpoints and duplicate visibility never add weight: one root, one presence, one owner batch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §15]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Manifests, logs, indexes, checkpoints and duplicate visibility never add weight: one root, one presence, one owner batch. [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §15]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -14385,7 +14448,7 @@ ALONE
 - Does: ACCEPTED — Uses reliable original source time as the normal main real-life date; leaves an unproved original date unresolved. [04/NH_BUNDLE_6_POLICY_DECISIONS_v1_0_CANDIDATE.md §4 / A3.3]
 - Gives out: ACCEPTED — Honest distinct time provenance. [04/NH_BUNDLE_6_POLICY_DECISIONS_v1_0_CANDIDATE.md §4 / A3.3]
 - Must never: ACCEPTED — Replace original source time with import time or record-creation time. [04/NH_BUNDLE_6_POLICY_DECISIONS_v1_0_CANDIDATE.md §4 / A3.3]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Uses reliable original source time as the normal main real-life date; leaves an unproved original date unresolved. [04/NH_BUNDLE_6_POLICY_DECISIONS_v1_0_CANDIDATE.md §4 / A3.3]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -14399,6 +14462,8 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.5.1 — Origin preservation policy | Reliably known original source time and separately recorded import/creation times. | Uses reliable original source time as the normal main real-life date; leaves an unproved original date unresolved. | Honest distinct time provenance. | [04/NH_BUNDLE_6_POLICY_DECISIONS_v1_0_CANDIDATE.md §4 / A3.3] |
+| 2 · ACCEPTED | C-STORE.5.1.3.1 — Original source time | The source-defined condition governed by C-STORE.5.1.3. | Only reliably known or proven original source time may serve as the main real-life date. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BUNDLE_6_POLICY_DECISIONS_v1_0_CANDIDATE.md §4 / A3] |
+| 3 · ACCEPTED | C-STORE.5.1.3.4 — Unresolved source time | The source-defined condition governed by C-STORE.5.1.3. | Only reliably known or proven original source time may serve as the main real-life date. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BUNDLE_6_POLICY_DECISIONS_v1_0_CANDIDATE.md §4 / A3] |
 
 SUB-PARTS: C-STORE.5.1.3.1 — Original source time; C-STORE.5.1.3.2 — Import time; C-STORE.5.1.3.3 — Record-creation time; C-STORE.5.1.3.4 — Unresolved source time
 
@@ -14410,12 +14475,12 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — When the item was actually created, captured, sent or occurred; main date only when reliable. [04/NH_BUNDLE_6_POLICY_DECISIONS_v1_0_CANDIDATE.md §4 / A3.3]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: When the item was actually created, captured, sent or occurred; main date only when reliable. [04/NH_BUNDLE_6_POLICY_DECISIONS_v1_0_CANDIDATE.md §4 / A3.3]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.5.1.3 — Origin time families: Only reliably known or proven original source time may serve as the main real-life date. [04/NH_BUNDLE_6_POLICY_DECISIONS_v1_0_CANDIDATE.md §4 / A3]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -14433,7 +14498,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — When N.H received or imported the item; separate from source time. [04/NH_BUNDLE_6_POLICY_DECISIONS_v1_0_CANDIDATE.md §4 / A3.3]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: When N.H received or imported the item; separate from source time. [04/NH_BUNDLE_6_POLICY_DECISIONS_v1_0_CANDIDATE.md §4 / A3.3]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -14456,7 +14521,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — When N.H created its own record; separate from source and import time. [04/NH_BUNDLE_6_POLICY_DECISIONS_v1_0_CANDIDATE.md §4 / A3.3]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: When N.H created its own record; separate from source and import time. [04/NH_BUNDLE_6_POLICY_DECISIONS_v1_0_CANDIDATE.md §4 / A3.3]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -14479,12 +14544,12 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — If original time cannot be reliably known or proven, leave it unresolved; do not guess. [04/NH_BUNDLE_6_POLICY_DECISIONS_v1_0_CANDIDATE.md §4 / A3.3]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: If original time cannot be reliably known or proven, leave it unresolved; do not guess. [04/NH_BUNDLE_6_POLICY_DECISIONS_v1_0_CANDIDATE.md §4 / A3.3]
+- Fails closed by: ACCEPTED — If original time cannot be reliably known or proven, leave it unresolved; do not guess. [04/NH_BUNDLE_6_POLICY_DECISIONS_v1_0_CANDIDATE.md §4 / A3.3]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.5.1.3 — Origin time families: Only reliably known or proven original source time may serve as the main real-life date. [04/NH_BUNDLE_6_POLICY_DECISIONS_v1_0_CANDIDATE.md §4 / A3]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -14558,7 +14623,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Each state change commits atomically with its own append-only record. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Each state change commits atomically with its own append-only record. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -14581,7 +14646,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — A stated deterministic key recognizes replays, skips duplicate work and records duplicate prevention. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: A stated deterministic key recognizes replays, skips duplicate work and records duplicate prevention. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -14604,7 +14669,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Unique keys prevent duplicates structurally, not best-effort. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Unique keys prevent duplicates structurally, not best-effort. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -14627,8 +14692,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Restart scans committed state only, resumes at the durable checkpoint and reconstructs nothing; each recovery action is recorded. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Restart scans committed state only, resumes at the durable checkpoint and reconstructs nothing; each recovery action is recorded. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
+- Fails closed by: ACCEPTED — Restart scans committed state only, resumes at the durable checkpoint and reconstructs nothing; each recovery action is recorded. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -14650,8 +14715,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Completed per-item commits stand; unfinished items resume. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Completed per-item commits stand; unfinished items resume. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
+- Fails closed by: ACCEPTED — Completed per-item commits stand; unfinished items resume. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -14673,8 +14738,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Uncertainty permits no memory entry, activation or claim of completeness. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Uncertainty permits no memory entry, activation or claim of completeness. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
+- Fails closed by: ACCEPTED — Uncertainty permits no memory entry, activation or claim of completeness. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -14696,8 +14761,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Exactly one operational record per real operation, including retrieval, use, evaluated-but-unused candidates, acceptance, rejection, omission and failure; no recursive logging or evidence weight; privacy and identity access apply. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Exactly one operational record per real operation, including retrieval, use, evaluated-but-unused candidates, acceptance, rejection, omission and failure; no recursive logging or evidence weight; privacy and identity access apply. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
+- Fails closed by: ACCEPTED — Withholds access or retrieval not allowed by privacy and identity authorization; uncertain operations permit no memory entry, activation or completeness claim. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -14719,7 +14784,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Every root-producing path goes through the catalog into the B11 active writable batch, consuming its registry, claim, ownership, fence, parent/child logs, historical-coverage gate and recovery unchanged. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Every root-producing path goes through the catalog into the B11 active writable batch, consuming its registry, claim, ownership, fence, parent/child logs, historical-coverage gate and recovery unchanged. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -14742,12 +14807,12 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Privacy authorization precedes relevance on every retrieval; held and sealed boundaries remain binding. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Privacy authorization precedes relevance on every retrieval; held and sealed boundaries remain binding. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
+- Fails closed by: ACCEPTED — Withholds access or retrieval not allowed by privacy and identity authorization; uncertain operations permit no memory entry, activation or completeness claim. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — Privacy authorization precedes relevance on every retrieval; held and sealed boundaries remain binding. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -14766,7 +14831,7 @@ ALONE
 - Does: ACCEPTED — Applies attempt and elapsed-time gates together; the first closed gate stops retry; early stop is allowed if retry is useless or unsafe. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Gives out: ACCEPTED — Bounded retry or an honest terminal halt. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Must never: ACCEPTED — Treat repetition alone as the recorded real change needed for further continuation. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Applies attempt and elapsed-time gates together; the first closed gate stops retry; early stop is allowed if retry is useless or unsafe. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -14785,6 +14850,14 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.5.2 — Bundle 6 operation protections | A failure classified retryable or terminal. | Applies attempt and elapsed-time gates together; the first closed gate stops retry; early stop is allowed if retry is useless or unsafe. | Bounded retry or an honest terminal halt. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3] |
+| 2 · ACCEPTED | C-STORE.5.2.11.1 — Technical attempts | The source-defined condition governed by C-STORE.5.2.11. | Three total technical attempts: the original plus two retries. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3] |
+| 3 · ACCEPTED | C-STORE.5.2.11.2 — Live retry gaps | The source-defined condition governed by C-STORE.5.2.11. | Minimum gaps are 10 seconds, then 30 seconds. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3] |
+| 4 · ACCEPTED | C-STORE.5.2.11.3 — Background/nightly retry gaps | The source-defined condition governed by C-STORE.5.2.11. | Minimum gaps are 1 minute, then 3 minutes. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3] |
+| 5 · ACCEPTED | C-STORE.5.2.11.4 — Live elapsed maximum | The source-defined condition governed by C-STORE.5.2.11. | The live elapsed-time maximum is 7 minutes. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3] |
+| 6 · ACCEPTED | C-STORE.5.2.11.5 — Background/nightly elapsed maximum | The source-defined condition governed by C-STORE.5.2.11. | The background/nightly elapsed-time maximum is 15 minutes. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3] |
+| 7 · ACCEPTED | C-STORE.5.2.11.6 — Bad/unsafe/unsupported proposal retry | The source-defined condition governed by C-STORE.5.2.11. | Exactly one careful retry follows the durable rejection record. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3] |
+| 8 · ACCEPTED | C-STORE.5.2.11.7 — First closing gate | The source-defined condition governed by C-STORE.5.2.11. | Attempt and elapsed gates both apply; whichever closes first stops retry. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3] |
+| 9 · ACCEPTED | C-STORE.5.2.11.8 — Further continuation | The source-defined condition governed by C-STORE.5.2.11. | Requires a recorded real change; repetition alone is never a real change. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3] |
 
 SUB-PARTS: C-STORE.5.2.11.1 — Technical attempts; C-STORE.5.2.11.2 — Live retry gaps; C-STORE.5.2.11.3 — Background/nightly retry gaps; C-STORE.5.2.11.4 — Live elapsed maximum; C-STORE.5.2.11.5 — Background/nightly elapsed maximum; C-STORE.5.2.11.6 — Bad/unsafe/unsupported proposal retry; C-STORE.5.2.11.7 — First closing gate; C-STORE.5.2.11.8 — Further continuation; C-STORE.5.2.11.9 — Terminal failure
 
@@ -14801,7 +14874,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.5.2.11 — Bounded retry: Three total technical attempts: the original plus two retries. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -14824,7 +14897,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.5.2.11 — Bounded retry: Minimum gaps are 10 seconds, then 30 seconds. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -14847,7 +14920,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.5.2.11 — Bounded retry: Minimum gaps are 1 minute, then 3 minutes. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -14870,7 +14943,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.5.2.11 — Bounded retry: The live elapsed-time maximum is 7 minutes. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -14893,7 +14966,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.5.2.11 — Bounded retry: The background/nightly elapsed-time maximum is 15 minutes. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -14912,11 +14985,11 @@ ALONE
 - Does: ACCEPTED — Exactly one careful retry follows the durable rejection record. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Gives out: NOT DECIDED
 - Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Allows only one careful retry after the durable rejection record; further continuation requires a recorded real change. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.5.2.11 — Bounded retry: Exactly one careful retry follows the durable rejection record. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -14934,12 +15007,12 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Attempt and elapsed gates both apply; whichever closes first stops retry. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Attempt and elapsed gates both apply; whichever closes first stops retry. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
+- Fails closed by: ACCEPTED — Attempt and elapsed gates both apply; whichever closes first stops retry. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.5.2.11 — Bounded retry: Attempt and elapsed gates both apply; whichever closes first stops retry. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -14957,12 +15030,12 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Requires a recorded real change; repetition alone is never a real change. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Requires a recorded real change; repetition alone is never a real change. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
+- Fails closed by: ACCEPTED — Withholds further continuation without a recorded real change; repetition alone never qualifies. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.5.2.11 — Bounded retry: Requires a recorded real change; repetition alone is never a real change. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -14980,8 +15053,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Halts honestly; it is not disguised as success. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Halts honestly; it is not disguised as success. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
+- Fails closed by: ACCEPTED — Halts honestly; it is not disguised as success. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §3]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -15030,7 +15103,7 @@ ALONE
 - Does: NOT DECIDED
 - Gives out: ACCEPTED — `{label_type: "live_conversation", label_version: "v1"}`. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §7]
 - Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — A live capture missing its required provenance label fails the envelope and follows the capture-error path; it never enters silently. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §7]
 
 TOGETHER
 - Fed by: ACCEPTED — C-STORE.5.3.1.1 — label_type: the field value with its stated form and meaning. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §7]
@@ -15054,7 +15127,7 @@ ALONE
 - Does: ACCEPTED — Exactly `live_conversation`. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §7]
 - Gives out: ACCEPTED — The `label_type` value carried by provenance_label. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §7]
 - Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — A live capture missing its required provenance label fails the envelope and follows the capture-error path; it never enters silently. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §7]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -15077,7 +15150,7 @@ ALONE
 - Does: ACCEPTED — Exactly `v1`. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §7]
 - Gives out: ACCEPTED — The `label_version` value carried by provenance_label. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §7]
 - Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — A live capture missing its required provenance label fails the envelope and follows the capture-error path; it never enters silently. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §7]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -15099,8 +15172,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Carried from the source stream; never guessed later. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §7]
 - Gives out: ACCEPTED — The `speaker_of_record` value carried by B17 — Live-conversation provenance-label format. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §7]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Carried from the source stream; never guessed later. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §7]
+- Fails closed by: ACCEPTED — A live capture missing its required provenance label fails the envelope and follows the capture-error path; it never enters silently. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §7]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -15122,8 +15195,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Marks earlier N.H output as N.H output, not as fact. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §7]
 - Gives out: ACCEPTED — The `N.H-own-output flag` value carried by B17 — Live-conversation provenance-label format. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §7]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Marks earlier N.H output as N.H output, not as fact. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §7]
+- Fails closed by: ACCEPTED — A live capture missing its required provenance label fails the envelope and follows the capture-error path; it never enters silently. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §7]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -15145,8 +15218,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Label assignment is part of the catalog capture transaction, idempotent with that capture; one capture, one record, no separate label-assignment operation or extra log. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §7]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Label assignment is part of the catalog capture transaction, idempotent with that capture; one capture, one record, no separate label-assignment operation or extra log. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §7]
+- Fails closed by: ACCEPTED — A live capture missing its required provenance label fails the envelope and follows the capture-error path; it never enters silently. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §7]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -15168,7 +15241,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — `live:ness_nh_conversation` is not the adopted label. Any needed flat serialization derives mechanically from the structured fields. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §7]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: `live:ness_nh_conversation` is not the adopted label. Any needed flat serialization derives mechanically from the structured fields. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §7]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -15220,7 +15293,7 @@ ALONE
 - Does: ACCEPTED — Carries identity, target, permitted field, original reference, alias, basis, version, predecessor and schema version. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Gives out: ACCEPTED — A committed version or a recorded compare-and-append refusal. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — An unverifiable or forked alias chain is recorded as failed and reads as no-alias; the sealed original governs until resolved. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: ACCEPTED — C-STORE.5.4.1.1 — alias_record_id: the field value with its stated form and meaning. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
@@ -15296,8 +15369,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Required; permitted values are `source_title` and `display_label`; `thread_id` is never allowed. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Gives out: ACCEPTED — The `field` value carried by Alias record. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Required; permitted values are `source_title` and `display_label`; `thread_id` is never allowed. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
+- Fails closed by: ACCEPTED — An unverifiable or forked alias chain is recorded as failed and reads as no-alias; the sealed original governs until resolved. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -15366,7 +15439,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Required reference to the sealed original value; never changed or copied out of context. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Gives out: ACCEPTED — The `original_value_ref` value carried by Alias record. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Required reference to the sealed original value; never changed or copied out of context. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -15389,7 +15462,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Required clarified/corrected grouping label. A machine-generated topic, summary or semantic label can never become a `source_title` alias. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Gives out: ACCEPTED — The `alias_value` value carried by Alias record. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Required clarified/corrected grouping label. A machine-generated topic, summary or semantic label can never become a `source_title` alias. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -15458,12 +15531,12 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Required on every successor version; references the previous committed alias version; absent only on version 1. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Gives out: ACCEPTED — The `predecessor_ref` value carried by Alias record. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Required on every successor version; references the previous committed alias version; absent only on version 1. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
+- Fails closed by: ACCEPTED — An unverifiable or forked alias chain is recorded as failed and reads as no-alias; the sealed original governs until resolved. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.5.4.2 — Atomic alias-head compare-and-append: A successor alias write requires its declared predecessor to remain the current head at commit time. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -15504,7 +15577,7 @@ ALONE
 - Takes in: ACCEPTED — The proposed version and declared predecessor. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Does: ACCEPTED — Commits only when the declared predecessor is still the current head at commit time; one concurrent winner, no forks or skipped versions. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Gives out: ACCEPTED — A new current head or recorded refusal. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Commits only when the declared predecessor is still the current head at commit time; one concurrent winner, no forks or skipped versions. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Fails closed by: ACCEPTED — A stale predecessor or detected fork is refused and recorded; consumers use the sealed original until resolved. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 
 TOGETHER
@@ -15517,6 +15590,8 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.5.4 — B20 — source_title alias/correction layer | The proposed version and declared predecessor. | Commits only when the declared predecessor is still the current head at commit time; one concurrent winner, no forks or skipped versions. | A new current head or recorded refusal. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9] |
+| 2 · ACCEPTED | C-STORE.5.4.2.1 — Concurrent loser | The source-defined condition governed by C-STORE.5.4.2. | A successor alias write requires its declared predecessor to remain the current head at commit time. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9] |
+| 3 · ACCEPTED | C-STORE.5.4.1.8 — predecessor_ref | The source-defined condition governed by C-STORE.5.4.2. | A successor alias write requires its declared predecessor to remain the current head at commit time. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9] |
 
 SUB-PARTS: C-STORE.5.4.2.1 — Concurrent loser; C-STORE.5.4.2.2 — Last committed head
 
@@ -15529,11 +15604,11 @@ ALONE
 - Does: ACCEPTED — The losing concurrent alias write is refused and recorded; it may retry against the new head as a fresh version. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Gives out: NOT DECIDED
 - Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — The losing concurrent alias write is refused and recorded; it may retry against the new head as a fresh version. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.5.4.2 — Atomic alias-head compare-and-append: A successor alias write requires its declared predecessor to remain the current head at commit time. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -15552,7 +15627,7 @@ ALONE
 - Does: ACCEPTED — After a crash the last committed head stands; prior versions remain preserved and readable. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Gives out: NOT DECIDED
 - Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — After a crash the last committed head stands; prior versions remain preserved and readable. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -15575,7 +15650,7 @@ ALONE
 - Does: ACCEPTED — One alias-write transaction per version; the duplicate key is target + field + version + predecessor. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Create duplicate versions. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — An unverifiable or forked alias chain is recorded as failed and reads as no-alias; the sealed original governs until resolved. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -15598,7 +15673,7 @@ ALONE
 - Does: ACCEPTED — Displays source labels with provenance showing that an alias was used and which version. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Gives out: ACCEPTED — Clarified presentation without changed grouping identity. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Must never: ACCEPTED — Determine, replace or alter canonical `thread_id` or change membership because a label changed. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — An unverifiable or forked alias chain is recorded as failed and reads as no-alias; the sealed original governs until resolved. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -15613,6 +15688,8 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.5.4 — B20 — source_title alias/correction layer | A verified alias version after canonical membership is already resolved. | Displays source labels with provenance showing that an alias was used and which version. | Clarified presentation without changed grouping identity. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9] |
+| 2 · ACCEPTED | C-STORE.5.4.4.3 — Label-based filtering | The source-defined condition governed by C-STORE.5.4.4. | Only explicitly label-based filtering may use the alias. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9] |
+| 3 · ACCEPTED | C-STORE.5.4.4.4 — Canonical membership first | The source-defined condition governed by C-STORE.5.4.4. | Thread-membership consumers consult aliases only for presentation after stable canonical membership has already been resolved. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9] |
 
 SUB-PARTS: C-STORE.5.4.4.1 — Human-readable presentation; C-STORE.5.4.4.2 — Source-label display; C-STORE.5.4.4.3 — Label-based filtering; C-STORE.5.4.4.4 — Canonical membership first; C-STORE.5.4.4.5 — Separate membership correction
 
@@ -15625,7 +15702,7 @@ ALONE
 - Does: ACCEPTED — Aliases may affect human-readable presentation. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Gives out: NOT DECIDED
 - Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — An unverifiable or forked alias chain is recorded as failed and reads as no-alias; the sealed original governs until resolved. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -15648,7 +15725,7 @@ ALONE
 - Does: ACCEPTED — Aliases may affect source-label display, carrying alias/version provenance. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Gives out: NOT DECIDED
 - Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — An unverifiable or forked alias chain is recorded as failed and reads as no-alias; the sealed original governs until resolved. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -15670,12 +15747,12 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Only explicitly label-based filtering may use the alias. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Only explicitly label-based filtering may use the alias. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
+- Fails closed by: ACCEPTED — An unverifiable or forked alias chain is recorded as failed and reads as no-alias; the sealed original governs until resolved. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.5.4.4 — Alias consumption: Only explicitly label-based filtering may use the alias. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -15693,12 +15770,12 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Thread-membership consumers consult aliases only for presentation after stable canonical membership has already been resolved. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Thread-membership consumers consult aliases only for presentation after stable canonical membership has already been resolved. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
+- Fails closed by: ACCEPTED — An unverifiable or forked alias chain is recorded as failed and reads as no-alias; the sealed original governs until resolved. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.5.4.4 — Alias consumption: Thread-membership consumers consult aliases only for presentation after stable canonical membership has already been resolved. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -15716,7 +15793,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Actual membership correction belongs to its own append-only membership/relationship mechanism, never an alias pretending `thread_id` changed. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Actual membership correction belongs to its own append-only membership/relationship mechanism, never an alias pretending `thread_id` changed. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -15762,8 +15839,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — One record per alias-consulting display-label or source-title presentation resolution; it is never a grouping decision. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: One record per alias-consulting display-label or source-title presentation resolution; it is never a grouping decision. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
+- Fails closed by: ACCEPTED — An unverifiable or forked alias chain is recorded as failed and reads as no-alias; the sealed original governs until resolved. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §9]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -15804,6 +15881,7 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.5 — Origin provenance and future-schema contracts | The unchanged catalog intake envelope plus separate grouping, display, provenance and time fields. | Keeps stable grouping identity separate from display; preserves time families and separate mixed-media Origins; versions the schema with its design record. | Versioned schema contracts and separate endpoint-verified relationship records. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10] |
+| 2 · ACCEPTED | C-STORE.4.3.2.3 — schema_compat_ref | The source-defined condition governed by C-STORE.5.5. | The exact root `schema_version` this batch accepts (v1 seven-field for the first successor; changes only via B21 + Ness adoption) | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md §4.2] |
 
 SUB-PARTS: C-STORE.5.5.1 — thread_id; C-STORE.5.5.2 — display_label; C-STORE.5.5.3 — Legacy subject separation; C-STORE.5.5.4 — source_times; C-STORE.5.5.5 — imported_at; C-STORE.5.5.6 — record_created_at; C-STORE.5.5.7 — origin_relationship_record; C-STORE.5.5.8 — Pre-ingest schema handoff; C-STORE.5.5.9 — Schema-version operation
 
@@ -15815,7 +15893,7 @@ ALONE
 - Takes in: ACCEPTED — Stable grouping key. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Does: ACCEPTED — Stable non-semantic grouping identity; never rewritten or aliased by B20. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Gives out: ACCEPTED — The `thread_id` value carried by B21 — Future root schema and pre-ingest schemas. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Stable non-semantic grouping identity; never rewritten or aliased by B20. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -15884,8 +15962,8 @@ ALONE
 - Takes in: ACCEPTED — Set of zero or more typed entries. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Does: ACCEPTED — Zero or more typed source-time entries; zero reliable source times is legal. Preserve all genuine source times; never invent an entry to satisfy the schema. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Gives out: ACCEPTED — The `source_times` value carried by B21 — Future root schema and pre-ingest schemas. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Zero or more typed source-time entries; zero reliable source times is legal. Preserve all genuine source times; never invent an entry to satisfy the schema. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
+- Fails closed by: ACCEPTED — With no reliably known source time, leaves zero main source date; no unknown, unreliable, import or record time fills the gap. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -15909,7 +15987,7 @@ ALONE
 - Does: ACCEPTED — Keeps each genuine source time separately with its provenance. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Gives out: ACCEPTED — A typed source-time entry. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Must never: ACCEPTED — Substitute import or record-creation time for an unknown source time. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — With no reliably known source time, leaves zero main source date; no unknown, unreliable, import or record time fills the gap. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 
 TOGETHER
 - Fed by: ACCEPTED — C-STORE.5.5.4.1.1 — timestamp_value: the field value with its stated form and meaning. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
@@ -16124,8 +16202,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — `known_reliable`, `known_unreliable` or `unknown`; unknown remains unknown. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Gives out: ACCEPTED — The `reliability_status` value carried by Typed source-time entry. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: `known_reliable`, `known_unreliable` or `unknown`; unknown remains unknown. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
+- Fails closed by: ACCEPTED — With no reliably known source time, leaves zero main source date; no unknown, unreliable, import or record time fills the gap. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -16241,8 +16319,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — May mark only a `known_reliable` entry. At most one is marked when reliable candidates exist; none is marked when no source time is reliable. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Gives out: ACCEPTED — The `is_main_real_life_date` value carried by Typed source-time entry. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: May mark only a `known_reliable` entry. At most one is marked when reliable candidates exist; none is marked when no source time is reliable. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
+- Fails closed by: ACCEPTED — With no reliably known source time, leaves zero main source date; no unknown, unreliable, import or record time fills the gap. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -16255,6 +16333,8 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.5.5.4.1 — Typed source-time entry | NOT DECIDED | May mark only a `known_reliable` entry. At most one is marked when reliable candidates exist; none is marked when no source time is reliable. | The `is_main_real_life_date` value carried by Typed source-time entry. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10] |
+| 2 · ACCEPTED | C-STORE.5.5.4.1.6.1 — Reliable-entry gate | The source-defined condition governed by C-STORE.5.5.4.1.6. | Only a known_reliable entry can be the main real-life date, and at most one is marked. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10] |
+| 3 · ACCEPTED | C-STORE.5.5.4.1.6.2 — One-main-date bound | The source-defined condition governed by C-STORE.5.5.4.1.6. | Only a known_reliable entry can be the main real-life date, and at most one is marked. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10] |
 
 SUB-PARTS: C-STORE.5.5.4.1.6.1 — Reliable-entry gate; C-STORE.5.5.4.1.6.2 — One-main-date bound; C-STORE.5.5.4.1.6.3 — Zero-main-date case
 
@@ -16266,12 +16346,12 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Only a `known_reliable` source-time entry may be marked as the main real-life date. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Only a `known_reliable` source-time entry may be marked as the main real-life date. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
+- Fails closed by: ACCEPTED — With no reliably known source time, leaves zero main source date; no unknown, unreliable, import or record time fills the gap. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.5.5.4.1.6 — is_main_real_life_date: Only a known_reliable entry can be the main real-life date, and at most one is marked. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -16289,12 +16369,12 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — When reliable candidates exist, at most one entry is marked; other genuine entries remain preserved without degradation. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: When reliable candidates exist, at most one entry is marked; other genuine entries remain preserved without degradation. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
+- Fails closed by: ACCEPTED — With no reliably known source time, leaves zero main source date; no unknown, unreliable, import or record time fills the gap. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.5.5.4.1.6 — is_main_real_life_date: Only a known_reliable entry can be the main real-life date, and at most one is marked. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -16312,8 +16392,8 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — When no source time is reliably known, the Origin has zero main source date; no unknown or unreliable value fills the gap. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: When no source time is reliably known, the Origin has zero main source date; no unknown or unreliable value fills the gap. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
+- Fails closed by: ACCEPTED — With no reliably known source time, leaves zero main source date; no unknown, unreliable, import or record time fills the gap. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -16336,7 +16416,7 @@ ALONE
 - Does: ACCEPTED — An Origin with no known source time carries an explicit unknown-time state rather than a fake entry. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Gives out: NOT DECIDED
 - Must never: ACCEPTED — Invent a timestamp or promote an unreliable entry to fill the gap. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — An Origin with no known source time carries an explicit unknown-time state rather than a fake entry. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 
 TOGETHER
 - Fed by: NOT DECIDED
@@ -16358,7 +16438,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — When N.H received/imported the item; never a source-time substitute. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Gives out: ACCEPTED — The `imported_at` value carried by B21 — Future root schema and pre-ingest schemas. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: When N.H received/imported the item; never a source-time substitute. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -16381,7 +16461,7 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — When N.H created its own record; never a source-time substitute. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Gives out: ACCEPTED — The `record_created_at` value carried by B21 — Future root schema and pre-ingest schemas. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
-- Must never: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: When N.H created its own record; never a source-time substitute. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Fails closed by: NOT DECIDED
 
 TOGETHER
@@ -16426,6 +16506,8 @@ USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.5.5 — B21 — Future root schema and pre-ingest schemas | Two exact durable endpoint identities and source-provenance evidence of the relationship. | Writes only after both endpoints durably exist, with its own stable operation identity and structural duplicate key. | A relationship beside the Origins; neither Origin nor its pre-ingest record is rewritten. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10] |
+| 2 · ACCEPTED | C-STORE.5.5.7.10 — Endpoint verification before relationship | The source-defined condition governed by C-STORE.5.5.7. | The relationship requires both exact endpoints to durably exist and verify; only a directly source-recorded relationship belongs to this operation. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10] |
+| 3 · ACCEPTED | C-STORE.5.5.7.9 — Relationship structural duplicate key | The source-defined condition governed by C-STORE.5.5.7. | The key is source + target + kind; replays cannot create a duplicate relationship. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10] |
 
 SUB-PARTS: C-STORE.5.5.7.1 — source origin identity; C-STORE.5.5.7.2 — target origin identity; C-STORE.5.5.7.3 — relationship kind; C-STORE.5.5.7.4 — source-provenance reference; C-STORE.5.5.7.5 — attachment-of; C-STORE.5.5.7.6 — transcript-of; C-STORE.5.5.7.7 — same-capture-session; C-STORE.5.5.7.8 — Relationship operation identity; C-STORE.5.5.7.9 — Relationship structural duplicate key; C-STORE.5.5.7.10 — Endpoint verification before relationship; C-STORE.5.5.7.11 — Relationship recovery; C-STORE.5.5.7.12 — Non-source-recorded relationship proposals
 
@@ -16438,11 +16520,11 @@ ALONE
 - Does: ACCEPTED — The durable source endpoint. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Gives out: ACCEPTED — The `source origin identity` value carried by origin_relationship_record. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Before both exact endpoint identities durably exist, no relationship is created; recovery may append only after both verify. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.5.5.7.10 — Endpoint verification before relationship: The relationship requires both exact endpoints to durably exist and verify; only a directly source-recorded relationship belongs to this operation. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -16461,11 +16543,11 @@ ALONE
 - Does: ACCEPTED — The durable target endpoint. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Gives out: ACCEPTED — The `target origin identity` value carried by origin_relationship_record. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — Before both exact endpoint identities durably exist, no relationship is created; recovery may append only after both verify. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.5.5.7.10 — Endpoint verification before relationship: The relationship requires both exact endpoints to durably exist and verify; only a directly source-recorded relationship belongs to this operation. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -16511,7 +16593,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.5.5.7.10 — Endpoint verification before relationship: The relationship requires both exact endpoints to durably exist and verify; only a directly source-recorded relationship belongs to this operation. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -16621,12 +16703,12 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — The key is source + target + kind; replays cannot create a duplicate relationship. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: The key is source + target + kind; replays cannot create a duplicate relationship. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
+- Fails closed by: ACCEPTED — The key is source + target + kind; replays cannot create a duplicate relationship. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.5.5.7 — origin_relationship_record: The key is source + target + kind; replays cannot create a duplicate relationship. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -16644,18 +16726,22 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — Both exact endpoint identities must durably exist before the relationship commits; each Origin commits independently through the catalog/B11 path. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: Both exact endpoint identities must durably exist before the relationship commits; each Origin commits independently through the catalog/B11 path. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
+- Fails closed by: ACCEPTED — Before both exact endpoint identities durably exist, no relationship is created; recovery may append only after both verify. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.5.5.7 — origin_relationship_record: The relationship requires both exact endpoints to durably exist and verify; only a directly source-recorded relationship belongs to this operation. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
 | # | Used in (part ID, and path ID if the use is path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-STORE.5.5.7 — origin_relationship_record | NOT DECIDED | Both exact endpoint identities must durably exist before the relationship commits; each Origin commits independently through the catalog/B11 path. | NOT DECIDED | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10] |
+| 2 · ACCEPTED | C-STORE.5.5.7.1 — source origin identity | The source-defined condition governed by C-STORE.5.5.7.10. | The relationship requires both exact endpoints to durably exist and verify; only a directly source-recorded relationship belongs to this operation. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10] |
+| 3 · ACCEPTED | C-STORE.5.5.7.2 — target origin identity | The source-defined condition governed by C-STORE.5.5.7.10. | The relationship requires both exact endpoints to durably exist and verify; only a directly source-recorded relationship belongs to this operation. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10] |
+| 4 · ACCEPTED | C-STORE.5.5.7.4 — source-provenance reference | The source-defined condition governed by C-STORE.5.5.7.10. | The relationship requires both exact endpoints to durably exist and verify; only a directly source-recorded relationship belongs to this operation. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10] |
+| 5 · ACCEPTED | C-STORE.5.5.7.11 — Relationship recovery | The source-defined condition governed by C-STORE.5.5.7.10. | The relationship requires both exact endpoints to durably exist and verify; only a directly source-recorded relationship belongs to this operation. | Permits the stated use only while that condition holds; no independent state mutation is asserted. | [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10] |
 
 SUB-PARTS: NONE
 
@@ -16667,12 +16753,12 @@ ALONE
 - Takes in: NOT DECIDED
 - Does: ACCEPTED — A crash before both endpoints exist creates no relationship. Recovery may append later only after both exact endpoints verify. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Gives out: NOT DECIDED
-- Must never: NOT DECIDED
-- Fails closed by: NOT DECIDED
+- Must never: ACCEPTED — Violate this stated restriction: A crash before both endpoints exist creates no relationship. Recovery may append later only after both exact endpoints verify. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
+- Fails closed by: ACCEPTED — A crash before both endpoints exist creates no relationship. Recovery may append later only after both exact endpoints verify. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: NOT DECIDED
+- Gated by: ACCEPTED — C-STORE.5.5.7.10 — Endpoint verification before relationship: The relationship requires both exact endpoints to durably exist and verify; only a directly source-recorded relationship belongs to this operation. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Changes: NOT DECIDED
 
 USED BY (one row per place; the same part may appear in several paths)
@@ -16714,7 +16800,7 @@ ALONE
 - Does: ACCEPTED — Carries the future fields through pre-ingest, aligning names with `capture_id` and the accepted catalog vocabulary. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Gives out: ACCEPTED — Source metadata without reinterpretation. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 - Must never: ACCEPTED — Rewrite an Origin or pre-ingest record to add a relationship link. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
-- Fails closed by: NOT DECIDED
+- Fails closed by: ACCEPTED — A root that cannot satisfy its declared schema version fails the envelope and never enters silently. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10]
 
 TOGETHER
 - Fed by: ACCEPTED — C-STORE.5.5.8.1 — capture_id: the field value with its stated form and meaning. [04/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md §10] [V10 §7E / MINIMUM INTAKE ENVELOPE]
@@ -16926,12 +17012,9 @@ SUB-PARTS: NONE
 |---|---|---|
 | C-STORE.1 | Fed by | NOT DECIDED |
 | C-STORE.1 | Changes | NOT DECIDED |
-| C-STORE.1.1 | Fails closed by | NOT DECIDED |
 | C-STORE.1.1 | Fed by | NOT DECIDED |
-| C-STORE.1.1 | Gated by | NOT DECIDED |
 | C-STORE.1.1 | Changes | NOT DECIDED |
 | C-STORE.2 | Changes | NOT DECIDED |
-| C-STORE.2.1 | Fails closed by | NOT DECIDED |
 | C-STORE.2.1 | Fed by | NOT DECIDED |
 | C-STORE.2.1 | Gated by | NOT DECIDED |
 | C-STORE.2.1 | Changes | NOT DECIDED |
@@ -16987,7 +17070,6 @@ SUB-PARTS: NONE
 | C-STORE.2.2.8 | Changes | NOT DECIDED |
 | C-STORE.2.2.8 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.2.2.8 | USED BY 1 / Changes there | NOT DECIDED |
-| C-STORE.2.3 | Fails closed by | NOT DECIDED |
 | C-STORE.2.3 | Fed by | NOT DECIDED |
 | C-STORE.2.3 | Gated by | NOT DECIDED |
 | C-STORE.2.3 | Changes | NOT DECIDED |
@@ -16999,7 +17081,6 @@ SUB-PARTS: NONE
 | C-STORE.2.5 | Fed by | NOT DECIDED |
 | C-STORE.2.5 | Gated by | NOT DECIDED |
 | C-STORE.2.5 | Changes | NOT DECIDED |
-| C-STORE.2.6 | Fails closed by | NOT DECIDED |
 | C-STORE.2.6 | Fed by | NOT DECIDED |
 | C-STORE.2.6 | Changes | NOT DECIDED |
 | C-STORE.2.6.1 | Takes in | NOT DECIDED |
@@ -17022,7 +17103,6 @@ SUB-PARTS: NONE
 | C-STORE.2.6.2 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.2.6.3 | Takes in | NOT DECIDED |
 | C-STORE.2.6.3 | Gives out | NOT DECIDED |
-| C-STORE.2.6.3 | Must never | NOT DECIDED |
 | C-STORE.2.6.3 | Fails closed by | NOT DECIDED |
 | C-STORE.2.6.3 | Fed by | NOT DECIDED |
 | C-STORE.2.6.3 | Gated by | NOT DECIDED |
@@ -17031,44 +17111,35 @@ SUB-PARTS: NONE
 | C-STORE.2.6.3 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.2.6.4 | Takes in | NOT DECIDED |
 | C-STORE.2.6.4 | Gives out | NOT DECIDED |
-| C-STORE.2.6.4 | Must never | NOT DECIDED |
-| C-STORE.2.6.4 | Fails closed by | NOT DECIDED |
 | C-STORE.2.6.4 | Fed by | NOT DECIDED |
 | C-STORE.2.6.4 | Gated by | NOT DECIDED |
 | C-STORE.2.6.4 | Changes | NOT DECIDED |
 | C-STORE.2.6.4 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.2.6.4 | USED BY 1 / Changes there | NOT DECIDED |
-| C-STORE.2.7 | Fails closed by | NOT DECIDED |
 | C-STORE.2.7 | Fed by | NOT DECIDED |
 | C-STORE.2.7 | Changes | NOT DECIDED |
-| C-STORE.2.7.1 | Fails closed by | NOT DECIDED |
 | C-STORE.2.7.1 | Fed by | NOT DECIDED |
 | C-STORE.2.7.1 | Gated by | NOT DECIDED |
 | C-STORE.2.7.1 | Changes | NOT DECIDED |
 | C-STORE.2.8 | Takes in | NOT DECIDED |
 | C-STORE.2.8 | Gives out | NOT DECIDED |
-| C-STORE.2.8 | Fails closed by | NOT DECIDED |
 | C-STORE.2.8 | Fed by | NOT DECIDED |
-| C-STORE.2.8 | Gated by | NOT DECIDED |
 | C-STORE.2.8 | Changes | NOT DECIDED |
 | C-STORE.2.8 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.2.8 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.3 | Fed by | NOT DECIDED |
 | C-STORE.3 | Changes | NOT DECIDED |
 | C-STORE.3.1 | Must never | NOT DECIDED |
-| C-STORE.3.1 | Fails closed by | NOT DECIDED |
 | C-STORE.3.1 | Fed by | NOT DECIDED |
 | C-STORE.3.1 | Changes | NOT DECIDED |
 | C-STORE.3.1.1 | Gives out | NOT DECIDED |
 | C-STORE.3.1.1 | Must never | NOT DECIDED |
-| C-STORE.3.1.1 | Fails closed by | NOT DECIDED |
 | C-STORE.3.1.1 | Fed by | NOT DECIDED |
 | C-STORE.3.1.1 | Gated by | NOT DECIDED |
 | C-STORE.3.1.1 | Changes | NOT DECIDED |
 | C-STORE.3.1.1 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.3.1.2 | Gives out | NOT DECIDED |
 | C-STORE.3.1.2 | Must never | NOT DECIDED |
-| C-STORE.3.1.2 | Fails closed by | NOT DECIDED |
 | C-STORE.3.1.2 | Fed by | NOT DECIDED |
 | C-STORE.3.1.2 | Gated by | NOT DECIDED |
 | C-STORE.3.1.2 | Changes | NOT DECIDED |
@@ -17085,26 +17156,18 @@ SUB-PARTS: NONE
 | C-STORE.3.3 | Changes | NOT DECIDED |
 | C-STORE.3.3 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.3.3 | USED BY 1 / Changes there | NOT DECIDED |
-| C-STORE.3.4 | Fails closed by | NOT DECIDED |
 | C-STORE.3.4 | Fed by | NOT DECIDED |
 | C-STORE.3.4 | Changes | NOT DECIDED |
-| C-STORE.3.4.1 | Must never | NOT DECIDED |
 | C-STORE.3.4.1 | Fails closed by | NOT DECIDED |
 | C-STORE.3.4.1 | Fed by | NOT DECIDED |
 | C-STORE.3.4.1 | Gated by | NOT DECIDED |
 | C-STORE.3.4.1 | Changes | NOT DECIDED |
-| C-STORE.3.4.2 | Must never | NOT DECIDED |
-| C-STORE.3.4.2 | Fails closed by | NOT DECIDED |
 | C-STORE.3.4.2 | Fed by | NOT DECIDED |
 | C-STORE.3.4.2 | Gated by | NOT DECIDED |
 | C-STORE.3.4.2 | Changes | NOT DECIDED |
-| C-STORE.3.4.3 | Must never | NOT DECIDED |
-| C-STORE.3.4.3 | Fails closed by | NOT DECIDED |
 | C-STORE.3.4.3 | Fed by | NOT DECIDED |
 | C-STORE.3.4.3 | Gated by | NOT DECIDED |
 | C-STORE.3.4.3 | Changes | NOT DECIDED |
-| C-STORE.3.4.4 | Must never | NOT DECIDED |
-| C-STORE.3.4.4 | Fails closed by | NOT DECIDED |
 | C-STORE.3.4.4 | Fed by | NOT DECIDED |
 | C-STORE.3.4.4 | Gated by | NOT DECIDED |
 | C-STORE.3.4.4 | Changes | NOT DECIDED |
@@ -17116,13 +17179,10 @@ SUB-PARTS: NONE
 | C-STORE.3.5 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4 | Fed by | NOT DECIDED |
 | C-STORE.4 | Changes | NOT DECIDED |
-| C-STORE.4.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.1 | Fed by | NOT DECIDED |
 | C-STORE.4.1 | Changes | NOT DECIDED |
 | C-STORE.4.1.1 | Takes in | NOT DECIDED |
 | C-STORE.4.1.1 | Gives out | NOT DECIDED |
-| C-STORE.4.1.1 | Must never | NOT DECIDED |
-| C-STORE.4.1.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.1.1 | Fed by | NOT DECIDED |
 | C-STORE.4.1.1 | Gated by | NOT DECIDED |
 | C-STORE.4.1.1 | Changes | NOT DECIDED |
@@ -17130,8 +17190,6 @@ SUB-PARTS: NONE
 | C-STORE.4.1.1 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.1.2 | Takes in | NOT DECIDED |
 | C-STORE.4.1.2 | Gives out | NOT DECIDED |
-| C-STORE.4.1.2 | Must never | NOT DECIDED |
-| C-STORE.4.1.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.1.2 | Fed by | NOT DECIDED |
 | C-STORE.4.1.2 | Gated by | NOT DECIDED |
 | C-STORE.4.1.2 | Changes | NOT DECIDED |
@@ -17139,7 +17197,6 @@ SUB-PARTS: NONE
 | C-STORE.4.1.2 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.1.3 | Takes in | NOT DECIDED |
 | C-STORE.4.1.3 | Gives out | NOT DECIDED |
-| C-STORE.4.1.3 | Must never | NOT DECIDED |
 | C-STORE.4.1.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.1.3 | Fed by | NOT DECIDED |
 | C-STORE.4.1.3 | Gated by | NOT DECIDED |
@@ -17148,8 +17205,6 @@ SUB-PARTS: NONE
 | C-STORE.4.1.3 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.1.4 | Takes in | NOT DECIDED |
 | C-STORE.4.1.4 | Gives out | NOT DECIDED |
-| C-STORE.4.1.4 | Must never | NOT DECIDED |
-| C-STORE.4.1.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.1.4 | Fed by | NOT DECIDED |
 | C-STORE.4.1.4 | Gated by | NOT DECIDED |
 | C-STORE.4.1.4 | Changes | NOT DECIDED |
@@ -17157,8 +17212,6 @@ SUB-PARTS: NONE
 | C-STORE.4.1.4 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.1.5 | Takes in | NOT DECIDED |
 | C-STORE.4.1.5 | Gives out | NOT DECIDED |
-| C-STORE.4.1.5 | Must never | NOT DECIDED |
-| C-STORE.4.1.5 | Fails closed by | NOT DECIDED |
 | C-STORE.4.1.5 | Fed by | NOT DECIDED |
 | C-STORE.4.1.5 | Gated by | NOT DECIDED |
 | C-STORE.4.1.5 | Changes | NOT DECIDED |
@@ -17166,8 +17219,6 @@ SUB-PARTS: NONE
 | C-STORE.4.1.5 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.1.6 | Takes in | NOT DECIDED |
 | C-STORE.4.1.6 | Gives out | NOT DECIDED |
-| C-STORE.4.1.6 | Must never | NOT DECIDED |
-| C-STORE.4.1.6 | Fails closed by | NOT DECIDED |
 | C-STORE.4.1.6 | Fed by | NOT DECIDED |
 | C-STORE.4.1.6 | Gated by | NOT DECIDED |
 | C-STORE.4.1.6 | Changes | NOT DECIDED |
@@ -17175,7 +17226,6 @@ SUB-PARTS: NONE
 | C-STORE.4.1.6 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.1.7 | Takes in | NOT DECIDED |
 | C-STORE.4.1.7 | Gives out | NOT DECIDED |
-| C-STORE.4.1.7 | Must never | NOT DECIDED |
 | C-STORE.4.1.7 | Fails closed by | NOT DECIDED |
 | C-STORE.4.1.7 | Fed by | NOT DECIDED |
 | C-STORE.4.1.7 | Gated by | NOT DECIDED |
@@ -17184,7 +17234,6 @@ SUB-PARTS: NONE
 | C-STORE.4.1.7 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.1.8 | Takes in | NOT DECIDED |
 | C-STORE.4.1.8 | Gives out | NOT DECIDED |
-| C-STORE.4.1.8 | Must never | NOT DECIDED |
 | C-STORE.4.1.8 | Fails closed by | NOT DECIDED |
 | C-STORE.4.1.8 | Fed by | NOT DECIDED |
 | C-STORE.4.1.8 | Gated by | NOT DECIDED |
@@ -17193,29 +17242,24 @@ SUB-PARTS: NONE
 | C-STORE.4.1.8 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.1.9 | Takes in | NOT DECIDED |
 | C-STORE.4.1.9 | Gives out | NOT DECIDED |
-| C-STORE.4.1.9 | Must never | NOT DECIDED |
 | C-STORE.4.1.9 | Fails closed by | NOT DECIDED |
 | C-STORE.4.1.9 | Fed by | NOT DECIDED |
 | C-STORE.4.1.9 | Gated by | NOT DECIDED |
 | C-STORE.4.1.9 | Changes | NOT DECIDED |
 | C-STORE.4.1.9 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.1.9 | USED BY 1 / Changes there | NOT DECIDED |
-| C-STORE.4.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.2 | Fed by | NOT DECIDED |
 | C-STORE.4.2 | Gated by | NOT DECIDED |
 | C-STORE.4.2 | Changes | NOT DECIDED |
-| C-STORE.4.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3 | Fed by | NOT DECIDED |
 | C-STORE.4.3 | Changes | NOT DECIDED |
 | C-STORE.4.3.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.1 | Gated by | NOT DECIDED |
 | C-STORE.4.3.1 | Changes | NOT DECIDED |
-| C-STORE.4.3.1.1 | Must never | NOT DECIDED |
 | C-STORE.4.3.1.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.1.1 | Fed by | NOT DECIDED |
 | C-STORE.4.3.1.1 | Gated by | NOT DECIDED |
 | C-STORE.4.3.1.1 | Changes | NOT DECIDED |
-| C-STORE.4.3.1.2 | Must never | NOT DECIDED |
 | C-STORE.4.3.1.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.1.2 | Fed by | NOT DECIDED |
 | C-STORE.4.3.1.2 | Gated by | NOT DECIDED |
@@ -17231,17 +17275,14 @@ SUB-PARTS: NONE
 | C-STORE.4.3.2.1 | Changes | NOT DECIDED |
 | C-STORE.4.3.2.1 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.3.2.2 | Takes in | NOT DECIDED |
-| C-STORE.4.3.2.2 | Must never | NOT DECIDED |
 | C-STORE.4.3.2.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.2.2 | Fed by | NOT DECIDED |
 | C-STORE.4.3.2.2 | Gated by | NOT DECIDED |
 | C-STORE.4.3.2.2 | Changes | NOT DECIDED |
 | C-STORE.4.3.2.2 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.3.2.3 | Takes in | NOT DECIDED |
-| C-STORE.4.3.2.3 | Must never | NOT DECIDED |
 | C-STORE.4.3.2.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.2.3 | Fed by | NOT DECIDED |
-| C-STORE.4.3.2.3 | Gated by | NOT DECIDED |
 | C-STORE.4.3.2.3 | Changes | NOT DECIDED |
 | C-STORE.4.3.2.3 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.3.2.4 | Takes in | NOT DECIDED |
@@ -17259,16 +17300,13 @@ SUB-PARTS: NONE
 | C-STORE.4.3.2.5 | Changes | NOT DECIDED |
 | C-STORE.4.3.2.5 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.3.2.6 | Takes in | NOT DECIDED |
-| C-STORE.4.3.2.6 | Must never | NOT DECIDED |
 | C-STORE.4.3.2.6 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.2.6 | Fed by | NOT DECIDED |
 | C-STORE.4.3.2.6 | Gated by | NOT DECIDED |
 | C-STORE.4.3.2.6 | Changes | NOT DECIDED |
 | C-STORE.4.3.2.6 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.3.2.7 | Takes in | NOT DECIDED |
-| C-STORE.4.3.2.7 | Must never | NOT DECIDED |
 | C-STORE.4.3.2.7 | Fails closed by | NOT DECIDED |
-| C-STORE.4.3.2.7 | Gated by | NOT DECIDED |
 | C-STORE.4.3.2.7 | Changes | NOT DECIDED |
 | C-STORE.4.3.2.7 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.3.2.7.1 | Must never | NOT DECIDED |
@@ -17292,14 +17330,12 @@ SUB-PARTS: NONE
 | C-STORE.4.3.2.7.4 | Gated by | NOT DECIDED |
 | C-STORE.4.3.2.7.4 | Changes | NOT DECIDED |
 | C-STORE.4.3.2.8 | Takes in | NOT DECIDED |
-| C-STORE.4.3.2.8 | Must never | NOT DECIDED |
 | C-STORE.4.3.2.8 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.2.8 | Fed by | NOT DECIDED |
 | C-STORE.4.3.2.8 | Gated by | NOT DECIDED |
 | C-STORE.4.3.2.8 | Changes | NOT DECIDED |
 | C-STORE.4.3.2.8 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.3.2.9 | Takes in | NOT DECIDED |
-| C-STORE.4.3.2.9 | Must never | NOT DECIDED |
 | C-STORE.4.3.2.9 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.2.9 | Fed by | NOT DECIDED |
 | C-STORE.4.3.2.9 | Gated by | NOT DECIDED |
@@ -17325,11 +17361,9 @@ SUB-PARTS: NONE
 | C-STORE.4.3.2.10.2 | Gated by | NOT DECIDED |
 | C-STORE.4.3.2.10.2 | Changes | NOT DECIDED |
 | C-STORE.4.3.2.10.2 | USED BY 1 / Takes in there | NOT DECIDED |
-| C-STORE.4.3.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.3 | Fed by | NOT DECIDED |
 | C-STORE.4.3.3 | Changes | NOT DECIDED |
 | C-STORE.4.3.3.1 | Takes in | NOT DECIDED |
-| C-STORE.4.3.3.1 | Must never | NOT DECIDED |
 | C-STORE.4.3.3.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.3.1 | Fed by | NOT DECIDED |
 | C-STORE.4.3.3.1 | Gated by | NOT DECIDED |
@@ -17366,12 +17400,10 @@ SUB-PARTS: NONE
 | C-STORE.4.3.3.2.4 | Must never | NOT DECIDED |
 | C-STORE.4.3.3.2.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.3.2.4 | Fed by | NOT DECIDED |
-| C-STORE.4.3.3.2.4 | Gated by | NOT DECIDED |
 | C-STORE.4.3.3.2.4 | Changes | NOT DECIDED |
 | C-STORE.4.3.3.2.4 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.3.3.3 | Takes in | NOT DECIDED |
 | C-STORE.4.3.3.3 | Gives out | NOT DECIDED |
-| C-STORE.4.3.3.3 | Must never | NOT DECIDED |
 | C-STORE.4.3.3.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.3.3 | Fed by | NOT DECIDED |
 | C-STORE.4.3.3.3 | Gated by | NOT DECIDED |
@@ -17380,17 +17412,12 @@ SUB-PARTS: NONE
 | C-STORE.4.3.3.3 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.3.3.4 | Takes in | NOT DECIDED |
 | C-STORE.4.3.3.4 | Gives out | NOT DECIDED |
-| C-STORE.4.3.3.4 | Must never | NOT DECIDED |
-| C-STORE.4.3.3.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.3.4 | Fed by | NOT DECIDED |
-| C-STORE.4.3.3.4 | Gated by | NOT DECIDED |
 | C-STORE.4.3.3.4 | Changes | NOT DECIDED |
 | C-STORE.4.3.3.4 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.3.3.4 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.3.3.5 | Takes in | NOT DECIDED |
 | C-STORE.4.3.3.5 | Gives out | NOT DECIDED |
-| C-STORE.4.3.3.5 | Must never | NOT DECIDED |
-| C-STORE.4.3.3.5 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.3.5 | Fed by | NOT DECIDED |
 | C-STORE.4.3.3.5 | Gated by | NOT DECIDED |
 | C-STORE.4.3.3.5 | Changes | NOT DECIDED |
@@ -17398,38 +17425,31 @@ SUB-PARTS: NONE
 | C-STORE.4.3.3.5 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.3.4 | Fed by | NOT DECIDED |
 | C-STORE.4.3.4 | Changes | NOT DECIDED |
-| C-STORE.4.3.4.1 | Must never | NOT DECIDED |
 | C-STORE.4.3.4.1 | Fed by | NOT DECIDED |
 | C-STORE.4.3.4.1 | Changes | NOT DECIDED |
-| C-STORE.4.3.4.1.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.4.1.1 | Fed by | NOT DECIDED |
 | C-STORE.4.3.4.1.1 | Gated by | NOT DECIDED |
 | C-STORE.4.3.4.1.1 | Changes | NOT DECIDED |
 | C-STORE.4.3.4.2 | Must never | NOT DECIDED |
 | C-STORE.4.3.4.2 | Fed by | NOT DECIDED |
 | C-STORE.4.3.4.2 | Changes | NOT DECIDED |
-| C-STORE.4.3.4.2.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.4.2.1 | Fed by | NOT DECIDED |
 | C-STORE.4.3.4.2.1 | Gated by | NOT DECIDED |
 | C-STORE.4.3.4.2.1 | Changes | NOT DECIDED |
 | C-STORE.4.3.4.3 | Must never | NOT DECIDED |
 | C-STORE.4.3.4.3 | Fed by | NOT DECIDED |
 | C-STORE.4.3.4.3 | Changes | NOT DECIDED |
-| C-STORE.4.3.4.3.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.4.3.1 | Fed by | NOT DECIDED |
 | C-STORE.4.3.4.3.1 | Gated by | NOT DECIDED |
 | C-STORE.4.3.4.3.1 | Changes | NOT DECIDED |
 | C-STORE.4.3.4.4 | Must never | NOT DECIDED |
 | C-STORE.4.3.4.4 | Fed by | NOT DECIDED |
 | C-STORE.4.3.4.4 | Changes | NOT DECIDED |
-| C-STORE.4.3.4.4.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.4.4.1 | Fed by | NOT DECIDED |
 | C-STORE.4.3.4.4.1 | Gated by | NOT DECIDED |
 | C-STORE.4.3.4.4.1 | Changes | NOT DECIDED |
-| C-STORE.4.3.4.5 | Must never | NOT DECIDED |
 | C-STORE.4.3.4.5 | Fed by | NOT DECIDED |
 | C-STORE.4.3.4.5 | Changes | NOT DECIDED |
-| C-STORE.4.3.4.5.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.4.5.1 | Fed by | NOT DECIDED |
 | C-STORE.4.3.4.5.1 | Gated by | NOT DECIDED |
 | C-STORE.4.3.4.5.1 | Changes | NOT DECIDED |
@@ -17437,7 +17457,6 @@ SUB-PARTS: NONE
 | C-STORE.4.3.5 | Changes | NOT DECIDED |
 | C-STORE.4.3.5.1 | Takes in | NOT DECIDED |
 | C-STORE.4.3.5.1 | Gives out | NOT DECIDED |
-| C-STORE.4.3.5.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.5.1 | Gated by | NOT DECIDED |
 | C-STORE.4.3.5.1 | Changes | NOT DECIDED |
 | C-STORE.4.3.5.1 | USED BY 1 / Takes in there | NOT DECIDED |
@@ -17478,7 +17497,6 @@ SUB-PARTS: NONE
 | C-STORE.4.3.5.1.5 | Changes | NOT DECIDED |
 | C-STORE.4.3.5.1.5 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.3.5.2 | Takes in | NOT DECIDED |
-| C-STORE.4.3.5.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.5.2 | Gated by | NOT DECIDED |
 | C-STORE.4.3.5.2 | Changes | NOT DECIDED |
 | C-STORE.4.3.5.2 | USED BY 1 / Takes in there | NOT DECIDED |
@@ -17533,8 +17551,6 @@ SUB-PARTS: NONE
 | C-STORE.4.3.5.2.7 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.3.5.3 | Takes in | NOT DECIDED |
 | C-STORE.4.3.5.3 | Gives out | NOT DECIDED |
-| C-STORE.4.3.5.3 | Fails closed by | NOT DECIDED |
-| C-STORE.4.3.5.3 | Gated by | NOT DECIDED |
 | C-STORE.4.3.5.3 | Changes | NOT DECIDED |
 | C-STORE.4.3.5.3 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.3.5.3 | USED BY 1 / Changes there | NOT DECIDED |
@@ -17546,7 +17562,6 @@ SUB-PARTS: NONE
 | C-STORE.4.3.5.3.1 | Changes | NOT DECIDED |
 | C-STORE.4.3.5.3.1 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.3.5.3.2 | Takes in | NOT DECIDED |
-| C-STORE.4.3.5.3.2 | Must never | NOT DECIDED |
 | C-STORE.4.3.5.3.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.5.3.2 | Fed by | NOT DECIDED |
 | C-STORE.4.3.5.3.2 | Gated by | NOT DECIDED |
@@ -17602,7 +17617,6 @@ SUB-PARTS: NONE
 | C-STORE.4.3.5.3.9 | Changes | NOT DECIDED |
 | C-STORE.4.3.5.3.9 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.3.5.3.10 | Takes in | NOT DECIDED |
-| C-STORE.4.3.5.3.10 | Must never | NOT DECIDED |
 | C-STORE.4.3.5.3.10 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.5.3.10 | Fed by | NOT DECIDED |
 | C-STORE.4.3.5.3.10 | Gated by | NOT DECIDED |
@@ -17611,8 +17625,6 @@ SUB-PARTS: NONE
 | C-STORE.4.3.5.4 | Fed by | NOT DECIDED |
 | C-STORE.4.3.5.4 | Changes | NOT DECIDED |
 | C-STORE.4.3.5.4.1 | Takes in | NOT DECIDED |
-| C-STORE.4.3.5.4.1 | Must never | NOT DECIDED |
-| C-STORE.4.3.5.4.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.5.4.1 | Fed by | NOT DECIDED |
 | C-STORE.4.3.5.4.1 | Gated by | NOT DECIDED |
 | C-STORE.4.3.5.4.1 | Changes | NOT DECIDED |
@@ -17621,73 +17633,55 @@ SUB-PARTS: NONE
 | C-STORE.4.3.5.4.2 | Must never | NOT DECIDED |
 | C-STORE.4.3.5.4.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.5.4.2 | Fed by | NOT DECIDED |
-| C-STORE.4.3.5.4.2 | Gated by | NOT DECIDED |
 | C-STORE.4.3.5.4.2 | Changes | NOT DECIDED |
 | C-STORE.4.3.5.4.2 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.3.5.4.3 | Takes in | NOT DECIDED |
-| C-STORE.4.3.5.4.3 | Must never | NOT DECIDED |
-| C-STORE.4.3.5.4.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.5.4.3 | Fed by | NOT DECIDED |
 | C-STORE.4.3.5.4.3 | Gated by | NOT DECIDED |
 | C-STORE.4.3.5.4.3 | Changes | NOT DECIDED |
 | C-STORE.4.3.5.4.3 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.3.5.5 | Takes in | NOT DECIDED |
 | C-STORE.4.3.5.5 | Gives out | NOT DECIDED |
-| C-STORE.4.3.5.5 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.5.5 | Fed by | NOT DECIDED |
-| C-STORE.4.3.5.5 | Gated by | NOT DECIDED |
 | C-STORE.4.3.5.5 | Changes | NOT DECIDED |
 | C-STORE.4.3.5.5 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.3.5.5 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.3.5.6 | Takes in | NOT DECIDED |
 | C-STORE.4.3.5.6 | Gives out | NOT DECIDED |
-| C-STORE.4.3.5.6 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.5.6 | Fed by | NOT DECIDED |
-| C-STORE.4.3.5.6 | Gated by | NOT DECIDED |
 | C-STORE.4.3.5.6 | Changes | NOT DECIDED |
 | C-STORE.4.3.5.6 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.3.5.6 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.3.5.7 | Takes in | NOT DECIDED |
 | C-STORE.4.3.5.7 | Gives out | NOT DECIDED |
-| C-STORE.4.3.5.7 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.5.7 | Fed by | NOT DECIDED |
-| C-STORE.4.3.5.7 | Gated by | NOT DECIDED |
 | C-STORE.4.3.5.7 | Changes | NOT DECIDED |
 | C-STORE.4.3.5.7 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.3.5.7 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.3.5.8 | Takes in | NOT DECIDED |
 | C-STORE.4.3.5.8 | Gives out | NOT DECIDED |
-| C-STORE.4.3.5.8 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.5.8 | Fed by | NOT DECIDED |
-| C-STORE.4.3.5.8 | Gated by | NOT DECIDED |
 | C-STORE.4.3.5.8 | Changes | NOT DECIDED |
 | C-STORE.4.3.5.8 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.3.5.8 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.3.5.9 | Takes in | NOT DECIDED |
 | C-STORE.4.3.5.9 | Gives out | NOT DECIDED |
-| C-STORE.4.3.5.9 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.5.9 | Fed by | NOT DECIDED |
-| C-STORE.4.3.5.9 | Gated by | NOT DECIDED |
 | C-STORE.4.3.5.9 | Changes | NOT DECIDED |
 | C-STORE.4.3.5.9 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.3.5.9 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.3.5.10 | Takes in | NOT DECIDED |
 | C-STORE.4.3.5.10 | Gives out | NOT DECIDED |
-| C-STORE.4.3.5.10 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.5.10 | Fed by | NOT DECIDED |
-| C-STORE.4.3.5.10 | Gated by | NOT DECIDED |
 | C-STORE.4.3.5.10 | Changes | NOT DECIDED |
 | C-STORE.4.3.5.10 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.3.5.10 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.3.5.11 | Takes in | NOT DECIDED |
 | C-STORE.4.3.5.11 | Gives out | NOT DECIDED |
-| C-STORE.4.3.5.11 | Fails closed by | NOT DECIDED |
 | C-STORE.4.3.5.11 | Fed by | NOT DECIDED |
-| C-STORE.4.3.5.11 | Gated by | NOT DECIDED |
 | C-STORE.4.3.5.11 | Changes | NOT DECIDED |
 | C-STORE.4.3.5.11 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.3.5.11 | USED BY 1 / Changes there | NOT DECIDED |
-| C-STORE.4.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4 | Fed by | NOT DECIDED |
 | C-STORE.4.4 | Changes | NOT DECIDED |
 | C-STORE.4.4.1 | Fails closed by | NOT DECIDED |
@@ -17715,28 +17709,24 @@ SUB-PARTS: NONE
 | C-STORE.4.4.1.1.2 | Changes | NOT DECIDED |
 | C-STORE.4.4.1.1.2 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.4.1.1.3 | Takes in | NOT DECIDED |
-| C-STORE.4.4.1.1.3 | Must never | NOT DECIDED |
 | C-STORE.4.4.1.1.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.1.1.3 | Fed by | NOT DECIDED |
 | C-STORE.4.4.1.1.3 | Gated by | NOT DECIDED |
 | C-STORE.4.4.1.1.3 | Changes | NOT DECIDED |
 | C-STORE.4.4.1.1.3 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.4.1.1.4 | Takes in | NOT DECIDED |
-| C-STORE.4.4.1.1.4 | Must never | NOT DECIDED |
 | C-STORE.4.4.1.1.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.1.1.4 | Fed by | NOT DECIDED |
 | C-STORE.4.4.1.1.4 | Gated by | NOT DECIDED |
 | C-STORE.4.4.1.1.4 | Changes | NOT DECIDED |
 | C-STORE.4.4.1.1.4 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.4.1.1.5 | Takes in | NOT DECIDED |
-| C-STORE.4.4.1.1.5 | Must never | NOT DECIDED |
 | C-STORE.4.4.1.1.5 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.1.1.5 | Fed by | NOT DECIDED |
 | C-STORE.4.4.1.1.5 | Gated by | NOT DECIDED |
 | C-STORE.4.4.1.1.5 | Changes | NOT DECIDED |
 | C-STORE.4.4.1.1.5 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.4.1.1.6 | Takes in | NOT DECIDED |
-| C-STORE.4.4.1.1.6 | Must never | NOT DECIDED |
 | C-STORE.4.4.1.1.6 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.1.1.6 | Fed by | NOT DECIDED |
 | C-STORE.4.4.1.1.6 | Gated by | NOT DECIDED |
@@ -17800,111 +17790,74 @@ SUB-PARTS: NONE
 | C-STORE.4.4.1.2.7 | Gated by | NOT DECIDED |
 | C-STORE.4.4.1.2.7 | Changes | NOT DECIDED |
 | C-STORE.4.4.1.2.7 | USED BY 1 / Takes in there | NOT DECIDED |
-| C-STORE.4.4.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.2 | Fed by | NOT DECIDED |
 | C-STORE.4.4.2 | Changes | NOT DECIDED |
-| C-STORE.4.4.2.1 | Must never | NOT DECIDED |
-| C-STORE.4.4.2.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.2.1 | Fed by | NOT DECIDED |
-| C-STORE.4.4.2.1 | Gated by | NOT DECIDED |
 | C-STORE.4.4.2.1 | Changes | NOT DECIDED |
-| C-STORE.4.4.2.2 | Must never | NOT DECIDED |
-| C-STORE.4.4.2.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.2.2 | Fed by | NOT DECIDED |
-| C-STORE.4.4.2.2 | Gated by | NOT DECIDED |
 | C-STORE.4.4.2.2 | Changes | NOT DECIDED |
-| C-STORE.4.4.2.3 | Must never | NOT DECIDED |
-| C-STORE.4.4.2.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.2.3 | Fed by | NOT DECIDED |
 | C-STORE.4.4.2.3 | Changes | NOT DECIDED |
 | C-STORE.4.4.2.3.1 | Takes in | NOT DECIDED |
 | C-STORE.4.4.2.3.1 | Gives out | NOT DECIDED |
-| C-STORE.4.4.2.3.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.2.3.1 | Fed by | NOT DECIDED |
-| C-STORE.4.4.2.3.1 | Gated by | NOT DECIDED |
 | C-STORE.4.4.2.3.1 | Changes | NOT DECIDED |
 | C-STORE.4.4.2.3.1 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.4.2.3.1 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.4.2.3.2 | Takes in | NOT DECIDED |
 | C-STORE.4.4.2.3.2 | Gives out | NOT DECIDED |
-| C-STORE.4.4.2.3.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.2.3.2 | Fed by | NOT DECIDED |
-| C-STORE.4.4.2.3.2 | Gated by | NOT DECIDED |
 | C-STORE.4.4.2.3.2 | Changes | NOT DECIDED |
 | C-STORE.4.4.2.3.2 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.4.2.3.2 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.4.2.3.3 | Takes in | NOT DECIDED |
 | C-STORE.4.4.2.3.3 | Gives out | NOT DECIDED |
-| C-STORE.4.4.2.3.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.2.3.3 | Fed by | NOT DECIDED |
-| C-STORE.4.4.2.3.3 | Gated by | NOT DECIDED |
 | C-STORE.4.4.2.3.3 | Changes | NOT DECIDED |
 | C-STORE.4.4.2.3.3 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.4.2.3.3 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.4.2.3.4 | Takes in | NOT DECIDED |
 | C-STORE.4.4.2.3.4 | Gives out | NOT DECIDED |
-| C-STORE.4.4.2.3.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.2.3.4 | Fed by | NOT DECIDED |
-| C-STORE.4.4.2.3.4 | Gated by | NOT DECIDED |
 | C-STORE.4.4.2.3.4 | Changes | NOT DECIDED |
 | C-STORE.4.4.2.3.4 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.4.2.3.4 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.4.2.3.5 | Takes in | NOT DECIDED |
 | C-STORE.4.4.2.3.5 | Gives out | NOT DECIDED |
-| C-STORE.4.4.2.3.5 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.2.3.5 | Fed by | NOT DECIDED |
-| C-STORE.4.4.2.3.5 | Gated by | NOT DECIDED |
 | C-STORE.4.4.2.3.5 | Changes | NOT DECIDED |
 | C-STORE.4.4.2.3.5 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.4.2.3.5 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.4.2.3.6 | Takes in | NOT DECIDED |
 | C-STORE.4.4.2.3.6 | Gives out | NOT DECIDED |
-| C-STORE.4.4.2.3.6 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.2.3.6 | Fed by | NOT DECIDED |
-| C-STORE.4.4.2.3.6 | Gated by | NOT DECIDED |
 | C-STORE.4.4.2.3.6 | Changes | NOT DECIDED |
 | C-STORE.4.4.2.3.6 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.4.2.3.6 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.4.2.3.7 | Takes in | NOT DECIDED |
 | C-STORE.4.4.2.3.7 | Gives out | NOT DECIDED |
-| C-STORE.4.4.2.3.7 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.2.3.7 | Fed by | NOT DECIDED |
-| C-STORE.4.4.2.3.7 | Gated by | NOT DECIDED |
 | C-STORE.4.4.2.3.7 | Changes | NOT DECIDED |
 | C-STORE.4.4.2.3.7 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.4.2.3.7 | USED BY 1 / Changes there | NOT DECIDED |
-| C-STORE.4.4.2.4 | Must never | NOT DECIDED |
-| C-STORE.4.4.2.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.2.4 | Fed by | NOT DECIDED |
-| C-STORE.4.4.2.4 | Gated by | NOT DECIDED |
 | C-STORE.4.4.2.4 | Changes | NOT DECIDED |
 | C-STORE.4.4.2.5 | Must never | NOT DECIDED |
-| C-STORE.4.4.2.5 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.2.5 | Fed by | NOT DECIDED |
 | C-STORE.4.4.2.5 | Gated by | NOT DECIDED |
 | C-STORE.4.4.2.5 | Changes | NOT DECIDED |
-| C-STORE.4.4.2.6 | Must never | NOT DECIDED |
-| C-STORE.4.4.2.6 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.2.6 | Fed by | NOT DECIDED |
-| C-STORE.4.4.2.6 | Gated by | NOT DECIDED |
 | C-STORE.4.4.2.6 | Changes | NOT DECIDED |
-| C-STORE.4.4.2.7 | Must never | NOT DECIDED |
-| C-STORE.4.4.2.7 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.2.7 | Fed by | NOT DECIDED |
-| C-STORE.4.4.2.7 | Gated by | NOT DECIDED |
 | C-STORE.4.4.2.7 | Changes | NOT DECIDED |
 | C-STORE.4.4.2.8 | Must never | NOT DECIDED |
-| C-STORE.4.4.2.8 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.2.8 | Fed by | NOT DECIDED |
 | C-STORE.4.4.2.8 | Gated by | NOT DECIDED |
 | C-STORE.4.4.2.8 | Changes | NOT DECIDED |
 | C-STORE.4.4.2.9 | Must never | NOT DECIDED |
-| C-STORE.4.4.2.9 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.2.9 | Fed by | NOT DECIDED |
 | C-STORE.4.4.2.9 | Gated by | NOT DECIDED |
 | C-STORE.4.4.2.9 | Changes | NOT DECIDED |
-| C-STORE.4.4.2.10 | Must never | NOT DECIDED |
-| C-STORE.4.4.2.10 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.2.10 | Fed by | NOT DECIDED |
 | C-STORE.4.4.2.10 | Gated by | NOT DECIDED |
 | C-STORE.4.4.2.10 | Changes | NOT DECIDED |
@@ -17928,34 +17881,25 @@ SUB-PARTS: NONE
 | C-STORE.4.4.2.14 | Gated by | NOT DECIDED |
 | C-STORE.4.4.2.14 | Changes | NOT DECIDED |
 | C-STORE.4.4.2.14 | USED BY 1 / Changes there | NOT DECIDED |
-| C-STORE.4.4.2.15 | Must never | NOT DECIDED |
-| C-STORE.4.4.2.15 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.2.15 | Fed by | NOT DECIDED |
-| C-STORE.4.4.2.15 | Gated by | NOT DECIDED |
 | C-STORE.4.4.2.15 | Changes | NOT DECIDED |
 | C-STORE.4.4.3 | Fed by | NOT DECIDED |
 | C-STORE.4.4.3 | Changes | NOT DECIDED |
 | C-STORE.4.4.3.1 | Takes in | NOT DECIDED |
 | C-STORE.4.4.3.1 | Gives out | NOT DECIDED |
-| C-STORE.4.4.3.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.3.1 | Fed by | NOT DECIDED |
-| C-STORE.4.4.3.1 | Gated by | NOT DECIDED |
 | C-STORE.4.4.3.1 | Changes | NOT DECIDED |
 | C-STORE.4.4.3.1 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.4.3.1 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.4.3.2 | Takes in | NOT DECIDED |
 | C-STORE.4.4.3.2 | Gives out | NOT DECIDED |
-| C-STORE.4.4.3.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.3.2 | Fed by | NOT DECIDED |
-| C-STORE.4.4.3.2 | Gated by | NOT DECIDED |
 | C-STORE.4.4.3.2 | Changes | NOT DECIDED |
 | C-STORE.4.4.3.2 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.4.3.2 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.4.3.3 | Takes in | NOT DECIDED |
 | C-STORE.4.4.3.3 | Gives out | NOT DECIDED |
-| C-STORE.4.4.3.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.4.3.3 | Fed by | NOT DECIDED |
-| C-STORE.4.4.3.3 | Gated by | NOT DECIDED |
 | C-STORE.4.4.3.3 | Changes | NOT DECIDED |
 | C-STORE.4.4.3.3 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.4.3.3 | USED BY 1 / Changes there | NOT DECIDED |
@@ -17989,15 +17933,11 @@ SUB-PARTS: NONE
 | C-STORE.4.4.3.4.3 | Changes | NOT DECIDED |
 | C-STORE.4.4.3.4.3 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.4.3.4.3 | USED BY 1 / Changes there | NOT DECIDED |
-| C-STORE.4.5 | Fails closed by | NOT DECIDED |
 | C-STORE.4.5 | Fed by | NOT DECIDED |
 | C-STORE.4.5 | Changes | NOT DECIDED |
-| C-STORE.4.5.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.5.1 | Fed by | NOT DECIDED |
 | C-STORE.4.5.1 | Changes | NOT DECIDED |
 | C-STORE.4.5.1.1 | Takes in | NOT DECIDED |
-| C-STORE.4.5.1.1 | Must never | NOT DECIDED |
-| C-STORE.4.5.1.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.5.1.1 | Changes | NOT DECIDED |
 | C-STORE.4.5.1.1 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.5.1.1.1 | Takes in | NOT DECIDED |
@@ -18064,9 +18004,6 @@ SUB-PARTS: NONE
 | C-STORE.4.5.1.1.9 | Changes | NOT DECIDED |
 | C-STORE.4.5.1.1.9 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.5.1.2 | Takes in | NOT DECIDED |
-| C-STORE.4.5.1.2 | Must never | NOT DECIDED |
-| C-STORE.4.5.1.2 | Fails closed by | NOT DECIDED |
-| C-STORE.4.5.1.2 | Gated by | NOT DECIDED |
 | C-STORE.4.5.1.2 | Changes | NOT DECIDED |
 | C-STORE.4.5.1.2 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.5.1.2.1 | Takes in | NOT DECIDED |
@@ -18091,16 +18028,13 @@ SUB-PARTS: NONE
 | C-STORE.4.5.1.2.2.1 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.5.1.2.2.2 | Takes in | NOT DECIDED |
 | C-STORE.4.5.1.2.2.2 | Gives out | NOT DECIDED |
-| C-STORE.4.5.1.2.2.2 | Must never | NOT DECIDED |
 | C-STORE.4.5.1.2.2.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.5.1.2.2.2 | Fed by | NOT DECIDED |
-| C-STORE.4.5.1.2.2.2 | Gated by | NOT DECIDED |
 | C-STORE.4.5.1.2.2.2 | Changes | NOT DECIDED |
 | C-STORE.4.5.1.2.2.2 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.5.1.2.2.2 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.5.1.2.2.3 | Takes in | NOT DECIDED |
 | C-STORE.4.5.1.2.2.3 | Gives out | NOT DECIDED |
-| C-STORE.4.5.1.2.2.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.5.1.2.2.3 | Fed by | NOT DECIDED |
 | C-STORE.4.5.1.2.2.3 | Gated by | NOT DECIDED |
 | C-STORE.4.5.1.2.2.3 | Changes | NOT DECIDED |
@@ -18131,18 +18065,15 @@ SUB-PARTS: NONE
 | C-STORE.4.5.1.3 | Must never | NOT DECIDED |
 | C-STORE.4.5.1.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.5.1.3 | Fed by | NOT DECIDED |
-| C-STORE.4.5.1.3 | Gated by | NOT DECIDED |
 | C-STORE.4.5.1.3 | Changes | NOT DECIDED |
 | C-STORE.4.5.1.3 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.5.1.4 | Takes in | NOT DECIDED |
 | C-STORE.4.5.1.4 | Must never | NOT DECIDED |
-| C-STORE.4.5.1.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.5.1.4 | Fed by | NOT DECIDED |
 | C-STORE.4.5.1.4 | Changes | NOT DECIDED |
 | C-STORE.4.5.1.4 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.5.1.4.1 | Takes in | NOT DECIDED |
 | C-STORE.4.5.1.4.1 | Gives out | NOT DECIDED |
-| C-STORE.4.5.1.4.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.5.1.4.1 | Fed by | NOT DECIDED |
 | C-STORE.4.5.1.4.1 | Gated by | NOT DECIDED |
 | C-STORE.4.5.1.4.1 | Changes | NOT DECIDED |
@@ -18150,7 +18081,6 @@ SUB-PARTS: NONE
 | C-STORE.4.5.1.4.1 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.5.1.4.2 | Takes in | NOT DECIDED |
 | C-STORE.4.5.1.4.2 | Gives out | NOT DECIDED |
-| C-STORE.4.5.1.4.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.5.1.4.2 | Fed by | NOT DECIDED |
 | C-STORE.4.5.1.4.2 | Gated by | NOT DECIDED |
 | C-STORE.4.5.1.4.2 | Changes | NOT DECIDED |
@@ -18158,44 +18088,33 @@ SUB-PARTS: NONE
 | C-STORE.4.5.1.4.2 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.5.1.4.3 | Takes in | NOT DECIDED |
 | C-STORE.4.5.1.4.3 | Gives out | NOT DECIDED |
-| C-STORE.4.5.1.4.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.5.1.4.3 | Fed by | NOT DECIDED |
 | C-STORE.4.5.1.4.3 | Gated by | NOT DECIDED |
 | C-STORE.4.5.1.4.3 | Changes | NOT DECIDED |
 | C-STORE.4.5.1.4.3 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.5.1.4.3 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.5.1.5 | Takes in | NOT DECIDED |
-| C-STORE.4.5.1.5 | Must never | NOT DECIDED |
-| C-STORE.4.5.1.5 | Fails closed by | NOT DECIDED |
 | C-STORE.4.5.1.5 | Fed by | NOT DECIDED |
 | C-STORE.4.5.1.5 | Changes | NOT DECIDED |
 | C-STORE.4.5.1.5 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.5.1.5.1 | Takes in | NOT DECIDED |
-| C-STORE.4.5.1.5.1 | Must never | NOT DECIDED |
-| C-STORE.4.5.1.5.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.5.1.5.1 | Fed by | NOT DECIDED |
-| C-STORE.4.5.1.5.1 | Gated by | NOT DECIDED |
 | C-STORE.4.5.1.5.1 | Changes | NOT DECIDED |
 | C-STORE.4.5.1.5.1 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.5.1.5.2 | Takes in | NOT DECIDED |
-| C-STORE.4.5.1.5.2 | Must never | NOT DECIDED |
-| C-STORE.4.5.1.5.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.5.1.5.2 | Fed by | NOT DECIDED |
-| C-STORE.4.5.1.5.2 | Gated by | NOT DECIDED |
 | C-STORE.4.5.1.5.2 | Changes | NOT DECIDED |
 | C-STORE.4.5.1.5.2 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.5.1.6 | Takes in | NOT DECIDED |
 | C-STORE.4.5.1.6 | Must never | NOT DECIDED |
 | C-STORE.4.5.1.6 | Fails closed by | NOT DECIDED |
 | C-STORE.4.5.1.6 | Fed by | NOT DECIDED |
-| C-STORE.4.5.1.6 | Gated by | NOT DECIDED |
 | C-STORE.4.5.1.6 | Changes | NOT DECIDED |
 | C-STORE.4.5.1.6 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.5.1.7 | Takes in | NOT DECIDED |
 | C-STORE.4.5.1.7 | Must never | NOT DECIDED |
 | C-STORE.4.5.1.7 | Fails closed by | NOT DECIDED |
 | C-STORE.4.5.1.7 | Fed by | NOT DECIDED |
-| C-STORE.4.5.1.7 | Gated by | NOT DECIDED |
 | C-STORE.4.5.1.7 | Changes | NOT DECIDED |
 | C-STORE.4.5.1.7 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.5.1.8 | Takes in | NOT DECIDED |
@@ -18206,24 +18125,19 @@ SUB-PARTS: NONE
 | C-STORE.4.5.1.8 | Changes | NOT DECIDED |
 | C-STORE.4.5.1.8 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.5.2 | Fed by | NOT DECIDED |
-| C-STORE.4.5.2 | Gated by | NOT DECIDED |
 | C-STORE.4.5.2 | Changes | NOT DECIDED |
-| C-STORE.4.5.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.5.3 | Fed by | NOT DECIDED |
 | C-STORE.4.5.3 | Gated by | NOT DECIDED |
 | C-STORE.4.5.3 | Changes | NOT DECIDED |
 | C-STORE.4.5.4 | Fed by | NOT DECIDED |
 | C-STORE.4.5.4 | Gated by | NOT DECIDED |
 | C-STORE.4.5.4 | Changes | NOT DECIDED |
-| C-STORE.4.6 | Fails closed by | NOT DECIDED |
 | C-STORE.4.6 | Fed by | NOT DECIDED |
 | C-STORE.4.6 | Changes | NOT DECIDED |
-| C-STORE.4.6.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.6.1 | Fed by | NOT DECIDED |
 | C-STORE.4.6.1 | Changes | NOT DECIDED |
 | C-STORE.4.6.1.1 | Takes in | NOT DECIDED |
 | C-STORE.4.6.1.1 | Gives out | NOT DECIDED |
-| C-STORE.4.6.1.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.6.1.1 | Fed by | NOT DECIDED |
 | C-STORE.4.6.1.1 | Gated by | NOT DECIDED |
 | C-STORE.4.6.1.1 | Changes | NOT DECIDED |
@@ -18231,7 +18145,6 @@ SUB-PARTS: NONE
 | C-STORE.4.6.1.1 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.6.1.2 | Takes in | NOT DECIDED |
 | C-STORE.4.6.1.2 | Gives out | NOT DECIDED |
-| C-STORE.4.6.1.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.6.1.2 | Fed by | NOT DECIDED |
 | C-STORE.4.6.1.2 | Gated by | NOT DECIDED |
 | C-STORE.4.6.1.2 | Changes | NOT DECIDED |
@@ -18239,7 +18152,6 @@ SUB-PARTS: NONE
 | C-STORE.4.6.1.2 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.6.1.3 | Takes in | NOT DECIDED |
 | C-STORE.4.6.1.3 | Gives out | NOT DECIDED |
-| C-STORE.4.6.1.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.6.1.3 | Fed by | NOT DECIDED |
 | C-STORE.4.6.1.3 | Gated by | NOT DECIDED |
 | C-STORE.4.6.1.3 | Changes | NOT DECIDED |
@@ -18247,7 +18159,6 @@ SUB-PARTS: NONE
 | C-STORE.4.6.1.3 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.6.1.4 | Takes in | NOT DECIDED |
 | C-STORE.4.6.1.4 | Gives out | NOT DECIDED |
-| C-STORE.4.6.1.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.6.1.4 | Fed by | NOT DECIDED |
 | C-STORE.4.6.1.4 | Gated by | NOT DECIDED |
 | C-STORE.4.6.1.4 | Changes | NOT DECIDED |
@@ -18255,7 +18166,6 @@ SUB-PARTS: NONE
 | C-STORE.4.6.1.4 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.6.1.5 | Takes in | NOT DECIDED |
 | C-STORE.4.6.1.5 | Gives out | NOT DECIDED |
-| C-STORE.4.6.1.5 | Fails closed by | NOT DECIDED |
 | C-STORE.4.6.1.5 | Fed by | NOT DECIDED |
 | C-STORE.4.6.1.5 | Gated by | NOT DECIDED |
 | C-STORE.4.6.1.5 | Changes | NOT DECIDED |
@@ -18265,14 +18175,12 @@ SUB-PARTS: NONE
 | C-STORE.4.6.2 | Gated by | NOT DECIDED |
 | C-STORE.4.6.2 | Changes | NOT DECIDED |
 | C-STORE.4.6.2.1 | Takes in | NOT DECIDED |
-| C-STORE.4.6.2.1 | Must never | NOT DECIDED |
 | C-STORE.4.6.2.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.6.2.1 | Fed by | NOT DECIDED |
 | C-STORE.4.6.2.1 | Gated by | NOT DECIDED |
 | C-STORE.4.6.2.1 | Changes | NOT DECIDED |
 | C-STORE.4.6.2.1 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.6.2.2 | Takes in | NOT DECIDED |
-| C-STORE.4.6.2.2 | Must never | NOT DECIDED |
 | C-STORE.4.6.2.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.6.2.2 | Fed by | NOT DECIDED |
 | C-STORE.4.6.2.2 | Gated by | NOT DECIDED |
@@ -18286,22 +18194,18 @@ SUB-PARTS: NONE
 | C-STORE.4.6.2.3 | Changes | NOT DECIDED |
 | C-STORE.4.6.2.3 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.6.2.4 | Takes in | NOT DECIDED |
-| C-STORE.4.6.2.4 | Must never | NOT DECIDED |
 | C-STORE.4.6.2.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.6.2.4 | Fed by | NOT DECIDED |
 | C-STORE.4.6.2.4 | Gated by | NOT DECIDED |
 | C-STORE.4.6.2.4 | Changes | NOT DECIDED |
 | C-STORE.4.6.2.4 | USED BY 1 / Takes in there | NOT DECIDED |
-| C-STORE.4.6.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.6.3 | Changes | NOT DECIDED |
 | C-STORE.4.6.3.1 | Takes in | NOT DECIDED |
-| C-STORE.4.6.3.1 | Must never | NOT DECIDED |
 | C-STORE.4.6.3.1 | Fed by | NOT DECIDED |
 | C-STORE.4.6.3.1 | Gated by | NOT DECIDED |
 | C-STORE.4.6.3.1 | Changes | NOT DECIDED |
 | C-STORE.4.6.3.1 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.6.3.2 | Takes in | NOT DECIDED |
-| C-STORE.4.6.3.2 | Must never | NOT DECIDED |
 | C-STORE.4.6.3.2 | Gated by | NOT DECIDED |
 | C-STORE.4.6.3.2 | Changes | NOT DECIDED |
 | C-STORE.4.6.3.2 | USED BY 1 / Takes in there | NOT DECIDED |
@@ -18328,7 +18232,6 @@ SUB-PARTS: NONE
 | C-STORE.4.6.3.2.3 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.6.3.2.4 | Takes in | NOT DECIDED |
 | C-STORE.4.6.3.2.4 | Must never | NOT DECIDED |
-| C-STORE.4.6.3.2.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.6.3.2.4 | Fed by | NOT DECIDED |
 | C-STORE.4.6.3.2.4 | Gated by | NOT DECIDED |
 | C-STORE.4.6.3.2.4 | Changes | NOT DECIDED |
@@ -18348,25 +18251,19 @@ SUB-PARTS: NONE
 | C-STORE.4.6.3.2.6 | Changes | NOT DECIDED |
 | C-STORE.4.6.3.2.6 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.6.3.3 | Takes in | NOT DECIDED |
-| C-STORE.4.6.3.3 | Must never | NOT DECIDED |
 | C-STORE.4.6.3.3 | Fed by | NOT DECIDED |
 | C-STORE.4.6.3.3 | Gated by | NOT DECIDED |
 | C-STORE.4.6.3.3 | Changes | NOT DECIDED |
 | C-STORE.4.6.3.3 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.6.3.4 | Takes in | NOT DECIDED |
-| C-STORE.4.6.3.4 | Must never | NOT DECIDED |
 | C-STORE.4.6.3.4 | Fed by | NOT DECIDED |
-| C-STORE.4.6.3.4 | Gated by | NOT DECIDED |
 | C-STORE.4.6.3.4 | Changes | NOT DECIDED |
 | C-STORE.4.6.3.4 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.6.3.5 | Takes in | NOT DECIDED |
-| C-STORE.4.6.3.5 | Must never | NOT DECIDED |
 | C-STORE.4.6.3.5 | Fed by | NOT DECIDED |
-| C-STORE.4.6.3.5 | Gated by | NOT DECIDED |
 | C-STORE.4.6.3.5 | Changes | NOT DECIDED |
 | C-STORE.4.6.3.5 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.6.3.6 | Takes in | NOT DECIDED |
-| C-STORE.4.6.3.6 | Must never | NOT DECIDED |
 | C-STORE.4.6.3.6 | Fed by | NOT DECIDED |
 | C-STORE.4.6.3.6 | Gated by | NOT DECIDED |
 | C-STORE.4.6.3.6 | Changes | NOT DECIDED |
@@ -18385,29 +18282,22 @@ SUB-PARTS: NONE
 | C-STORE.4.6.5.1 | Changes | NOT DECIDED |
 | C-STORE.4.6.5.1 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.6.5.2 | Takes in | NOT DECIDED |
-| C-STORE.4.6.5.2 | Must never | NOT DECIDED |
-| C-STORE.4.6.5.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.6.5.2 | Fed by | NOT DECIDED |
 | C-STORE.4.6.5.2 | Gated by | NOT DECIDED |
 | C-STORE.4.6.5.2 | Changes | NOT DECIDED |
 | C-STORE.4.6.5.2 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.6.5.3 | Takes in | NOT DECIDED |
-| C-STORE.4.6.5.3 | Must never | NOT DECIDED |
-| C-STORE.4.6.5.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.6.5.3 | Fed by | NOT DECIDED |
 | C-STORE.4.6.5.3 | Gated by | NOT DECIDED |
 | C-STORE.4.6.5.3 | Changes | NOT DECIDED |
 | C-STORE.4.6.5.3 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.6.5.4 | Takes in | NOT DECIDED |
 | C-STORE.4.6.5.4 | Must never | NOT DECIDED |
-| C-STORE.4.6.5.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.6.5.4 | Fed by | NOT DECIDED |
 | C-STORE.4.6.5.4 | Gated by | NOT DECIDED |
 | C-STORE.4.6.5.4 | Changes | NOT DECIDED |
 | C-STORE.4.6.5.4 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.6.5.5 | Takes in | NOT DECIDED |
-| C-STORE.4.6.5.5 | Must never | NOT DECIDED |
-| C-STORE.4.6.5.5 | Fails closed by | NOT DECIDED |
 | C-STORE.4.6.5.5 | Fed by | NOT DECIDED |
 | C-STORE.4.6.5.5 | Gated by | NOT DECIDED |
 | C-STORE.4.6.5.5 | Changes | NOT DECIDED |
@@ -18416,41 +18306,31 @@ SUB-PARTS: NONE
 | C-STORE.4.6.6 | Changes | NOT DECIDED |
 | C-STORE.4.6.6.1 | Takes in | NOT DECIDED |
 | C-STORE.4.6.6.1 | Gives out | NOT DECIDED |
-| C-STORE.4.6.6.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.6.6.1 | Fed by | NOT DECIDED |
-| C-STORE.4.6.6.1 | Gated by | NOT DECIDED |
 | C-STORE.4.6.6.1 | Changes | NOT DECIDED |
 | C-STORE.4.6.6.1 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.6.6.1 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.6.6.2 | Takes in | NOT DECIDED |
 | C-STORE.4.6.6.2 | Gives out | NOT DECIDED |
-| C-STORE.4.6.6.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.6.6.2 | Fed by | NOT DECIDED |
-| C-STORE.4.6.6.2 | Gated by | NOT DECIDED |
 | C-STORE.4.6.6.2 | Changes | NOT DECIDED |
 | C-STORE.4.6.6.2 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.6.6.2 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.6.6.3 | Takes in | NOT DECIDED |
 | C-STORE.4.6.6.3 | Gives out | NOT DECIDED |
-| C-STORE.4.6.6.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.6.6.3 | Fed by | NOT DECIDED |
-| C-STORE.4.6.6.3 | Gated by | NOT DECIDED |
 | C-STORE.4.6.6.3 | Changes | NOT DECIDED |
 | C-STORE.4.6.6.3 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.6.6.3 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.6.6.4 | Takes in | NOT DECIDED |
 | C-STORE.4.6.6.4 | Gives out | NOT DECIDED |
-| C-STORE.4.6.6.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.6.6.4 | Fed by | NOT DECIDED |
-| C-STORE.4.6.6.4 | Gated by | NOT DECIDED |
 | C-STORE.4.6.6.4 | Changes | NOT DECIDED |
 | C-STORE.4.6.6.4 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.6.6.4 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.6.6.5 | Takes in | NOT DECIDED |
 | C-STORE.4.6.6.5 | Gives out | NOT DECIDED |
-| C-STORE.4.6.6.5 | Fails closed by | NOT DECIDED |
 | C-STORE.4.6.6.5 | Fed by | NOT DECIDED |
-| C-STORE.4.6.6.5 | Gated by | NOT DECIDED |
 | C-STORE.4.6.6.5 | Changes | NOT DECIDED |
 | C-STORE.4.6.6.5 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.6.6.5 | USED BY 1 / Changes there | NOT DECIDED |
@@ -18458,7 +18338,6 @@ SUB-PARTS: NONE
 | C-STORE.4.6.7 | Fed by | NOT DECIDED |
 | C-STORE.4.6.7 | Gated by | NOT DECIDED |
 | C-STORE.4.6.7 | Changes | NOT DECIDED |
-| C-STORE.4.7 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7 | Fed by | NOT DECIDED |
 | C-STORE.4.7 | Changes | NOT DECIDED |
 | C-STORE.4.7.1 | Changes | NOT DECIDED |
@@ -18470,29 +18349,24 @@ SUB-PARTS: NONE
 | C-STORE.4.7.1.1 | Changes | NOT DECIDED |
 | C-STORE.4.7.1.1 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.7.1.2 | Takes in | NOT DECIDED |
-| C-STORE.4.7.1.2 | Must never | NOT DECIDED |
 | C-STORE.4.7.1.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.1.2 | Fed by | NOT DECIDED |
 | C-STORE.4.7.1.2 | Gated by | NOT DECIDED |
 | C-STORE.4.7.1.2 | Changes | NOT DECIDED |
 | C-STORE.4.7.1.2 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.7.1.3 | Takes in | NOT DECIDED |
-| C-STORE.4.7.1.3 | Must never | NOT DECIDED |
 | C-STORE.4.7.1.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.1.3 | Fed by | NOT DECIDED |
 | C-STORE.4.7.1.3 | Gated by | NOT DECIDED |
 | C-STORE.4.7.1.3 | Changes | NOT DECIDED |
 | C-STORE.4.7.1.3 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.7.1.4 | Takes in | NOT DECIDED |
-| C-STORE.4.7.1.4 | Must never | NOT DECIDED |
 | C-STORE.4.7.1.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.1.4 | Fed by | NOT DECIDED |
 | C-STORE.4.7.1.4 | Gated by | NOT DECIDED |
 | C-STORE.4.7.1.4 | Changes | NOT DECIDED |
 | C-STORE.4.7.1.4 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.7.1.5 | Takes in | NOT DECIDED |
-| C-STORE.4.7.1.5 | Must never | NOT DECIDED |
-| C-STORE.4.7.1.5 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.1.5 | Changes | NOT DECIDED |
 | C-STORE.4.7.1.5 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.7.1.5.1 | Takes in | NOT DECIDED |
@@ -18510,14 +18384,11 @@ SUB-PARTS: NONE
 | C-STORE.4.7.1.5.2 | Changes | NOT DECIDED |
 | C-STORE.4.7.1.5.2 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.7.1.5.3 | Takes in | NOT DECIDED |
-| C-STORE.4.7.1.5.3 | Must never | NOT DECIDED |
-| C-STORE.4.7.1.5.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.1.5.3 | Fed by | NOT DECIDED |
 | C-STORE.4.7.1.5.3 | Gated by | NOT DECIDED |
 | C-STORE.4.7.1.5.3 | Changes | NOT DECIDED |
 | C-STORE.4.7.1.5.3 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.7.1.5.4 | Takes in | NOT DECIDED |
-| C-STORE.4.7.1.5.4 | Must never | NOT DECIDED |
 | C-STORE.4.7.1.5.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.1.5.4 | Fed by | NOT DECIDED |
 | C-STORE.4.7.1.5.4 | Gated by | NOT DECIDED |
@@ -18525,14 +18396,11 @@ SUB-PARTS: NONE
 | C-STORE.4.7.1.5.4 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.7.1.5.5 | Takes in | NOT DECIDED |
 | C-STORE.4.7.1.5.5 | Must never | NOT DECIDED |
-| C-STORE.4.7.1.5.5 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.1.5.5 | Fed by | NOT DECIDED |
 | C-STORE.4.7.1.5.5 | Gated by | NOT DECIDED |
 | C-STORE.4.7.1.5.5 | Changes | NOT DECIDED |
 | C-STORE.4.7.1.5.5 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.7.1.5.6 | Takes in | NOT DECIDED |
-| C-STORE.4.7.1.5.6 | Must never | NOT DECIDED |
-| C-STORE.4.7.1.5.6 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.1.5.6 | Fed by | NOT DECIDED |
 | C-STORE.4.7.1.5.6 | Gated by | NOT DECIDED |
 | C-STORE.4.7.1.5.6 | Changes | NOT DECIDED |
@@ -18551,14 +18419,12 @@ SUB-PARTS: NONE
 | C-STORE.4.7.1.5.8 | Must never | NOT DECIDED |
 | C-STORE.4.7.1.5.8 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.1.5.8 | Fed by | NOT DECIDED |
-| C-STORE.4.7.1.5.8 | Gated by | NOT DECIDED |
 | C-STORE.4.7.1.5.8 | Changes | NOT DECIDED |
 | C-STORE.4.7.1.5.8 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.7.1.5.8 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.7.1.5.9 | Takes in | NOT DECIDED |
 | C-STORE.4.7.1.5.9 | Gives out | NOT DECIDED |
 | C-STORE.4.7.1.5.9 | Must never | NOT DECIDED |
-| C-STORE.4.7.1.5.9 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.1.5.9 | Fed by | NOT DECIDED |
 | C-STORE.4.7.1.5.9 | Gated by | NOT DECIDED |
 | C-STORE.4.7.1.5.9 | Changes | NOT DECIDED |
@@ -18566,10 +18432,8 @@ SUB-PARTS: NONE
 | C-STORE.4.7.1.5.9 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.7.1.5.10 | Takes in | NOT DECIDED |
 | C-STORE.4.7.1.5.10 | Gives out | NOT DECIDED |
-| C-STORE.4.7.1.5.10 | Must never | NOT DECIDED |
 | C-STORE.4.7.1.5.10 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.1.5.10 | Fed by | NOT DECIDED |
-| C-STORE.4.7.1.5.10 | Gated by | NOT DECIDED |
 | C-STORE.4.7.1.5.10 | Changes | NOT DECIDED |
 | C-STORE.4.7.1.5.10 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.7.1.5.10 | USED BY 1 / Changes there | NOT DECIDED |
@@ -18582,53 +18446,40 @@ SUB-PARTS: NONE
 | C-STORE.4.7.1.5.11 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.7.1.5.11.1 | Takes in | NOT DECIDED |
 | C-STORE.4.7.1.5.11.1 | Gives out | NOT DECIDED |
-| C-STORE.4.7.1.5.11.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.1.5.11.1 | Fed by | NOT DECIDED |
-| C-STORE.4.7.1.5.11.1 | Gated by | NOT DECIDED |
 | C-STORE.4.7.1.5.11.1 | Changes | NOT DECIDED |
 | C-STORE.4.7.1.5.11.1 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.7.1.5.11.1 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.7.1.5.11.2 | Takes in | NOT DECIDED |
 | C-STORE.4.7.1.5.11.2 | Gives out | NOT DECIDED |
-| C-STORE.4.7.1.5.11.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.1.5.11.2 | Fed by | NOT DECIDED |
-| C-STORE.4.7.1.5.11.2 | Gated by | NOT DECIDED |
 | C-STORE.4.7.1.5.11.2 | Changes | NOT DECIDED |
 | C-STORE.4.7.1.5.11.2 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.7.1.5.11.2 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.7.1.5.11.3 | Takes in | NOT DECIDED |
 | C-STORE.4.7.1.5.11.3 | Gives out | NOT DECIDED |
-| C-STORE.4.7.1.5.11.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.1.5.11.3 | Fed by | NOT DECIDED |
-| C-STORE.4.7.1.5.11.3 | Gated by | NOT DECIDED |
 | C-STORE.4.7.1.5.11.3 | Changes | NOT DECIDED |
 | C-STORE.4.7.1.5.11.3 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.7.1.5.11.3 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.7.1.5.11.4 | Takes in | NOT DECIDED |
 | C-STORE.4.7.1.5.11.4 | Gives out | NOT DECIDED |
-| C-STORE.4.7.1.5.11.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.1.5.11.4 | Fed by | NOT DECIDED |
-| C-STORE.4.7.1.5.11.4 | Gated by | NOT DECIDED |
 | C-STORE.4.7.1.5.11.4 | Changes | NOT DECIDED |
 | C-STORE.4.7.1.5.11.4 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.7.1.5.11.4 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.7.1.6 | Takes in | NOT DECIDED |
-| C-STORE.4.7.1.6 | Must never | NOT DECIDED |
 | C-STORE.4.7.1.6 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.1.6 | Fed by | NOT DECIDED |
 | C-STORE.4.7.1.6 | Gated by | NOT DECIDED |
 | C-STORE.4.7.1.6 | Changes | NOT DECIDED |
 | C-STORE.4.7.1.6 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.7.1.7 | Takes in | NOT DECIDED |
-| C-STORE.4.7.1.7 | Must never | NOT DECIDED |
-| C-STORE.4.7.1.7 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.1.7 | Fed by | NOT DECIDED |
 | C-STORE.4.7.1.7 | Gated by | NOT DECIDED |
 | C-STORE.4.7.1.7 | Changes | NOT DECIDED |
 | C-STORE.4.7.1.7 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.7.1.8 | Takes in | NOT DECIDED |
-| C-STORE.4.7.1.8 | Must never | NOT DECIDED |
-| C-STORE.4.7.1.8 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.1.8 | Fed by | NOT DECIDED |
 | C-STORE.4.7.1.8 | Gated by | NOT DECIDED |
 | C-STORE.4.7.1.8 | Changes | NOT DECIDED |
@@ -18641,22 +18492,17 @@ SUB-PARTS: NONE
 | C-STORE.4.7.1.9 | Changes | NOT DECIDED |
 | C-STORE.4.7.1.9 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.7.1.10 | Takes in | NOT DECIDED |
-| C-STORE.4.7.1.10 | Must never | NOT DECIDED |
 | C-STORE.4.7.1.10 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.1.10 | Fed by | NOT DECIDED |
 | C-STORE.4.7.1.10 | Gated by | NOT DECIDED |
 | C-STORE.4.7.1.10 | Changes | NOT DECIDED |
 | C-STORE.4.7.1.10 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.7.1.11 | Takes in | NOT DECIDED |
-| C-STORE.4.7.1.11 | Must never | NOT DECIDED |
-| C-STORE.4.7.1.11 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.1.11 | Fed by | NOT DECIDED |
 | C-STORE.4.7.1.11 | Gated by | NOT DECIDED |
 | C-STORE.4.7.1.11 | Changes | NOT DECIDED |
 | C-STORE.4.7.1.11 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.7.1.12 | Takes in | NOT DECIDED |
-| C-STORE.4.7.1.12 | Must never | NOT DECIDED |
-| C-STORE.4.7.1.12 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.1.12 | Fed by | NOT DECIDED |
 | C-STORE.4.7.1.12 | Gated by | NOT DECIDED |
 | C-STORE.4.7.1.12 | Changes | NOT DECIDED |
@@ -18678,7 +18524,6 @@ SUB-PARTS: NONE
 | C-STORE.4.7.1.13.2 | Must never | NOT DECIDED |
 | C-STORE.4.7.1.13.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.1.13.2 | Fed by | NOT DECIDED |
-| C-STORE.4.7.1.13.2 | Gated by | NOT DECIDED |
 | C-STORE.4.7.1.13.2 | Changes | NOT DECIDED |
 | C-STORE.4.7.1.13.2 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.7.1.13.2 | USED BY 1 / Changes there | NOT DECIDED |
@@ -18767,7 +18612,6 @@ SUB-PARTS: NONE
 | C-STORE.4.7.2.12 | Changes | NOT DECIDED |
 | C-STORE.4.7.2.12 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.7.2.13 | Gives out | NOT DECIDED |
-| C-STORE.4.7.2.13 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.2.13 | Fed by | NOT DECIDED |
 | C-STORE.4.7.2.13 | Gated by | NOT DECIDED |
 | C-STORE.4.7.2.13 | Changes | NOT DECIDED |
@@ -18815,13 +18659,11 @@ SUB-PARTS: NONE
 | C-STORE.4.7.2.18 | Gated by | NOT DECIDED |
 | C-STORE.4.7.2.18 | Changes | NOT DECIDED |
 | C-STORE.4.7.2.18 | USED BY 1 / Changes there | NOT DECIDED |
-| C-STORE.4.7.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.3 | Fed by | NOT DECIDED |
 | C-STORE.4.7.3 | Gated by | NOT DECIDED |
 | C-STORE.4.7.3 | Changes | NOT DECIDED |
 | C-STORE.4.7.4 | Changes | NOT DECIDED |
 | C-STORE.4.7.4.1 | Takes in | NOT DECIDED |
-| C-STORE.4.7.4.1 | Must never | NOT DECIDED |
 | C-STORE.4.7.4.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.4.1 | Fed by | NOT DECIDED |
 | C-STORE.4.7.4.1 | Gated by | NOT DECIDED |
@@ -18869,22 +18711,17 @@ SUB-PARTS: NONE
 | C-STORE.4.7.4.5 | Changes | NOT DECIDED |
 | C-STORE.4.7.4.5 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.7.4.6 | Takes in | NOT DECIDED |
-| C-STORE.4.7.4.6 | Must never | NOT DECIDED |
-| C-STORE.4.7.4.6 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.4.6 | Fed by | NOT DECIDED |
 | C-STORE.4.7.4.6 | Gated by | NOT DECIDED |
 | C-STORE.4.7.4.6 | Changes | NOT DECIDED |
 | C-STORE.4.7.4.6 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.7.4.7 | Takes in | NOT DECIDED |
-| C-STORE.4.7.4.7 | Must never | NOT DECIDED |
-| C-STORE.4.7.4.7 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.4.7 | Fed by | NOT DECIDED |
 | C-STORE.4.7.4.7 | Gated by | NOT DECIDED |
 | C-STORE.4.7.4.7 | Changes | NOT DECIDED |
 | C-STORE.4.7.4.7 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.7.4.8 | Takes in | NOT DECIDED |
 | C-STORE.4.7.4.8 | Gives out | NOT DECIDED |
-| C-STORE.4.7.4.8 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.4.8 | Fed by | NOT DECIDED |
 | C-STORE.4.7.4.8 | Gated by | NOT DECIDED |
 | C-STORE.4.7.4.8 | Changes | NOT DECIDED |
@@ -18892,7 +18729,6 @@ SUB-PARTS: NONE
 | C-STORE.4.7.4.8 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.7.4.9 | Takes in | NOT DECIDED |
 | C-STORE.4.7.4.9 | Gives out | NOT DECIDED |
-| C-STORE.4.7.4.9 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.4.9 | Fed by | NOT DECIDED |
 | C-STORE.4.7.4.9 | Gated by | NOT DECIDED |
 | C-STORE.4.7.4.9 | Changes | NOT DECIDED |
@@ -18910,7 +18746,6 @@ SUB-PARTS: NONE
 | C-STORE.4.7.4.11 | Gives out | NOT DECIDED |
 | C-STORE.4.7.4.11 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.4.11 | Fed by | NOT DECIDED |
-| C-STORE.4.7.4.11 | Gated by | NOT DECIDED |
 | C-STORE.4.7.4.11 | Changes | NOT DECIDED |
 | C-STORE.4.7.4.11 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.7.4.11 | USED BY 1 / Changes there | NOT DECIDED |
@@ -18921,7 +18756,6 @@ SUB-PARTS: NONE
 | C-STORE.4.7.6 | Fed by | NOT DECIDED |
 | C-STORE.4.7.6 | Gated by | NOT DECIDED |
 | C-STORE.4.7.6 | Changes | NOT DECIDED |
-| C-STORE.4.7.7 | Fails closed by | NOT DECIDED |
 | C-STORE.4.7.7 | Fed by | NOT DECIDED |
 | C-STORE.4.7.7 | Gated by | NOT DECIDED |
 | C-STORE.4.7.7 | Changes | NOT DECIDED |
@@ -18936,18 +18770,14 @@ SUB-PARTS: NONE
 | C-STORE.4.7.10 | Fed by | NOT DECIDED |
 | C-STORE.4.7.10 | Gated by | NOT DECIDED |
 | C-STORE.4.7.10 | Changes | NOT DECIDED |
-| C-STORE.4.8 | Fails closed by | NOT DECIDED |
 | C-STORE.4.8 | Fed by | NOT DECIDED |
 | C-STORE.4.8 | Changes | NOT DECIDED |
-| C-STORE.4.8.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.8.1 | Fed by | NOT DECIDED |
 | C-STORE.4.8.1 | Gated by | NOT DECIDED |
 | C-STORE.4.8.1 | Changes | NOT DECIDED |
-| C-STORE.4.8.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.8.2 | Fed by | NOT DECIDED |
 | C-STORE.4.8.2 | Gated by | NOT DECIDED |
 | C-STORE.4.8.2 | Changes | NOT DECIDED |
-| C-STORE.4.8.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.8.3 | Fed by | NOT DECIDED |
 | C-STORE.4.8.3 | Gated by | NOT DECIDED |
 | C-STORE.4.8.3 | Changes | NOT DECIDED |
@@ -18974,7 +18804,6 @@ SUB-PARTS: NONE
 | C-STORE.4.8.5.2 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.8.5.3 | Takes in | NOT DECIDED |
 | C-STORE.4.8.5.3 | Gives out | NOT DECIDED |
-| C-STORE.4.8.5.3 | Must never | NOT DECIDED |
 | C-STORE.4.8.5.3 | Fed by | NOT DECIDED |
 | C-STORE.4.8.5.3 | Gated by | NOT DECIDED |
 | C-STORE.4.8.5.3 | Changes | NOT DECIDED |
@@ -18983,7 +18812,6 @@ SUB-PARTS: NONE
 | C-STORE.4.8.6 | Fed by | NOT DECIDED |
 | C-STORE.4.8.6 | Gated by | NOT DECIDED |
 | C-STORE.4.8.6 | Changes | NOT DECIDED |
-| C-STORE.4.9 | Fails closed by | NOT DECIDED |
 | C-STORE.4.9 | Fed by | NOT DECIDED |
 | C-STORE.4.9 | Changes | NOT DECIDED |
 | C-STORE.4.9.1 | Fed by | NOT DECIDED |
@@ -18993,13 +18821,11 @@ SUB-PARTS: NONE
 | C-STORE.4.9.2 | Fed by | NOT DECIDED |
 | C-STORE.4.9.2 | Gated by | NOT DECIDED |
 | C-STORE.4.9.2 | Changes | NOT DECIDED |
-| C-STORE.4.9.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.9.3 | Fed by | NOT DECIDED |
 | C-STORE.4.9.3 | Changes | NOT DECIDED |
 | C-STORE.4.9.3.1 | Takes in | NOT DECIDED |
 | C-STORE.4.9.3.1 | Gives out | NOT DECIDED |
 | C-STORE.4.9.3.1 | Must never | NOT DECIDED |
-| C-STORE.4.9.3.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.9.3.1 | Gated by | NOT DECIDED |
 | C-STORE.4.9.3.1 | Changes | NOT DECIDED |
 | C-STORE.4.9.3.1 | USED BY 1 / Takes in there | NOT DECIDED |
@@ -19039,7 +18865,6 @@ SUB-PARTS: NONE
 | C-STORE.4.9.3.1.5 | Gated by | NOT DECIDED |
 | C-STORE.4.9.3.1.5 | Changes | NOT DECIDED |
 | C-STORE.4.9.3.1.5 | USED BY 1 / Takes in there | NOT DECIDED |
-| C-STORE.4.9.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.9.4 | Fed by | NOT DECIDED |
 | C-STORE.4.9.4 | Changes | NOT DECIDED |
 | C-STORE.4.9.4.1 | Takes in | NOT DECIDED |
@@ -19085,746 +18910,577 @@ SUB-PARTS: NONE
 | C-STORE.4.10 | Changes | NOT DECIDED |
 | C-STORE.4.10.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.1 | Changes | NOT DECIDED |
-| C-STORE.4.10.1.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.1.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.1.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.1.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.2 | Fed by | NOT DECIDED |
 | C-STORE.4.10.2 | Changes | NOT DECIDED |
-| C-STORE.4.10.2.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.2.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.2.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.2.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.3 | Fed by | NOT DECIDED |
 | C-STORE.4.10.3 | Changes | NOT DECIDED |
-| C-STORE.4.10.3.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.3.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.3.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.3.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.4 | Fed by | NOT DECIDED |
 | C-STORE.4.10.4 | Changes | NOT DECIDED |
-| C-STORE.4.10.4.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.4.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.4.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.4.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.5 | Fed by | NOT DECIDED |
 | C-STORE.4.10.5 | Changes | NOT DECIDED |
-| C-STORE.4.10.5.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.5.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.5.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.5.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.6 | Fed by | NOT DECIDED |
 | C-STORE.4.10.6 | Changes | NOT DECIDED |
-| C-STORE.4.10.6.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.6.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.6.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.6.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.7 | Fed by | NOT DECIDED |
 | C-STORE.4.10.7 | Changes | NOT DECIDED |
-| C-STORE.4.10.7.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.7.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.7.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.7.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.8 | Fed by | NOT DECIDED |
 | C-STORE.4.10.8 | Changes | NOT DECIDED |
-| C-STORE.4.10.8.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.8.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.8.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.8.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.9 | Fed by | NOT DECIDED |
 | C-STORE.4.10.9 | Changes | NOT DECIDED |
-| C-STORE.4.10.9.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.9.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.9.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.9.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.10 | Fed by | NOT DECIDED |
 | C-STORE.4.10.10 | Changes | NOT DECIDED |
-| C-STORE.4.10.10.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.10.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.10.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.10.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.11 | Fed by | NOT DECIDED |
 | C-STORE.4.10.11 | Changes | NOT DECIDED |
-| C-STORE.4.10.11.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.11.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.11.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.11.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.12 | Fed by | NOT DECIDED |
 | C-STORE.4.10.12 | Changes | NOT DECIDED |
-| C-STORE.4.10.12.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.12.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.12.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.12.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.13 | Fed by | NOT DECIDED |
 | C-STORE.4.10.13 | Changes | NOT DECIDED |
-| C-STORE.4.10.13.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.13.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.13.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.13.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.14 | Fed by | NOT DECIDED |
 | C-STORE.4.10.14 | Changes | NOT DECIDED |
-| C-STORE.4.10.14.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.14.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.14.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.14.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.15 | Fed by | NOT DECIDED |
 | C-STORE.4.10.15 | Changes | NOT DECIDED |
-| C-STORE.4.10.15.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.15.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.15.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.15.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.16 | Fed by | NOT DECIDED |
 | C-STORE.4.10.16 | Changes | NOT DECIDED |
-| C-STORE.4.10.16.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.16.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.16.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.16.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.17 | Fed by | NOT DECIDED |
 | C-STORE.4.10.17 | Changes | NOT DECIDED |
-| C-STORE.4.10.17.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.17.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.17.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.17.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.18 | Fed by | NOT DECIDED |
 | C-STORE.4.10.18 | Changes | NOT DECIDED |
-| C-STORE.4.10.18.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.18.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.18.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.18.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.19 | Fed by | NOT DECIDED |
 | C-STORE.4.10.19 | Changes | NOT DECIDED |
-| C-STORE.4.10.19.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.19.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.19.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.19.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.20 | Fed by | NOT DECIDED |
 | C-STORE.4.10.20 | Changes | NOT DECIDED |
-| C-STORE.4.10.20.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.20.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.20.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.20.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.21 | Fed by | NOT DECIDED |
 | C-STORE.4.10.21 | Changes | NOT DECIDED |
-| C-STORE.4.10.21.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.21.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.21.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.21.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.22 | Fed by | NOT DECIDED |
 | C-STORE.4.10.22 | Changes | NOT DECIDED |
-| C-STORE.4.10.22.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.22.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.22.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.22.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.23 | Fed by | NOT DECIDED |
 | C-STORE.4.10.23 | Changes | NOT DECIDED |
-| C-STORE.4.10.23.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.23.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.23.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.23.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.24 | Fed by | NOT DECIDED |
 | C-STORE.4.10.24 | Changes | NOT DECIDED |
-| C-STORE.4.10.24.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.24.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.24.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.24.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.25 | Fed by | NOT DECIDED |
 | C-STORE.4.10.25 | Changes | NOT DECIDED |
-| C-STORE.4.10.25.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.25.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.25.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.25.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.26 | Fed by | NOT DECIDED |
 | C-STORE.4.10.26 | Changes | NOT DECIDED |
-| C-STORE.4.10.26.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.26.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.26.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.26.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.27 | Fed by | NOT DECIDED |
 | C-STORE.4.10.27 | Changes | NOT DECIDED |
-| C-STORE.4.10.27.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.27.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.27.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.27.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.28 | Fed by | NOT DECIDED |
 | C-STORE.4.10.28 | Changes | NOT DECIDED |
-| C-STORE.4.10.28.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.28.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.28.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.28.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.29 | Fed by | NOT DECIDED |
 | C-STORE.4.10.29 | Changes | NOT DECIDED |
-| C-STORE.4.10.29.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.29.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.29.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.29.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.30 | Fed by | NOT DECIDED |
 | C-STORE.4.10.30 | Changes | NOT DECIDED |
-| C-STORE.4.10.30.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.30.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.30.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.30.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.31 | Fed by | NOT DECIDED |
 | C-STORE.4.10.31 | Changes | NOT DECIDED |
-| C-STORE.4.10.31.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.31.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.31.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.31.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.32 | Fed by | NOT DECIDED |
 | C-STORE.4.10.32 | Changes | NOT DECIDED |
-| C-STORE.4.10.32.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.32.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.32.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.32.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.33 | Fed by | NOT DECIDED |
 | C-STORE.4.10.33 | Changes | NOT DECIDED |
-| C-STORE.4.10.33.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.33.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.33.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.33.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.34 | Fed by | NOT DECIDED |
 | C-STORE.4.10.34 | Changes | NOT DECIDED |
-| C-STORE.4.10.34.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.34.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.34.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.34.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.35 | Fed by | NOT DECIDED |
 | C-STORE.4.10.35 | Changes | NOT DECIDED |
-| C-STORE.4.10.35.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.35.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.35.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.35.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.36 | Fed by | NOT DECIDED |
 | C-STORE.4.10.36 | Changes | NOT DECIDED |
-| C-STORE.4.10.36.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.36.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.36.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.36.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.37 | Fed by | NOT DECIDED |
 | C-STORE.4.10.37 | Changes | NOT DECIDED |
-| C-STORE.4.10.37.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.37.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.37.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.37.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.38 | Fed by | NOT DECIDED |
 | C-STORE.4.10.38 | Changes | NOT DECIDED |
-| C-STORE.4.10.38.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.38.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.38.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.38.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.39 | Fed by | NOT DECIDED |
 | C-STORE.4.10.39 | Changes | NOT DECIDED |
-| C-STORE.4.10.39.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.39.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.39.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.39.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.40 | Fed by | NOT DECIDED |
 | C-STORE.4.10.40 | Changes | NOT DECIDED |
-| C-STORE.4.10.40.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.40.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.40.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.40.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.41 | Fed by | NOT DECIDED |
 | C-STORE.4.10.41 | Changes | NOT DECIDED |
-| C-STORE.4.10.41.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.41.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.41.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.41.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.42 | Fed by | NOT DECIDED |
 | C-STORE.4.10.42 | Changes | NOT DECIDED |
-| C-STORE.4.10.42.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.42.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.42.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.42.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.43 | Fed by | NOT DECIDED |
 | C-STORE.4.10.43 | Changes | NOT DECIDED |
-| C-STORE.4.10.43.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.43.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.43.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.43.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.44 | Fed by | NOT DECIDED |
 | C-STORE.4.10.44 | Changes | NOT DECIDED |
-| C-STORE.4.10.44.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.44.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.44.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.44.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.45 | Fed by | NOT DECIDED |
 | C-STORE.4.10.45 | Changes | NOT DECIDED |
-| C-STORE.4.10.45.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.45.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.45.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.45.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.46 | Fed by | NOT DECIDED |
 | C-STORE.4.10.46 | Changes | NOT DECIDED |
-| C-STORE.4.10.46.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.46.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.46.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.46.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.47 | Fed by | NOT DECIDED |
 | C-STORE.4.10.47 | Changes | NOT DECIDED |
-| C-STORE.4.10.47.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.47.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.47.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.47.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.48 | Fed by | NOT DECIDED |
 | C-STORE.4.10.48 | Changes | NOT DECIDED |
-| C-STORE.4.10.48.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.48.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.48.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.48.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.49 | Fed by | NOT DECIDED |
 | C-STORE.4.10.49 | Changes | NOT DECIDED |
-| C-STORE.4.10.49.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.49.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.49.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.49.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.50 | Fed by | NOT DECIDED |
 | C-STORE.4.10.50 | Changes | NOT DECIDED |
-| C-STORE.4.10.50.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.50.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.50.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.50.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.51 | Fed by | NOT DECIDED |
 | C-STORE.4.10.51 | Changes | NOT DECIDED |
-| C-STORE.4.10.51.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.51.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.51.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.51.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.52 | Fed by | NOT DECIDED |
 | C-STORE.4.10.52 | Changes | NOT DECIDED |
-| C-STORE.4.10.52.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.52.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.52.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.52.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.53 | Fed by | NOT DECIDED |
 | C-STORE.4.10.53 | Changes | NOT DECIDED |
-| C-STORE.4.10.53.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.53.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.53.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.53.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.54 | Fed by | NOT DECIDED |
 | C-STORE.4.10.54 | Changes | NOT DECIDED |
-| C-STORE.4.10.54.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.54.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.54.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.54.1 | Changes | NOT DECIDED |
 | C-STORE.4.10.55 | Fed by | NOT DECIDED |
 | C-STORE.4.10.55 | Changes | NOT DECIDED |
-| C-STORE.4.10.55.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.10.55.1 | Fed by | NOT DECIDED |
 | C-STORE.4.10.55.1 | Gated by | NOT DECIDED |
 | C-STORE.4.10.55.1 | Changes | NOT DECIDED |
 | C-STORE.4.11 | Fed by | NOT DECIDED |
 | C-STORE.4.11 | Changes | NOT DECIDED |
-| C-STORE.4.11.1 | Must never | NOT DECIDED |
 | C-STORE.4.11.1 | Fed by | NOT DECIDED |
 | C-STORE.4.11.1 | Changes | NOT DECIDED |
-| C-STORE.4.11.1.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.11.1.1 | Fed by | NOT DECIDED |
 | C-STORE.4.11.1.1 | Gated by | NOT DECIDED |
 | C-STORE.4.11.1.1 | Changes | NOT DECIDED |
 | C-STORE.4.11.2 | Must never | NOT DECIDED |
 | C-STORE.4.11.2 | Fed by | NOT DECIDED |
 | C-STORE.4.11.2 | Changes | NOT DECIDED |
-| C-STORE.4.11.2.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.11.2.1 | Fed by | NOT DECIDED |
 | C-STORE.4.11.2.1 | Gated by | NOT DECIDED |
 | C-STORE.4.11.2.1 | Changes | NOT DECIDED |
-| C-STORE.4.11.3 | Must never | NOT DECIDED |
 | C-STORE.4.11.3 | Fed by | NOT DECIDED |
 | C-STORE.4.11.3 | Changes | NOT DECIDED |
-| C-STORE.4.11.3.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.11.3.1 | Fed by | NOT DECIDED |
 | C-STORE.4.11.3.1 | Gated by | NOT DECIDED |
 | C-STORE.4.11.3.1 | Changes | NOT DECIDED |
-| C-STORE.4.11.4 | Must never | NOT DECIDED |
 | C-STORE.4.11.4 | Fed by | NOT DECIDED |
 | C-STORE.4.11.4 | Changes | NOT DECIDED |
-| C-STORE.4.11.4.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.11.4.1 | Fed by | NOT DECIDED |
 | C-STORE.4.11.4.1 | Gated by | NOT DECIDED |
 | C-STORE.4.11.4.1 | Changes | NOT DECIDED |
-| C-STORE.4.11.5 | Must never | NOT DECIDED |
 | C-STORE.4.11.5 | Fed by | NOT DECIDED |
 | C-STORE.4.11.5 | Changes | NOT DECIDED |
-| C-STORE.4.11.5.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.11.5.1 | Fed by | NOT DECIDED |
 | C-STORE.4.11.5.1 | Gated by | NOT DECIDED |
 | C-STORE.4.11.5.1 | Changes | NOT DECIDED |
-| C-STORE.4.11.6 | Must never | NOT DECIDED |
 | C-STORE.4.11.6 | Fed by | NOT DECIDED |
 | C-STORE.4.11.6 | Changes | NOT DECIDED |
-| C-STORE.4.11.6.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.11.6.1 | Fed by | NOT DECIDED |
 | C-STORE.4.11.6.1 | Gated by | NOT DECIDED |
 | C-STORE.4.11.6.1 | Changes | NOT DECIDED |
 | C-STORE.4.11.7 | Must never | NOT DECIDED |
 | C-STORE.4.11.7 | Fed by | NOT DECIDED |
 | C-STORE.4.11.7 | Changes | NOT DECIDED |
-| C-STORE.4.11.7.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.11.7.1 | Fed by | NOT DECIDED |
 | C-STORE.4.11.7.1 | Gated by | NOT DECIDED |
 | C-STORE.4.11.7.1 | Changes | NOT DECIDED |
-| C-STORE.4.11.8 | Must never | NOT DECIDED |
 | C-STORE.4.11.8 | Fed by | NOT DECIDED |
 | C-STORE.4.11.8 | Changes | NOT DECIDED |
-| C-STORE.4.11.8.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.11.8.1 | Fed by | NOT DECIDED |
 | C-STORE.4.11.8.1 | Gated by | NOT DECIDED |
 | C-STORE.4.11.8.1 | Changes | NOT DECIDED |
-| C-STORE.4.11.9 | Must never | NOT DECIDED |
 | C-STORE.4.11.9 | Fed by | NOT DECIDED |
 | C-STORE.4.11.9 | Changes | NOT DECIDED |
-| C-STORE.4.11.9.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.11.9.1 | Fed by | NOT DECIDED |
 | C-STORE.4.11.9.1 | Gated by | NOT DECIDED |
 | C-STORE.4.11.9.1 | Changes | NOT DECIDED |
-| C-STORE.4.11.10 | Must never | NOT DECIDED |
 | C-STORE.4.11.10 | Fed by | NOT DECIDED |
 | C-STORE.4.11.10 | Changes | NOT DECIDED |
-| C-STORE.4.11.10.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.11.10.1 | Fed by | NOT DECIDED |
 | C-STORE.4.11.10.1 | Gated by | NOT DECIDED |
 | C-STORE.4.11.10.1 | Changes | NOT DECIDED |
-| C-STORE.4.11.11 | Must never | NOT DECIDED |
 | C-STORE.4.11.11 | Fed by | NOT DECIDED |
 | C-STORE.4.11.11 | Changes | NOT DECIDED |
-| C-STORE.4.11.11.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.11.11.1 | Fed by | NOT DECIDED |
 | C-STORE.4.11.11.1 | Gated by | NOT DECIDED |
 | C-STORE.4.11.11.1 | Changes | NOT DECIDED |
-| C-STORE.4.11.12 | Must never | NOT DECIDED |
 | C-STORE.4.11.12 | Fed by | NOT DECIDED |
 | C-STORE.4.11.12 | Changes | NOT DECIDED |
-| C-STORE.4.11.12.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.11.12.1 | Fed by | NOT DECIDED |
 | C-STORE.4.11.12.1 | Gated by | NOT DECIDED |
 | C-STORE.4.11.12.1 | Changes | NOT DECIDED |
-| C-STORE.4.11.13 | Must never | NOT DECIDED |
 | C-STORE.4.11.13 | Fed by | NOT DECIDED |
 | C-STORE.4.11.13 | Changes | NOT DECIDED |
-| C-STORE.4.11.13.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.11.13.1 | Fed by | NOT DECIDED |
 | C-STORE.4.11.13.1 | Gated by | NOT DECIDED |
 | C-STORE.4.11.13.1 | Changes | NOT DECIDED |
-| C-STORE.4.11.14 | Must never | NOT DECIDED |
 | C-STORE.4.11.14 | Fed by | NOT DECIDED |
 | C-STORE.4.11.14 | Changes | NOT DECIDED |
-| C-STORE.4.11.14.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.11.14.1 | Fed by | NOT DECIDED |
 | C-STORE.4.11.14.1 | Gated by | NOT DECIDED |
 | C-STORE.4.11.14.1 | Changes | NOT DECIDED |
-| C-STORE.4.11.15 | Must never | NOT DECIDED |
 | C-STORE.4.11.15 | Fed by | NOT DECIDED |
 | C-STORE.4.11.15 | Changes | NOT DECIDED |
-| C-STORE.4.11.15.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.11.15.1 | Fed by | NOT DECIDED |
 | C-STORE.4.11.15.1 | Gated by | NOT DECIDED |
 | C-STORE.4.11.15.1 | Changes | NOT DECIDED |
-| C-STORE.4.11.16 | Must never | NOT DECIDED |
 | C-STORE.4.11.16 | Fed by | NOT DECIDED |
 | C-STORE.4.11.16 | Changes | NOT DECIDED |
-| C-STORE.4.11.16.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.11.16.1 | Fed by | NOT DECIDED |
 | C-STORE.4.11.16.1 | Gated by | NOT DECIDED |
 | C-STORE.4.11.16.1 | Changes | NOT DECIDED |
-| C-STORE.4.11.17 | Must never | NOT DECIDED |
 | C-STORE.4.11.17 | Fed by | NOT DECIDED |
 | C-STORE.4.11.17 | Changes | NOT DECIDED |
-| C-STORE.4.11.17.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.11.17.1 | Fed by | NOT DECIDED |
 | C-STORE.4.11.17.1 | Gated by | NOT DECIDED |
 | C-STORE.4.11.17.1 | Changes | NOT DECIDED |
-| C-STORE.4.12 | Fails closed by | NOT DECIDED |
 | C-STORE.4.12 | Fed by | NOT DECIDED |
 | C-STORE.4.12 | Changes | NOT DECIDED |
-| C-STORE.4.12.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.12.1 | Fed by | NOT DECIDED |
 | C-STORE.4.12.1 | Gated by | NOT DECIDED |
 | C-STORE.4.12.1 | Changes | NOT DECIDED |
-| C-STORE.4.12.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.12.2 | Fed by | NOT DECIDED |
 | C-STORE.4.12.2 | Gated by | NOT DECIDED |
 | C-STORE.4.12.2 | Changes | NOT DECIDED |
-| C-STORE.4.12.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.12.3 | Fed by | NOT DECIDED |
 | C-STORE.4.12.3 | Gated by | NOT DECIDED |
 | C-STORE.4.12.3 | Changes | NOT DECIDED |
-| C-STORE.4.12.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.12.4 | Fed by | NOT DECIDED |
 | C-STORE.4.12.4 | Gated by | NOT DECIDED |
 | C-STORE.4.12.4 | Changes | NOT DECIDED |
-| C-STORE.4.12.5 | Fails closed by | NOT DECIDED |
 | C-STORE.4.12.5 | Fed by | NOT DECIDED |
 | C-STORE.4.12.5 | Gated by | NOT DECIDED |
 | C-STORE.4.12.5 | Changes | NOT DECIDED |
-| C-STORE.4.12.6 | Fails closed by | NOT DECIDED |
 | C-STORE.4.12.6 | Fed by | NOT DECIDED |
 | C-STORE.4.12.6 | Gated by | NOT DECIDED |
 | C-STORE.4.12.6 | Changes | NOT DECIDED |
-| C-STORE.4.12.7 | Fails closed by | NOT DECIDED |
 | C-STORE.4.12.7 | Fed by | NOT DECIDED |
 | C-STORE.4.12.7 | Gated by | NOT DECIDED |
 | C-STORE.4.12.7 | Changes | NOT DECIDED |
-| C-STORE.4.12.8 | Fails closed by | NOT DECIDED |
 | C-STORE.4.12.8 | Fed by | NOT DECIDED |
 | C-STORE.4.12.8 | Gated by | NOT DECIDED |
 | C-STORE.4.12.8 | Changes | NOT DECIDED |
-| C-STORE.4.12.9 | Fails closed by | NOT DECIDED |
 | C-STORE.4.12.9 | Fed by | NOT DECIDED |
 | C-STORE.4.12.9 | Gated by | NOT DECIDED |
 | C-STORE.4.12.9 | Changes | NOT DECIDED |
-| C-STORE.4.13 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13 | Fed by | NOT DECIDED |
 | C-STORE.4.13 | Changes | NOT DECIDED |
-| C-STORE.4.13.1 | Must never | NOT DECIDED |
-| C-STORE.4.13.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.1 | Fed by | NOT DECIDED |
 | C-STORE.4.13.1 | Changes | NOT DECIDED |
-| C-STORE.4.13.1.1 | Must never | NOT DECIDED |
 | C-STORE.4.13.1.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.1.1 | Fed by | NOT DECIDED |
 | C-STORE.4.13.1.1 | Gated by | NOT DECIDED |
 | C-STORE.4.13.1.1 | Changes | NOT DECIDED |
-| C-STORE.4.13.1.2 | Must never | NOT DECIDED |
 | C-STORE.4.13.1.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.1.2 | Fed by | NOT DECIDED |
 | C-STORE.4.13.1.2 | Gated by | NOT DECIDED |
 | C-STORE.4.13.1.2 | Changes | NOT DECIDED |
-| C-STORE.4.13.1.3 | Must never | NOT DECIDED |
 | C-STORE.4.13.1.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.1.3 | Fed by | NOT DECIDED |
 | C-STORE.4.13.1.3 | Gated by | NOT DECIDED |
 | C-STORE.4.13.1.3 | Changes | NOT DECIDED |
-| C-STORE.4.13.1.4 | Must never | NOT DECIDED |
 | C-STORE.4.13.1.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.1.4 | Fed by | NOT DECIDED |
 | C-STORE.4.13.1.4 | Gated by | NOT DECIDED |
 | C-STORE.4.13.1.4 | Changes | NOT DECIDED |
-| C-STORE.4.13.1.5 | Must never | NOT DECIDED |
-| C-STORE.4.13.1.5 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.1.5 | Fed by | NOT DECIDED |
 | C-STORE.4.13.1.5 | Gated by | NOT DECIDED |
 | C-STORE.4.13.1.5 | Changes | NOT DECIDED |
-| C-STORE.4.13.1.6 | Must never | NOT DECIDED |
-| C-STORE.4.13.1.6 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.1.6 | Fed by | NOT DECIDED |
 | C-STORE.4.13.1.6 | Gated by | NOT DECIDED |
 | C-STORE.4.13.1.6 | Changes | NOT DECIDED |
-| C-STORE.4.13.2 | Must never | NOT DECIDED |
 | C-STORE.4.13.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.2 | Fed by | NOT DECIDED |
 | C-STORE.4.13.2 | Gated by | NOT DECIDED |
 | C-STORE.4.13.2 | Changes | NOT DECIDED |
-| C-STORE.4.13.3 | Must never | NOT DECIDED |
 | C-STORE.4.13.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.3 | Fed by | NOT DECIDED |
 | C-STORE.4.13.3 | Changes | NOT DECIDED |
-| C-STORE.4.13.3.1 | Must never | NOT DECIDED |
 | C-STORE.4.13.3.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.3.1 | Fed by | NOT DECIDED |
 | C-STORE.4.13.3.1 | Gated by | NOT DECIDED |
 | C-STORE.4.13.3.1 | Changes | NOT DECIDED |
-| C-STORE.4.13.3.2 | Must never | NOT DECIDED |
 | C-STORE.4.13.3.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.3.2 | Fed by | NOT DECIDED |
 | C-STORE.4.13.3.2 | Gated by | NOT DECIDED |
 | C-STORE.4.13.3.2 | Changes | NOT DECIDED |
-| C-STORE.4.13.3.3 | Must never | NOT DECIDED |
 | C-STORE.4.13.3.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.3.3 | Fed by | NOT DECIDED |
 | C-STORE.4.13.3.3 | Gated by | NOT DECIDED |
 | C-STORE.4.13.3.3 | Changes | NOT DECIDED |
-| C-STORE.4.13.3.4 | Must never | NOT DECIDED |
 | C-STORE.4.13.3.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.3.4 | Fed by | NOT DECIDED |
 | C-STORE.4.13.3.4 | Gated by | NOT DECIDED |
 | C-STORE.4.13.3.4 | Changes | NOT DECIDED |
-| C-STORE.4.13.4 | Must never | NOT DECIDED |
-| C-STORE.4.13.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.4 | Fed by | NOT DECIDED |
 | C-STORE.4.13.4 | Changes | NOT DECIDED |
-| C-STORE.4.13.4.1 | Must never | NOT DECIDED |
 | C-STORE.4.13.4.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.4.1 | Fed by | NOT DECIDED |
 | C-STORE.4.13.4.1 | Gated by | NOT DECIDED |
 | C-STORE.4.13.4.1 | Changes | NOT DECIDED |
-| C-STORE.4.13.4.2 | Must never | NOT DECIDED |
 | C-STORE.4.13.4.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.4.2 | Fed by | NOT DECIDED |
 | C-STORE.4.13.4.2 | Gated by | NOT DECIDED |
 | C-STORE.4.13.4.2 | Changes | NOT DECIDED |
-| C-STORE.4.13.4.3 | Must never | NOT DECIDED |
 | C-STORE.4.13.4.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.4.3 | Fed by | NOT DECIDED |
 | C-STORE.4.13.4.3 | Gated by | NOT DECIDED |
 | C-STORE.4.13.4.3 | Changes | NOT DECIDED |
-| C-STORE.4.13.4.4 | Must never | NOT DECIDED |
 | C-STORE.4.13.4.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.4.4 | Fed by | NOT DECIDED |
 | C-STORE.4.13.4.4 | Gated by | NOT DECIDED |
 | C-STORE.4.13.4.4 | Changes | NOT DECIDED |
-| C-STORE.4.13.4.5 | Must never | NOT DECIDED |
 | C-STORE.4.13.4.5 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.4.5 | Fed by | NOT DECIDED |
 | C-STORE.4.13.4.5 | Gated by | NOT DECIDED |
 | C-STORE.4.13.4.5 | Changes | NOT DECIDED |
-| C-STORE.4.13.4.6 | Must never | NOT DECIDED |
 | C-STORE.4.13.4.6 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.4.6 | Fed by | NOT DECIDED |
 | C-STORE.4.13.4.6 | Gated by | NOT DECIDED |
 | C-STORE.4.13.4.6 | Changes | NOT DECIDED |
-| C-STORE.4.13.4.7 | Must never | NOT DECIDED |
-| C-STORE.4.13.4.7 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.4.7 | Fed by | NOT DECIDED |
 | C-STORE.4.13.4.7 | Gated by | NOT DECIDED |
 | C-STORE.4.13.4.7 | Changes | NOT DECIDED |
-| C-STORE.4.13.4.8 | Must never | NOT DECIDED |
-| C-STORE.4.13.4.8 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.4.8 | Fed by | NOT DECIDED |
 | C-STORE.4.13.4.8 | Gated by | NOT DECIDED |
 | C-STORE.4.13.4.8 | Changes | NOT DECIDED |
-| C-STORE.4.13.5 | Must never | NOT DECIDED |
-| C-STORE.4.13.5 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.5 | Fed by | NOT DECIDED |
 | C-STORE.4.13.5 | Changes | NOT DECIDED |
-| C-STORE.4.13.5.1 | Must never | NOT DECIDED |
 | C-STORE.4.13.5.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.5.1 | Fed by | NOT DECIDED |
 | C-STORE.4.13.5.1 | Gated by | NOT DECIDED |
 | C-STORE.4.13.5.1 | Changes | NOT DECIDED |
-| C-STORE.4.13.5.2 | Must never | NOT DECIDED |
 | C-STORE.4.13.5.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.5.2 | Fed by | NOT DECIDED |
 | C-STORE.4.13.5.2 | Gated by | NOT DECIDED |
 | C-STORE.4.13.5.2 | Changes | NOT DECIDED |
-| C-STORE.4.13.5.3 | Must never | NOT DECIDED |
-| C-STORE.4.13.5.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.5.3 | Fed by | NOT DECIDED |
 | C-STORE.4.13.5.3 | Gated by | NOT DECIDED |
 | C-STORE.4.13.5.3 | Changes | NOT DECIDED |
-| C-STORE.4.13.5.4 | Must never | NOT DECIDED |
 | C-STORE.4.13.5.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.5.4 | Fed by | NOT DECIDED |
 | C-STORE.4.13.5.4 | Gated by | NOT DECIDED |
 | C-STORE.4.13.5.4 | Changes | NOT DECIDED |
-| C-STORE.4.13.5.5 | Must never | NOT DECIDED |
-| C-STORE.4.13.5.5 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.5.5 | Fed by | NOT DECIDED |
 | C-STORE.4.13.5.5 | Gated by | NOT DECIDED |
 | C-STORE.4.13.5.5 | Changes | NOT DECIDED |
-| C-STORE.4.13.6 | Must never | NOT DECIDED |
-| C-STORE.4.13.6 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.6 | Fed by | NOT DECIDED |
 | C-STORE.4.13.6 | Gated by | NOT DECIDED |
 | C-STORE.4.13.6 | Changes | NOT DECIDED |
-| C-STORE.4.13.7 | Must never | NOT DECIDED |
 | C-STORE.4.13.7 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.7 | Fed by | NOT DECIDED |
 | C-STORE.4.13.7 | Changes | NOT DECIDED |
-| C-STORE.4.13.7.1 | Must never | NOT DECIDED |
 | C-STORE.4.13.7.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.7.1 | Fed by | NOT DECIDED |
 | C-STORE.4.13.7.1 | Gated by | NOT DECIDED |
 | C-STORE.4.13.7.1 | Changes | NOT DECIDED |
-| C-STORE.4.13.7.2 | Must never | NOT DECIDED |
 | C-STORE.4.13.7.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.7.2 | Fed by | NOT DECIDED |
 | C-STORE.4.13.7.2 | Gated by | NOT DECIDED |
 | C-STORE.4.13.7.2 | Changes | NOT DECIDED |
-| C-STORE.4.13.7.3 | Must never | NOT DECIDED |
 | C-STORE.4.13.7.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.7.3 | Fed by | NOT DECIDED |
 | C-STORE.4.13.7.3 | Gated by | NOT DECIDED |
 | C-STORE.4.13.7.3 | Changes | NOT DECIDED |
-| C-STORE.4.13.8 | Must never | NOT DECIDED |
-| C-STORE.4.13.8 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.8 | Fed by | NOT DECIDED |
 | C-STORE.4.13.8 | Gated by | NOT DECIDED |
 | C-STORE.4.13.8 | Changes | NOT DECIDED |
-| C-STORE.4.13.9 | Must never | NOT DECIDED |
 | C-STORE.4.13.9 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.9 | Fed by | NOT DECIDED |
 | C-STORE.4.13.9 | Gated by | NOT DECIDED |
 | C-STORE.4.13.9 | Changes | NOT DECIDED |
-| C-STORE.4.13.10 | Must never | NOT DECIDED |
 | C-STORE.4.13.10 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.10 | Fed by | NOT DECIDED |
 | C-STORE.4.13.10 | Gated by | NOT DECIDED |
 | C-STORE.4.13.10 | Changes | NOT DECIDED |
-| C-STORE.4.13.11 | Must never | NOT DECIDED |
 | C-STORE.4.13.11 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.11 | Fed by | NOT DECIDED |
 | C-STORE.4.13.11 | Gated by | NOT DECIDED |
 | C-STORE.4.13.11 | Changes | NOT DECIDED |
-| C-STORE.4.13.12 | Must never | NOT DECIDED |
 | C-STORE.4.13.12 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.12 | Fed by | NOT DECIDED |
 | C-STORE.4.13.12 | Gated by | NOT DECIDED |
 | C-STORE.4.13.12 | Changes | NOT DECIDED |
-| C-STORE.4.13.13 | Must never | NOT DECIDED |
-| C-STORE.4.13.13 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.13 | Fed by | NOT DECIDED |
 | C-STORE.4.13.13 | Gated by | NOT DECIDED |
 | C-STORE.4.13.13 | Changes | NOT DECIDED |
-| C-STORE.4.13.14 | Must never | NOT DECIDED |
-| C-STORE.4.13.14 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.14 | Fed by | NOT DECIDED |
 | C-STORE.4.13.14 | Changes | NOT DECIDED |
-| C-STORE.4.13.14.1 | Must never | NOT DECIDED |
-| C-STORE.4.13.14.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.14.1 | Fed by | NOT DECIDED |
 | C-STORE.4.13.14.1 | Gated by | NOT DECIDED |
 | C-STORE.4.13.14.1 | Changes | NOT DECIDED |
-| C-STORE.4.13.14.2 | Must never | NOT DECIDED |
-| C-STORE.4.13.14.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.14.2 | Fed by | NOT DECIDED |
 | C-STORE.4.13.14.2 | Gated by | NOT DECIDED |
 | C-STORE.4.13.14.2 | Changes | NOT DECIDED |
-| C-STORE.4.13.14.3 | Must never | NOT DECIDED |
-| C-STORE.4.13.14.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.14.3 | Fed by | NOT DECIDED |
 | C-STORE.4.13.14.3 | Gated by | NOT DECIDED |
 | C-STORE.4.13.14.3 | Changes | NOT DECIDED |
-| C-STORE.4.13.14.4 | Must never | NOT DECIDED |
-| C-STORE.4.13.14.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.14.4 | Fed by | NOT DECIDED |
 | C-STORE.4.13.14.4 | Gated by | NOT DECIDED |
 | C-STORE.4.13.14.4 | Changes | NOT DECIDED |
-| C-STORE.4.13.14.5 | Must never | NOT DECIDED |
-| C-STORE.4.13.14.5 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.14.5 | Fed by | NOT DECIDED |
 | C-STORE.4.13.14.5 | Gated by | NOT DECIDED |
 | C-STORE.4.13.14.5 | Changes | NOT DECIDED |
-| C-STORE.4.13.14.6 | Must never | NOT DECIDED |
-| C-STORE.4.13.14.6 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.14.6 | Fed by | NOT DECIDED |
 | C-STORE.4.13.14.6 | Gated by | NOT DECIDED |
 | C-STORE.4.13.14.6 | Changes | NOT DECIDED |
-| C-STORE.4.13.15 | Must never | NOT DECIDED |
 | C-STORE.4.13.15 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.15 | Fed by | NOT DECIDED |
 | C-STORE.4.13.15 | Changes | NOT DECIDED |
-| C-STORE.4.13.15.1 | Must never | NOT DECIDED |
 | C-STORE.4.13.15.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.15.1 | Fed by | NOT DECIDED |
 | C-STORE.4.13.15.1 | Gated by | NOT DECIDED |
 | C-STORE.4.13.15.1 | Changes | NOT DECIDED |
-| C-STORE.4.13.15.2 | Must never | NOT DECIDED |
 | C-STORE.4.13.15.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.15.2 | Fed by | NOT DECIDED |
 | C-STORE.4.13.15.2 | Gated by | NOT DECIDED |
 | C-STORE.4.13.15.2 | Changes | NOT DECIDED |
-| C-STORE.4.13.15.3 | Must never | NOT DECIDED |
 | C-STORE.4.13.15.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.15.3 | Fed by | NOT DECIDED |
 | C-STORE.4.13.15.3 | Gated by | NOT DECIDED |
 | C-STORE.4.13.15.3 | Changes | NOT DECIDED |
-| C-STORE.4.13.15.4 | Must never | NOT DECIDED |
 | C-STORE.4.13.15.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.15.4 | Fed by | NOT DECIDED |
 | C-STORE.4.13.15.4 | Gated by | NOT DECIDED |
 | C-STORE.4.13.15.4 | Changes | NOT DECIDED |
-| C-STORE.4.13.15.5 | Must never | NOT DECIDED |
 | C-STORE.4.13.15.5 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.15.5 | Fed by | NOT DECIDED |
 | C-STORE.4.13.15.5 | Gated by | NOT DECIDED |
@@ -19837,132 +19493,96 @@ SUB-PARTS: NONE
 | C-STORE.4.13.16 | Changes | NOT DECIDED |
 | C-STORE.4.13.16 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.4.13.16 | USED BY 1 / Changes there | NOT DECIDED |
-| C-STORE.4.13.17 | Must never | NOT DECIDED |
 | C-STORE.4.13.17 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.17 | Fed by | NOT DECIDED |
 | C-STORE.4.13.17 | Changes | NOT DECIDED |
-| C-STORE.4.13.17.1 | Must never | NOT DECIDED |
 | C-STORE.4.13.17.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.17.1 | Fed by | NOT DECIDED |
 | C-STORE.4.13.17.1 | Gated by | NOT DECIDED |
 | C-STORE.4.13.17.1 | Changes | NOT DECIDED |
-| C-STORE.4.13.17.2 | Must never | NOT DECIDED |
 | C-STORE.4.13.17.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.17.2 | Fed by | NOT DECIDED |
 | C-STORE.4.13.17.2 | Gated by | NOT DECIDED |
 | C-STORE.4.13.17.2 | Changes | NOT DECIDED |
-| C-STORE.4.13.17.3 | Must never | NOT DECIDED |
 | C-STORE.4.13.17.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.17.3 | Fed by | NOT DECIDED |
 | C-STORE.4.13.17.3 | Gated by | NOT DECIDED |
 | C-STORE.4.13.17.3 | Changes | NOT DECIDED |
-| C-STORE.4.13.18 | Must never | NOT DECIDED |
 | C-STORE.4.13.18 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.18 | Fed by | NOT DECIDED |
 | C-STORE.4.13.18 | Changes | NOT DECIDED |
-| C-STORE.4.13.18.1 | Must never | NOT DECIDED |
 | C-STORE.4.13.18.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.18.1 | Fed by | NOT DECIDED |
 | C-STORE.4.13.18.1 | Gated by | NOT DECIDED |
 | C-STORE.4.13.18.1 | Changes | NOT DECIDED |
-| C-STORE.4.13.18.2 | Must never | NOT DECIDED |
 | C-STORE.4.13.18.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.18.2 | Fed by | NOT DECIDED |
 | C-STORE.4.13.18.2 | Gated by | NOT DECIDED |
 | C-STORE.4.13.18.2 | Changes | NOT DECIDED |
-| C-STORE.4.13.18.3 | Must never | NOT DECIDED |
 | C-STORE.4.13.18.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.18.3 | Fed by | NOT DECIDED |
 | C-STORE.4.13.18.3 | Gated by | NOT DECIDED |
 | C-STORE.4.13.18.3 | Changes | NOT DECIDED |
-| C-STORE.4.13.18.4 | Must never | NOT DECIDED |
 | C-STORE.4.13.18.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.18.4 | Fed by | NOT DECIDED |
 | C-STORE.4.13.18.4 | Gated by | NOT DECIDED |
 | C-STORE.4.13.18.4 | Changes | NOT DECIDED |
-| C-STORE.4.13.19 | Must never | NOT DECIDED |
-| C-STORE.4.13.19 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.19 | Fed by | NOT DECIDED |
 | C-STORE.4.13.19 | Changes | NOT DECIDED |
-| C-STORE.4.13.19.1 | Must never | NOT DECIDED |
-| C-STORE.4.13.19.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.19.1 | Fed by | NOT DECIDED |
 | C-STORE.4.13.19.1 | Gated by | NOT DECIDED |
 | C-STORE.4.13.19.1 | Changes | NOT DECIDED |
-| C-STORE.4.13.19.2 | Must never | NOT DECIDED |
-| C-STORE.4.13.19.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.19.2 | Fed by | NOT DECIDED |
 | C-STORE.4.13.19.2 | Gated by | NOT DECIDED |
 | C-STORE.4.13.19.2 | Changes | NOT DECIDED |
-| C-STORE.4.13.19.3 | Must never | NOT DECIDED |
-| C-STORE.4.13.19.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.19.3 | Fed by | NOT DECIDED |
 | C-STORE.4.13.19.3 | Gated by | NOT DECIDED |
 | C-STORE.4.13.19.3 | Changes | NOT DECIDED |
-| C-STORE.4.13.20 | Must never | NOT DECIDED |
 | C-STORE.4.13.20 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.20 | Fed by | NOT DECIDED |
 | C-STORE.4.13.20 | Changes | NOT DECIDED |
-| C-STORE.4.13.20.1 | Must never | NOT DECIDED |
 | C-STORE.4.13.20.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.20.1 | Fed by | NOT DECIDED |
 | C-STORE.4.13.20.1 | Gated by | NOT DECIDED |
 | C-STORE.4.13.20.1 | Changes | NOT DECIDED |
-| C-STORE.4.13.20.2 | Must never | NOT DECIDED |
 | C-STORE.4.13.20.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.20.2 | Fed by | NOT DECIDED |
 | C-STORE.4.13.20.2 | Gated by | NOT DECIDED |
 | C-STORE.4.13.20.2 | Changes | NOT DECIDED |
-| C-STORE.4.13.21 | Must never | NOT DECIDED |
 | C-STORE.4.13.21 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.21 | Fed by | NOT DECIDED |
 | C-STORE.4.13.21 | Changes | NOT DECIDED |
-| C-STORE.4.13.21.1 | Must never | NOT DECIDED |
 | C-STORE.4.13.21.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.21.1 | Fed by | NOT DECIDED |
 | C-STORE.4.13.21.1 | Gated by | NOT DECIDED |
 | C-STORE.4.13.21.1 | Changes | NOT DECIDED |
-| C-STORE.4.13.21.2 | Must never | NOT DECIDED |
 | C-STORE.4.13.21.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.21.2 | Fed by | NOT DECIDED |
 | C-STORE.4.13.21.2 | Gated by | NOT DECIDED |
 | C-STORE.4.13.21.2 | Changes | NOT DECIDED |
-| C-STORE.4.13.21.3 | Must never | NOT DECIDED |
 | C-STORE.4.13.21.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.21.3 | Fed by | NOT DECIDED |
 | C-STORE.4.13.21.3 | Gated by | NOT DECIDED |
 | C-STORE.4.13.21.3 | Changes | NOT DECIDED |
-| C-STORE.4.13.21.4 | Must never | NOT DECIDED |
 | C-STORE.4.13.21.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.21.4 | Fed by | NOT DECIDED |
 | C-STORE.4.13.21.4 | Gated by | NOT DECIDED |
 | C-STORE.4.13.21.4 | Changes | NOT DECIDED |
-| C-STORE.4.13.22 | Must never | NOT DECIDED |
-| C-STORE.4.13.22 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.22 | Fed by | NOT DECIDED |
 | C-STORE.4.13.22 | Changes | NOT DECIDED |
-| C-STORE.4.13.22.1 | Must never | NOT DECIDED |
-| C-STORE.4.13.22.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.22.1 | Fed by | NOT DECIDED |
 | C-STORE.4.13.22.1 | Gated by | NOT DECIDED |
 | C-STORE.4.13.22.1 | Changes | NOT DECIDED |
-| C-STORE.4.13.22.2 | Must never | NOT DECIDED |
-| C-STORE.4.13.22.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.22.2 | Fed by | NOT DECIDED |
 | C-STORE.4.13.22.2 | Gated by | NOT DECIDED |
 | C-STORE.4.13.22.2 | Changes | NOT DECIDED |
-| C-STORE.4.13.22.3 | Must never | NOT DECIDED |
-| C-STORE.4.13.22.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.13.22.3 | Fed by | NOT DECIDED |
 | C-STORE.4.13.22.3 | Gated by | NOT DECIDED |
 | C-STORE.4.13.22.3 | Changes | NOT DECIDED |
-| C-STORE.4.14 | Fails closed by | NOT DECIDED |
 | C-STORE.4.14 | Fed by | NOT DECIDED |
 | C-STORE.4.14 | Changes | NOT DECIDED |
 | C-STORE.4.14.1 | Takes in | NOT DECIDED |
 | C-STORE.4.14.1 | Gives out | NOT DECIDED |
-| C-STORE.4.14.1 | Must never | NOT DECIDED |
-| C-STORE.4.14.1 | Fails closed by | NOT DECIDED |
 | C-STORE.4.14.1 | Fed by | NOT DECIDED |
 | C-STORE.4.14.1 | Gated by | NOT DECIDED |
 | C-STORE.4.14.1 | Changes | NOT DECIDED |
@@ -19970,7 +19590,6 @@ SUB-PARTS: NONE
 | C-STORE.4.14.1 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.14.2 | Takes in | NOT DECIDED |
 | C-STORE.4.14.2 | Gives out | NOT DECIDED |
-| C-STORE.4.14.2 | Must never | NOT DECIDED |
 | C-STORE.4.14.2 | Fails closed by | NOT DECIDED |
 | C-STORE.4.14.2 | Fed by | NOT DECIDED |
 | C-STORE.4.14.2 | Gated by | NOT DECIDED |
@@ -19979,7 +19598,6 @@ SUB-PARTS: NONE
 | C-STORE.4.14.2 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.14.3 | Takes in | NOT DECIDED |
 | C-STORE.4.14.3 | Gives out | NOT DECIDED |
-| C-STORE.4.14.3 | Must never | NOT DECIDED |
 | C-STORE.4.14.3 | Fails closed by | NOT DECIDED |
 | C-STORE.4.14.3 | Fed by | NOT DECIDED |
 | C-STORE.4.14.3 | Gated by | NOT DECIDED |
@@ -19988,7 +19606,6 @@ SUB-PARTS: NONE
 | C-STORE.4.14.3 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.4.14.4 | Takes in | NOT DECIDED |
 | C-STORE.4.14.4 | Gives out | NOT DECIDED |
-| C-STORE.4.14.4 | Must never | NOT DECIDED |
 | C-STORE.4.14.4 | Fails closed by | NOT DECIDED |
 | C-STORE.4.14.4 | Fed by | NOT DECIDED |
 | C-STORE.4.14.4 | Gated by | NOT DECIDED |
@@ -20060,21 +19677,17 @@ SUB-PARTS: NONE
 | C-STORE.5.1.2.6 | Changes | NOT DECIDED |
 | C-STORE.5.1.2.6 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.1.2.6 | USED BY 1 / Changes there | NOT DECIDED |
-| C-STORE.5.1.3 | Fails closed by | NOT DECIDED |
 | C-STORE.5.1.3 | Fed by | NOT DECIDED |
 | C-STORE.5.1.3 | Changes | NOT DECIDED |
 | C-STORE.5.1.3.1 | Takes in | NOT DECIDED |
 | C-STORE.5.1.3.1 | Gives out | NOT DECIDED |
-| C-STORE.5.1.3.1 | Must never | NOT DECIDED |
 | C-STORE.5.1.3.1 | Fails closed by | NOT DECIDED |
 | C-STORE.5.1.3.1 | Fed by | NOT DECIDED |
-| C-STORE.5.1.3.1 | Gated by | NOT DECIDED |
 | C-STORE.5.1.3.1 | Changes | NOT DECIDED |
 | C-STORE.5.1.3.1 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.1.3.1 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.1.3.2 | Takes in | NOT DECIDED |
 | C-STORE.5.1.3.2 | Gives out | NOT DECIDED |
-| C-STORE.5.1.3.2 | Must never | NOT DECIDED |
 | C-STORE.5.1.3.2 | Fails closed by | NOT DECIDED |
 | C-STORE.5.1.3.2 | Fed by | NOT DECIDED |
 | C-STORE.5.1.3.2 | Gated by | NOT DECIDED |
@@ -20083,7 +19696,6 @@ SUB-PARTS: NONE
 | C-STORE.5.1.3.2 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.1.3.3 | Takes in | NOT DECIDED |
 | C-STORE.5.1.3.3 | Gives out | NOT DECIDED |
-| C-STORE.5.1.3.3 | Must never | NOT DECIDED |
 | C-STORE.5.1.3.3 | Fails closed by | NOT DECIDED |
 | C-STORE.5.1.3.3 | Fed by | NOT DECIDED |
 | C-STORE.5.1.3.3 | Gated by | NOT DECIDED |
@@ -20092,10 +19704,7 @@ SUB-PARTS: NONE
 | C-STORE.5.1.3.3 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.1.3.4 | Takes in | NOT DECIDED |
 | C-STORE.5.1.3.4 | Gives out | NOT DECIDED |
-| C-STORE.5.1.3.4 | Must never | NOT DECIDED |
-| C-STORE.5.1.3.4 | Fails closed by | NOT DECIDED |
 | C-STORE.5.1.3.4 | Fed by | NOT DECIDED |
-| C-STORE.5.1.3.4 | Gated by | NOT DECIDED |
 | C-STORE.5.1.3.4 | Changes | NOT DECIDED |
 | C-STORE.5.1.3.4 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.1.3.4 | USED BY 1 / Changes there | NOT DECIDED |
@@ -20112,7 +19721,6 @@ SUB-PARTS: NONE
 | C-STORE.5.2.1 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.2.2 | Takes in | NOT DECIDED |
 | C-STORE.5.2.2 | Gives out | NOT DECIDED |
-| C-STORE.5.2.2 | Must never | NOT DECIDED |
 | C-STORE.5.2.2 | Fails closed by | NOT DECIDED |
 | C-STORE.5.2.2 | Fed by | NOT DECIDED |
 | C-STORE.5.2.2 | Gated by | NOT DECIDED |
@@ -20121,7 +19729,6 @@ SUB-PARTS: NONE
 | C-STORE.5.2.2 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.2.3 | Takes in | NOT DECIDED |
 | C-STORE.5.2.3 | Gives out | NOT DECIDED |
-| C-STORE.5.2.3 | Must never | NOT DECIDED |
 | C-STORE.5.2.3 | Fails closed by | NOT DECIDED |
 | C-STORE.5.2.3 | Fed by | NOT DECIDED |
 | C-STORE.5.2.3 | Gated by | NOT DECIDED |
@@ -20130,7 +19737,6 @@ SUB-PARTS: NONE
 | C-STORE.5.2.3 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.2.4 | Takes in | NOT DECIDED |
 | C-STORE.5.2.4 | Gives out | NOT DECIDED |
-| C-STORE.5.2.4 | Must never | NOT DECIDED |
 | C-STORE.5.2.4 | Fails closed by | NOT DECIDED |
 | C-STORE.5.2.4 | Fed by | NOT DECIDED |
 | C-STORE.5.2.4 | Gated by | NOT DECIDED |
@@ -20139,8 +19745,6 @@ SUB-PARTS: NONE
 | C-STORE.5.2.4 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.2.5 | Takes in | NOT DECIDED |
 | C-STORE.5.2.5 | Gives out | NOT DECIDED |
-| C-STORE.5.2.5 | Must never | NOT DECIDED |
-| C-STORE.5.2.5 | Fails closed by | NOT DECIDED |
 | C-STORE.5.2.5 | Fed by | NOT DECIDED |
 | C-STORE.5.2.5 | Gated by | NOT DECIDED |
 | C-STORE.5.2.5 | Changes | NOT DECIDED |
@@ -20148,8 +19752,6 @@ SUB-PARTS: NONE
 | C-STORE.5.2.5 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.2.6 | Takes in | NOT DECIDED |
 | C-STORE.5.2.6 | Gives out | NOT DECIDED |
-| C-STORE.5.2.6 | Must never | NOT DECIDED |
-| C-STORE.5.2.6 | Fails closed by | NOT DECIDED |
 | C-STORE.5.2.6 | Fed by | NOT DECIDED |
 | C-STORE.5.2.6 | Gated by | NOT DECIDED |
 | C-STORE.5.2.6 | Changes | NOT DECIDED |
@@ -20157,8 +19759,6 @@ SUB-PARTS: NONE
 | C-STORE.5.2.6 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.2.7 | Takes in | NOT DECIDED |
 | C-STORE.5.2.7 | Gives out | NOT DECIDED |
-| C-STORE.5.2.7 | Must never | NOT DECIDED |
-| C-STORE.5.2.7 | Fails closed by | NOT DECIDED |
 | C-STORE.5.2.7 | Fed by | NOT DECIDED |
 | C-STORE.5.2.7 | Gated by | NOT DECIDED |
 | C-STORE.5.2.7 | Changes | NOT DECIDED |
@@ -20166,8 +19766,6 @@ SUB-PARTS: NONE
 | C-STORE.5.2.7 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.2.8 | Takes in | NOT DECIDED |
 | C-STORE.5.2.8 | Gives out | NOT DECIDED |
-| C-STORE.5.2.8 | Must never | NOT DECIDED |
-| C-STORE.5.2.8 | Fails closed by | NOT DECIDED |
 | C-STORE.5.2.8 | Fed by | NOT DECIDED |
 | C-STORE.5.2.8 | Gated by | NOT DECIDED |
 | C-STORE.5.2.8 | Changes | NOT DECIDED |
@@ -20175,7 +19773,6 @@ SUB-PARTS: NONE
 | C-STORE.5.2.8 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.2.9 | Takes in | NOT DECIDED |
 | C-STORE.5.2.9 | Gives out | NOT DECIDED |
-| C-STORE.5.2.9 | Must never | NOT DECIDED |
 | C-STORE.5.2.9 | Fails closed by | NOT DECIDED |
 | C-STORE.5.2.9 | Fed by | NOT DECIDED |
 | C-STORE.5.2.9 | Gated by | NOT DECIDED |
@@ -20184,14 +19781,10 @@ SUB-PARTS: NONE
 | C-STORE.5.2.9 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.2.10 | Takes in | NOT DECIDED |
 | C-STORE.5.2.10 | Gives out | NOT DECIDED |
-| C-STORE.5.2.10 | Must never | NOT DECIDED |
-| C-STORE.5.2.10 | Fails closed by | NOT DECIDED |
 | C-STORE.5.2.10 | Fed by | NOT DECIDED |
-| C-STORE.5.2.10 | Gated by | NOT DECIDED |
 | C-STORE.5.2.10 | Changes | NOT DECIDED |
 | C-STORE.5.2.10 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.2.10 | USED BY 1 / Changes there | NOT DECIDED |
-| C-STORE.5.2.11 | Fails closed by | NOT DECIDED |
 | C-STORE.5.2.11 | Fed by | NOT DECIDED |
 | C-STORE.5.2.11 | Changes | NOT DECIDED |
 | C-STORE.5.2.11.1 | Takes in | NOT DECIDED |
@@ -20199,7 +19792,6 @@ SUB-PARTS: NONE
 | C-STORE.5.2.11.1 | Must never | NOT DECIDED |
 | C-STORE.5.2.11.1 | Fails closed by | NOT DECIDED |
 | C-STORE.5.2.11.1 | Fed by | NOT DECIDED |
-| C-STORE.5.2.11.1 | Gated by | NOT DECIDED |
 | C-STORE.5.2.11.1 | Changes | NOT DECIDED |
 | C-STORE.5.2.11.1 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.2.11.1 | USED BY 1 / Changes there | NOT DECIDED |
@@ -20208,7 +19800,6 @@ SUB-PARTS: NONE
 | C-STORE.5.2.11.2 | Must never | NOT DECIDED |
 | C-STORE.5.2.11.2 | Fails closed by | NOT DECIDED |
 | C-STORE.5.2.11.2 | Fed by | NOT DECIDED |
-| C-STORE.5.2.11.2 | Gated by | NOT DECIDED |
 | C-STORE.5.2.11.2 | Changes | NOT DECIDED |
 | C-STORE.5.2.11.2 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.2.11.2 | USED BY 1 / Changes there | NOT DECIDED |
@@ -20217,7 +19808,6 @@ SUB-PARTS: NONE
 | C-STORE.5.2.11.3 | Must never | NOT DECIDED |
 | C-STORE.5.2.11.3 | Fails closed by | NOT DECIDED |
 | C-STORE.5.2.11.3 | Fed by | NOT DECIDED |
-| C-STORE.5.2.11.3 | Gated by | NOT DECIDED |
 | C-STORE.5.2.11.3 | Changes | NOT DECIDED |
 | C-STORE.5.2.11.3 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.2.11.3 | USED BY 1 / Changes there | NOT DECIDED |
@@ -20226,7 +19816,6 @@ SUB-PARTS: NONE
 | C-STORE.5.2.11.4 | Must never | NOT DECIDED |
 | C-STORE.5.2.11.4 | Fails closed by | NOT DECIDED |
 | C-STORE.5.2.11.4 | Fed by | NOT DECIDED |
-| C-STORE.5.2.11.4 | Gated by | NOT DECIDED |
 | C-STORE.5.2.11.4 | Changes | NOT DECIDED |
 | C-STORE.5.2.11.4 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.2.11.4 | USED BY 1 / Changes there | NOT DECIDED |
@@ -20235,41 +19824,30 @@ SUB-PARTS: NONE
 | C-STORE.5.2.11.5 | Must never | NOT DECIDED |
 | C-STORE.5.2.11.5 | Fails closed by | NOT DECIDED |
 | C-STORE.5.2.11.5 | Fed by | NOT DECIDED |
-| C-STORE.5.2.11.5 | Gated by | NOT DECIDED |
 | C-STORE.5.2.11.5 | Changes | NOT DECIDED |
 | C-STORE.5.2.11.5 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.2.11.5 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.2.11.6 | Takes in | NOT DECIDED |
 | C-STORE.5.2.11.6 | Gives out | NOT DECIDED |
 | C-STORE.5.2.11.6 | Must never | NOT DECIDED |
-| C-STORE.5.2.11.6 | Fails closed by | NOT DECIDED |
 | C-STORE.5.2.11.6 | Fed by | NOT DECIDED |
-| C-STORE.5.2.11.6 | Gated by | NOT DECIDED |
 | C-STORE.5.2.11.6 | Changes | NOT DECIDED |
 | C-STORE.5.2.11.6 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.2.11.6 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.2.11.7 | Takes in | NOT DECIDED |
 | C-STORE.5.2.11.7 | Gives out | NOT DECIDED |
-| C-STORE.5.2.11.7 | Must never | NOT DECIDED |
-| C-STORE.5.2.11.7 | Fails closed by | NOT DECIDED |
 | C-STORE.5.2.11.7 | Fed by | NOT DECIDED |
-| C-STORE.5.2.11.7 | Gated by | NOT DECIDED |
 | C-STORE.5.2.11.7 | Changes | NOT DECIDED |
 | C-STORE.5.2.11.7 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.2.11.7 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.2.11.8 | Takes in | NOT DECIDED |
 | C-STORE.5.2.11.8 | Gives out | NOT DECIDED |
-| C-STORE.5.2.11.8 | Must never | NOT DECIDED |
-| C-STORE.5.2.11.8 | Fails closed by | NOT DECIDED |
 | C-STORE.5.2.11.8 | Fed by | NOT DECIDED |
-| C-STORE.5.2.11.8 | Gated by | NOT DECIDED |
 | C-STORE.5.2.11.8 | Changes | NOT DECIDED |
 | C-STORE.5.2.11.8 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.2.11.8 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.2.11.9 | Takes in | NOT DECIDED |
 | C-STORE.5.2.11.9 | Gives out | NOT DECIDED |
-| C-STORE.5.2.11.9 | Must never | NOT DECIDED |
-| C-STORE.5.2.11.9 | Fails closed by | NOT DECIDED |
 | C-STORE.5.2.11.9 | Fed by | NOT DECIDED |
 | C-STORE.5.2.11.9 | Gated by | NOT DECIDED |
 | C-STORE.5.2.11.9 | Changes | NOT DECIDED |
@@ -20279,39 +19857,30 @@ SUB-PARTS: NONE
 | C-STORE.5.3.1 | Takes in | NOT DECIDED |
 | C-STORE.5.3.1 | Does | NOT DECIDED |
 | C-STORE.5.3.1 | Must never | NOT DECIDED |
-| C-STORE.5.3.1 | Fails closed by | NOT DECIDED |
 | C-STORE.5.3.1 | Gated by | NOT DECIDED |
 | C-STORE.5.3.1 | Changes | NOT DECIDED |
 | C-STORE.5.3.1 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.3.1 | USED BY 1 / Does there | NOT DECIDED |
 | C-STORE.5.3.1.1 | Must never | NOT DECIDED |
-| C-STORE.5.3.1.1 | Fails closed by | NOT DECIDED |
 | C-STORE.5.3.1.1 | Fed by | NOT DECIDED |
 | C-STORE.5.3.1.1 | Gated by | NOT DECIDED |
 | C-STORE.5.3.1.1 | Changes | NOT DECIDED |
 | C-STORE.5.3.1.2 | Must never | NOT DECIDED |
-| C-STORE.5.3.1.2 | Fails closed by | NOT DECIDED |
 | C-STORE.5.3.1.2 | Fed by | NOT DECIDED |
 | C-STORE.5.3.1.2 | Gated by | NOT DECIDED |
 | C-STORE.5.3.1.2 | Changes | NOT DECIDED |
 | C-STORE.5.3.2 | Takes in | NOT DECIDED |
-| C-STORE.5.3.2 | Must never | NOT DECIDED |
-| C-STORE.5.3.2 | Fails closed by | NOT DECIDED |
 | C-STORE.5.3.2 | Fed by | NOT DECIDED |
 | C-STORE.5.3.2 | Gated by | NOT DECIDED |
 | C-STORE.5.3.2 | Changes | NOT DECIDED |
 | C-STORE.5.3.2 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.3.3 | Takes in | NOT DECIDED |
-| C-STORE.5.3.3 | Must never | NOT DECIDED |
-| C-STORE.5.3.3 | Fails closed by | NOT DECIDED |
 | C-STORE.5.3.3 | Fed by | NOT DECIDED |
 | C-STORE.5.3.3 | Gated by | NOT DECIDED |
 | C-STORE.5.3.3 | Changes | NOT DECIDED |
 | C-STORE.5.3.3 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.3.4 | Takes in | NOT DECIDED |
 | C-STORE.5.3.4 | Gives out | NOT DECIDED |
-| C-STORE.5.3.4 | Must never | NOT DECIDED |
-| C-STORE.5.3.4 | Fails closed by | NOT DECIDED |
 | C-STORE.5.3.4 | Fed by | NOT DECIDED |
 | C-STORE.5.3.4 | Gated by | NOT DECIDED |
 | C-STORE.5.3.4 | Changes | NOT DECIDED |
@@ -20319,7 +19888,6 @@ SUB-PARTS: NONE
 | C-STORE.5.3.4 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.3.5 | Takes in | NOT DECIDED |
 | C-STORE.5.3.5 | Gives out | NOT DECIDED |
-| C-STORE.5.3.5 | Must never | NOT DECIDED |
 | C-STORE.5.3.5 | Fails closed by | NOT DECIDED |
 | C-STORE.5.3.5 | Fed by | NOT DECIDED |
 | C-STORE.5.3.5 | Gated by | NOT DECIDED |
@@ -20330,7 +19898,6 @@ SUB-PARTS: NONE
 | C-STORE.5.4 | Changes | NOT DECIDED |
 | C-STORE.5.4.1 | Takes in | NOT DECIDED |
 | C-STORE.5.4.1 | Must never | NOT DECIDED |
-| C-STORE.5.4.1 | Fails closed by | NOT DECIDED |
 | C-STORE.5.4.1 | Gated by | NOT DECIDED |
 | C-STORE.5.4.1 | Changes | NOT DECIDED |
 | C-STORE.5.4.1 | USED BY 1 / Takes in there | NOT DECIDED |
@@ -20349,8 +19916,6 @@ SUB-PARTS: NONE
 | C-STORE.5.4.1.2 | Changes | NOT DECIDED |
 | C-STORE.5.4.1.2 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.4.1.3 | Takes in | NOT DECIDED |
-| C-STORE.5.4.1.3 | Must never | NOT DECIDED |
-| C-STORE.5.4.1.3 | Fails closed by | NOT DECIDED |
 | C-STORE.5.4.1.3 | Fed by | NOT DECIDED |
 | C-STORE.5.4.1.3 | Changes | NOT DECIDED |
 | C-STORE.5.4.1.3 | USED BY 1 / Takes in there | NOT DECIDED |
@@ -20369,14 +19934,12 @@ SUB-PARTS: NONE
 | C-STORE.5.4.1.3.2 | Changes | NOT DECIDED |
 | C-STORE.5.4.1.3.2 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.4.1.4 | Takes in | NOT DECIDED |
-| C-STORE.5.4.1.4 | Must never | NOT DECIDED |
 | C-STORE.5.4.1.4 | Fails closed by | NOT DECIDED |
 | C-STORE.5.4.1.4 | Fed by | NOT DECIDED |
 | C-STORE.5.4.1.4 | Gated by | NOT DECIDED |
 | C-STORE.5.4.1.4 | Changes | NOT DECIDED |
 | C-STORE.5.4.1.4 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.4.1.5 | Takes in | NOT DECIDED |
-| C-STORE.5.4.1.5 | Must never | NOT DECIDED |
 | C-STORE.5.4.1.5 | Fails closed by | NOT DECIDED |
 | C-STORE.5.4.1.5 | Fed by | NOT DECIDED |
 | C-STORE.5.4.1.5 | Gated by | NOT DECIDED |
@@ -20397,10 +19960,7 @@ SUB-PARTS: NONE
 | C-STORE.5.4.1.7 | Changes | NOT DECIDED |
 | C-STORE.5.4.1.7 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.4.1.8 | Takes in | NOT DECIDED |
-| C-STORE.5.4.1.8 | Must never | NOT DECIDED |
-| C-STORE.5.4.1.8 | Fails closed by | NOT DECIDED |
 | C-STORE.5.4.1.8 | Fed by | NOT DECIDED |
-| C-STORE.5.4.1.8 | Gated by | NOT DECIDED |
 | C-STORE.5.4.1.8 | Changes | NOT DECIDED |
 | C-STORE.5.4.1.8 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.4.1.9 | Takes in | NOT DECIDED |
@@ -20410,22 +19970,18 @@ SUB-PARTS: NONE
 | C-STORE.5.4.1.9 | Gated by | NOT DECIDED |
 | C-STORE.5.4.1.9 | Changes | NOT DECIDED |
 | C-STORE.5.4.1.9 | USED BY 1 / Takes in there | NOT DECIDED |
-| C-STORE.5.4.2 | Must never | NOT DECIDED |
 | C-STORE.5.4.2 | Fed by | NOT DECIDED |
 | C-STORE.5.4.2 | Changes | NOT DECIDED |
 | C-STORE.5.4.2.1 | Takes in | NOT DECIDED |
 | C-STORE.5.4.2.1 | Gives out | NOT DECIDED |
 | C-STORE.5.4.2.1 | Must never | NOT DECIDED |
-| C-STORE.5.4.2.1 | Fails closed by | NOT DECIDED |
 | C-STORE.5.4.2.1 | Fed by | NOT DECIDED |
-| C-STORE.5.4.2.1 | Gated by | NOT DECIDED |
 | C-STORE.5.4.2.1 | Changes | NOT DECIDED |
 | C-STORE.5.4.2.1 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.4.2.1 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.4.2.2 | Takes in | NOT DECIDED |
 | C-STORE.5.4.2.2 | Gives out | NOT DECIDED |
 | C-STORE.5.4.2.2 | Must never | NOT DECIDED |
-| C-STORE.5.4.2.2 | Fails closed by | NOT DECIDED |
 | C-STORE.5.4.2.2 | Fed by | NOT DECIDED |
 | C-STORE.5.4.2.2 | Gated by | NOT DECIDED |
 | C-STORE.5.4.2.2 | Changes | NOT DECIDED |
@@ -20433,19 +19989,16 @@ SUB-PARTS: NONE
 | C-STORE.5.4.2.2 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.4.3 | Takes in | NOT DECIDED |
 | C-STORE.5.4.3 | Gives out | NOT DECIDED |
-| C-STORE.5.4.3 | Fails closed by | NOT DECIDED |
 | C-STORE.5.4.3 | Fed by | NOT DECIDED |
 | C-STORE.5.4.3 | Gated by | NOT DECIDED |
 | C-STORE.5.4.3 | Changes | NOT DECIDED |
 | C-STORE.5.4.3 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.4.3 | USED BY 1 / Changes there | NOT DECIDED |
-| C-STORE.5.4.4 | Fails closed by | NOT DECIDED |
 | C-STORE.5.4.4 | Fed by | NOT DECIDED |
 | C-STORE.5.4.4 | Changes | NOT DECIDED |
 | C-STORE.5.4.4.1 | Takes in | NOT DECIDED |
 | C-STORE.5.4.4.1 | Gives out | NOT DECIDED |
 | C-STORE.5.4.4.1 | Must never | NOT DECIDED |
-| C-STORE.5.4.4.1 | Fails closed by | NOT DECIDED |
 | C-STORE.5.4.4.1 | Fed by | NOT DECIDED |
 | C-STORE.5.4.4.1 | Gated by | NOT DECIDED |
 | C-STORE.5.4.4.1 | Changes | NOT DECIDED |
@@ -20454,7 +20007,6 @@ SUB-PARTS: NONE
 | C-STORE.5.4.4.2 | Takes in | NOT DECIDED |
 | C-STORE.5.4.4.2 | Gives out | NOT DECIDED |
 | C-STORE.5.4.4.2 | Must never | NOT DECIDED |
-| C-STORE.5.4.4.2 | Fails closed by | NOT DECIDED |
 | C-STORE.5.4.4.2 | Fed by | NOT DECIDED |
 | C-STORE.5.4.4.2 | Gated by | NOT DECIDED |
 | C-STORE.5.4.4.2 | Changes | NOT DECIDED |
@@ -20462,25 +20014,18 @@ SUB-PARTS: NONE
 | C-STORE.5.4.4.2 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.4.4.3 | Takes in | NOT DECIDED |
 | C-STORE.5.4.4.3 | Gives out | NOT DECIDED |
-| C-STORE.5.4.4.3 | Must never | NOT DECIDED |
-| C-STORE.5.4.4.3 | Fails closed by | NOT DECIDED |
 | C-STORE.5.4.4.3 | Fed by | NOT DECIDED |
-| C-STORE.5.4.4.3 | Gated by | NOT DECIDED |
 | C-STORE.5.4.4.3 | Changes | NOT DECIDED |
 | C-STORE.5.4.4.3 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.4.4.3 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.4.4.4 | Takes in | NOT DECIDED |
 | C-STORE.5.4.4.4 | Gives out | NOT DECIDED |
-| C-STORE.5.4.4.4 | Must never | NOT DECIDED |
-| C-STORE.5.4.4.4 | Fails closed by | NOT DECIDED |
 | C-STORE.5.4.4.4 | Fed by | NOT DECIDED |
-| C-STORE.5.4.4.4 | Gated by | NOT DECIDED |
 | C-STORE.5.4.4.4 | Changes | NOT DECIDED |
 | C-STORE.5.4.4.4 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.4.4.4 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.4.4.5 | Takes in | NOT DECIDED |
 | C-STORE.5.4.4.5 | Gives out | NOT DECIDED |
-| C-STORE.5.4.4.5 | Must never | NOT DECIDED |
 | C-STORE.5.4.4.5 | Fails closed by | NOT DECIDED |
 | C-STORE.5.4.4.5 | Fed by | NOT DECIDED |
 | C-STORE.5.4.4.5 | Gated by | NOT DECIDED |
@@ -20498,15 +20043,12 @@ SUB-PARTS: NONE
 | C-STORE.5.4.5 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.4.6 | Takes in | NOT DECIDED |
 | C-STORE.5.4.6 | Gives out | NOT DECIDED |
-| C-STORE.5.4.6 | Must never | NOT DECIDED |
-| C-STORE.5.4.6 | Fails closed by | NOT DECIDED |
 | C-STORE.5.4.6 | Fed by | NOT DECIDED |
 | C-STORE.5.4.6 | Gated by | NOT DECIDED |
 | C-STORE.5.4.6 | Changes | NOT DECIDED |
 | C-STORE.5.4.6 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.4.6 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.5 | Changes | NOT DECIDED |
-| C-STORE.5.5.1 | Must never | NOT DECIDED |
 | C-STORE.5.5.1 | Fails closed by | NOT DECIDED |
 | C-STORE.5.5.1 | Fed by | NOT DECIDED |
 | C-STORE.5.5.1 | Gated by | NOT DECIDED |
@@ -20524,11 +20066,8 @@ SUB-PARTS: NONE
 | C-STORE.5.5.3 | Changes | NOT DECIDED |
 | C-STORE.5.5.3 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.5.3 | USED BY 1 / Changes there | NOT DECIDED |
-| C-STORE.5.5.4 | Must never | NOT DECIDED |
-| C-STORE.5.5.4 | Fails closed by | NOT DECIDED |
 | C-STORE.5.5.4 | Fed by | NOT DECIDED |
 | C-STORE.5.5.4 | Changes | NOT DECIDED |
-| C-STORE.5.5.4.1 | Fails closed by | NOT DECIDED |
 | C-STORE.5.5.4.1 | Gated by | NOT DECIDED |
 | C-STORE.5.5.4.1 | Changes | NOT DECIDED |
 | C-STORE.5.5.4.1.1 | Takes in | NOT DECIDED |
@@ -20587,8 +20126,6 @@ SUB-PARTS: NONE
 | C-STORE.5.5.4.1.3 | Changes | NOT DECIDED |
 | C-STORE.5.5.4.1.3 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.5.4.1.4 | Takes in | NOT DECIDED |
-| C-STORE.5.5.4.1.4 | Must never | NOT DECIDED |
-| C-STORE.5.5.4.1.4 | Fails closed by | NOT DECIDED |
 | C-STORE.5.5.4.1.4 | Fed by | NOT DECIDED |
 | C-STORE.5.5.4.1.4 | Changes | NOT DECIDED |
 | C-STORE.5.5.4.1.4 | USED BY 1 / Takes in there | NOT DECIDED |
@@ -20621,33 +20158,23 @@ SUB-PARTS: NONE
 | C-STORE.5.5.4.1.5 | Changes | NOT DECIDED |
 | C-STORE.5.5.4.1.5 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.5.4.1.6 | Takes in | NOT DECIDED |
-| C-STORE.5.5.4.1.6 | Must never | NOT DECIDED |
-| C-STORE.5.5.4.1.6 | Fails closed by | NOT DECIDED |
 | C-STORE.5.5.4.1.6 | Fed by | NOT DECIDED |
 | C-STORE.5.5.4.1.6 | Changes | NOT DECIDED |
 | C-STORE.5.5.4.1.6 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.5.4.1.6.1 | Takes in | NOT DECIDED |
 | C-STORE.5.5.4.1.6.1 | Gives out | NOT DECIDED |
-| C-STORE.5.5.4.1.6.1 | Must never | NOT DECIDED |
-| C-STORE.5.5.4.1.6.1 | Fails closed by | NOT DECIDED |
 | C-STORE.5.5.4.1.6.1 | Fed by | NOT DECIDED |
-| C-STORE.5.5.4.1.6.1 | Gated by | NOT DECIDED |
 | C-STORE.5.5.4.1.6.1 | Changes | NOT DECIDED |
 | C-STORE.5.5.4.1.6.1 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.5.4.1.6.1 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.5.4.1.6.2 | Takes in | NOT DECIDED |
 | C-STORE.5.5.4.1.6.2 | Gives out | NOT DECIDED |
-| C-STORE.5.5.4.1.6.2 | Must never | NOT DECIDED |
-| C-STORE.5.5.4.1.6.2 | Fails closed by | NOT DECIDED |
 | C-STORE.5.5.4.1.6.2 | Fed by | NOT DECIDED |
-| C-STORE.5.5.4.1.6.2 | Gated by | NOT DECIDED |
 | C-STORE.5.5.4.1.6.2 | Changes | NOT DECIDED |
 | C-STORE.5.5.4.1.6.2 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.5.4.1.6.2 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.5.4.1.6.3 | Takes in | NOT DECIDED |
 | C-STORE.5.5.4.1.6.3 | Gives out | NOT DECIDED |
-| C-STORE.5.5.4.1.6.3 | Must never | NOT DECIDED |
-| C-STORE.5.5.4.1.6.3 | Fails closed by | NOT DECIDED |
 | C-STORE.5.5.4.1.6.3 | Fed by | NOT DECIDED |
 | C-STORE.5.5.4.1.6.3 | Gated by | NOT DECIDED |
 | C-STORE.5.5.4.1.6.3 | Changes | NOT DECIDED |
@@ -20655,21 +20182,18 @@ SUB-PARTS: NONE
 | C-STORE.5.5.4.1.6.3 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.5.4.2 | Takes in | NOT DECIDED |
 | C-STORE.5.5.4.2 | Gives out | NOT DECIDED |
-| C-STORE.5.5.4.2 | Fails closed by | NOT DECIDED |
 | C-STORE.5.5.4.2 | Fed by | NOT DECIDED |
 | C-STORE.5.5.4.2 | Gated by | NOT DECIDED |
 | C-STORE.5.5.4.2 | Changes | NOT DECIDED |
 | C-STORE.5.5.4.2 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.5.4.2 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.5.5 | Takes in | NOT DECIDED |
-| C-STORE.5.5.5 | Must never | NOT DECIDED |
 | C-STORE.5.5.5 | Fails closed by | NOT DECIDED |
 | C-STORE.5.5.5 | Fed by | NOT DECIDED |
 | C-STORE.5.5.5 | Gated by | NOT DECIDED |
 | C-STORE.5.5.5 | Changes | NOT DECIDED |
 | C-STORE.5.5.5 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.5.6 | Takes in | NOT DECIDED |
-| C-STORE.5.5.6 | Must never | NOT DECIDED |
 | C-STORE.5.5.6 | Fails closed by | NOT DECIDED |
 | C-STORE.5.5.6 | Fed by | NOT DECIDED |
 | C-STORE.5.5.6 | Gated by | NOT DECIDED |
@@ -20678,16 +20202,12 @@ SUB-PARTS: NONE
 | C-STORE.5.5.7 | Changes | NOT DECIDED |
 | C-STORE.5.5.7.1 | Takes in | NOT DECIDED |
 | C-STORE.5.5.7.1 | Must never | NOT DECIDED |
-| C-STORE.5.5.7.1 | Fails closed by | NOT DECIDED |
 | C-STORE.5.5.7.1 | Fed by | NOT DECIDED |
-| C-STORE.5.5.7.1 | Gated by | NOT DECIDED |
 | C-STORE.5.5.7.1 | Changes | NOT DECIDED |
 | C-STORE.5.5.7.1 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.5.7.2 | Takes in | NOT DECIDED |
 | C-STORE.5.5.7.2 | Must never | NOT DECIDED |
-| C-STORE.5.5.7.2 | Fails closed by | NOT DECIDED |
 | C-STORE.5.5.7.2 | Fed by | NOT DECIDED |
-| C-STORE.5.5.7.2 | Gated by | NOT DECIDED |
 | C-STORE.5.5.7.2 | Changes | NOT DECIDED |
 | C-STORE.5.5.7.2 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.5.7.3 | Takes in | NOT DECIDED |
@@ -20701,7 +20221,6 @@ SUB-PARTS: NONE
 | C-STORE.5.5.7.4 | Must never | NOT DECIDED |
 | C-STORE.5.5.7.4 | Fails closed by | NOT DECIDED |
 | C-STORE.5.5.7.4 | Fed by | NOT DECIDED |
-| C-STORE.5.5.7.4 | Gated by | NOT DECIDED |
 | C-STORE.5.5.7.4 | Changes | NOT DECIDED |
 | C-STORE.5.5.7.4 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.5.7.5 | Takes in | NOT DECIDED |
@@ -20742,28 +20261,19 @@ SUB-PARTS: NONE
 | C-STORE.5.5.7.8 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.5.7.9 | Takes in | NOT DECIDED |
 | C-STORE.5.5.7.9 | Gives out | NOT DECIDED |
-| C-STORE.5.5.7.9 | Must never | NOT DECIDED |
-| C-STORE.5.5.7.9 | Fails closed by | NOT DECIDED |
 | C-STORE.5.5.7.9 | Fed by | NOT DECIDED |
-| C-STORE.5.5.7.9 | Gated by | NOT DECIDED |
 | C-STORE.5.5.7.9 | Changes | NOT DECIDED |
 | C-STORE.5.5.7.9 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.5.7.9 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.5.7.10 | Takes in | NOT DECIDED |
 | C-STORE.5.5.7.10 | Gives out | NOT DECIDED |
-| C-STORE.5.5.7.10 | Must never | NOT DECIDED |
-| C-STORE.5.5.7.10 | Fails closed by | NOT DECIDED |
 | C-STORE.5.5.7.10 | Fed by | NOT DECIDED |
-| C-STORE.5.5.7.10 | Gated by | NOT DECIDED |
 | C-STORE.5.5.7.10 | Changes | NOT DECIDED |
 | C-STORE.5.5.7.10 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.5.7.10 | USED BY 1 / Changes there | NOT DECIDED |
 | C-STORE.5.5.7.11 | Takes in | NOT DECIDED |
 | C-STORE.5.5.7.11 | Gives out | NOT DECIDED |
-| C-STORE.5.5.7.11 | Must never | NOT DECIDED |
-| C-STORE.5.5.7.11 | Fails closed by | NOT DECIDED |
 | C-STORE.5.5.7.11 | Fed by | NOT DECIDED |
-| C-STORE.5.5.7.11 | Gated by | NOT DECIDED |
 | C-STORE.5.5.7.11 | Changes | NOT DECIDED |
 | C-STORE.5.5.7.11 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.5.7.11 | USED BY 1 / Changes there | NOT DECIDED |
@@ -20775,7 +20285,6 @@ SUB-PARTS: NONE
 | C-STORE.5.5.7.12 | Changes | NOT DECIDED |
 | C-STORE.5.5.7.12 | USED BY 1 / Takes in there | NOT DECIDED |
 | C-STORE.5.5.7.12 | USED BY 1 / Changes there | NOT DECIDED |
-| C-STORE.5.5.8 | Fails closed by | NOT DECIDED |
 | C-STORE.5.5.8 | Gated by | NOT DECIDED |
 | C-STORE.5.5.8 | Changes | NOT DECIDED |
 | C-STORE.5.5.8.1 | Takes in | NOT DECIDED |
@@ -21343,17 +20852,17 @@ The following list carries forward the passed Chapter 2 list, removing only the 
 ## CONTRACT CHECK
 
 CONTRACT CHECK (against the cloned contract, SHA-256 e78c7a8c8a448ff20966002465c8d6a330000900802c0b19a48e8a124e5ceba1)
-§1.3 no history/actions/roles/workflow in this chapter: PASS — all 709 behavior templates checked; source history, correction narratives, status snapshots and build workflow excluded. Read/coverage/check metadata is separated from behavior.
-§1.4 every gap written as NOT DECIDED: PASS — all 3,911 empty template and USED BY fields match the Appendix A register; additional unresolved forms and values are listed separately.
+§1.3 no history/actions/roles/workflow in this chapter: PASS — all 709 cards checked. Corrections place source-decided prohibitions, failure outcomes and gating conditions in their matching boxes; correction history is confined to this check and the separate changed-lines file.
+§1.4 every gap written as NOT DECIDED: PASS — all 2,127 Must never / Fails closed by / Gated by placements reviewed. 577 false empty fields filled; 2,842 NOT DECIDED template entries and 492 NOT DECIDED USED BY cells remain registered (2,842 wholly empty template fields). Other original open-detail gaps are preserved. The changed-lines report gives a reason for every retained empty reviewed box.
 §1.5 conflicts marked, none resolved: PASS — seal reopening, true destruction, and B11 stale-plan wording differences remain explicit; the authority order is unchanged.
-§3 exactly one stamp per line: PASS — all 6,968 template behavior lines and 719 USED BY rows checked. BUILT scopes checked against V10's authoritative status table; B11 and Bundle 6 mechanics remain ACCEPTED.
-§4 every behavior line cited in the exact format: PASS — 83 distinct citation targets resolve in pinned sources; the B11 and Bundle 6 field/transition/failure/record text was checked against the complete source files.
+§3 exactly one stamp per line: PASS — 4,132 populated field lines and 799 USED BY rows checked. BUILT applies only to the exact behavior supported by V10’s authoritative status table; design and accepted-package behavior and links retain their own status.
+§4 every behavior line cited in the exact format: PASS — all added behavior and reciprocal rows carry the relevant source-section citations. Unchanged lines retain their original citations; original source coverage is preserved.
 §5.4 one name per thing: PASS — Map top-level names retained; 709 unique part IDs and their repeated names checked; no new top-level component or path introduced.
-§6 all template fields present, in order, for every part: PASS — all 709 templates contain ALONE, the six fields, TOGETHER, the three fields, USED BY and SUB-PARTS in order.
-§6.3 reciprocity within this chapter: PASS — all 708 internal pairs checked in both directions. External endpoints are recorded as cross-piece/chapter obligations; later groups are not claimed complete.
-§6.4 every decided detail written in, no citation used in place of content: PASS — seven v1 root fields; batch and bootstrap records; 15 batch transitions; eight lifecycle boundaries; six write/post-commit boundaries; 18 idempotency points; 55 recovery cases and explicit outcomes; 17 fail-closed classes; logging vocabulary; Origin/provenance, alias and typed future-schema contracts checked against their sources.
+§6 all template fields present, in order, for every part: PASS — all 709 cards retain the nine fields in order, ALONE, TOGETHER, USED BY and SUB-PARTS. IDs, names, Does text and child lists remain byte-identical.
+§6.3 reciprocity within this chapter: PASS — every newly named internal gate has an existing or added reciprocal USED BY row (80 added). Previously asserted relationships and external relationship-accounting entries remain intact.
+§6.4 every decided detail written in, no citation used in place of content: PASS — all cards reviewed for source-decided prohibition, failure and gating text left outside its dedicated box. The new boxes state the behavior; no new threshold, retry policy, schema, sentinel or runtime mechanism is selected.
 §6.5 sub-parts recursed to the bottom: PASS — records to fields, controlled vocabularies to values, lifecycle/claim/generation rules to states and transitions, gates to their conditions, and failure cases to outcomes; every listed sub-part resolves to its own complete template.
-§9 coverage matrix rows added for every file used: PASS — 138 READ-folder files and all 107 V10 second-/third-level headings retained; current source placements and source-section coverage added; whole-read versus scoped reread credit kept distinct.
+§9 coverage matrix rows added for every file used: PASS — the original coverage matrix is byte-identical; corrections use sources and receipts already covered there. Pinned sources were reopened for the correction review; no new whole-read credit is claimed.
 §10.11 no recommendation, no sentence addressed to Ness: PASS — the complete behavior body was scanned and the operative language reviewed.
 Files read whole for this chapter: `04_ACCEPTED_STANDALONE_DESIGNS/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_v1_4_CANDIDATE.md`; `04_ACCEPTED_STANDALONE_DESIGNS/NH_B11_ACTIVE_WRITABLE_BATCH_ARCHITECTURE_PACKAGE_COMPLETE_CLOSURE_RECORD_v1_0.md`; `04_ACCEPTED_STANDALONE_DESIGNS/NH_BUNDLE_6_POLICY_DECISIONS_v1_0_CANDIDATE.md`; `04_ACCEPTED_STANDALONE_DESIGNS/NH_BUNDLE_6_MECHANICAL_DESIGN_v1_4_CANDIDATE.md`; `04_ACCEPTED_STANDALONE_DESIGNS/NH_BUNDLE_6_POLICY_DECISIONS_PACKAGE_COMPLETE_CLOSURE_RECORD_v1_0.md`; `04_ACCEPTED_STANDALONE_DESIGNS/NH_BUNDLE_6_MECHANICAL_DESIGN_PACKAGE_COMPLETE_CLOSURE_RECORD_v1_0.md`. Instruction file: `NH_MASTER-21_SYSTEM_BEHAVIOR_BUILD_CONTRACT_FOR_CHATGPT_v1_0.md` (same hash above).
 
