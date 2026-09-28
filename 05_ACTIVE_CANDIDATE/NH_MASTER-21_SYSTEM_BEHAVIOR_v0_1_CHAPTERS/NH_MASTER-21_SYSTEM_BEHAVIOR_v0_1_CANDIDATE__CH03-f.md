@@ -832,6 +832,10 @@ USED BY
 | # | Used in (part ID, and path ID if path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-GOLD.1.5.2.6 — O-JUDGE | O-JUDGE ending with judgment_authorization_failed. | Records judgment_authorization_failed as this operation’s terminal; emits eval_judgment_authorization_failed once. Reasons are pre-receipt crash, failed/unverifiable receipt write, refusal before consumption after a claim, or head breach after a durable receipt; claim closure is the consequence, never the cause. | One terminal judgment_authorization_failed and log eval_judgment_authorization_failed. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.2] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.5] [NHD-B16EEB] |
+| 2 · ACCEPTED | C-GOLD.1.7.7.6 — Authorization-failure reason: pre-receipt crash | O-JUDGE ends judgment_authorization_failed because of pre-receipt crash. | This log belongs only to O-JUDGE’s durable judgment_authorization_failed terminal and carries its exact reason. | One honest authorization-failure log. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.5] [NHD-B16EEB] |
+| 3 · ACCEPTED | C-GOLD.1.7.7.7 — Authorization-failure reason: failed/unverifiable receipt write | O-JUDGE ends judgment_authorization_failed because of failed/unverifiable receipt write. | This log belongs only to O-JUDGE’s durable judgment_authorization_failed terminal and carries its exact reason. | One honest authorization-failure log. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.5] [NHD-B16EEB] |
+| 4 · ACCEPTED | C-GOLD.1.7.7.8 — Authorization-failure reason: refusal before consumption | O-JUDGE ends judgment_authorization_failed because of refusal before consumption. | This log belongs only to O-JUDGE’s durable judgment_authorization_failed terminal and carries its exact reason. | One honest authorization-failure log. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.5] [NHD-B16EEB] |
+| 5 · ACCEPTED | C-GOLD.1.7.7.9 — Authorization-failure reason: head breach after receipt | O-JUDGE ends judgment_authorization_failed because of head breach after receipt. | This log belongs only to O-JUDGE’s durable judgment_authorization_failed terminal and carries its exact reason. | One honest authorization-failure log. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.5] [NHD-B16EEB] |
 
 SUB-PARTS: NONE
 
@@ -1340,6 +1344,8 @@ USED BY
 | # | Used in (part ID, and path ID if path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-GOLD.1.5.2 — Operation terminal catalog | exactly one requested record and its E16. | Atomically commits the requested scope-relevant canonical record with its ledger entry under both head comparison and the record’s domain preconditions. | Exactly one of appended, absorbed, lost_race_technical, refused_domain_precondition. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.2] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.5] [NHD-B16EEB] |
+| 2 · ACCEPTED | C-GOLD.1.6.3 — Linked protected-judgment protocol | O-JUDGE, its claim, conditional BAI receipt and E9/E16 append. | BAI rechecks immediately before consumption; O-APPEND re-verifies proof and enforces CAS-1/CAS-3. | Linked durable stages; the flushed BAI receipt is the authorization commit point. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.12] [NHD-B16EEB] |
+| 3 · ACCEPTED | C-GOLD.1.7.4.3 — Claim state judgment_committed | The named E9 + E16 committed through O-APPEND appended/absorbed. | The named E9 and E16 committed or their exact duplicate was absorbed. | A successful receipt-bearing or selected-proof judgment claim. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.13] [NHD-B16EEB] |
 
 SUB-PARTS: C-GOLD.1.5.2.13.1 — O-APPEND appended; C-GOLD.1.5.2.13.2 — O-APPEND absorbed; C-GOLD.1.5.2.13.3 — O-APPEND lost_race_technical; C-GOLD.1.5.2.13.4 — O-APPEND refused_domain_precondition
 
@@ -1481,7 +1487,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Requires one E7 for every started attempt. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.2] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.3.7 — trial_attempt_terminal (E7): Requires one E7 for every started attempt. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.2] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -1550,7 +1556,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Records run_closed_incomplete. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.2] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -1573,7 +1579,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Records run_indeterminate. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.2] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -1596,7 +1602,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Refuses every later attempt start. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.2] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -1659,6 +1665,7 @@ USED BY
 | 1 · ACCEPTED | C-GOLD.1.5 — Evaluation operations and trial execution | planned_trial_key and all attempts for that planned measurement. | Derives planned_trial_output_key deterministically; uses it as the reading’s idempotency_key; at most one output commits. | One committed output ever. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.4] [NHD-B16EEB] |
 | 2 · ACCEPTED | C-GOLD.1.5.12.3 — CR-3 — E6, output found by key, no E7 | planned_trial_key and all attempts for that planned measurement. | Recovery follows this rule: Derives planned_trial_output_key deterministically; uses it as the reading’s idempotency_key; at most one output commits. | One committed output ever. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.4] [NHD-B16EEB] |
 | 3 · ACCEPTED | C-GOLD.1.5.2.4 — O-ATTEMPT | planned_trial_key and all attempts for that planned measurement. | Derives planned_trial_output_key deterministically; uses it as the reading’s idempotency_key; at most one output commits. | One committed output ever. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.4] [NHD-B16EEB] |
+| 4 · ACCEPTED | C-GOLD.1.5.5.3 — Judged failure is a measurement | A completed output judged fail. | The output is already completed; its judged fail is the measurement, not an uncompleted technical attempt. | The actual failed measurement is retained. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.4] [NHD-B16EEB] |
 
 SUB-PARTS: C-GOLD.1.5.5.1 — planned_trial_output_key; C-GOLD.1.5.5.2 — Output-before-visibility gate; C-GOLD.1.5.5.3 — Judged failure is a measurement
 
@@ -1675,7 +1682,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Every attempt of one planned trial shares this deterministic key; it becomes the reading idempotency_key. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.4] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -1699,7 +1706,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — E7 attempt_completed or E7r resolved_output_found must commit before operator or judge visibility. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.4] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.3.7 — trial_attempt_terminal (E7): E7 attempt_completed or C-GOLD.1.3.8 — trial_attempt_resolution (E7r): E7r resolved_output_found must commit before operator or judge visibility. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.4] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -1723,7 +1730,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — The output is already completed; its judged fail is the measurement, not an uncompleted technical attempt. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.4] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.5.5 — One output per planned trial: The output is already completed; its judged fail is the measurement, not an uncompleted technical attempt. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.4] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -1778,7 +1785,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Routes as terminal_success. Absorbs retries; the completed output remains final. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.5] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -1870,7 +1877,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Routes as privacy_refused. Cannot retry around the refusal. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.5] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -1893,7 +1900,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Routes as dependency_blocked_held. The hold blocks execution. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.5] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -1931,6 +1938,8 @@ USED BY
 | 7 · ACCEPTED | C-GOLD.1.3.6 — trial_attempt_start (E6) | An attempt of ordinal ≥ 2. | Every later attempt requires committed B9 R1 admission. | One authorized later attempt. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.5] [NHD-B16EEB] |
 | 8 · ACCEPTED | C-GOLD.1.5.6.2 — attempt_failed B9 routing | An attempt of ordinal ≥ 2. | Technical classification alone does not admit execution; committed B9 R1 admission is required. | One authorized later attempt. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.5] [NHD-B16EEB] |
 | 9 · ACCEPTED | C-GOLD.1.5.6.3 — attempt_interrupted_abandoned B9 routing | An attempt of ordinal ≥ 2. | Technical classification alone does not admit execution; committed B9 R1 admission is required. | One authorized later attempt. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.5] [NHD-B16EEB] |
+| 10 · ACCEPTED | C-GOLD.1.5.6.10 — Accepted B9 episode values | The B9 context class and episode state. | B9 admission must obey its context-specific budget, gaps, deadline and unchanged-input continuation rules. | Context-specific B9 admission limits. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §2.3] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.5] [NHD-B16EEB] |
+| 11 · ACCEPTED | C-GOLD.1.6.4.10 — Unrelated ledger movement during forward completion | The receipt-bound E9 loses only the scope-ledger CAS-1 race. | B9 admission governs the new O-APPEND. | Retry of only the E9/E16 append under B9. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.12] [NHD-B16EEB] |
 
 SUB-PARTS: NONE
 
@@ -1947,7 +1956,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Ordinal 1 is the original execution by reference, not a later B9-admitted attempt. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.5] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -1971,7 +1980,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Only consumed B9 real-change admission permits continuation after the episode is exhausted. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §2.3] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.1] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.5.6.10.10 — Real-change continuation: Only consumed B9 real-change admission permits continuation after the episode is exhausted. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §2.3] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.1] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -2004,7 +2013,7 @@ TOGETHER
 - Fed by: ACCEPTED — C-GOLD.1.5.6.10.8 — attempt_number: Permanent attempt number, separate from per-episode ordinal. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §2.3] [NHD-B16EEB]
 - Fed by: ACCEPTED — C-GOLD.1.5.6.10.9 — Per-episode ordinal: Ordinal within the current episode; original execution is ordinal 1 by reference. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §2.3] [NHD-B16EEB]
 - Fed by: ACCEPTED — C-GOLD.1.5.6.10.10 — Real-change continuation: A consumed real-change record with seam-confirmed unchanged canonical inputs is required. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §2.3] [NHD-B16EEB]
-- Gated by: ACCEPTED — B9 admission must obey its context-specific budget, gaps, deadline and unchanged-input continuation rules. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §2.3] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.5] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.5.6.7 — Committed B9 R1 admission: B9 admission must obey its context-specific budget, gaps, deadline and unchanged-input continuation rules. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §2.3] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.5] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -2028,7 +2037,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — 3 total technical attempts per episode. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §2.3] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -2051,7 +2060,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Minimum 10 seconds before the first technical re-attempt. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §2.3] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -2074,7 +2083,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Minimum 30 seconds before the next technical re-attempt. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §2.3] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -2097,7 +2106,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Minimum 1 minute before the first technical re-attempt. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §2.3] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -2120,7 +2129,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Minimum 3 minutes before the next technical re-attempt. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §2.3] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -2143,7 +2152,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — 7 minutes. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §2.3] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -2166,7 +2175,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — 15 minutes. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §2.3] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -2189,7 +2198,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Permanent attempt number, separate from per-episode ordinal. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §2.3] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -2212,7 +2221,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Ordinal within the current episode; original execution is ordinal 1 by reference. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §2.3] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -2242,6 +2251,8 @@ USED BY
 | # | Used in (part ID, and path ID if path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-GOLD.1.5.6.10 — Accepted B9 episode values | A B9 admission using the corresponding value. | A consumed real-change record with seam-confirmed unchanged canonical inputs is required. | The stated B9 admission constraint. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §2.3] [NHD-B16EEB] |
+| 2 · ACCEPTED | C-GOLD.1.5.6.9 — Technical episode exhaustion | An exhausted B9 trial episode. | Only consumed B9 real-change admission permits continuation after the episode is exhausted. | No false trial coverage. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §2.3] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.1] [NHD-B16EEB] |
+| 3 · ACCEPTED | C-GOLD.1.7.8.1 — Pending before authority consumption | Ordinary O-APPEND exhaustion before authority consumption, in practice SACL-only. | A consumed real-change record authorizes the new B9 episode; the owner remains the same O-JUDGE. | Owned pending claim; no current output head, so incomplete. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.5] [NHD-B16EEB] |
 
 SUB-PARTS: NONE
 
@@ -2258,7 +2269,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — The actual context recorded in E5 controls retry classification; missing or unreadable context admits no retry. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.6] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.3.5 — evaluation_run_open (E5): The actual context recorded in E5 controls retry classification; missing or unreadable context admits no retry. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.6] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -2312,7 +2323,7 @@ TOGETHER
 - Fed by: ACCEPTED — C-GOLD.1.5.8.1.3 — Unique next ledger position: Uses sequence n+1 and previous_entry_digest=d; competing appends cannot share the position. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.1] [NHD-B16EEB]
 - Fed by: ACCEPTED — C-GOLD.1.5.8.1.4 — Technical lost-race continuation: Ends that append once; B9 may admit a new O-APPEND with a new ID, unchanged canonical key, unchanged requested content and unchanged idempotency identity against the new head. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.1] [NHD-B16EEB]
 - Fed by: ACCEPTED — C-GOLD.1.5.8.1.5 — Domain-precondition refusal: Ends refused_domain_precondition; privacy refusals use privacy_refused and identity/authority conflicts use terminal_substantive as applicable. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.1] [NHD-B16EEB]
-- Gated by: ACCEPTED — Current ledger head equals expected {n,d}, and the requested record domain preconditions hold. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.5.8.1.1 — Expected head match: Current ledger head equals expected {n,d}, and the requested record domain preconditions hold. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [NHD-B16EEB]
 - Changes: ACCEPTED — C-GOLD.1.3.18 — evaluation_scope_ledger_entry (E16): The winning entry receives n+1 and previous_entry_digest=d together with its canonical record. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [NHD-B16EEB]
 
 USED BY
@@ -2347,13 +2358,14 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Compares the authoritative current head to exactly {n,d} together with domain preconditions. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
 | # | Used in (part ID, and path ID if path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-GOLD.1.5.8.1 — CAS-1 ledger compare-and-append | Current ledger head and expected {n,d}. | Compares the authoritative current head to exactly {n,d} together with domain preconditions. | Commit admission only on a match. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.1] [NHD-B16EEB] |
+| 2 · ACCEPTED | C-GOLD.1.5.8.1 — CAS-1 ledger compare-and-append | Requested record, its domain preconditions, and expected ledger head {n, d}. | Current ledger head equals expected {n,d}, and the requested record domain preconditions hold. | Exactly one winning append; competing loser commits neither record nor entry. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [NHD-B16EEB] |
 
 SUB-PARTS: NONE
 
@@ -2370,7 +2382,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Commits both in the same boundary or neither. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -2393,7 +2405,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Uses sequence n+1 and previous_entry_digest=d; competing appends cannot share the position. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -2416,7 +2428,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Ends that append once; B9 may admit a new O-APPEND with a new ID, unchanged canonical key, unchanged requested content and unchanged idempotency identity against the new head. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -2439,7 +2451,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Ends refused_domain_precondition; privacy refusals use privacy_refused and identity/authority conflicts use terminal_substantive as applicable. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -2462,7 +2474,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — expected_previous_head is the current aggregate head, or none for the first; identical key/content may absorb. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.3.11 — suite_aggregate_result (E10): expected_previous_head is the current aggregate head, or none for the first; identical key/content may absorb. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -2490,7 +2502,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — scope, bound ledger head and evaluated-set digest identify one pure derivation with one content. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -2520,7 +2532,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — expected_previous_judgment_head is still the current head and CAS-1 also holds; identical submission may absorb. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.6.1.2 — Unique current judgment head: expected_previous_judgment_head is still the current head and CAS-1 also holds; identical submission may absorb. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -2531,6 +2543,8 @@ USED BY
 | 3 · ACCEPTED | C-GOLD.1.5.9.8.3 — Atomic judgment record | One effectively completed output’s planned_trial_output_key, expected judgment head or none, and E9 content. | Commits E9 only if its expected head is still current and CAS-1 holds; identical submission absorbs; stale competing successor refuses. | At most one successor for a current judgment head. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [NHD-B16EEB] |
 | 4 · ACCEPTED | C-GOLD.1.5.2.6 — O-JUDGE | One effectively completed output’s planned_trial_output_key, expected judgment head or none, and E9 content. | Commits E9 only if its expected head is still current and CAS-1 holds; identical submission absorbs; stale competing successor refuses. | At most one successor for a current judgment head. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [NHD-B16EEB] |
 | 5 · ACCEPTED | C-GOLD.1.3.10 — evaluation_judgment (E9) | One effectively completed output’s planned_trial_output_key, expected judgment head or none, and E9 content. | Judgment commit requires the expected head still current and CAS-1 satisfied. | At most one successor for a current judgment head. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [NHD-B16EEB] |
+| 6 · ACCEPTED | C-GOLD.1.6.1.2 — Unique current judgment head | Committed E9 records for this chain. | CAS-3 alone advances the unique current judgment head. | The single current judgment head. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.11] [NHD-B16EEB] |
+| 7 · ACCEPTED | C-GOLD.1.6.1.3 — First and later judgment predecessor | The proposed E9 and the chain’s current head. | CAS-3 requires the expected head to equal the unique current head. | A predecessor-bound E9. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.11] [NHD-B16EEB] |
 
 SUB-PARTS: NONE
 
@@ -2778,6 +2792,8 @@ USED BY
 | # | Used in (part ID, and path ID if path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-GOLD.1.5.9 — Evaluation transaction boundaries | Output identity/integrity, expected head, scoring mode and event-time authority proof. | Uses three linked separately durable stages: winning authorization claim; conditional BAI consumption with flushed receipt; then atomic E9 + E16 through O-APPEND under CAS-1 and CAS-3. O-APPEND re-verifies the bound receipt, or verifies fresh valid session proof at commit. Mode must match E1; output must be effectively completed and integrity-matched. Own successful token consumption is expected, never a refusal. | The named boundary’s canonical effect. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.7] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB] |
+| 2 · ACCEPTED | C-GOLD.1.6.1 — Per-output judgment-chain rules | planned_trial_output_key and committed E9 records. | Judgments require an effectively completed output and an E1-matching authority reference. | A unique current head or judgment_indeterminate. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.11] [NHD-B16EEB] |
+| 3 · ACCEPTED | C-GOLD.1.6.3.3 — Protected stage 3 — commit E9 and E16 | The bound durable receipt or required fresh SACL reference. | Both CAS comparisons and the selected proof requirements hold. | A committed E9 with its scope entry. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.12] [NHD-B16EEB] |
 
 SUB-PARTS: C-GOLD.1.5.9.8.1 — Authorization claim first; C-GOLD.1.5.9.8.2 — Conditional BAI receipt; C-GOLD.1.5.9.8.3 — Atomic judgment record
 
@@ -2982,7 +2998,7 @@ TOGETHER
 - Fed by: ACCEPTED — C-GOLD.1.5.10.13 — Aggregate idempotency key: {run, expected_previous_head, terminal-set digest, E7r digest, judgment-set digest} — CAS-2 [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
 - Fed by: ACCEPTED — C-GOLD.1.5.10.14 — Results idempotency key: DET-1 identity [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
 - Fed by: ACCEPTED — C-GOLD.1.5.10.15 — E13 / E14 / E15 / logs idempotency key: result + kind / excluded run / affected-run set / operation ID [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
-- Gated by: ACCEPTED — Each record uses its own canonical duplicate-prevention identity; operation IDs remain separate. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -3005,7 +3021,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — name + version + integrity (same name/version, different integrity → contradiction) [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -3028,13 +3044,17 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — content digest [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
 | # | Used in (part ID, and path ID if path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-GOLD.1.5.10 — Evaluation idempotency keys | A repeated E2e / E3 / E4 / E4S request. | content digest | Canonical identity: content digest | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB] |
+| 2 · ACCEPTED | C-GOLD.1.2.1 — model_evaluation_profile (E4) | Model identity and the execution-path bindings. | The exact approved profile and path/system configuration are bound; content-digest identity governs registration. | An E4 model profile. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.1] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB] |
+| 3 · ACCEPTED | C-GOLD.1.2.1.3 — Execution-path binding | Suite version; engine, prompt, context and validator configuration. | The exact approved profile and path/system configuration are bound; content-digest identity governs registration. | A binding with path_configuration_digest. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.1] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB] |
+| 4 · ACCEPTED | C-GOLD.1.2.2 — system_candidate_profile (E4S) | The two component E4 profiles and the combined system configuration. | The exact approved profile and path/system configuration are bound; content-digest identity governs registration. | An E4S profile with system_configuration_digest. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.1] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB] |
+| 5 · ACCEPTED | C-GOLD.1.2.2.4 — Combined handoff configuration | Brief schema, validators, contracts, gates and handoff arrangement. | The exact approved profile and path/system configuration are bound; content-digest identity governs registration. | The complete system configuration and its digest. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.1] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB] |
 
 SUB-PARTS: NONE
 
@@ -3051,7 +3071,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — run ID; identical repeat absorbs; different content refused [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -3074,7 +3094,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — planned_trial_key; one B9 group [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -3097,7 +3117,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — planned_trial_output_key; one committed output ever [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -3120,7 +3140,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — {planned_trial_key, attempt_id} / attempt ID [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -3143,7 +3163,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — {attempt_id, conclusive} — at most one resolved_output_found or resolved_absence_proven ever [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -3166,7 +3186,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — {attempt_id, resolution_sequence} [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -3189,7 +3209,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — run ID [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -3212,7 +3232,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — E9 identity {judgment_chain_key, expected_previous_judgment_head, content digest}; identical re-submission absorbs; at most one committed successor per predecessor (CAS-3) [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -3235,7 +3255,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — its own operation ID; the requested record's own idempotency key is the canonical key B9 groups on [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -3258,7 +3278,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — {scope, sequence_number} — CAS-1 [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -3281,7 +3301,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — {run, expected_previous_head, terminal-set digest, E7r digest, judgment-set digest} — CAS-2 [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -3304,7 +3324,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — DET-1 identity [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -3327,7 +3347,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — result + kind / excluded run / affected-run set / operation ID [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -3396,6 +3416,11 @@ USED BY
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-GOLD.1.5.11 — Unresolved-attempt resolution semantics | Output found under verified planned_trial_output_key identity and integrity. | Appends E7r and advances the ledger head; effective attempt is completed. terminal_success; retries absorb. Once judged, the trial counts as covered; aggregate head is stale and a new E10 over frozen set + E7r may use it. Before E8 the run may complete; after E8 that record remains unchanged and effective run state may be completed if every unresolved attempt is now found. | The derived effective state and advanced ledger head. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB] |
 | 2 · ACCEPTED | C-GOLD.1.5.12.19 — CR-19 — Output found after E8 | Output found under verified planned_trial_output_key identity and integrity. | Recovery follows this rule: Appends E7r and advances the ledger head; effective attempt is completed. terminal_success; retries absorb. Once judged, the trial counts as covered; aggregate head is stale and a new E10 over frozen set + E7r may use it. Before E8 the run may complete; after E8 that record remains unchanged and effective run state may be completed if every unresolved attempt is now found. | The derived effective state and advanced ledger head. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB] |
+| 3 · ACCEPTED | C-GOLD.1.5.11.1.1 — resolved_output_found Effective attempt state | resolved_output_found E7r. | This consequence applies to resolved_output_found; only lookup evidence may establish that E7r outcome. | The stated effective attempt state. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB] |
+| 4 · ACCEPTED | C-GOLD.1.5.11.1.2 — resolved_output_found B9 routing | resolved_output_found E7r. | This consequence applies to resolved_output_found; only lookup evidence may establish that E7r outcome. | The stated b9 routing. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB] |
+| 5 · ACCEPTED | C-GOLD.1.5.11.1.3 — resolved_output_found Aggregate consequence | resolved_output_found E7r. | This consequence applies to resolved_output_found; only lookup evidence may establish that E7r outcome. | The stated aggregate consequence. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB] |
+| 6 · ACCEPTED | C-GOLD.1.5.11.1.4 — resolved_output_found Ledger consequence | resolved_output_found E7r. | This consequence applies to resolved_output_found; only lookup evidence may establish that E7r outcome. | The stated ledger consequence. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB] |
+| 7 · ACCEPTED | C-GOLD.1.5.11.1.5 — resolved_output_found Run consequence | resolved_output_found E7r. | This consequence applies to resolved_output_found; only lookup evidence may establish that E7r outcome. | The stated run consequence. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB] |
 
 SUB-PARTS: C-GOLD.1.5.11.1.1 — resolved_output_found Effective attempt state; C-GOLD.1.5.11.1.2 — resolved_output_found B9 routing; C-GOLD.1.5.11.1.3 — resolved_output_found Aggregate consequence; C-GOLD.1.5.11.1.4 — resolved_output_found Ledger consequence; C-GOLD.1.5.11.1.5 — resolved_output_found Run consequence
 
@@ -3412,7 +3437,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — This consequence applies to resolved_output_found; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.5.11.1 — resolved_output_found resolution: This consequence applies to resolved_output_found; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -3435,7 +3460,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — This consequence applies to resolved_output_found; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.5.11.1 — resolved_output_found resolution: This consequence applies to resolved_output_found; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -3458,7 +3483,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — This consequence applies to resolved_output_found; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.5.11.1 — resolved_output_found resolution: This consequence applies to resolved_output_found; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -3481,7 +3506,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — This consequence applies to resolved_output_found; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.5.11.1 — resolved_output_found resolution: This consequence applies to resolved_output_found; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
 - Changes: ACCEPTED — C-GOLD.1.4.2 — Scope ledger head: The E7r append advances the ledger head. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
 
 USED BY
@@ -3504,7 +3529,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — This consequence applies to resolved_output_found; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.5.11.1 — resolved_output_found resolution: This consequence applies to resolved_output_found; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -3542,6 +3567,11 @@ USED BY
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-GOLD.1.5.11 — Unresolved-attempt resolution semantics | Durable lookup proves output absence. | Appends E7r and advances the ledger head; effective attempt is interrupted/abandoned. technical_retryable; B9 consumes E7r as the durable outcome. Trial remains uncovered unless another attempt completes. Before E8 a further attempt requires B9 admission; after E8 no attempt may start and effective run state is incomplete, absent an already accepted objective-invalidity route; none exists. | The derived effective state and advanced ledger head. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB] |
 | 2 · ACCEPTED | C-GOLD.1.5.12.18 — CR-18 — Absence proven after E8 | Durable lookup proves output absence. | Recovery follows this rule: Appends E7r and advances the ledger head; effective attempt is interrupted/abandoned. technical_retryable; B9 consumes E7r as the durable outcome. Trial remains uncovered unless another attempt completes. Before E8 a further attempt requires B9 admission; after E8 no attempt may start and effective run state is incomplete, absent an already accepted objective-invalidity route; none exists. | The derived effective state and advanced ledger head. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB] |
+| 3 · ACCEPTED | C-GOLD.1.5.11.2.1 — resolved_absence_proven Effective attempt state | resolved_absence_proven E7r. | This consequence applies to resolved_absence_proven; only lookup evidence may establish that E7r outcome. | The stated effective attempt state. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB] |
+| 4 · ACCEPTED | C-GOLD.1.5.11.2.2 — resolved_absence_proven B9 routing | resolved_absence_proven E7r. | This consequence applies to resolved_absence_proven; only lookup evidence may establish that E7r outcome. | The stated b9 routing. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB] |
+| 5 · ACCEPTED | C-GOLD.1.5.11.2.3 — resolved_absence_proven Aggregate consequence | resolved_absence_proven E7r. | This consequence applies to resolved_absence_proven; only lookup evidence may establish that E7r outcome. | The stated aggregate consequence. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB] |
+| 6 · ACCEPTED | C-GOLD.1.5.11.2.4 — resolved_absence_proven Ledger consequence | resolved_absence_proven E7r. | This consequence applies to resolved_absence_proven; only lookup evidence may establish that E7r outcome. | The stated ledger consequence. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB] |
+| 7 · ACCEPTED | C-GOLD.1.5.11.2.5 — resolved_absence_proven Run consequence | resolved_absence_proven E7r. | This consequence applies to resolved_absence_proven; only lookup evidence may establish that E7r outcome. | The stated run consequence. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB] |
 
 SUB-PARTS: C-GOLD.1.5.11.2.1 — resolved_absence_proven Effective attempt state; C-GOLD.1.5.11.2.2 — resolved_absence_proven B9 routing; C-GOLD.1.5.11.2.3 — resolved_absence_proven Aggregate consequence; C-GOLD.1.5.11.2.4 — resolved_absence_proven Ledger consequence; C-GOLD.1.5.11.2.5 — resolved_absence_proven Run consequence
 
@@ -3558,7 +3588,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — This consequence applies to resolved_absence_proven; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.5.11.2 — resolved_absence_proven resolution: This consequence applies to resolved_absence_proven; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -3581,7 +3611,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — This consequence applies to resolved_absence_proven; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.5.11.2 — resolved_absence_proven resolution: This consequence applies to resolved_absence_proven; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -3604,7 +3634,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — This consequence applies to resolved_absence_proven; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.5.11.2 — resolved_absence_proven resolution: This consequence applies to resolved_absence_proven; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -3627,7 +3657,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — This consequence applies to resolved_absence_proven; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.5.11.2 — resolved_absence_proven resolution: This consequence applies to resolved_absence_proven; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
 - Changes: ACCEPTED — C-GOLD.1.4.2 — Scope ledger head: The E7r append advances the ledger head. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
 
 USED BY
@@ -3650,7 +3680,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — This consequence applies to resolved_absence_proven; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.5.11.2 — resolved_absence_proven resolution: This consequence applies to resolved_absence_proven; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -3687,6 +3717,11 @@ USED BY
 | # | Used in (part ID, and path ID if path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-GOLD.1.5.11 — Unresolved-attempt resolution semantics | Output existence is still unprovable. | Appends E7r and advances the ledger head; effective attempt is unresolved. indeterminate; never retried. Run aggregate head is indeterminate. Cannot become completed; before E8, closure is permitted only as run_indeterminate. | The derived effective state and advanced ledger head. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB] |
+| 2 · ACCEPTED | C-GOLD.1.5.11.3.1 — still_undetermined Effective attempt state | still_undetermined E7r. | This consequence applies to still_undetermined; only lookup evidence may establish that E7r outcome. | The stated effective attempt state. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB] |
+| 3 · ACCEPTED | C-GOLD.1.5.11.3.2 — still_undetermined B9 routing | still_undetermined E7r. | This consequence applies to still_undetermined; only lookup evidence may establish that E7r outcome. | The stated b9 routing. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB] |
+| 4 · ACCEPTED | C-GOLD.1.5.11.3.3 — still_undetermined Aggregate consequence | still_undetermined E7r. | This consequence applies to still_undetermined; only lookup evidence may establish that E7r outcome. | The stated aggregate consequence. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB] |
+| 5 · ACCEPTED | C-GOLD.1.5.11.3.4 — still_undetermined Ledger consequence | still_undetermined E7r. | This consequence applies to still_undetermined; only lookup evidence may establish that E7r outcome. | The stated ledger consequence. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB] |
+| 6 · ACCEPTED | C-GOLD.1.5.11.3.5 — still_undetermined Run consequence | still_undetermined E7r. | This consequence applies to still_undetermined; only lookup evidence may establish that E7r outcome. | The stated run consequence. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB] |
 
 SUB-PARTS: C-GOLD.1.5.11.3.1 — still_undetermined Effective attempt state; C-GOLD.1.5.11.3.2 — still_undetermined B9 routing; C-GOLD.1.5.11.3.3 — still_undetermined Aggregate consequence; C-GOLD.1.5.11.3.4 — still_undetermined Ledger consequence; C-GOLD.1.5.11.3.5 — still_undetermined Run consequence
 
@@ -3703,7 +3738,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — This consequence applies to still_undetermined; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.5.11.3 — still_undetermined resolution: This consequence applies to still_undetermined; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -3726,7 +3761,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — This consequence applies to still_undetermined; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.5.11.3 — still_undetermined resolution: This consequence applies to still_undetermined; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -3749,7 +3784,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — This consequence applies to still_undetermined; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.5.11.3 — still_undetermined resolution: This consequence applies to still_undetermined; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -3772,7 +3807,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — This consequence applies to still_undetermined; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.5.11.3 — still_undetermined resolution: This consequence applies to still_undetermined; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
 - Changes: ACCEPTED — C-GOLD.1.4.2 — Scope ledger head: The E7r append advances the ledger head. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
 
 USED BY
@@ -3795,7 +3830,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — This consequence applies to still_undetermined; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.5.11.3 — still_undetermined resolution: This consequence applies to still_undetermined; only lookup evidence may establish that E7r outcome. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -4867,6 +4902,45 @@ Every empty box is listed with its source-silence reason. Known mechanics deferr
 | C-GOLD.1.5.13 | Fed by | NOT DECIDED | No separate supplying part is named for this atomic member/rule; its concrete inputs are recorded in Takes in. |
 | C-GOLD.1.5.13 | Changes | NOT DECIDED | No separate outward state change is assigned to this field/rule by its cited section; its stated result remains in Gives out. |
 | C-GOLD.1.5.8 | Physical compare-and-append implementation | NOT DECIDED | The accepted bridge leaves ledger/CAS storage mechanics, canonicalization and integrity algorithms open (§20). |
+| C-GOLD.1.5.3.4 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.3.5 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.3.6 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.5.1 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.6.1 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.6.5 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.6.6 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.6.8 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.6.10.1 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.6.10.2 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.6.10.3 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.6.10.4 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.6.10.5 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.6.10.6 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.6.10.7 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.6.10.8 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.6.10.9 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.8.1.1 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.8.1.2 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.8.1.3 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.8.1.4 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.8.1.5 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.8.3 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.10 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.10.1 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.10.2 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.10.3 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.10.4 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.10.5 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.10.6 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.10.7 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.10.8 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.10.9 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.10.10 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.10.11 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.10.12 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.10.13 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.10.14 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.5.10.15 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
 
 ### Source-conflict and status distinctions
 
@@ -5171,10 +5245,12 @@ No conflict is resolved by this pair. B16 v1.0 §5.3 retains its input-3 phrase 
 
 ## READ RECORD
 
+Round 3A correction: the attached `NH_MASTER-21_FIX_REQUEST_ROUND3_2026-09-26.md`, all listed cards and their cited source sections were checked; no fresh whole-read source credit or source-pin change is claimed.
+
 ### Files read whole for this pair
 
 - `05_ACTIVE_CANDIDATE/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md` — 2,018 lines, 135,956 bytes; SHA-256 `04dd5abc42e59afb61b4d280a0bb69d647d187fd0da385bc5c567eddbca81a41`; Git blob matches the verified source pin.
-- `04_ACCEPTED_STANDALONE_DESIGNS/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_PACKAGE_COMPLETE_CLOSURE_RECORD_v1_0.md` — acceptance identity/status and open-slot definitions; matched the source pin.
+- `04_ACCEPTED_STANDALONE_DESIGNS/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_PACKAGE_COMPLETE_CLOSURE_RECORD_v1_0.md` — acceptance identity/status and open-slot definitions; matched the source pin. SHA-256 `298de053269f4a9e93e97dfd994d33b0b879d71af636b169769264e7183d9d4c`.
 - Instruction: cloned `NH_MASTER-21_SYSTEM_BEHAVIOR_BUILD_CONTRACT_FOR_CHATGPT_v1_0.md`, SHA-256 `e78c7a8c8a448ff20966002465c8d6a330000900802c0b19a48e8a124e5ceba1`.
 - Instruction: `NH_MASTER-21_FIX_REQUEST_ROUND1_2026-09-25(1).md`; the all-card field-placement rule and step reciprocity remain applied.
 
@@ -5296,16 +5372,16 @@ The earlier whole-read accounting is carried forward; this pair adds whole-read 
 
 CONTRACT CHECK (against the cloned contract, SHA-256 e78c7a8c8a448ff20966002465c8d6a330000900802c0b19a48e8a124e5ceba1)
 §1.3 no history/actions/roles/workflow in this chapter: PASS — all 177 behavior cards, field lines and reciprocal rows checked; source status and read accounting are outside behavior. Runtime judgment authority remains runtime behavior, not drafting workflow.
-§1.4 every gap written as NOT DECIDED: PASS — all 531 prohibition/failure/gate boxes reviewed against their own text and cited source. 298 empty fields and 1 scoped gaps are registered with reasons. Decided material scheduled for a later piece is separately listed; it is not called undecided.
+§1.4 every gap written as NOT DECIDED: PASS — all 531 prohibition/failure/gate boxes reviewed against their own text and cited source. 337 empty fields and 1 scoped gaps are registered with reasons. Decided material scheduled for a later piece is separately listed; it is not called undecided. Round 3A: all 69 listed unnamed TOGETHER lines reviewed: 24 disposition 1, 39 disposition 2, 6 disposition 3; no additional unnamed lines found.
 §1.5 conflicts marked, none resolved: PASS — B16 v1.0’s earlier input-3 wording is preserved in the source-conflict register; Chapter 3-e also marks the narrow E13 behavior line. No accepted source or earlier chapter is edited; V10 remains governing.
-§3 exactly one stamp per line: PASS — 1529 populated field lines and 317 USED BY rows checked. All are ACCEPTED from the exact accepted bridge source. The V10 status table grants no BUILT standing to these bridge records, operations or links; none is stamped BUILT.
+§3 exactly one stamp per line: PASS — 1490 populated field lines and 352 USED BY rows checked. All are ACCEPTED from the exact accepted bridge source. The V10 status table grants no BUILT standing to these bridge records, operations or links; none is stamped BUILT.
 §4 every behavior line cited in the exact format: PASS — every populated field and reciprocal row carries exact 05/file §section citations to the accepted v1.7 source and NHD-B16EEB. All section targets resolve; record-definition citations include the actual later section where a carried outcome is defined. Receipt §§3–5 establishes accepted standing independently of folder/header.
 §5.4 one name per thing: PASS — new sub-part IDs remain under the Map’s existing C-GOLD identifier; canonical endpoint names match prior chapter names. No new top-level ID or controlled NHD identifier is introduced. Proposed source names and globally unique policy-slot IDs are retained.
 §6 all template fields present, in order, for every part: PASS — all 177 templates carry all nine fields in order, ALONE, TOGETHER, USED BY and SUB-PARTS; every listed child exists in this pair.
-§6.3 reciprocity within this chapter: PASS — all 854 unique relationship pairs across 3-e/3-f checked in both directions. The 39 transaction/stage/recovery step cards name their defining rules with reciprocal USED BY rows. External endpoint additions are recorded here without modifying prior chapters.
+§6.3 reciprocity within this chapter: PASS — all 1441 unique forward card relationships in corrected CH03-e/CH03-f/CH03-g/CH03-h checked against USED BY rows or retained continuation entries. Every new disposition-1 reference has its reciprocal in the named card’s own file when that card is in this round, otherwise in the using chapter’s continuation table. Existing step-to-rule links remain; continuation entries stay in their own tables and are not merged at assembly.
 §6.4 every decided detail written in, no citation used in place of content: PASS within this piece’s explicit scope — All thirteen bridge operation identities and their terminal/log vocabularies; run-closing conditions; frozen terminal set; output-before-visibility; B9 classifications and accepted limits; twelve transaction boundaries; fifteen idempotency points; CAS-1, CAS-2, DET-1 and CAS-3; three resolution outcomes with all consequences; twenty-four in-scope recovery cases. Protected judgment-specific recovery remains explicitly reserved.
 §6.5 sub-parts recursed to the bottom: PASS within this piece’s explicit scope — record members, named measurement dimensions, registered enum/failure classes, operation outcomes, commit conditions and resolution consequences have cards. No unchosen policy value, storage algorithm, mechanism or authorization option is invented.
-§9 coverage matrix rows added for every file used: PASS — all 145 READ-folder files at the pin are accounted for; all 107 carried V10 heading rows remain. The bridge and receipt rows reflect this whole read, with a detailed section landing map. Source/passed-chapter blob preservation checked for 52 matched local files.
+§9 coverage matrix rows added for every file used: PASS — all 145 READ-folder files at the pin are accounted for; all 107 carried V10 heading rows remain. The bridge and receipt rows reflect this whole read, with a detailed section landing map. The bridge source and acceptance receipt SHA-256 fingerprints are listed in READ RECORD and match the pinned copies.
 §10.11 no recommendation, no sentence addressed to Ness: PASS — checked in all behavior cards and register contributions; source recommendations are not imported as decisions.
 Files read whole for this chapter: `05_ACTIVE_CANDIDATE/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md`; `04_ACCEPTED_STANDALONE_DESIGNS/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_PACKAGE_COMPLETE_CLOSURE_RECORD_v1_0.md`; the cloned contract and fix-request instructions. Scoped rereads and inherited whole-read credits remain separately identified in READ RECORD.
 

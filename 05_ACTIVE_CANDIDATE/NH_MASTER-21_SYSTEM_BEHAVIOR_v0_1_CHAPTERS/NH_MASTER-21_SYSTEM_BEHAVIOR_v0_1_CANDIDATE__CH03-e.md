@@ -33,7 +33,7 @@ TOGETHER
 - Fed by: ACCEPTED — C-GOLD.1.4 — Scope ledger and currentness: Advances one authoritative scope ledger with every relevant record; results bind the exact head and evaluated-set digest. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6] [NHD-B16EEB] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.3] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §11]
 - Fed by: ACCEPTED — C-GOLD — Sealed gold sets v1, v2-B (§7C): C-GOLD supplies sealed-gold examination and gold-run logging; the bridge extends that owner. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §2.5] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §3] [NHD-B16EEB] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.3] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §11]
 - Fed by: ACCEPTED — C-GOLD.1.5 — Evaluation operations and trial execution: Executes under one-terminal/one-log ownership, output uniqueness, B9 admission and lookup-first recovery. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.1] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.2] [NHD-B16EEB] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.3] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §11]
-- Gated by: ACCEPTED — A complete current epoch is required for evidentiary execution; usable evidence must match its current scope; privacy access must be authorized. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.3] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.2] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.4] [NHD-B16EEB] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §11]
+- Gated by: ACCEPTED — C-GOLD.1.2.3 — policy_epoch (E2e): A complete current epoch is required for evidentiary execution; C-GOLD.1.4.3 — Authoritative current result: usable evidence must match its current scope; C-GOLD.1.3.19 — Evaluation privacy and access: privacy access must be authorized. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.3] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.2] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.4] [NHD-B16EEB] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §11]
 - Changes: NOT DECIDED
 
 USED BY
@@ -255,7 +255,7 @@ TOGETHER
 - Fed by: ACCEPTED — C-GOLD.1.2.1.3 — Execution-path binding: Binds the exact execution path for this suite version. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.1] [NHD-B16EEB]
 - Fed by: ACCEPTED — C-GOLD.1.2.1.4 — model digest: The model digest bound to the profile and matched exactly to the reading by AP-6. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.1] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §9] [NHD-B16EEB]
 - Gated by: ACCEPTED — C-GOLD.1.3.19 — Evaluation privacy and access: §7Q governs these records/ledgers/logs before relevance; applicable SACL scope must allow access. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.4] [NHD-B16EEB]
-- Gated by: ACCEPTED — The exact approved profile and path/system configuration are bound; content-digest identity governs registration. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.1] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.5.10.2 — E2e / E3 / E4 / E4S idempotency key: The exact approved profile and path/system configuration are bound; content-digest identity governs registration. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.1] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -336,7 +336,7 @@ TOGETHER
 - Fed by: ACCEPTED — C-GOLD.1.2.1.3.7 — validator configuration: The validator configuration, or the exact not_in_path alternative. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.1] [NHD-B16EEB]
 - Fed by: ACCEPTED — C-GOLD.1.2.1.3.8 — other benchmark-protected configuration: Other configuration protected for benchmark comparability. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.1] [NHD-B16EEB]
 - Fed by: ACCEPTED — C-GOLD.1.2.1.3.9 — path_configuration_digest: The digest identifying this binding’s complete path configuration. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.1] [NHD-B16EEB]
-- Gated by: ACCEPTED — The exact approved profile and path/system configuration are bound; content-digest identity governs registration. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.1] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.5.10.2 — E2e / E3 / E4 / E4S idempotency key: The exact approved profile and path/system configuration are bound; content-digest identity governs registration. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.1] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -593,7 +593,7 @@ TOGETHER
 - Fed by: ACCEPTED — C-GOLD.1.2.2.3 — combined handoff configuration: The configuration of the combined pair/system. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.1] [NHD-B16EEB]
 - Fed by: ACCEPTED — C-GOLD.1.2.2.4 — Combined handoff configuration: Identifies the configured pair/system used for evaluation. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.1] [NHD-B16EEB]
 - Gated by: ACCEPTED — C-GOLD.1.3.19 — Evaluation privacy and access: §7Q governs these records/ledgers/logs before relevance; applicable SACL scope must allow access. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.4] [NHD-B16EEB]
-- Gated by: ACCEPTED — The exact approved profile and path/system configuration are bound; content-digest identity governs registration. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.1] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.5.10.2 — E2e / E3 / E4 / E4S idempotency key: The exact approved profile and path/system configuration are bound; content-digest identity governs registration. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.1] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -695,7 +695,7 @@ TOGETHER
 - Fed by: ACCEPTED — C-GOLD.1.2.2.4.5 — gate configuration references: References to the bound gate configurations. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.1] [NHD-B16EEB]
 - Fed by: ACCEPTED — C-GOLD.1.2.2.4.6 — dual-model handoff arrangement: The handoff arrangement of the accepted dual-model handoff package, §§1–4. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.1] [NHD-B16EEB]
 - Fed by: ACCEPTED — C-GOLD.1.2.2.4.7 — system_configuration_digest: The digest of the combined system configuration. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.1] [NHD-B16EEB]
-- Gated by: ACCEPTED — The exact approved profile and path/system configuration are bound; content-digest identity governs registration. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.1] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.5.10.2 — E2e / E3 / E4 / E4S idempotency key: The exact approved profile and path/system configuration are bound; content-digest identity governs registration. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.1] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.8] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -902,6 +902,7 @@ USED BY
 | 6 · ACCEPTED | C-GOLD.1.2.4 — Run class freeze | All policy kinds required by that family. | Binds every required current accepted version; currentness lasts only while every named policy is current. | A frozen policy epoch, or no admissible evidentiary run. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.2] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.3] [NHD-B16EEB] |
 | 7 · ACCEPTED | C-GOLD.1.5.2.2 — O-SETUP | All policy kinds required by that family. | For this requested record kind, appends the E2e canonical record when its stated commit conditions hold; earlier records remain unchanged. | A frozen policy epoch, or no admissible evidentiary run. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.2] [NHD-B16EEB] |
 | 8 · ACCEPTED | C-GOLD.1.5.9.2 — EB-2 — Setup registration | All policy kinds required by that family. | For the corresponding requested record kind, commits E2e at this boundary only after its stated gates; existing records are not overwritten. | A frozen policy epoch, or no admissible evidentiary run. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.7] [NHD-B16EEB] |
+| 9 · ACCEPTED | C-GOLD.1 — Promotion evaluation-evidence bridge | Accepted suite references, candidate profiles, policy references, evaluation records and their scope ledger. | A complete current epoch is required for evidentiary execution; usable evidence must match its current scope; privacy access must be authorized. | Distinct E11a, E11b and E12 result families and E13 references to E11a/E11b only, subject to their accepted prerequisites. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.3] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.2] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.4] [NHD-B16EEB] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §11] |
 
 SUB-PARTS: C-GOLD.1.2.3.1 — trial_count_policy_ref; C-GOLD.1.2.3.2 — tolerance/acceptance rule references; C-GOLD.1.2.3.3 — required-coverage profile; C-GOLD.1.2.3.4 — measured-dimension budgets; C-GOLD.1.2.3.5 — judgment-authority requirement; C-GOLD.1.2.3.6 — held-out policy; C-GOLD.1.2.3.7 — Invoked-only policies and B9 separation; C-GOLD.1.2.3.8 — hardware-need / purchase criteria reference
 
@@ -1023,6 +1024,9 @@ USED BY
 | # | Used in (part ID, and path ID if path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-GOLD.1.2.3 — policy_epoch (E2e) | Accepted NHD-B16EEB-D16 proof requirement wherever Ness judgments are needed. | Accepted NHD-B16EEB-D16 proof requirement wherever Ness judgments are needed. | The recorded judgment-authority requirement member. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.2] [NHD-B16EEB] |
+| 2 · ACCEPTED | C-GOLD.1.6 — Judgment chains and conditional authority proofs | Effectively completed outputs, E1 scoring bindings and E9 authority references. | NHD-B16EEB-D16 must be accepted before any Ness judgment can commit. | Authorized chain heads, or refused/unavailable/indeterminate judgments. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.11] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.12] [NHD-B16EEB] |
+| 3 · ACCEPTED | C-GOLD.1.6.2.1 — ness_meaning_judgment authority | All sealed-gold cases and B24 meaning-dependent cases; the accepted NHD-B16EEB-D16 requirement. | The proof has the required kind, purpose and scope, and proves Ness at the required event time. | A verified proof of this judgment act. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.11] [NHD-B16EEB] |
+| 4 · ACCEPTED | C-GOLD.1.6.5.1 — SACL validity at judgment commit | The required SACL/SIA identity/session assessment at E9 commit. The source gives a fresh, non-stale recognized_ness assessment for the Ness stream as an example of the state named by NHD-B16EEB-D16; the accepted option still determines the actual requirement. | The accepted proof requirement determines the required state and invalidating conditions. | Verified event-time identity state. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.12] [NHD-B16EEB] |
 
 SUB-PARTS: NONE
 
@@ -1118,6 +1122,7 @@ USED BY
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-GOLD.1.2 — Evaluation identities and required coverage | An evidentiary or exploratory run. | Freezes evidentiary runs to the complete current epoch, suite manifest and registered profile; exploratory runs remain non_evidentiary. | One fixed run class. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.3] [NHD-B16EEB] |
 | 2 · ACCEPTED | C-GOLD.1.2.3 — policy_epoch (E2e) | An evidentiary or exploratory run. | Evidentiary opening requires the complete current policy epoch; exploratory classification cannot later become evidentiary. | One fixed run class. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.3] [NHD-B16EEB] |
+| 3 · ACCEPTED | C-GOLD.1.2.4.1 — Evidentiary run admission | Complete current epoch, accepted suite manifest and registered profile. | Complete current epoch, accepted manifest, registered profile and set trial count are mandatory. | An evidentiary run. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.3] [NHD-B16EEB] |
 
 SUB-PARTS: C-GOLD.1.2.4.1 — Evidentiary run admission; C-GOLD.1.2.4.2 — Exploratory permanence
 
@@ -1134,7 +1139,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Complete current epoch, accepted manifest, registered profile and set trial count are mandatory. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.3] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.2.4 — Run class freeze: Complete current epoch, accepted manifest, registered profile and set trial count are mandatory. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.3] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -1157,7 +1162,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — The exploratory class is fixed at run open and permanently non_evidentiary. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.3] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -1186,13 +1191,20 @@ TOGETHER
 - Fed by: ACCEPTED — C-GOLD.1.2.5.5 — gold_evidence family: Keeps the run in the gold_evidence family. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB]
 - Fed by: ACCEPTED — C-GOLD.1.2.5.6 — held_out_evidence family: Keeps the run in the held_out_evidence family. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB]
 - Fed by: ACCEPTED — C-GOLD.1.2.5.7 — b24_system_eligibility family: Keeps the run in the b24_system_eligibility family. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB]
-- Gated by: ACCEPTED — One run belongs to exactly one scope and one target family. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
 | # | Used in (part ID, and path ID if path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-GOLD.1.2 — Evaluation identities and required coverage | Target family, E4/E4S digest, role/system and epoch. | Assigns one run to exactly one scope and one family. | A scope tuple. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB] |
+| 2 · ACCEPTED | C-GOLD.1.2.5.1 — target family | Exactly one of gold_evidence, held_out_evidence or b24_system_eligibility. | One run belongs to exactly one scope and one target family. | The recorded target family member. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB] |
+| 3 · ACCEPTED | C-GOLD.1.2.5.2 — candidate profile digest | The E4 or E4S candidate digest. | One run belongs to exactly one scope and one target family. | The recorded candidate profile digest member. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB] |
+| 4 · ACCEPTED | C-GOLD.1.2.5.3 — role/system | The role or combined system under evaluation. | One run belongs to exactly one scope and one target family. | The recorded role/system member. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB] |
+| 5 · ACCEPTED | C-GOLD.1.2.5.4 — policy epoch | The scope’s policy epoch. | One run belongs to exactly one scope and one target family. | The recorded policy epoch member. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB] |
+| 6 · ACCEPTED | C-GOLD.1.2.5.5 — gold_evidence family | A run assigned to this target family. | One run belongs to exactly one scope and one target family. | One family-specific scope. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB] |
+| 7 · ACCEPTED | C-GOLD.1.2.5.6 — held_out_evidence family | A run assigned to this target family. | One run belongs to exactly one scope and one target family. | One family-specific scope. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB] |
+| 8 · ACCEPTED | C-GOLD.1.2.5.7 — b24_system_eligibility family | A run assigned to this target family. | One run belongs to exactly one scope and one target family. | One family-specific scope. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB] |
 
 SUB-PARTS: C-GOLD.1.2.5.1 — target family; C-GOLD.1.2.5.2 — candidate profile digest; C-GOLD.1.2.5.3 — role/system; C-GOLD.1.2.5.4 — policy epoch; C-GOLD.1.2.5.5 — gold_evidence family; C-GOLD.1.2.5.6 — held_out_evidence family; C-GOLD.1.2.5.7 — b24_system_eligibility family
 
@@ -1209,7 +1221,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — One run belongs to exactly one scope and one target family. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.2.5 — Evaluation scope: One run belongs to exactly one scope and one target family. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -1232,7 +1244,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — One run belongs to exactly one scope and one target family. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.2.5 — Evaluation scope: One run belongs to exactly one scope and one target family. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -1255,7 +1267,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — One run belongs to exactly one scope and one target family. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.2.5 — Evaluation scope: One run belongs to exactly one scope and one target family. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -1278,7 +1290,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — One run belongs to exactly one scope and one target family. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.2.5 — Evaluation scope: One run belongs to exactly one scope and one target family. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -1301,7 +1313,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — One run belongs to exactly one scope and one target family. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.2.5 — Evaluation scope: One run belongs to exactly one scope and one target family. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -1324,7 +1336,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — One run belongs to exactly one scope and one target family. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.2.5 — Evaluation scope: One run belongs to exactly one scope and one target family. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -1347,7 +1359,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — One run belongs to exactly one scope and one target family. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.2.5 — Evaluation scope: One run belongs to exactly one scope and one target family. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.4] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -1381,6 +1393,10 @@ USED BY
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-GOLD.1.2 — Evaluation identities and required coverage | run, case_id and trial_index. | Uses planned_trial_key as canonical identity and one B9 retry group; the plan equals the complete suite case list × epoch trial count. | A full set of planned measurement trials. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.5] [NHD-B16EEB] |
 | 2 · ACCEPTED | C-GOLD.1.3.5 — evaluation_run_open (E5) | run, case_id and trial_index. | The complete suite case list × epoch trial count must be the trial plan; subset plans are refused. | A full set of planned measurement trials. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.5] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB] |
+| 3 · ACCEPTED | C-GOLD.1.2.6.1 — run | The evaluation run containing the planned trial. | The planned trial is the fixed run/case_id/trial_index identity; one planned_trial_key identifies one B9 source operation. | The recorded run member. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.5] [NHD-B16EEB] |
+| 4 · ACCEPTED | C-GOLD.1.2.6.2 — case_id | The suite case identity. | The planned trial is the fixed run/case_id/trial_index identity; one planned_trial_key identifies one B9 source operation. | The recorded case_id member. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.5] [NHD-B16EEB] |
+| 5 · ACCEPTED | C-GOLD.1.2.6.3 — trial_index | The planned repetition index. | The planned trial is the fixed run/case_id/trial_index identity; one planned_trial_key identifies one B9 source operation. | The recorded trial_index member. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.5] [NHD-B16EEB] |
+| 6 · ACCEPTED | C-GOLD.1.2.6.4 — planned_trial_key | The canonical B9 source-operation identity for this planned trial; one B9 retry group. | The planned trial is the fixed run/case_id/trial_index identity; one planned_trial_key identifies one B9 source operation. | The recorded planned_trial_key member. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.5] [NHD-B16EEB] |
 
 SUB-PARTS: C-GOLD.1.2.6.1 — run; C-GOLD.1.2.6.2 — case_id; C-GOLD.1.2.6.3 — trial_index; C-GOLD.1.2.6.4 — planned_trial_key
 
@@ -1397,7 +1413,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — The planned trial is the fixed run/case_id/trial_index identity; one planned_trial_key identifies one B9 source operation. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.5] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.2.6 — Planned trial identity and full trial plan: The planned trial is the fixed run/case_id/trial_index identity; one planned_trial_key identifies one B9 source operation. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.5] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -1420,7 +1436,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — The planned trial is the fixed run/case_id/trial_index identity; one planned_trial_key identifies one B9 source operation. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.5] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.2.6 — Planned trial identity and full trial plan: The planned trial is the fixed run/case_id/trial_index identity; one planned_trial_key identifies one B9 source operation. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.5] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -1443,7 +1459,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — The planned trial is the fixed run/case_id/trial_index identity; one planned_trial_key identifies one B9 source operation. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.5] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.2.6 — Planned trial identity and full trial plan: The planned trial is the fixed run/case_id/trial_index identity; one planned_trial_key identifies one B9 source operation. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.5] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -1466,7 +1482,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — The planned trial is the fixed run/case_id/trial_index identity; one planned_trial_key identifies one B9 source operation. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.5] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.2.6 — Planned trial identity and full trial plan: The planned trial is the fixed run/case_id/trial_index identity; one planned_trial_key identifies one B9 source operation. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.5] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -1525,6 +1541,10 @@ USED BY
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-GOLD.1.2.7 — Coverage cells and named measurements | The declared cell and an evidentiary run’s E5. | Requires at least one complete current passed full-plan run matching the cell exactly. | A satisfied cell only after an actual matching run. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.6] [NHD-B16EEB] |
 | 2 · ACCEPTED | C-GOLD.1.2.7 — Coverage cells and named measurements | The declared cell and an evidentiary run’s E5. | Requires at least one complete current passed full-plan run matching the cell exactly. | A satisfied cell only after an actual matching run. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.6] [NHD-B16EEB] |
+| 3 · ACCEPTED | C-GOLD.1.2.7.1.1 — suite manifest and version | The exact concrete suite manifest and version. | The actual completed current passed full-plan run must match every declared cell member exactly. | The recorded suite manifest and version member. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.6] [NHD-B16EEB] |
+| 4 · ACCEPTED | C-GOLD.1.2.7.1.2 — suite family | The §7B.2 family, or sealed_gold_rule_8 for gold cells in B24 coverage. | The actual completed current passed full-plan run must match every declared cell member exactly. | The recorded suite family member. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.6] [NHD-B16EEB] |
+| 5 · ACCEPTED | C-GOLD.1.2.7.1.3 — measurement scope | The §7B.3 analyst, messenger or combined measurement scope. | The actual completed current passed full-plan run must match every declared cell member exactly. | The recorded measurement scope member. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.6] [NHD-B16EEB] |
+| 6 · ACCEPTED | C-GOLD.1.2.7.1.4 — execution binding | The exact execution binding; a gold-family cell is only gold suite + version and path binding. | The actual completed current passed full-plan run must match every declared cell member exactly. | The recorded execution binding member. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.6] [NHD-B16EEB] |
 
 SUB-PARTS: C-GOLD.1.2.7.1.1 — suite manifest and version; C-GOLD.1.2.7.1.2 — suite family; C-GOLD.1.2.7.1.3 — measurement scope; C-GOLD.1.2.7.1.4 — execution binding
 
@@ -1541,7 +1561,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — The actual completed current passed full-plan run must match every declared cell member exactly. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.6] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.2.7.1 — Coverage cell: The actual completed current passed full-plan run must match every declared cell member exactly. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.6] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -1564,7 +1584,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — The actual completed current passed full-plan run must match every declared cell member exactly. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.6] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.2.7.1 — Coverage cell: The actual completed current passed full-plan run must match every declared cell member exactly. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.6] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -1587,7 +1607,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — The actual completed current passed full-plan run must match every declared cell member exactly. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.6] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.2.7.1 — Coverage cell: The actual completed current passed full-plan run must match every declared cell member exactly. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.6] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -1610,7 +1630,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — The actual completed current passed full-plan run must match every declared cell member exactly. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.6] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.2.7.1 — Coverage cell: The actual completed current passed full-plan run must match every declared cell member exactly. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.6] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -2629,6 +2649,7 @@ USED BY
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-GOLD.1.3.2 — evaluation_suite_manifest (E1) | Case identity, judgment mode, scoring rule and applicable checker/category bindings. | Binds ness_meaning_judgment or deterministic_checker; deterministic mode names exact checker configuration and version; §7C categories exist only for benchmark_family. | One explicit accepted binding per case. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB] |
 | 2 · ACCEPTED | C-GOLD.1.3.2 — evaluation_suite_manifest (E1) | Case identity, judgment mode, scoring rule and applicable checker/category bindings. | Every case has its accepted mode and governing rule; checker identity/version and benchmark-only categories retain their exact scope. | One explicit accepted binding per case. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB] |
+| 3 · ACCEPTED | C-GOLD.1.6.2 — E1-bound judgment authority | E1 case scoring binding and the proposed E9 authority reference. | The proof matches E1’s scoring binding. | An authorized reference or a refused judgment. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.11] [NHD-B16EEB] |
 
 SUB-PARTS: C-GOLD.1.3.2.12.1 — judgment mode; C-GOLD.1.3.2.12.2 — governing scoring-rule reference; C-GOLD.1.3.2.12.3 — checker configuration identity; C-GOLD.1.3.2.12.4 — checker configuration version; C-GOLD.1.3.2.12.5 — §7C category mapping
 
@@ -3149,6 +3170,7 @@ USED BY
 | 5 · ACCEPTED | C-GOLD.1.2.7.1 — Coverage cell | Run class, scope, profile, cell, suite kind, rule, epoch, context and full plan. | Freezes the run’s exact evidence context before execution. | One run-opening record. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.3] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.5] [NHD-B16EEB] |
 | 6 · ACCEPTED | C-GOLD.1.5.2.3 — O-RUN | Run class, scope, profile, cell, suite kind, rule, epoch, context and full plan. | appends the E5 canonical record when its stated commit conditions hold; earlier records remain unchanged. | One run-opening record. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.2] [NHD-B16EEB] |
 | 7 · ACCEPTED | C-GOLD.1.5.9.3 — EB-3 — Run open | Run class, scope, profile, cell, suite kind, rule, epoch, context and full plan. | For the corresponding requested record kind, commits E5 at this boundary only after its stated gates; existing records are not overwritten. | One run-opening record. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.7] [NHD-B16EEB] |
+| 8 · ACCEPTED | C-GOLD.1.5.7 — Actual execution-context classification | The execution context recorded in E5. | The actual context recorded in E5 controls retry classification; missing or unreadable context admits no retry. | A context-bound B9 retry classification. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.6] [NHD-B16EEB] |
 
 SUB-PARTS: C-GOLD.1.3.5.1 — run ID; C-GOLD.1.3.5.2 — class; C-GOLD.1.3.5.3 — scope; C-GOLD.1.3.5.4 — profile ref; C-GOLD.1.3.5.5 — coverage cell; C-GOLD.1.3.5.6 — E1 suite kind; C-GOLD.1.3.5.7 — governing scoring-rule reference; C-GOLD.1.3.5.8 — frozen epoch ref; C-GOLD.1.3.5.9 — recorded execution context; C-GOLD.1.3.5.10 — runtime/hardware configuration; C-GOLD.1.3.5.11 — comparability group; C-GOLD.1.3.5.12 — full trial plan; C-GOLD.1.3.5.13 — operator; C-GOLD.1.3.5.14 — opened_at
 
@@ -3343,7 +3365,7 @@ ALONE
 - What it is: ACCEPTED — The recorded execution context member of evaluation_run_open (E5). [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.3] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.5]
 - Takes in: ACCEPTED — The actual execution context used for B9 classification. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.3] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.5]
 - Does: ACCEPTED — The actual execution context used for B9 classification. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.3] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.5]
-- Gives out: ACCEPTED — The recorded recorded execution context member. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.3] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.5]
+- Gives out: ACCEPTED — The recorded execution context member. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.3] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.5]
 - Must never: ACCEPTED — Rewrite this member of the immutable canonical record; corrections are new linked records, with the original preserved. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB]
 - Fails closed by: ACCEPTED — If the containing canonical record is unreadable, downstream state is indeterminate; no separate per-field refusal mechanism is specified. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.1] [NHD-B16EEB]
 
@@ -3355,7 +3377,7 @@ TOGETHER
 USED BY
 | # | Used in (part ID, and path ID if path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
-| 1 · ACCEPTED | C-GOLD.1.3.5 — evaluation_run_open (E5) | The actual execution context used for B9 classification. | The actual execution context used for B9 classification. | The recorded recorded execution context member. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB] |
+| 1 · ACCEPTED | C-GOLD.1.3.5 — evaluation_run_open (E5) | The actual execution context used for B9 classification. | The actual execution context used for B9 classification. | The recorded execution context member. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB] |
 
 SUB-PARTS: NONE
 
@@ -3680,6 +3702,12 @@ USED BY
 | 6 · ACCEPTED | C-GOLD.1.5.2.4.4 — O-ATTEMPT attempt_unresolved | Attempt identity, terminal outcome and any deterministic findings. | Records this attempt’s single terminal in E7. | One E7 terminal; never rewritten. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.2] [NHD-B16EEB] |
 | 7 · ACCEPTED | C-GOLD.1.5.2.4 — O-ATTEMPT | Attempt identity, terminal outcome and any deterministic findings. | appends the E7 canonical record when its stated commit conditions hold; earlier records remain unchanged. | One E7 terminal; never rewritten. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.2] [NHD-B16EEB] |
 | 8 · ACCEPTED | C-GOLD.1.5.9.5 — EB-5 — Attempt terminal | Attempt identity, terminal outcome and any deterministic findings. | For the corresponding requested record kind, commits E7 at this boundary only after its stated gates; existing records are not overwritten. | One E7 terminal; never rewritten. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.7] [NHD-B16EEB] |
+| 9 · ACCEPTED | C-GOLD.1.3.7.2.1 — technical attempt failure | An attempt_failed E7. | The E7 outcome is attempt_failed; its class is recorded without changing the terminal. | The stated failure class. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB] |
+| 10 · ACCEPTED | C-GOLD.1.3.7.2.2 — resource attempt failure | An attempt_failed E7. | The E7 outcome is attempt_failed; its class is recorded without changing the terminal. | The stated failure class. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB] |
+| 11 · ACCEPTED | C-GOLD.1.3.7.2.3 — timeout attempt failure | An attempt_failed E7. | The E7 outcome is attempt_failed; its class is recorded without changing the terminal. | The stated failure class. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB] |
+| 12 · ACCEPTED | C-GOLD.1.5.3.1 — All started attempts terminal | Every E6 of the run. | Requires one E7 for every started attempt. | E8 admission condition. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.2] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB] |
+| 13 · ACCEPTED | C-GOLD.1.5.5.2 — Output-before-visibility gate | A produced output and its E7/E7r record. | E7 attempt_completed or E7r resolved_output_found must commit before operator or judge visibility. | Only durably completed outputs become visible. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.4] [NHD-B16EEB] |
+| 14 · ACCEPTED | C-GOLD.1.6.1.1 — Judgment-chain key and creation | The output’s planned_trial_output_key and E7 attempt_completed or E7r resolved_output_found. | E7 attempt_completed or E7r resolved_output_found establishes effective completion. | One output-keyed chain. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.11] [NHD-B16EEB] |
 
 SUB-PARTS: C-GOLD.1.3.7.1 — terminal outcome; C-GOLD.1.3.7.2 — failure class; C-GOLD.1.3.7.3 — checker binding
 
@@ -3744,7 +3772,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — The E7 outcome is attempt_failed; its class is recorded without changing the terminal. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.3.7 — trial_attempt_terminal (E7): The E7 outcome is attempt_failed; its class is recorded without changing the terminal. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB]
 - Gated by: ACCEPTED — C-GOLD.1.3.1 — Canonical record preservation: The canonical record remains append-only and immutable; corrections are new linked records and no gold/root/reading text is copied. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
@@ -3768,7 +3796,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — The E7 outcome is attempt_failed; its class is recorded without changing the terminal. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.3.7 — trial_attempt_terminal (E7): The E7 outcome is attempt_failed; its class is recorded without changing the terminal. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB]
 - Gated by: ACCEPTED — C-GOLD.1.3.1 — Canonical record preservation: The canonical record remains append-only and immutable; corrections are new linked records and no gold/root/reading text is copied. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
@@ -3792,7 +3820,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — The E7 outcome is attempt_failed; its class is recorded without changing the terminal. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.3.7 — trial_attempt_terminal (E7): The E7 outcome is attempt_failed; its class is recorded without changing the terminal. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB]
 - Gated by: ACCEPTED — C-GOLD.1.3.1 — Canonical record preservation: The canonical record remains append-only and immutable; corrections are new linked records and no gold/root/reading text is copied. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
@@ -3859,6 +3887,8 @@ USED BY
 | 9 · ACCEPTED | C-GOLD.1.5.11.1 — resolved_output_found resolution | Durable lookup evidence for the attempt’s output. | Appends this resolution without rewriting E7 or E8. | A derived effective attempt state. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB] |
 | 10 · ACCEPTED | C-GOLD.1.5.11.2 — resolved_absence_proven resolution | Durable lookup evidence for the attempt’s output. | Appends this resolution without rewriting E7 or E8. | A derived effective attempt state. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB] |
 | 11 · ACCEPTED | C-GOLD.1.5.11.3 — still_undetermined resolution | Durable lookup evidence for the attempt’s output. | Appends this resolution without rewriting E7 or E8. | A derived effective attempt state. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.10] [NHD-B16EEB] |
+| 12 · ACCEPTED | C-GOLD.1.5.5.2 — Output-before-visibility gate | A produced output and its E7/E7r record. | E7 attempt_completed or E7r resolved_output_found must commit before operator or judge visibility. | Only durably completed outputs become visible. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.4] [NHD-B16EEB] |
+| 13 · ACCEPTED | C-GOLD.1.6.1.1 — Judgment-chain key and creation | The output’s planned_trial_output_key and E7 attempt_completed or E7r resolved_output_found. | E7 attempt_completed or E7r resolved_output_found establishes effective completion. | One output-keyed chain. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.11] [NHD-B16EEB] |
 
 SUB-PARTS: C-GOLD.1.3.8.1 — resolution outcome; C-GOLD.1.3.8.2 — resolved output proof
 
@@ -4023,6 +4053,8 @@ USED BY
 | 4 · ACCEPTED | C-GOLD.1.5.2.6 — O-JUDGE | Output identity/integrity, expected head, scoring mode and event-time authority proof. | Appends a judgment under the current-head and accepted authority conditions; identical resubmission absorbs. | A pass/fail judgment preserving earlier heads. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.11] [NHD-B16EEB] |
 | 5 · ACCEPTED | C-GOLD.1.5.2.6 — O-JUDGE | Output identity/integrity, expected head, scoring mode and event-time authority proof. | appends the E9 canonical record when its stated commit conditions hold; earlier records remain unchanged. | A pass/fail judgment preserving earlier heads. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.2] [NHD-B16EEB] |
 | 6 · ACCEPTED | C-GOLD.1.5.9.8 — EB-8 — Protected judgment | Output identity/integrity, expected head, scoring mode and event-time authority proof. | For the corresponding requested record kind, commits E9 at this boundary only after its stated gates; existing records are not overwritten. | A pass/fail judgment preserving earlier heads. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.7] [NHD-B16EEB] |
+| 7 · ACCEPTED | C-GOLD.1.6.1.4 — Authorized append-only judgment correction | A new authorized E9 naming the single current head and carrying change_reason. | The new E9 is authorized and its expected head is the unique current head. | A new authorized current head and unchanged earlier judgment. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.11] [NHD-B16EEB] |
+| 8 · ACCEPTED | C-GOLD.1.6.1.4 — Authorized append-only judgment correction | A new authorized E9 naming the single current head and carrying change_reason. | The new authorized E9 becomes head; the predecessor remains byte-identical. | A new authorized current head and unchanged earlier judgment. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.11] [NHD-B16EEB] |
 
 SUB-PARTS: C-GOLD.1.3.10.1 — judgment_chain_key; C-GOLD.1.3.10.2 — expected_previous_judgment_head; C-GOLD.1.3.10.3 — output ref; C-GOLD.1.3.10.4 — output integrity; C-GOLD.1.3.10.5 — judgment mode; C-GOLD.1.3.10.6 — judgment_authority_ref; C-GOLD.1.3.10.7 — pass / fail; C-GOLD.1.3.10.8 — §7C classification; C-GOLD.1.3.10.9 — human_annotation provenance; C-GOLD.1.3.10.10 — change_reason; C-GOLD.1.3.10.11 — model_assist_ref; C-GOLD.1.3.10.12 — E9 identity
 
@@ -4167,6 +4199,9 @@ USED BY
 | # | Used in (part ID, and path ID if path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
 | 1 · ACCEPTED | C-GOLD.1.3.10 — evaluation_judgment (E9) | The event-time proof required by accepted NHD-B16EEB-D16; BAI durable consumption receipt and/or immutable session-state proof, or the declared deterministic checker plus execution record. | The event-time proof required by accepted NHD-B16EEB-D16; BAI durable consumption receipt and/or immutable session-state proof, or the declared deterministic checker plus execution record. | The recorded judgment_authority_ref member. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB] |
+| 2 · ACCEPTED | C-GOLD.1.6.2.2 — deterministic_checker authority | The accepted E1 checker identity/configuration/version and this check’s execution record. | Exact accepted E1 checker binding and an execution record. | An authorized deterministic checker finding. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.11] [NHD-B16EEB] |
+| 3 · ACCEPTED | C-GOLD.1.6.2.4 — Model assistance carries no authority | Optional model_assist_ref. | A separate verified authority reference is required; a model-only E9 is refused. | No judgment authority from the model. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.11] [NHD-B16EEB] |
+| 4 · ACCEPTED | C-GOLD.1.6.2.5 — Annotation provenance supplements verified authority | human_annotation provenance and a verified authority reference. | The authority reference is independently verified. | Annotation provenance plus verified authority. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.11] [NHD-B16EEB] |
 
 SUB-PARTS: C-GOLD.1.3.10.6.1 — BAI receipt reference; C-GOLD.1.3.10.6.2 — SACL event-time reference; C-GOLD.1.3.10.6.3 — deterministic checker proof
 
@@ -4513,6 +4548,7 @@ USED BY
 | 4 · ACCEPTED | C-GOLD.1.2.7.2 — Named measurement satisfaction | Frozen terminal set, resolutions, current judgment heads, scoring rules and measurements. | Binds the exact consumed sets and the run’s own suite-kind scoring rule; records actual measurements and coverage. | A per-run aggregate head. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.11] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §8.1] [NHD-B16EEB] |
 | 5 · ACCEPTED | C-GOLD.1.5.2.7 — O-AGGREGATE | Frozen terminal set, resolutions, current judgment heads, scoring rules and measurements. | appends the E10 canonical record when its stated commit conditions hold; earlier records remain unchanged. | A per-run aggregate head. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.2] [NHD-B16EEB] |
 | 6 · ACCEPTED | C-GOLD.1.5.9.9 — EB-9 — Aggregate | Frozen terminal set, resolutions, current judgment heads, scoring rules and measurements. | For the corresponding requested record kind, commits E10 at this boundary only after its stated gates; existing records are not overwritten. | A per-run aggregate head. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.7] [NHD-B16EEB] |
+| 7 · ACCEPTED | C-GOLD.1.5.8.2 — CAS-2 aggregate-head compare-and-replace | E10, its expected prior aggregate head or none, terminal-set digest, E7r digest and judgment-set digest. | expected_previous_head is the current aggregate head, or none for the first; identical key/content may absorb. | One current aggregate head. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [NHD-B16EEB] |
 
 SUB-PARTS: C-GOLD.1.3.11.1 — expected_previous_head; C-GOLD.1.3.11.2 — terminal-set digest; C-GOLD.1.3.11.3 — E7r digest; C-GOLD.1.3.11.4 — current judgment-head set; C-GOLD.1.3.11.5 — judgment-set digest; C-GOLD.1.3.11.6 — suite kind; C-GOLD.1.3.11.7 — scoring rule applied; C-GOLD.1.3.11.8 — findings; C-GOLD.1.3.11.9 — recorded named-measurement results; C-GOLD.1.3.11.10 — coverage; C-GOLD.1.3.11.11 — state
 
@@ -4707,7 +4743,7 @@ ALONE
 - What it is: ACCEPTED — The recorded named-measurement results member of suite_aggregate_result (E10). [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.11] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §8.1]
 - Takes in: ACCEPTED — Actual measurement results, not merely measurement names. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.11] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §8.1]
 - Does: ACCEPTED — Actual measurement results, not merely measurement names. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.11] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §8.1]
-- Gives out: ACCEPTED — The recorded recorded named-measurement results member. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.11] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §8.1]
+- Gives out: ACCEPTED — The recorded named-measurement results member. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.9] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §7.11] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §8.1]
 - Must never: ACCEPTED — Rewrite this member of the immutable canonical record; corrections are new linked records, with the original preserved. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB]
 - Fails closed by: ACCEPTED — If the containing canonical record is unreadable, downstream state is indeterminate; no separate per-field refusal mechanism is specified. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.1] [NHD-B16EEB]
 
@@ -4719,7 +4755,7 @@ TOGETHER
 USED BY
 | # | Used in (part ID, and path ID if path-specific) | Takes in there | Does there | Changes there | Source |
 |---|---|---|---|---|---|
-| 1 · ACCEPTED | C-GOLD.1.3.11 — suite_aggregate_result (E10) | Actual measurement results, not merely measurement names. | Actual measurement results, not merely measurement names. | The recorded recorded named-measurement results member. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB] |
+| 1 · ACCEPTED | C-GOLD.1.3.11 — suite_aggregate_result (E10) | Actual measurement results, not merely measurement names. | Actual measurement results, not merely measurement names. | The recorded named-measurement results member. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §5] [NHD-B16EEB] |
 
 SUB-PARTS: NONE
 
@@ -5861,6 +5897,7 @@ USED BY
 | 27 · ACCEPTED | C-GOLD.1.5 — Evaluation operations and trial execution | Evaluation records, ledgers and logs. | §7Q governs these records/ledgers/logs before relevance; applicable SACL scope must allow access. | Authorized record access. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.4] [NHD-B16EEB] |
 | 28 · ACCEPTED | C-GOLD.1.5.1 — Canonical records and operation-owned logs | Evaluation records, ledgers and logs. | §7Q governs these records/ledgers/logs before relevance; applicable SACL scope must allow access. | Authorized record access. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.4] [NHD-B16EEB] |
 | 29 · ACCEPTED | C-GOLD.1.5.2 — Operation terminal catalog | Evaluation records, ledgers and logs. | §7Q governs these records/ledgers/logs before relevance; applicable SACL scope must allow access. | Authorized record access. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.4] [NHD-B16EEB] |
+| 30 · ACCEPTED | C-GOLD.1 — Promotion evaluation-evidence bridge | Accepted suite references, candidate profiles, policy references, evaluation records and their scope ledger. | A complete current epoch is required for evidentiary execution; usable evidence must match its current scope; privacy access must be authorized. | Distinct E11a, E11b and E12 result families and E13 references to E11a/E11b only, subject to their accepted prerequisites. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.3] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.2] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.4] [NHD-B16EEB] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §11] |
 
 SUB-PARTS: NONE
 
@@ -5931,7 +5968,7 @@ TOGETHER
 - Fed by: ACCEPTED — C-GOLD.1.4.2.1 — latest sequence_number: The latest ledger sequence number. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.1] [NHD-B16EEB]
 - Fed by: ACCEPTED — C-GOLD.1.4.2.2 — latest entry digest: The digest of that latest entry. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.1] [NHD-B16EEB]
 - Gated by: ACCEPTED — C-GOLD.1.3.19 — Evaluation privacy and access: §7Q governs these records/ledgers/logs before relevance; applicable SACL scope must allow access. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.4] [NHD-B16EEB]
-- Gated by: ACCEPTED — Currentness compares the exact latest sequence_number and entry digest, not an earlier head. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.1] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.2] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.4.3 — Authoritative current result: Currentness compares the exact latest sequence_number and entry digest, not an earlier head. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.1] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.2] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -5962,7 +5999,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Currentness compares the exact latest sequence_number and entry digest, not an earlier head. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.1] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.2] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.4.3 — Authoritative current result: Currentness compares the exact latest sequence_number and entry digest, not an earlier head. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.1] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.2] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -5985,7 +6022,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Currentness compares the exact latest sequence_number and entry digest, not an earlier head. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.1] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.2] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.4.3 — Authoritative current result: Currentness compares the exact latest sequence_number and entry digest, not an earlier head. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.1] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.2] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -6021,6 +6058,10 @@ USED BY
 | 4 · ACCEPTED | C-GOLD.1.3.14 — b24_system_eligibility_result (E12) | A result’s bound head, evaluated-set digest and epoch. | A result is usable for a new check only while its bound head and epoch are current. | Current or not-current result, with earlier records preserved. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.2] [NHD-B16EEB] |
 | 5 · ACCEPTED | C-GOLD.1.3.15 — promotion_evaluation_evidence_ref (E13) | A result’s bound head, evaluated-set digest and epoch. | A result is usable for a new check only while its bound head and epoch are current. | Current or not-current result, with earlier records preserved. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.2] [NHD-B16EEB] |
 | 6 · ACCEPTED | C-GOLD.1.5.12.20 — CR-20 — Later E9 / E7r / E10 / E14 / E15 | A result’s bound head, evaluated-set digest and epoch. | Recovery follows this rule: Counts as current only when its bound head equals the ledger’s current head and its epoch is current; later relevant records stale earlier results for new checks. | Current or not-current result, with earlier records preserved. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.2] [NHD-B16EEB] |
+| 7 · ACCEPTED | C-GOLD.1 — Promotion evaluation-evidence bridge | Accepted suite references, candidate profiles, policy references, evaluation records and their scope ledger. | A complete current epoch is required for evidentiary execution; usable evidence must match its current scope; privacy access must be authorized. | Distinct E11a, E11b and E12 result families and E13 references to E11a/E11b only, subject to their accepted prerequisites. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §4.3] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.2] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §13.4] [NHD-B16EEB] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §11] |
+| 8 · ACCEPTED | C-GOLD.1.4.2 — Scope ledger head | The scope’s append-only ledger. | Currentness compares the exact latest sequence_number and entry digest, not an earlier head. | latest sequence_number and latest entry digest. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.1] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.2] [NHD-B16EEB] |
+| 9 · ACCEPTED | C-GOLD.1.4.2.1 — latest sequence_number | The latest ledger sequence number. | Currentness compares the exact latest sequence_number and entry digest, not an earlier head. | The recorded latest sequence_number member. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.1] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.2] [NHD-B16EEB] |
+| 10 · ACCEPTED | C-GOLD.1.4.2.2 — latest entry digest | The digest of that latest entry. | Currentness compares the exact latest sequence_number and entry digest, not an earlier head. | The recorded latest entry digest member. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.1] [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.2] [NHD-B16EEB] |
 
 SUB-PARTS: NONE
 
@@ -6040,7 +6081,7 @@ TOGETHER
 - Fed by: ACCEPTED — C-GOLD.1.4.4.2 — other scope epoch: That scope’s epoch. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.3] [NHD-B16EEB]
 - Fed by: ACCEPTED — C-GOLD.1.4.4.3 — other scope head: That scope’s ledger head. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.3] [NHD-B16EEB]
 - Fed by: ACCEPTED — C-GOLD.1.4.4.4 — other scope state: That scope’s result state. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.3] [NHD-B16EEB]
-- Gated by: ACCEPTED — Disclosure includes every other scope sharing family, model/component identity and role/system. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.3] [NHD-B16EEB]
+- Gated by: NOT DECIDED
 - Changes: NOT DECIDED
 
 USED BY
@@ -6050,6 +6091,10 @@ USED BY
 | 2 · ACCEPTED | C-GOLD.1.3.12 — gold_evidence_result (E11a) | All other scopes sharing family, model identity or component identities, and role/system. | Carries mandatory mechanically computed prior-scope disclosure. | Mandatory prior-scope disclosure. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.3] [NHD-B16EEB] |
 | 3 · ACCEPTED | C-GOLD.1.3.13 — held_out_evidence_result (E11b) | All other scopes sharing family, model identity or component identities, and role/system. | Carries mandatory mechanically computed prior-scope disclosure. | Mandatory prior-scope disclosure. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.3] [NHD-B16EEB] |
 | 4 · ACCEPTED | C-GOLD.1.3.14 — b24_system_eligibility_result (E12) | All other scopes sharing family, model identity or component identities, and role/system. | Carries mandatory mechanically computed prior-scope disclosure. | Mandatory prior-scope disclosure. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.3] [NHD-B16EEB] |
+| 5 · ACCEPTED | C-GOLD.1.4.4.1 — other matching scope | Every other scope sharing the stated family, identities and role/system. | Disclosure includes every other scope sharing family, model/component identity and role/system. | The recorded other matching scope member. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.3] [NHD-B16EEB] |
+| 6 · ACCEPTED | C-GOLD.1.4.4.2 — other scope epoch | That scope’s epoch. | Disclosure includes every other scope sharing family, model/component identity and role/system. | The recorded other scope epoch member. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.3] [NHD-B16EEB] |
+| 7 · ACCEPTED | C-GOLD.1.4.4.3 — other scope head | That scope’s ledger head. | Disclosure includes every other scope sharing family, model/component identity and role/system. | The recorded other scope head member. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.3] [NHD-B16EEB] |
+| 8 · ACCEPTED | C-GOLD.1.4.4.4 — other scope state | That scope’s result state. | Disclosure includes every other scope sharing family, model/component identity and role/system. | The recorded other scope state member. | [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.3] [NHD-B16EEB] |
 
 SUB-PARTS: C-GOLD.1.4.4.1 — other matching scope; C-GOLD.1.4.4.2 — other scope epoch; C-GOLD.1.4.4.3 — other scope head; C-GOLD.1.4.4.4 — other scope state
 
@@ -6066,7 +6111,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Disclosure includes every other scope sharing family, model/component identity and role/system. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.3] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.4.4 — Prior-scope disclosure: Disclosure includes every other scope sharing family, model/component identity and role/system. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.3] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -6089,7 +6134,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Disclosure includes every other scope sharing family, model/component identity and role/system. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.3] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.4.4 — Prior-scope disclosure: Disclosure includes every other scope sharing family, model/component identity and role/system. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.3] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -6112,7 +6157,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Disclosure includes every other scope sharing family, model/component identity and role/system. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.3] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.4.4 — Prior-scope disclosure: Disclosure includes every other scope sharing family, model/component identity and role/system. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.3] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -6135,7 +6180,7 @@ ALONE
 
 TOGETHER
 - Fed by: NOT DECIDED
-- Gated by: ACCEPTED — Disclosure includes every other scope sharing family, model/component identity and role/system. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.3] [NHD-B16EEB]
+- Gated by: ACCEPTED — C-GOLD.1.4.4 — Prior-scope disclosure: Disclosure includes every other scope sharing family, model/component identity and role/system. [05/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md §6.3] [NHD-B16EEB]
 - Changes: NOT DECIDED
 
 USED BY
@@ -6687,6 +6732,9 @@ Every empty box is listed with its source-silence reason. Known mechanics deferr
 | C-GOLD.1.3.16 | Objective invalidity policy value | NOT DECIDED | NHD-B16EEB-D10 remains unset. |
 | C-GOLD.1.3.17 | Completed-run disagreement policy value | NOT DECIDED | NHD-B16EEB-D11 remains unset. |
 | C-GOLD.1 | Physical record mechanics | NOT DECIDED | Canonicalization, integrity algorithms, storage/serialization and ledger/CAS storage are not selected by the source. |
+| C-GOLD.1.2.4.2 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.2.5 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
+| C-GOLD.1.4.4 | Gated by | NOT DECIDED | The removed TOGETHER line restated this card’s own ALONE behavior, output or value; no separate Gated by relationship is specified for this box. |
 
 ### Source-conflict and status distinctions
 
@@ -7008,10 +7056,12 @@ No conflict is resolved by this pair. B16 v1.0 §5.3 retains its input-3 phrase 
 
 ## READ RECORD
 
+Round 3A correction: the attached `NH_MASTER-21_FIX_REQUEST_ROUND3_2026-09-26.md`, all listed cards and their cited source sections were checked; no fresh whole-read source credit or source-pin change is claimed.
+
 ### Files read whole for this pair
 
 - `05_ACTIVE_CANDIDATE/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md` — 2,018 lines, 135,956 bytes; SHA-256 `04dd5abc42e59afb61b4d280a0bb69d647d187fd0da385bc5c567eddbca81a41`; Git blob matches the verified source pin.
-- `04_ACCEPTED_STANDALONE_DESIGNS/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_PACKAGE_COMPLETE_CLOSURE_RECORD_v1_0.md` — acceptance identity/status and open-slot definitions; matched the source pin.
+- `04_ACCEPTED_STANDALONE_DESIGNS/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_PACKAGE_COMPLETE_CLOSURE_RECORD_v1_0.md` — acceptance identity/status and open-slot definitions; matched the source pin. SHA-256 `298de053269f4a9e93e97dfd994d33b0b879d71af636b169769264e7183d9d4c`.
 - Instruction: cloned `NH_MASTER-21_SYSTEM_BEHAVIOR_BUILD_CONTRACT_FOR_CHATGPT_v1_0.md`, SHA-256 `e78c7a8c8a448ff20966002465c8d6a330000900802c0b19a48e8a124e5ceba1`.
 - Instruction: `NH_MASTER-21_FIX_REQUEST_ROUND1_2026-09-25(1).md`; the all-card field-placement rule and step reciprocity remain applied.
 
@@ -7133,16 +7183,16 @@ The earlier whole-read accounting is carried forward; this pair adds whole-read 
 
 CONTRACT CHECK (against the cloned contract, SHA-256 e78c7a8c8a448ff20966002465c8d6a330000900802c0b19a48e8a124e5ceba1)
 §1.3 no history/actions/roles/workflow in this chapter: PASS — all 241 behavior cards, field lines and reciprocal rows checked; source status and read accounting are outside behavior. Runtime judgment authority remains runtime behavior, not drafting workflow.
-§1.4 every gap written as NOT DECIDED: PASS — all 723 prohibition/failure/gate boxes reviewed against their own text and cited source. 471 empty fields and 8 scoped gaps are registered with reasons. Decided material scheduled for a later piece is separately listed; it is not called undecided.
+§1.4 every gap written as NOT DECIDED: PASS — all 723 prohibition/failure/gate boxes reviewed against their own text and cited source. 474 empty fields and 8 scoped gaps are registered with reasons. Decided material scheduled for a later piece is separately listed; it is not called undecided. Round 3A: all 34 listed unnamed TOGETHER lines reviewed: 31 disposition 1, 3 disposition 2, 0 disposition 3; no additional unnamed lines found.
 §1.5 conflicts marked, none resolved: PASS — B16 v1.0’s earlier input-3 wording is preserved in the source-conflict register; Chapter 3-e also marks the narrow E13 behavior line. No accepted source or earlier chapter is edited; V10 remains governing.
-§3 exactly one stamp per line: PASS — 1979 populated field lines and 570 USED BY rows checked. All are ACCEPTED from the exact accepted bridge source. The V10 status table grants no BUILT standing to these bridge records, operations or links; none is stamped BUILT.
+§3 exactly one stamp per line: PASS — 1976 populated field lines and 615 USED BY rows checked. All are ACCEPTED from the exact accepted bridge source. The V10 status table grants no BUILT standing to these bridge records, operations or links; none is stamped BUILT.
 §4 every behavior line cited in the exact format: PASS — every populated field and reciprocal row carries exact 05/file §section citations to the accepted v1.7 source and NHD-B16EEB. All section targets resolve; record-definition citations include the actual later section where a carried outcome is defined. Receipt §§3–5 establishes accepted standing independently of folder/header.
 §5.4 one name per thing: PASS — new sub-part IDs remain under the Map’s existing C-GOLD identifier; canonical endpoint names match prior chapter names. No new top-level ID or controlled NHD identifier is introduced. Proposed source names and globally unique policy-slot IDs are retained.
 §6 all template fields present, in order, for every part: PASS — all 241 templates carry all nine fields in order, ALONE, TOGETHER, USED BY and SUB-PARTS; every listed child exists in this pair.
-§6.3 reciprocity within this chapter: PASS — all 854 unique relationship pairs across 3-e/3-f checked in both directions. The 39 transaction/stage/recovery step cards name their defining rules with reciprocal USED BY rows. External endpoint additions are recorded here without modifying prior chapters.
+§6.3 reciprocity within this chapter: PASS — all 1441 unique forward card relationships in corrected CH03-e/CH03-f/CH03-g/CH03-h checked against USED BY rows or retained continuation entries. Every new disposition-1 reference has its reciprocal in the named card’s own file when that card is in this round, otherwise in the using chapter’s continuation table. Existing step-to-rule links remain; continuation entries stay in their own tables and are not merged at assembly.
 §6.4 every decided detail written in, no citation used in place of content: PASS within this piece’s explicit scope — Both profiles and their path/system members; complete policy epoch requirements; all fourteen measurements; canonical E1–E16 contracts including E2e, E4S, E7r and distinct E11a/E11b; record members, conditional authority-reference forms, coverage registration conditions and currentness/disclosure. Full protected judgment and result derivation are explicitly reserved for later pieces.
 §6.5 sub-parts recursed to the bottom: PASS within this piece’s explicit scope — record members, named measurement dimensions, registered enum/failure classes, operation outcomes, commit conditions and resolution consequences have cards. No unchosen policy value, storage algorithm, mechanism or authorization option is invented.
-§9 coverage matrix rows added for every file used: PASS — all 145 READ-folder files at the pin are accounted for; all 107 carried V10 heading rows remain. The bridge and receipt rows reflect this whole read, with a detailed section landing map. Source/passed-chapter blob preservation checked for 52 matched local files.
+§9 coverage matrix rows added for every file used: PASS — all 145 READ-folder files at the pin are accounted for; all 107 carried V10 heading rows remain. The bridge and receipt rows reflect this whole read, with a detailed section landing map. The bridge source and acceptance receipt SHA-256 fingerprints are listed in READ RECORD and match the pinned copies.
 §10.11 no recommendation, no sentence addressed to Ness: PASS — checked in all behavior cards and register contributions; source recommendations are not imported as decisions.
 Files read whole for this chapter: `05_ACTIVE_CANDIDATE/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_v1_7_CANDIDATE.md`; `04_ACCEPTED_STANDALONE_DESIGNS/NH_B16_PROMOTION_EVALUATION_EVIDENCE_BRIDGE_PACKAGE_COMPLETE_CLOSURE_RECORD_v1_0.md`; the cloned contract and fix-request instructions. Scoped rereads and inherited whole-read credits remain separately identified in READ RECORD.
 
