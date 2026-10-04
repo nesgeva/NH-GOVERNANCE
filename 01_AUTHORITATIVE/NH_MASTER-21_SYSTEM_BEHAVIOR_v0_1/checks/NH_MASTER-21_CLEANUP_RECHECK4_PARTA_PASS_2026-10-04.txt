@@ -1,0 +1,2 @@
+﻿Get-Clipboard | Set-Content -Encoding UTF8 "$HOME\Downloads\NH_MASTER-21_CLEANUP_RECHECK4_PARTA_PASS_2026-10-04.txt"
+Get-Item "$HOME\Downloads\NH_MASTER-21_CLEANUP_RECHECK4_PARTA_PASS_2026-10-04.txt" | Select-Object Name, Length
