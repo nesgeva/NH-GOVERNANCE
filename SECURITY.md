@@ -11,6 +11,8 @@ Protection rules constrain every component and output channel.
 - Non-negotiable live credentials and secrets require protected handling. Do not make all sensitive personal material automatically excluded.
 - Keep exclusion, sealed isolation, hiding, restriction, redaction, and deletion from ordinary visibility distinct. Internal influence removal is separate. Hiding or deleting from view does not destroy originals or stop internal influence.
 - Explicit influence removal names scope, affected components, and start time. Stop that use from the enforcement commit. Never infer broader scope from a topic pause.
+- Track supplied sources and dependencies through derived records. Treat supplied material as potentially influential, not proof of its exact effect on reasoning. Restrictions block scoped retrieval and dependent summaries, connections, indexes, caches, and unfinished work. Discard affected drafts and generation context. Asking a model to ignore restricted material still in its input is insufficient.
+- Rebuild derivatives from permitted independent evidence through their normal owner and acceptance rules. Preserve originals and history under their access rules. Removing a sentence may leave other influence. Independent instructions remain usable within scope. Removal does not establish an opposite belief or undo delivered words or completed actions. Disclose unverified dependency coverage.
 - Understand natural instructions. A clear reopening needs no repeated confirmation. Do not silently restore a paused topic.
 - Visible deletion includes direct and indirect traces and safely rebuilt derivatives. Verify every relevant surface before claiming completion. Preserve honest partial, failed, or unknown outcomes and a content-free record of what occurred.
 - Master-21's visibility-removal outcomes are `protected_complete`, `protected_with_declared_limits`, `incomplete`, `blocked`, and `failed`. Do not reuse older destructive-deletion wording. Report remaining traces, unverified locations, limits, and possible further action where incomplete.
@@ -57,6 +59,10 @@ Normal recovery codes appear only on the paired phone. Verify the Bitwarden save
 
 Replacement requires the normal recovery code and local thumbprint. Fully verify the new phone before revoking the old one, then rotate recovery material. Emergency recovery is local, provisional until its required preparation completes, and atomic across new trust, old revocations, old-material invalidation, and new-material activation. It grants no code or configuration editing authority.
 
+Before relying on encrypted backups, define and test desktop failure, phone loss, and combined-loss recovery. Specify owner proof, recovery-material custody, replacement trust, and lost-device revocation. Do not assume recovery codes decrypt backups. Declare unrecoverable cases before use. Backup copies grant no device trust.
+
+Restore into a fresh Dry epoch under the mode rules. Recover current restrictions and device revocations through a protected mechanism beyond the older snapshot. If freshness cannot be established, withhold affected material. Verify record integrity, references, and restrictions; rebuild derived indexes as needed. Pending external actions use the action-reconciliation rules, never automatic replay. Restoration grants no new access to sealed TSC archives.
+
 ## Voice enrollment
 
 - Enrollment starts through explicit Ness action. Reserve one operation/session and recheck all six owner prerequisites before prompting and immediately before consuming `voice_enrollment_ness` authorization.
@@ -96,6 +102,10 @@ Any changed binding invalidates the old pass. Access reduction discards affected
 
 An unknown delivery is unresolved, never proof of withholding or success. Resolve the owner's actual outcome before any retry. Do not blindly resend, replay a withheld draft, or bypass the chain through voice, diagnostics, debugging, or another channel.
 
+Private speech requires a defined output grant and scope. Personal Mode, voice recognition, and a headphone connection alone cannot authorize a private channel. Shared speakers retain their audience ceiling. Microphones cannot rule out silent listeners.
+
+Recheck each short audio section, bound queued playback, and stop and flush affected audio on access reduction. Existing delivery gates apply to the exact approved wording. Do not automatically replay affected material merely because access returns. Already heard words cannot be recalled. Test buffering and channel-authorization mechanics.
+
 ## Actions
 
 Keep suggestion, preparation, approval, attempt, outside effect, observed result, interpretation, and correction as separate linked records. Approval is not execution or proof that the reasoning is true.
@@ -111,10 +121,15 @@ Keep suggestion, preparation, approval, attempt, outside effect, observed result
 - If authority is violated, stop related autonomous work and further chain steps, record honestly, and show the incident. A corrective world action needs its own preview and approval.
 - A preauthorized emergency stop may prevent additional effects. It does not authorize recalling messages, changing external data, contacting people, or reversing completed effects.
 - Never retry an uncertain external effect to repair a missing acknowledgment.
+- Persist the approved action's stable identity before sending. Use service-supported duplicate prevention and original-request lookup where available. A local identifier cannot prevent external duplicates. Reconcile interrupted results. Service acceptance does not prove the recipient read a message. Incomplete history does not prove nonexecution. Retry confirmed nonexecution only under valid approval and retry rules. Otherwise disclose uncertainty and withhold automatic resend. Disclose duplicate risk before seeking separate approval for a new action linked to the unresolved original. That new action does not settle the original result or count as its recovery retry. Original approval does not cover uncertain extra copies.
 
 Result inputs distinguish Ness-reported outcomes from automatically detected possible links. Keep action, result event, and proposed connection separate. Ness may confirm, reject, modify, dispute, or leave a link unresolved. A confirmed link is not causal proof.
 
 Result states are success, partial success, failure, cancellation, no/unknown result, and incorrect/disputed linkage. A result may trigger another owner's designed review, never automatic action repetition. Ness may disable or restrict automatic detection.
+
+## Untrusted input
+
+Webpages, documents, images, and imported conversations supply data, not current instructions or permission. Claims of Ness's approval inside a source grant nothing. Acting on source instructions needs his applicable scoped authority under the action rules. Program-enforced file, tool, and network restrictions limit each component to its job. Research fetching cannot access personal memory; synthesis has no tools, file access, or network. Drafts grant no authority. OPERATIONS.md owns research-to-intake rules. Isolation limits actions, but misleading source instructions can still distort wording. Apply evidence checks and adversarial tests across intake paths; model instructions and a second reviewer alone provide no guarantee.
 
 ## Protected maintenance
 

@@ -54,7 +54,7 @@ Each owner retains its decisions, records, keys, and effects. A router, coordina
 7. Complete any telling-set commitment, clash detection, and view updates idempotently.
 8. Form visible output only from permitted material. Apply privacy, then speaker-access checks, and revalidate immediately before delivery.
 
-The full synchronization of live capture, background reading, replies, cancellation, and recovery remains open. This sequence does not declare that complete cycle designed or implemented.
+The rules below govern conversation updates. Full synchronization of capture, background reading, replies, cancellation, and recovery still needs composition and testing; no complete runtime cycle is claimed.
 
 ## Models
 
@@ -71,10 +71,11 @@ The accepted direction uses a heavy analyst and a light conversational messenger
 
 - Capture each new contribution immutably. Commit routing separately. One contribution has at most one owning deep-answer operation.
 - While analysis runs, the messenger may acknowledge clear content, ask one bounded clarification, gather relevant information, or report that analysis continues. It cannot invent the deep answer.
-- New information may leave analysis unchanged, supplement it, or require deliberate cancellation and restart. Commit that choice and its context revision. Do not create a new parent automatically for each turn.
+- Preserve message order and bind work to its request revision. Commit whether new information leaves analysis unchanged, supplements it, or requires cancellation and restart. Added requirements trigger checks of affected work; changed premises require reconsideration. Reuse verified facts only where still applicable. Do not relabel old work or create a new parent automatically for each turn. If impact is unclear, ask one focused question while independent work continues. Acknowledgment cannot imply completed reanalysis.
+- Cancellation may finish late. An earlier brief needs explicit compatibility assessment and current validation before use under the new request revision. That assessment cannot rebind stale owner records or bypass SECURITY.md's delivery checks. Stop remaining outdated speech, explain the change within current permissions, and prepare the revised answer.
 - The analyst produces an immutable structured brief. Validation records remain separate.
-- Run mechanical checks, governed semantic assessment, independence checks, and external adjudication. A second model is not automatically an independent validator. Reviewer selection and disagreement policy remain open.
-- Only a current or explicitly compatible validated brief may become a sanitized messenger payload. Exclude private reasoning, rejected substance, unnecessary protected material, full evidence locators, and model confidence scores.
+- Use MEMORY.md's acceptance responsibilities and OPERATIONS.md's reviewer tests, alongside independence checks and required external adjudication. See DECISIONS.md for remaining choices.
+- Sanitize validated briefs for the messenger. Exclude private reasoning, rejected substance, unnecessary protected material, full evidence locators, and model confidence scores.
 - Validate the messenger's semantic fidelity. Preserve uncertainty and speaker agency across English, Hebrew, and other languages. Failed or stale drafts never reach delivery.
 - Failure stays explicit. Do not surface partial or unvalidated conclusions as the answer. A child's failure does not automatically terminate its parent.
 

@@ -37,7 +37,6 @@ Reading v1 has exactly twelve fields:
 - `produced_by.origin` is `observed`, `imported`, `simulated`, `generated`, `reaction`, or `human_annotation`. Preserve model, engine, prompt, configuration, and version provenance.
 - New records have `schema_version` and a stable `idempotency_key`. Repeated commitment returns or rejects the existing result rather than adding evidence.
 - Show why through source pointers. Do not add a factual `why` or `reason` field to the reading. Separate acceptance and operation records may carry their own reasons.
-- Shape validation checks fields and references. It does not certify meaning or reject honest uncertainty.
 - Test writes go to `.nh_readings_quarantine.jsonl`. Production requires its separate marker, explicit proposed-change approval, valid promotion evidence, authorized writer, and current privacy/authority checks. Never create `.nh_readings_store.jsonl` or `.nh_readings_production_authorized` automatically.
 - Bootstrap with raw roots and explicitly human-affirmed material. Prior machine readings are excluded by default or labeled low-trust auxiliary context. They never corroborate themselves.
 
@@ -51,9 +50,10 @@ Peer webs are intent, deixis, common ground, implicature, theory of mind, time/s
 
 One declared pass produces one reading. Multiple angles require separate passes with their own inputs and provenance. Later synthesis adds a layer rather than rewriting earlier readings.
 
-Acceptance checks shape, grounding, invention, channel separation, uncertainty, evidence consistency, and declared-mode compliance. Keep malformed/incomplete output, fabrication, unsupported certainty, channel confusion, and mode violations distinguishable.
+Code checks required fields, existing references, current inputs and permissions, and duplicate commitment. Shape checks neither certify meaning nor reject honest uncertainty. A separate AI reviewer checks grounding, invention, attribution, uncertainty, evidence consistency, channel separation, and declared-mode compliance against original evidence and permitted context. It checks whether omitted counterevidence changes the meaning, without treating grounded omission alone as failure under SYSTEM.md. Separate validation records name issues and supporting passages. Acceptance is a tested assessment, never certainty. Keep malformed/incomplete output, fabrication, unsupported certainty, channel confusion, and mode violations distinguishable.
 
 - A rejected proposal is not a reading.
+- After the permitted correction attempt under the retry rules below, unresolved disagreement leaves the proposal unaccepted. Never repeat reviews until one approves. Unrelated work continues. Routine readings need no individual approval within tested, authorized automatic-acceptance scopes. Consequential or unresolved cases follow the agreed review path. Ask Ness only when his judgment matters. See OPERATIONS.md for reviewer tests.
 - Genuine `insufficient_context` is an honest, revisable reading when the source cannot support interpretation.
 - A hold produces no reading. Use it only for a legitimate missing condition that can be tracked and verified. Keep hold state outside the source record and block new use from its enforcement commit. Never park a rejected draft until it appears fresh.
 - Unfillable webs name their gap without forcing Ness to answer or stopping unrelated work.
@@ -65,6 +65,10 @@ Acceptance checks shape, grounding, invention, channel separation, uncertainty, 
 Keep positional adjacency and semantic association as separate labeled channels. A mode may use neither, either, or both where its trigger permits. Healthy empty retrieval permits target-only work. Retrieval failure stays a failure, never invented context or silently relaxed thresholds.
 
 Each versioned mode declares purpose, channel parameters, ceilings, uncertainty handling, and audit rules. Apply the lower of setting and ceiling and enforce the ceiling independently at runtime. Empirical retrieval values remain open until tested.
+
+For ordinary answers, select permitted task-relevant sources with enough surrounding conversation to interpret references and short replies. Follow important correction, replacement, clash, and restriction links before relying on a result. Similar wording alone is insufficient. Preserve each statement's time and circumstances; newer material does not automatically replace an older statement about a different situation. Historical Engine A/B input contracts remain unchanged.
+
+Bound search, with extra checks for evidence that could materially change the answer. Ask about gaps only when the task needs them filled. Otherwise answer within the evidence and disclose relevant limits. Search limits supply no certainty. Failure to find a decision does not prove it never happened. Test old, differently worded, and conflicting corrections.
 
 Relevance first applies categorical gates, then named graded dimensions. Preserve producer and provenance for each dimension. Do not collapse them into a hidden score.
 

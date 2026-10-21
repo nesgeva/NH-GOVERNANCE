@@ -19,7 +19,15 @@ These shared contracts do not select a database or implementation language.
 
 Record producer, operation, time, supplied inputs/sources, decision/output, omissions/rejections/failures/unknowns and reasons, unchosen alternatives, remaining uncertainty, record connections, and every actual use. A use event identifies the record, consumer, purpose, contributing output/decision, outcome, unused alternatives/reasons, and uncertainty. Do not rewrite an earlier record to add later use.
 
-Recursive self-examination runs when current context, a genuine system purpose, a design rule, an anomaly, Ness's question, or another authorized trigger requires it. Go only as deep as that purpose needs, without a fixed maximum. Record trigger, examined records, findings, result use, uncertainty, and connections. This is distinct from automatically logging the act of logging.
+Recursive self-examination needs current context, a genuine system purpose, a design rule, an anomaly, Ness's question, or another authorized trigger. Examine only what the purpose needs within the work budgets below. Record trigger, examined records, findings, result use, uncertainty, and connections. This is distinct from automatically logging the act of logging.
+
+## Background work budgets
+
+Limit each background job's processing time, model calls, or examined material based on hardware and workload measurements. When the budget runs out, preserve completed steps, remaining work, and input references, then pause at a safe checkpoint. Before resuming, revalidate frozen inputs, current permissions, retry rules, and claim ownership. Do not substitute changed inputs into the same attempt or repeat commitments or effects. Changed inputs follow the owner's revision rules, including MEMORY.md's linked-operation rule for rereading.
+
+A budget pause is not failure, crash replay, or acceptance. Never weaken checks or silently enlarge budgets. Continue only under allowed rules or Ness's decision where required.
+
+Live interaction normally takes priority over background interpretation. Allow short safe commits before yielding resources. Preserve the one-worker queue contract; priority grants no concurrent claim. If a reply depends on unfinished work, disclose that limit instead of delivering an unvalidated conclusion.
 
 ## Reading queue
 
@@ -30,7 +38,7 @@ Recursive self-examination runs when current context, a genuine system purpose, 
 - Use `stable_hash(enqueue_key + "reading_v1")` as the reading's idempotency key. Keep pass identity as provenance, not duplicate identity. Recovery finds an existing reading before writing.
 - Preserve sequential retrieval, proposal, acceptance, quarantine write, clash/view processing, and job close. Check claim authority before protected writes.
 - Commit explicit no-clash/no-update sentinels. Absence is not a negative result.
-- Recover incomplete crash work only. Completed/failed jobs and handled technical failures do not enter automatic crash replay. Holds, privacy refusal, and indeterminate work block admission.
+- Crash replay recovers incomplete crash work only. Completed/failed jobs and handled technical failures do not enter it. Budget continuation follows the rules above. Holds, privacy refusal, and indeterminate work block admission.
 - Nightly activation durably records each trigger, admits one activation run, and processes only existing eligible jobs. Preserve separate request, configuration, run, and disposition records. No silent historical backfill.
 
 ## Promotion and evaluation
@@ -40,6 +48,12 @@ Recursive self-examination runs when current context, a genuine system purpose, 
 - Lookup prior commitment, admit one reservation, verify current prerequisites, commit at most one eligibility record, and record the parent outcome before acknowledgment.
 - Promotion machinery neither judges content nor creates/writes the production store. Production activation remains separately gated.
 - Preserve sealed gold identities and trial provenance. Missing source cases, unresolved reviewer independence, unknown scoring rules, or unchosen judgment authorization cannot be fabricated into passing evidence.
+
+Test reviewers on Ness-judged examples, including deliberate errors and valid readings. Measure missed errors and wrongful rejection before authorizing a defined automatic-acceptance scope. Separate models do not establish independence. Ness sets intended behavior and resolves substantive questions without manually grading every run.
+
+For complete-system tests, fix expected behavior before execution. Test full capture, interpretation, correction, persistence, recovery, retrieval, and authorized delivery cycles. Inspect records, permissions, duplicates, and operation outcomes as well as visible answers. Inject crashes during writes, connection loss after external effects, access changes during speech, and mid-answer corrections. Honest unfinished or unknown outcomes may pass where specified; apparent success cannot hide an unsafe effect.
+
+Agree separate standards for permissions/record preservation, semantic quality, latency/interruption, and failure reporting. One aggregate score cannot excuse a forbidden disclosure or duplicate action. Repeat important scenarios and retain cases not used for tuning. Passing applies only to the tested version and scope, guarantees no universal correctness, and authorizes no production activation.
 
 ## Authority verification
 
@@ -68,14 +82,14 @@ UDOK coordinates typed references to owner records. It does not own meaning, pol
 ## Research and imports
 
 - Brave supplies raw research. Academic sources are Semantic Scholar and OpenAlex under the later recorded design. Google Scholar and Tavily are excluded directions.
-- Separate fetch, text-only synthesis, and create-space/review contexts. Synthesis cannot call tools, read files, or make network requests. Treat fetched instructions as untrusted source data.
+- Separate fetch, text-only synthesis, and create-space/review contexts. SECURITY.md owns enforced isolation and untrusted-input handling.
 - No research stage writes directly to roots, readings, creations, or production. All accepted intake uses the normal shared path and permissions.
 - Preserve relevant plain text and an inert full-page PNG with provenance, time, reference, and integrity hash. Isolate page rendering separately. Store no active HTML, scripts, cookies, or sessions.
 - The screenshot supports human review, not reasoning or embeddings. If unavailable, retain verified text/metadata and failure reason. Do not discard or lower textual confidence solely for a missing screenshot.
 - Auto-reject flagged material but never silently delete it. The rejected-bin view uses escaped text, inactive URLs, stripped spoofing characters, no previews/network fetches, and disabled copy/select. Those UI restrictions are not a security boundary.
 - Implement a query counter and daily spending cap. Automatic currency checks need Ness's approved schedule. Historical 3 AM / 150-cycle / three-search values grant no schedule authority.
-- Extract only facts present in at least two of the three raw result sets and add nothing absent from raw data. This is not a vote among models. Source/run identities and content duplicate identities remain separate.
+- Replace two-of-three result-set voting with claim-level evidence checking. Retain each claim's source, date, and supporting passage; check that it supports the whole claim. Trace copied or shared origins so repeated pages add no independent support. Preserve conflicts and missing evidence. One direct source may support a narrow attributed claim, but not broader untested performance claims. Add nothing unsupported by the raw evidence. Source/run identities and content duplicate identities remain separate.
 - Commit fetched, preserved, synthesized, gated, and queued/rejected checkpoints. Resume committed progress without fabricating failed stages.
 - Image intake preserves metadata, proposes a plain description, proposes contextual meaning, obtains Ness's confirmation, then uses Catalog. Neither machine proposal is a source fact or a substitute for the original image.
-- The selected plain-description direction uses detection/segmentation labels, boxes, and confidence rather than a narrating vision-language model. Its trained vocabulary limits coverage. YOLO, Segment-Anything, osam, PaddleOCR-VL, SmolVLM, and Ollama routes are candidates, not installed selections. Keep imported observations and later reactions separate.
+- Use text recognition for writing, detection/segmentation for labels and locations, and a local vision-language model for broader proposed descriptions. Keep each tool's outputs separate and retain uncertainty. Do not infer identity, emotion, or intent from appearance alone or invent unreadable details. Qwen3-VL, YOLO, Segment-Anything, osam, PaddleOCR-VL, SmolVLM, and Ollama remain candidates requiring tests on images and hardware. This design selects and installs none. Keep imported observations and later reactions separate.
 - Deferred WhatsApp ingestion stays disabled until its protected mechanics are accepted/integrated and Ness authorizes use. A design record alone cannot authorize decryption or ingestion.

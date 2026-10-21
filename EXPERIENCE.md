@@ -70,7 +70,7 @@ The supplied test used CPU float32. Successful output WAVs, seeds, final timings
 Standing direction is one young-adult male bilingual voice, American English, acceptable foreign accent in Hebrew, private noncommercial use, local generation, and no emotional pull. Keep generated speech separate from Ness's identity profile and language-model selection.
 
 - Stop TTS immediately when Ness starts speaking. Record the physical interruption and output position; do not infer agreement, emotion, or understanding.
-- Every spoken word passes the same output gates and preserves the approved meaning. A future delivery director changes how words sound, never what they assert.
+- Every spoken word passes SECURITY.md's ongoing delivery and channel checks and preserves the approved meaning. A future delivery director changes how words sound, never what they assert.
 - Recorded read-aloud answers include N.H replies, on-screen text, and supplied files. Start by pointing/tapping, speaking, or combining them. Resolve "repeat" from intent rather than a fixed default.
 - Spoken content also appears in a small side voice chat. When to offer continuation after interruption remains open.
 
