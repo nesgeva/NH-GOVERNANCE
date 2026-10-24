@@ -55,6 +55,38 @@ For complete-system tests, fix expected behavior before execution. Test full cap
 
 Agree separate standards for permissions/record preservation, semantic quality, latency/interruption, and failure reporting. One aggregate score cannot excuse a forbidden disclosure or duplicate action. Repeat important scenarios and retain cases not used for tuning. Passing applies only to the tested version and scope, guarantees no universal correctness, and authorizes no production activation.
 
+## Intent reliability research
+
+These 2026-10-23 proposals remain unadopted. Candidate 12B/6B roles do not select models. Restrict failures or test replacements without weaker acceptance.
+
+The full research and primary-source comparisons are preserved in PROVENANCE.md's local evidence archive. They found no guarantee of reliable ambiguity detection, context retention or calibrated confidence. Templates and grammars constrain structure, not meaning; partial schema support still needs instructions and full validation.
+
+Pin models, tokenizer/template, quantization, runtime, prompts and settings in disposable runtimes without production writes/effects. Inspect contracts. Compare permitted speakers, context, corrections and revisions with the baseline; preserve Engine A/B contracts.
+
+Experimental briefs propose outcomes, intentions, targets, conditions, negations, references and passages, never canonical fields. Preserve quotations, simulation, indirect requests and alternatives under existing MEMORY acceptance, SYSTEM messenger/revision and SECURITY delivery rules. Code checks structure/bindings; independent review checks support/fidelity. Clarify action-changing ambiguity; preserve unknowns.
+
+Freeze development/held-out conversations before tuning; split scenario families against paraphrase leakage. Test English/Hebrew/mixed language, attribution, conditions/negation, unresolved confirmations, quotations, corrections, stale work and discussion versus execution. Include minimal meaning-changing pairs and clear requests. Compare baseline, prompts/context, briefs, reviewer and full path under existing evaluation/gold rules. Separately measure unsupported commitments, attribution/condition errors, ambiguity misses, needless questions, reviewer misses/rejections and fidelity. After semantic screening, measure latency, memory, interruption and speech. Ness sets tolerances.
+
+[QLoRA](https://arxiv.org/abs/2305.14314) adapter training proves neither accuracy nor hardware fit. Try retrieval/prompts/tests first. Training requires separate approval, no personal memories/identity and untouched reevaluation before adoption.
+
+## Local conversation and speech findings
+
+Development tests ran on 2026-10-24. EXPERIENCE.md owns acceptance; PROVENANCE.md locates evidence.
+
+Gemma4 12B analyzed, E4B replied and Qwen3 4B Thinking advised across 16 English/Hebrew turns and 50 calls. Provisional external review graded 14 candidates as five useful, two partial, six needless clarifications and one wrong-topic answer. Two stale results were withheld. Correction acknowledgments waited 30 to 32 seconds. Final candidates took a median 69.79 seconds, maximum 106.77. Qwen advice included errors and controlled no corrections. No models were adopted, trained or given answer keys.
+
+Q8 VoxCPM prepared English/Hebrew audio in 14.14/13.61 seconds. Programmatic Read reached driver progress in 0.140/0.063 seconds without an empty queue, leaving 12.87 GiB RAM. A separate combined workload left 8.26 GiB RAM and 2.12 GiB NVIDIA memory. Acoustic and physical-click latency remain unmeasured. Targets are preparation during arrival within 20 to 30 seconds and playback within two seconds of Read.
+
+RAM buffering, current-wording checks, bounded playback and serialized authorization/submission passed revocation races and simulated Stop/speech/access checks. Actual N.H grants, microphone interruption and message-feed integration remain unproved. Retest timing with pronunciation connected.
+
+RenikudPlus int8 prepared original/new Hebrew in 1.09/0.39 seconds without case-specific dictionaries or expected phonemes. Substitution rejection and span tests passed, but a suspect verb reading remains. Character preservation does not prove intended meaning.
+
+Automatic vowel marks degraded VoxCPM screening; an English style prefix became spoken words. Both methods failed. Native GPU comparison hit the RAM floor, then text-decoding failure before rendering. Manual vowel fixes did not meet the general requirement.
+
+BlueTTS ONNX v2 accepts phonemes. Its adapter recomputed them per section; carrying whole-context predictions into rendering still needs verification. After an encoding failure, its UTF-8 retry used the full unchanged reference, loaded in 5.57 seconds and generated 7.52 seconds in 5.07 seconds, leaving 11.95 GiB RAM. No gain, filtering, added silence or selected retakes concealed errors. Ness accepted this result. ASR flags and uncertain pronunciation remain limitations. ASR screens; human listening judges. No engine replacement or N.H activation occurred.
+
+Next test new sentences, meaning, reference fidelity and tone. Connect authorization, revisions, cancellation and speech interruption through existing owners. Preserve first takes/failures without weaker acceptance/privacy, training or answer leakage.
+
 ## Authority verification
 
 AIC verifies artifact identity and recorded authority. It does not create authority, repair artifacts, choose a winner between contradictory governing records, or replace runtime access checks.

@@ -16,7 +16,7 @@ Master-21's adopted book was verified against its adoption record:
 
 ## Consolidation map
 
-The table maps archived sources to their compact owners. Detailed historical schemas, audit receipts, and byte evidence remain in the archive. The current files retain behavior, boundaries, status, key schemas/values, and user intentions without repeating every field as a component.
+Historical schemas, receipts and byte evidence remain in the archive. Current owners retain behavior, status, constraints and intent.
 
 | Original material | Current owner |
 |---|---|
@@ -43,3 +43,14 @@ The table maps archived sources to their compact owners. Detailed historical sch
 Removed from active input: repeated parent/child descriptions, reciprocal link tables, empty template cells, generated occurrence counts, embedded source copies, old versions, audit narratives, assembly machinery, and obsolete instructions. An empty template field is not promoted into a new decision request.
 
 This specification does not reproduce every original mechanical field name or historical test fixture. Before implementing an exact existing contract, resolve its original owner and schema rather than inventing omitted details. The preserved originals support that lookup.
+
+## Local experiment evidence
+
+The verified local archive `C:/Users/user/Downloads/NH_Voice_Evidence_20261024.zip` preserves 649 experiment files, including failures, reference audio, reader code and the complete earlier research. It excludes pretrained weights, whose identity follows below. Raw evidence stays outside this documentation commit. Its SHA-256 is `42212d4fe71e3fb2185603d45d622ca2509c056d04d0bc01c9ac44853e6f96ce`. Source folders under `C:/Users/user/AppData/Local/Temp/` include:
+
+- `nh_long_conversation_20261024` contains frozen cases, prompts, settings, outputs and provisional grades.
+- `nh_fast_reader_v3_20261024/report.md` connects experiments. EXPERIENCE.md supersedes its older listening status.
+- `nh_voice_fidelity_20261024`, `nh_voice_approved_timing_20261024` and `nh_hebrew_repair_20261024` contain comparisons, timing and Hebrew candidates.
+- `nh_sentence_speech_20261024` contains code, tests, plans, model identity and failed renderings. `nh_sentence_speech_ipa_v2_20261024` contains the UTF-8 adapter, measurements and accepted `phoneme-adapter.wav`, SHA-256 `eaddd61348317bbca13ef96fa267dc85c717664e9c611c6abd84f6d38ea96147`.
+
+Pronunciation inference used `notmax123/RenikudPlus`, revision `679c56ca449d41873fb8ff7711ddf7563d28198f`, `model_int8.onnx`, SHA-256 `0337468fad56eadf5ecc7becfdf21648a4d668de41de5bc27e860141b5afcadd`. Check archive availability before reuse; absent evidence cannot establish reproduction.

@@ -53,7 +53,7 @@ Preserved historical Wonder answers retain their source scope and later question
 
 ## Speech
 
-The later recorded voice choice is VoxCPM2 with the 2026-10-09 reference, replacing the BlueTTS speaking setup. It is a selected listening baseline, not completed N.H integration or a real-time benchmark.
+VoxCPM2 with the 2026-10-09 reference replaced the BlueTTS listening baseline.
 
 | Baseline item | Recorded value |
 |---|---|
@@ -62,10 +62,10 @@ The later recorded voice choice is VoxCPM2 with the 2026-10-09 reference, replac
 | Reference | Original full `2026-10-09 17-35-35.mp3`, 176,283 bytes |
 | Reference SHA-256 | `0798ca3e4f9f0ae5bf3a3162b0e887d17cb38fd367c1148931f9f8251d66b51b` |
 | Shared settings | `cfg_value=2.0`, `inference_timesteps=10`, normalization/denoising off |
-| English | Same reference for reference and prompt audio, with recorded transcript |
+| English | Same reference for reference and prompt audio, with corrected transcript below |
 | Hebrew | Same reference, no prompt audio/text |
 
-The supplied test used CPU float32. Successful output WAVs, seeds, final timings, GPU tests, and full pronunciation evaluation were not supplied. Preserve this evidence limit. Do not adopt incidental reader chunking, language detection, saving, buffering, or Stop behavior as product policy.
+OPERATIONS.md records recovered CPU float32 WAVs and later GPU Q8 tests, without adopting incidental reader mechanics.
 
 Standing direction is one young-adult male bilingual voice, American English, acceptable foreign accent in Hebrew, private noncommercial use, local generation, and no emotional pull. Keep generated speech separate from Ness's identity profile and language-model selection.
 
@@ -73,6 +73,18 @@ Standing direction is one young-adult male bilingual voice, American English, ac
 - Every spoken word passes SECURITY.md's ongoing delivery and channel checks and preserves the approved meaning. A future delivery director changes how words sound, never what they assert.
 - Recorded read-aloud answers include N.H replies, on-screen text, and supplied files. Start by pointing/tapping, speaking, or combining them. Resolve "repeat" from intent rather than a fixed default.
 - Spoken content also appears in a small side voice chat. When to offer continuation after interruption remains open.
+
+### Accepted speech preparation direction
+
+On 2026-10-24 Ness accepted the automatic preparation demonstration and authorized documentation, commit and push. This does not authorize N.H activation or prove universal accuracy.
+
+Keep approved words immutable. Derive pronunciation, syllables, stress, pauses and emphasis from permitted context. Render sentence by sentence without changing meaning, negation, uncertainty or attribution. Instructions require renderer support and must never become spoken words. No training or test-answer feedback is authorized.
+
+The prototype binds UTF-8 text, hashes, revisions and exact spans. It predicts Hebrew vowels and phonemes before splitting, rejects changed letters/punctuation and preserves English wording. Meaning, pronunciation, tone, existing marks and numbers need further verification. Preparation grants no delivery authority.
+
+Ness corrected the reference transcript to "G'day, I'm Tom, this is a quick sample of my voice, easygoing, warm and perfect for natural conversations." Originals remain intact. He approved fast English, short Hebrew and long English. Long Hebrew failed punctuation, accent and syllables; two sections were almost acceptable. His later "This is perfect" accepts the automatic phoneme demonstration. Earlier failures remain failures.
+
+The demonstration used an isolated BlueTTS phoneme adapter with the full reference. VoxCPM remains selected; integration is unproved.
 
 ## Mobile and observation
 
