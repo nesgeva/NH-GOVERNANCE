@@ -2,33 +2,37 @@
 
 ## Purpose and authority
 
-Keep N.H's intended behavior clear enough for one LLM input. Ness owns product decisions. Simplifying wording does not authorize changing behavior, weakening privacy, activating proposals, or claiming unverified implementation.
+Ness owns product decisions. Keep N.H behavior clear for one LLM input. Wording edits cannot change behavior, weaken privacy, adopt proposals or imply unverified implementation.
 
 ## Organization
 
-- README is navigation and usage only. SYSTEM owns purpose, components, and status. MEMORY, SECURITY, EXPERIENCE, and OPERATIONS each own their domain. DECISIONS holds genuine open questions. PROVENANCE points to historical evidence.
-- Give each requirement one home. Link to it elsewhere. State universal rules once; add only a domain's actual exception or mechanism.
-- Edit the existing owner file. Use Git for revision history. Do not create successor documents, per-chat handoffs, parallel masters, acceptance receipts, audit diaries, or documents that merely repeat another document.
-- Keep historical source material outside the active input. Never silently discard unique decisions or archive current requirements merely to pass the budget.
-- Separate accepted behavior, recorded preference, proposal, future intention, historical observation, and unknown. Preserve later explicit replacements and the scope of each answer.
-- Record a real unresolved question once. Empty template cells, absent boilerplate, and duplicated references are not new product gaps.
-- Keep schemas and exact values only where they constrain behavior or an existing contract. Never invent missing values, implementation choices, or authority.
+- README owns navigation and usage. SYSTEM owns purpose, components and status. MEMORY, SECURITY, EXPERIENCE and OPERATIONS own their domains. DECISIONS owns open questions. PROVENANCE points to historical evidence.
+- Give each requirement one home. Link elsewhere. State universal rules once; add only actual domain exceptions or mechanisms.
+- Edit existing owners. Use Git history instead of successor documents, per-chat handoffs, parallel masters, acceptance receipts, audit diaries or duplicates.
+- Keep history outside active input. Never silently discard unique decisions or archive current requirements to pass the budget.
+- Distinguish accepted behavior, preferences, proposals, future intentions, historical observations and unknowns. Preserve later explicit replacements and each answer's scope.
+- Record unresolved questions once. Empty templates, absent boilerplate and duplicate references are not gaps.
+- Keep schemas and exact values only when behavior or existing contracts require them. Never invent values, implementation choices or authority.
 
 ## Writing
 
-- Prefer short complete sentences, bullets for parallel rules, and tables for mappings. Use concrete subjects and active verbs.
-- Cut introductions, summaries that repeat the body, rhetorical questions, generic conclusions, reassurance, flattery, and chatbot sign-offs.
-- Use plain words. Avoid abstract metaphors, inflated vocabulary, vague attribution, decorative examples, forced groups of three, synonym cycling, and ornamental participle clauses.
-- Say what a component does. Use "is" and "has" where accurate. Do not replace mechanisms with feelings or slogans.
-- Avoid "not just X, but Y", false ranges, redundant bold labels, title-case headings, decorative emojis, curly quotes, and dash punctuation. Use periods or commas. Colons introduce actual lists or examples.
-- Preserve required negations, conditions, uncertainty, exceptions, and permission boundaries. Do not make concise text ambiguous through fragments, abbreviations, or dropped words.
-- Keep product flows free of implementation chatter unless it affects Ness's decision. Explain technical matters with a concrete example when needed.
+- Use short complete sentences, concrete subjects, active verbs, bullets for parallel rules and tables for mappings.
+- Cut introductions, repeated summaries, rhetorical questions, generic conclusions, reassurance, flattery and chatbot sign-offs.
+- Use plain words. Avoid metaphors, inflated vocabulary, vague attribution, decorative examples, forced threes, synonym cycling and ornamental participles. Describe mechanisms with "is" or "has", not feelings or slogans.
+- Avoid "not just X, but Y", false ranges, redundant bold labels, title-case headings, emojis, curly quotes and dash punctuation. Use periods or commas. Colons introduce lists or examples.
+- Preserve negations, conditions, uncertainty, exceptions and permissions. Avoid ambiguous fragments or abbreviations. Keep implementation details out of product flows unless they affect Ness's decision.
+
+## Explaining N.H to Ness
+
+AI assistants, including ChatGPT, explain N.H in simple Hebrew through everyday use. Describe Ness's actions, N.H's responses, what Ness sees and what happens next. Assume no technical knowledge. Explain terms. Clarify confusion with context and simpler words, not just shorter text. See EXPERIENCE.md for conversation rules.
+
+Example wording only, not adopted behavior: "אתה מחוץ לבית. אתה שולח לעוזר תמונה. אחר כך אתה מפעיל סנכרון ומשלים אימות. התמונה עוברת למחשב."
 
 ## Size and verification
 
-- The entire active project, including these instructions, tooling, and filename labels, must remain below 20,000 tokens in both `cl100k_base` and `o200k_base`. Aim below 18,000 for headroom.
-- Run `python3 tools/check_project.py` after changes. Install dependencies outside the project. Do not exclude a document, hide text in binaries, add symlinks, or weaken the counter to pass.
-- Export LLM bundles outside the project. Never retain duplicate generated bundles here.
-- Before adding text, remove duplication or replace obsolete wording. Add a file only when none of the existing owners fits.
-- Review meaning and status against actual sources. A token count, keyword match, or heading inventory cannot prove semantic preservation.
-- Verify claims about actual files or runtime behavior. Say plainly what was not checked. Do not report complete until the actual working tree meets the requested outcome.
+- Keep the whole active project, including instructions, tools and filename labels, below 20,000 tokens in `cl100k_base` and `o200k_base`. Aim below 18,000.
+- Run `python3 tools/check_project.py` after edits. Install dependencies outside the project. Never exclude documents, hide text in binaries, add symlinks or weaken counting to pass.
+- Export LLM bundles outside the project. Keep no generated duplicates here.
+- Remove duplication or replace obsolete wording before additions. Add files only if no owner fits.
+- Check meaning and status against sources. Counts, keywords and headings cannot prove preserved meaning.
+- Verify file and runtime claims. State unchecked work. Finish only when the working tree meets the request.
