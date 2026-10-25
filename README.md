@@ -1,7 +1,5 @@
 # N.H
 
-Local personal memory, contextual interpretation, conversation, and explicit simulation. Ness owns decisions. N.H preserves sources and adds revisable readings.
-
 | Read | Contains |
 |---|---|
 | [SYSTEM.md](SYSTEM.md) | Purpose, owners, main path, models, build status |
@@ -13,9 +11,11 @@ Local personal memory, contextual interpretation, conversation, and explicit sim
 | [AGENTS.md](AGENTS.md) | Editing rules and token budget |
 | [PROVENANCE.md](PROVENANCE.md) | Original-source location and consolidation scope |
 
+Review [unadopted design proposals](https://github.com/nesgeva/NH-GOVERNANCE/issues/3) separately, outside the default LLM input.
+
 ## LLM input
 
-Provide these files together. They define the current project without claiming runtime implementation or authorizing building it.
+Provide these files together.
 
 Count every project file, including tools and filename labels, with both token encodings:
 
@@ -29,6 +29,6 @@ Export the exact counted input outside this project:
 python3 tools/check_project.py --bundle /tmp/NH-LLM.md
 ```
 
-Install [tools/requirements.txt](tools/requirements.txt) in an external Python environment. The check fails at 20,000 tokens. Different models use different tokenizers; these counts cover `cl100k_base` and `o200k_base`, not every model. Leave room for the task and reply.
+Install [tools/requirements.txt](tools/requirements.txt) outside the project. The checker covers two encodings, not every model's tokenizer. Leave room for the task and reply.
 
-Full originals are preserved in the sibling archive documented in [PROVENANCE.md](PROVENANCE.md). Use them for historical or exact-contract questions, not as the default prompt.
+Use [PROVENANCE.md](PROVENANCE.md) for historical or exact-contract sources, outside the default prompt.

@@ -4,30 +4,30 @@ These shared contracts do not select a database or implementation language.
 
 ## Records and recovery
 
-- One real operation has one parent history. Stages, attempts, and recovery append linked child events. Log actual outcomes, including rejection, omission, no change, and evaluated-but-unused material.
-- Logs are living, protected, retrievable records. They add no evidence weight, grant no access, and never recursively log their own creation.
+- Each real operation has one parent history. Stages, attempts and recovery append children. Record actual outcomes, including rejection, omission, no change and evaluated-but-unused material.
+- Logs stay protected and retrievable. They add no evidence weight or access and never recursively log their creation.
 - Keep domain facts, operational logs, lifecycle events, authority proofs, and projections separate. A log cannot replace its owner's canonical record.
 - General logs carry minimal structural references, not raw secrets, private payloads, full protected locators, or reconstructive descriptions.
-- Freeze record identity, schema version, provenance, and governing inputs. Corrections and status changes append beside committed bodies.
-- Commit each defined boundary completely or not at all. Acknowledgment follows durable truth. Keep cross-owner protocols ordered rather than pretending separate stores share one atomic transaction.
-- Use structural uniqueness and stable canonical keys at the actual effect boundary. Lookup-first recovery checks owner commitment before repeating work. Similarity scans and random new IDs are not duplicate defenses.
-- Missing checkpoints, vanished workers, silence, and interrupted calls do not prove an effect did or did not happen. Reconcile unknown effects through the owner; do not retry blindly.
-- Preserve failed, cancelled, partial, stale, and unknown outcomes. Never mutate a failed child into success. A failed child need not terminate its parent unless the parent contract says so.
+- Freeze identity, schema version, provenance and governing inputs. Append corrections/status changes beside committed bodies.
+- Commit each boundary completely or not at all. Acknowledge durable truth. Order cross-owner protocols without assuming a shared atomic transaction.
+- Enforce structural uniqueness and stable canonical keys at effect boundaries. Before repeating work, recovery checks owner commitment. Similarity scans and random new IDs cannot prevent duplicates.
+- Missing checkpoints, vanished workers, silence and interrupted calls prove neither effect nor absence. Reconcile unknown effects through their owner before retrying.
+- Preserve failed, cancelled, partial, stale and unknown outcomes. Never relabel failed children as successful. A failed child need not terminate its parent unless its contract requires it.
 - Retry policy, operation identity, reread trigger, hold release, authority, and effect ownership remain separate.
 - Rebuildable indexes and views cannot determine commitment, replace originals, gate success retroactively, or grant permissions.
-- Keep each operational record. Active/cold status changes append separately. Cooling needs an accepted rule; reactivation requires actual use or a valid governed new link, not similarity alone.
+- Retain operational records. Append active/cold changes separately. Cooling needs an accepted rule; reactivation needs actual use or a valid governed new link, not similarity alone.
 
-Record producer, operation, time, supplied inputs/sources, decision/output, omissions/rejections/failures/unknowns and reasons, unchosen alternatives, remaining uncertainty, record connections, and every actual use. A use event identifies the record, consumer, purpose, contributing output/decision, outcome, unused alternatives/reasons, and uncertainty. Do not rewrite an earlier record to add later use.
+Record producer, operation, time, supplied inputs/sources, decisions/outputs, omissions/rejections/failures/unknowns with reasons, unchosen alternatives, uncertainty, connections and every actual use. Use events name record, consumer, purpose, contributing output/decision, outcome, unused alternatives/reasons and uncertainty. Append later use without rewriting earlier records.
 
-Recursive self-examination needs current context, a genuine system purpose, a design rule, an anomaly, Ness's question, or another authorized trigger. Examine only what the purpose needs within the work budgets below. Record trigger, examined records, findings, result use, uncertainty, and connections. This is distinct from automatically logging the act of logging.
+Self-examination needs current context, a genuine system purpose, design rule, anomaly, Ness's question or another authorized trigger. Examine only what that purpose needs within work budgets. Record trigger, examined records, findings, result use, uncertainty and connections. Do not confuse this with recursively logging log creation.
 
 ## Background work budgets
 
-Limit each background job's processing time, model calls, or examined material based on hardware and workload measurements. When the budget runs out, preserve completed steps, remaining work, and input references, then pause at a safe checkpoint. Before resuming, revalidate frozen inputs, current permissions, retry rules, and claim ownership. Do not substitute changed inputs into the same attempt or repeat commitments or effects. Changed inputs follow the owner's revision rules, including MEMORY.md's linked-operation rule for rereading.
+Bound each background job's time, model calls or examined material using hardware/workload measurements. At budget exhaustion, preserve completed steps, remaining work and input references, then pause at a safe checkpoint. Before resuming, revalidate frozen inputs, permissions, retry rules and claim ownership. Never substitute changed inputs into the same attempt or repeat commitments/effects. Apply owner revision rules, including MEMORY.md's linked-operation rule for rereading.
 
-A budget pause is not failure, crash replay, or acceptance. Never weaken checks or silently enlarge budgets. Continue only under allowed rules or Ness's decision where required.
+A budget pause is not failure, crash replay or acceptance. Never weaken checks or silently enlarge budgets. Continue under allowed rules or Ness's required decision.
 
-Live interaction normally takes priority over background interpretation. Allow short safe commits before yielding resources. Preserve the one-worker queue contract; priority grants no concurrent claim. If a reply depends on unfinished work, disclose that limit instead of delivering an unvalidated conclusion.
+Live interaction normally outranks background interpretation. Yield after short safe commits. Priority grants no second queue worker or concurrent claim. Disclose unfinished dependencies; never deliver unvalidated conclusions.
 
 ## Reading queue
 
@@ -71,9 +71,9 @@ Freeze development/held-out conversations before tuning; split scenario families
 
 ## Local conversation and speech findings
 
-Development tests ran on 2026-10-24. EXPERIENCE.md owns acceptance; PROVENANCE.md locates evidence.
+EXPERIENCE.md owns acceptance; PROVENANCE.md locates the 2026-10-24 development tests.
 
-Gemma4 12B analyzed, E4B replied and Qwen3 4B Thinking advised across 16 English/Hebrew turns and 50 calls. Provisional external review graded 14 candidates as five useful, two partial, six needless clarifications and one wrong-topic answer. Two stale results were withheld. Correction acknowledgments waited 30 to 32 seconds. Final candidates took a median 69.79 seconds, maximum 106.77. Qwen advice included errors and controlled no corrections. No models were adopted, trained or given answer keys.
+Gemma4 12B analyzed, E4B replied and Qwen3 4B Thinking advised over 16 English/Hebrew turns and 50 calls. Provisional external review graded 14 candidates: five useful, two partial, six needless clarifications, one wrong-topic. Two stale results were withheld. Correction acknowledgments waited 30 to 32 seconds. Final candidates took median 69.79 seconds, maximum 106.77. Qwen advice included errors and controlled no corrections. No models were adopted, trained or given answer keys.
 
 Q8 VoxCPM prepared English/Hebrew audio in 14.14/13.61 seconds. Programmatic Read reached driver progress in 0.140/0.063 seconds without an empty queue, leaving 12.87 GiB RAM. A separate combined workload left 8.26 GiB RAM and 2.12 GiB NVIDIA memory. Acoustic and physical-click latency remain unmeasured. Targets are preparation during arrival within 20 to 30 seconds and playback within two seconds of Read.
 
@@ -85,17 +85,17 @@ Automatic vowel marks degraded VoxCPM screening; an English style prefix became 
 
 BlueTTS ONNX v2 accepts phonemes. Its adapter recomputed them per section; carrying whole-context predictions into rendering still needs verification. After an encoding failure, its UTF-8 retry used the full unchanged reference, loaded in 5.57 seconds and generated 7.52 seconds in 5.07 seconds, leaving 11.95 GiB RAM. No gain, filtering, added silence or selected retakes concealed errors. Ness accepted this result. ASR flags and uncertain pronunciation remain limitations. ASR screens; human listening judges. No engine replacement or N.H activation occurred.
 
-Next test new sentences, meaning, reference fidelity and tone. Connect authorization, revisions, cancellation and speech interruption through existing owners. Preserve first takes/failures without weaker acceptance/privacy, training or answer leakage.
+Next test new sentences, meaning, reference fidelity and tone. Connect authorization, revisions, cancellation and interruption through existing owners. Preserve first takes/failures without weaker acceptance/privacy, training or answer leakage.
 
 ## Authority verification
 
 AIC verifies artifact identity and recorded authority. It does not create authority, repair artifacts, choose a winner between contradictory governing records, or replace runtime access checks.
 
-- Derive status from explicit adoption/acceptance evidence, not filename, placement, date, or an embedded historical header.
+- Derive status from explicit adoption or acceptance evidence, never filenames, placement, dates or historical headers.
 - Establish shared work, enumerate the governing set, recompute member identities and status evidence, revalidate authority order/rules, then seal a content-bound verification generation.
-- Commit one outcome per fully sealed generation before its terminal. A family lookup key does not own a generation's outcome lock.
-- Reuse requires checking the complete current input basis again. Cached summaries, elapsed time, and remembered hashes are not freshness proof.
-- Distinguish inability to inspect from determinate absence or contradiction. Unfinished work does not become an artifact refusal merely because retries ran out.
+- Commit one outcome per fully sealed generation before terminal. A family lookup key owns no generation outcome lock.
+- Reuse requires rechecking all current inputs. Cached summaries, elapsed time and remembered hashes prove no freshness.
+- Distinguish unavailable inspection from verified absence or contradiction. Retry exhaustion never turns unfinished work into artifact refusal.
 - Recovery preserves partial observations and resumes only admissible missing steps. It never releases provisional, inherited, or assumed authority.
 
 ## Coordination
@@ -120,8 +120,8 @@ UDOK coordinates typed references to owner records. It does not own meaning, pol
 - The screenshot supports human review, not reasoning or embeddings. If unavailable, retain verified text/metadata and failure reason. Do not discard or lower textual confidence solely for a missing screenshot.
 - Auto-reject flagged material but never silently delete it. The rejected-bin view uses escaped text, inactive URLs, stripped spoofing characters, no previews/network fetches, and disabled copy/select. Those UI restrictions are not a security boundary.
 - Implement a query counter and daily spending cap. Automatic currency checks need Ness's approved schedule. Historical 3 AM / 150-cycle / three-search values grant no schedule authority.
-- Replace two-of-three result-set voting with claim-level evidence checking. Retain each claim's source, date, and supporting passage; check that it supports the whole claim. Trace copied or shared origins so repeated pages add no independent support. Preserve conflicts and missing evidence. One direct source may support a narrow attributed claim, but not broader untested performance claims. Add nothing unsupported by the raw evidence. Source/run identities and content duplicate identities remain separate.
+- Check claims against whole supporting passages, not two-of-three result-set votes. Retain each source, date and passage; trace copied or shared origins. Repeated pages add no independent support. Preserve conflicts and missing evidence. One direct source supports narrow attributed claims, not broader untested performance. Add nothing unsupported. Keep source and run identities separate from content duplicate identities.
 - Commit fetched, preserved, synthesized, gated, and queued/rejected checkpoints. Resume committed progress without fabricating failed stages.
 - Image intake preserves metadata, proposes a plain description, proposes contextual meaning, obtains Ness's confirmation, then uses Catalog. Neither machine proposal is a source fact or a substitute for the original image.
-- Use text recognition for writing, detection/segmentation for labels and locations, and a local vision-language model for broader proposed descriptions. Keep each tool's outputs separate and retain uncertainty. Do not infer identity, emotion, or intent from appearance alone or invent unreadable details. Qwen3-VL, YOLO, Segment-Anything, osam, PaddleOCR-VL, SmolVLM, and Ollama remain candidates requiring tests on images and hardware. This design selects and installs none. Keep imported observations and later reactions separate.
+- Use text recognition for writing, detection/segmentation for labels and locations, and local vision-language models for proposed descriptions. Keep tool outputs separate with uncertainty. Never infer identity, emotion or intent from appearance alone or invent unreadable details. Qwen3-VL, YOLO, Segment-Anything, osam, PaddleOCR-VL, SmolVLM and Ollama remain candidates needing image and hardware tests; this design selects and installs none. Imported observations and later reactions stay separate.
 - Deferred WhatsApp ingestion stays disabled until its protected mechanics are accepted/integrated and Ness authorizes use. A design record alone cannot authorize decryption or ingestion.

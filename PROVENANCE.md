@@ -1,6 +1,6 @@
 # Source preservation
 
-Consolidation requested by Ness on 2026-10-21. It changes documentation organization and wording, not runtime behavior or permissions.
+Ness requested consolidation on 2026-10-21. Only documentation organization and wording changed, not runtime behavior or permissions.
 
 Original snapshot: Git commit `a9940789ab7fc18b976c365006d75984201b38fd`.
 
@@ -8,7 +8,7 @@ Archive location, moved with Ness's explicit approval:
 
 `/mnt/c/Users/user/NH-GOVERNANCE-source-archive-2026-10-21`
 
-The archive preserves all 436 original tracked files, 138,705,102 bytes, unchanged. Every file's size and SHA-256 matched before and after relocation. Its `original-manifest.json` records those identities. Git history also retains the earlier tracked tree. Neither archive nor Git history belongs in the default LLM input.
+The archive preserves all 436 tracked files, 138,705,102 bytes. Each size/SHA-256 matched before and after relocation; `original-manifest.json` records them. Git retains the earlier tree. Neither archive nor Git history belongs in default LLM input.
 
 Master-21's adopted book was verified against its adoption record:
 
@@ -40,9 +40,9 @@ Historical schemas, receipts and byte evidence remain in the archive. Current ow
 | Music/media, branches, creation, search, camera intentions | EXPERIENCE future intentions |
 | Other inactive candidates and historical sources | EXPERIENCE where intent remains relevant; exact history in archive |
 
-Removed from active input: repeated parent/child descriptions, reciprocal link tables, empty template cells, generated occurrence counts, embedded source copies, old versions, audit narratives, assembly machinery, and obsolete instructions. An empty template field is not promoted into a new decision request.
+Removed from active input: repeated parent/child descriptions, reciprocal links, empty templates, generated occurrence counts, embedded source copies, old versions, audit narratives, assembly machinery and obsolete instructions.
 
-This specification does not reproduce every original mechanical field name or historical test fixture. Before implementing an exact existing contract, resolve its original owner and schema rather than inventing omitted details. The preserved originals support that lookup.
+Historical mechanical fields and fixtures remain in the archive. Before implementing an existing contract, resolve its original owner and schema rather than inventing omitted details.
 
 ## Local experiment evidence
 
@@ -54,3 +54,5 @@ The verified local archive `C:/Users/user/Downloads/NH_Voice_Evidence_20261024.z
 - `nh_sentence_speech_20261024` contains code, tests, plans, model identity and failed renderings. `nh_sentence_speech_ipa_v2_20261024` contains the UTF-8 adapter, measurements and accepted `phoneme-adapter.wav`, SHA-256 `eaddd61348317bbca13ef96fa267dc85c717664e9c611c6abd84f6d38ea96147`.
 
 Pronunciation inference used `notmax123/RenikudPlus`, revision `679c56ca449d41873fb8ff7711ddf7563d28198f`, `model_int8.onnx`, SHA-256 `0337468fad56eadf5ecc7becfdf21648a4d668de41de5bc27e860141b5afcadd`. Check archive availability before reuse; absent evidence cannot establish reproduction.
+
+Copy-only Zstandard 1.5.7 trials from 2026-10-25 are in `C:/Users/user/.codex/visualizations/2026/10/25/01a173ff-0c9b-7520-ba2e-546b50bdbaa0/nh-compression-evidence`. The manifest identifies code/results with source hashes. Every tested reconstruction was byte-identical; source contents were unchanged. Samples do not qualify a phone implementation or predict other files' savings.

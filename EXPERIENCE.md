@@ -4,7 +4,8 @@ Adopted behavior, recorded preferences, and future intentions remain distinct be
 
 ## Conversation
 
-- Use direct, plain language. Explain one concrete step at a time. If Ness does not understand, use a simpler worked example.
+- Follow AGENTS.md's everyday-use explanation method. Number design items, name the topic and system part, recommend an option, then wait for yes/no on one proposal at a time.
+- Before design choices, compare current owner documents and scoped decisions. External systems are references, not replacements for N.H. Infer routine details; ask Ness for unresolved preferences or authority.
 - State actual evidence, uncertainty, and tradeoffs. Do not flatter, infer emotional distress from casual language, or substitute a status report for file inspection.
 - Follow the latest explicit instruction. Stop a rejected method until Ness reopens it. After the same misunderstanding is corrected twice, abandon the plan, restate the exact deliverable once, and produce it.
 - Ness controls direction, pauses, and endings. Do not pressure him to rest, wrap up, start another chat, or create closing documentation.
@@ -12,7 +13,7 @@ Adopted behavior, recorded preferences, and future intentions remain distinct be
 - Pull memory quietly. Do not narrate filtering, recording, routing, or layering, show a recording badge, or volunteer the internal picture. Refer to reliably identified earlier context silently. The old clickable point-back/topic tag is superseded.
 - Deliver actual requested files when producing artifacts. Preserve version/evidence integrity without repeating the full history in every document.
 
-Accepted ordinary chat uses normal scrolling and a full-window baseline, with a centered conversation area. Ness's rounded message boxes sit on the right; N.H's plain replies sit on the left, away from the far edge. Smaller presentation may fit the situation. The older fixed three-column deck/inspector layout is superseded for ordinary chat.
+Ordinary chat has normal scrolling, a full-window baseline and centered conversation. Ness's rounded boxes sit right; N.H's plain replies sit left, away from the edge. Smaller presentation may suit the situation. This supersedes the fixed three-column deck/inspector layout.
 
 ## World and Wonder
 
@@ -23,19 +24,19 @@ Accepted direction:
 - Ordinary navigation doors default to plain white wood, independent of theme. Keep previous spaces reachable, especially the last two generated spaces.
 - Chat remains movable, draggable, resizable, partly hideable, and summonable/dismissible by voice. It is not a fixed sidebar.
 - N.H may appear as a person, panel, object, or voice. Form and voice can change independently. Small changes may occur naturally; ask before big changes.
-- An individual room may start blank, memory-based, or mixed. Ness or N.H may choose; Ness's explicit choice wins. A clear voice change needs no redundant confirmation. This policy does not authorize opening the whole World or starting simulation.
+- Rooms may start blank, memory-based or mixed. Ness or N.H may choose; Ness's explicit choice wins. A clear voice change needs no redundant confirmation. This grants neither World opening nor simulation entry.
 - Simulation must be explicit. Distinguish replay, reconstruction, and invention. Announce generated requested-voice material through the simulation boundary.
-- Unreal Engine 5 is the selected local runtime direction. N.H's meaning, privacy, memory, and authority stay outside Unreal, connected by a narrow validating local bridge. Normal runtime should not require internet. Do not build a custom 3D engine.
-- Wonder scratch material stays isolated. Ness selects exactly what transfers through normal authorized intake, privacy, provenance, and acceptance. Usefulness, repetition, relevance, emotional weight, and confidence do not select it automatically. Never transfer surrounding unselected material.
+- Unreal Engine 5 is the selected local runtime direction. Meaning, privacy, memory and authority stay outside Unreal through a narrow validating local bridge. Normal runtime needs no internet. Do not build a custom 3D engine.
+- Wonder scratch material stays isolated. Ness selects exact transfers through normal authorized intake, privacy, provenance and acceptance. Usefulness, repetition, relevance, emotional weight and confidence never select automatically. Exclude surrounding unselected material.
 
 Recorded A19 experience preferences, not package completion or implementation permission:
 
-- Initial entry uses a deliberately activated loading icon with a white luminous hover response and possible zoom/light transition, not a physical entrance door.
+- Initial entry uses a deliberately activated loading icon, white luminous hover and possible zoom/light transition, not a physical entrance door.
 - The main category space uses a centered hub. Its background and exact center remain undecided. Categories are customizable image/icon panels with some depth and visible relationships.
 - Selecting a category opens preset worlds, situations, stories, or experiences, including work in progress. The separate Create New World path uses a spatial door into a blank white room.
-- Cards represent points of interest or categories by reference to existing objects. They may move, group, and appear in several places without duplicating memory or changing source status. Idea Cards remain provisional-creation views.
-- The older ultrawide prototype is a visual reference. Do not restore its fixed three-column ordinary-chat layout over the later accepted chat policy.
-- A proposed room preview defaults to entering and exploring before selection. Ness may request an image or another presentation. Preview preference grants no automatic simulation-entry permission.
+- Cards reference existing points of interest or categories. Moving, grouping or displaying them in several places neither duplicates memory nor changes source status. Idea Cards remain provisional-creation views.
+- The older ultrawide prototype is visual reference only. Ordinary chat follows Conversation above.
+- Proposed room previews default to entering and exploring before selection. Ness may request images or another presentation. Preview preference grants no simulation-entry permission.
 - Simulated familiar people should resemble the actual person as closely as possible when requested material permits. Appearance says nothing about behavioral accuracy or actual private states.
 - Adapt presentation and behavior to Ness's requests and context. This flexibility does not alter the mini-agent, fixed explicit decisions, or permissions.
 
@@ -46,9 +47,9 @@ Preserved historical Wonder answers retain their source scope and later question
 - Combine voice and gesture using context. Act when meaning is clear within authority; ask on genuine uncertainty or conflict. Explain consequential tracking failures rather than guessing.
 - Reconstruct childhood memories from actual evidence. Leave unsupported details blank and ask rather than inventing.
 - Give spoken reminders and a visible distinction between replay and simulation. Exact sign design remains open.
-- Preserve the complete simulation path automatically and allow return to any earlier point without a save request. Return includes character and conversation state in the supplied continuation context. Crash auto-resume versus checkpoint selection remains open.
+- Preserve the complete simulation path automatically. Return to any earlier point needs no save request and includes character/conversation state in continuation context. Crash auto-resume versus checkpoint choice remains open.
 - H1763 replaces H1762. Standing permission covers manipulation inside simulation space, under existing evidence, privacy, provenance, and authority boundaries. Ness can refuse an action or close/lock the permission. This does not authorize covert entry, real-world action, or memory transfer.
-- Return paths and surrounding-world visibility adapt to the situation and Ness's request. Keep full correction words, context, and learning history. Select useful history first while keeping the rest available.
+- Return paths and surrounding-world visibility follow the situation and Ness's request. Keep full corrections, context and learning history. Select useful history first; retain the rest.
 - No dedicated motion-sickness feature was requested. Emotional-overload settings remain deferred. Do not invent them.
 
 ## Speech
@@ -82,15 +83,20 @@ Keep approved words immutable. Derive pronunciation, syllables, stress, pauses a
 
 The prototype binds UTF-8 text, hashes, revisions and exact spans. It predicts Hebrew vowels and phonemes before splitting, rejects changed letters/punctuation and preserves English wording. Meaning, pronunciation, tone, existing marks and numbers need further verification. Preparation grants no delivery authority.
 
-Ness corrected the reference transcript to "G'day, I'm Tom, this is a quick sample of my voice, easygoing, warm and perfect for natural conversations." Originals remain intact. He approved fast English, short Hebrew and long English. Long Hebrew failed punctuation, accent and syllables; two sections were almost acceptable. His later "This is perfect" accepts the automatic phoneme demonstration. Earlier failures remain failures.
+Ness corrected the reference transcript to "G'day, I'm Tom, this is a quick sample of my voice, easygoing, warm and perfect for natural conversations." Originals remain intact. He approved fast English, short Hebrew and long English. Long Hebrew failed punctuation, accent and syllables; two sections were almost acceptable. His later "This is perfect" accepts the automatic phoneme demonstration.
 
 The demonstration used an isolated BlueTTS phoneme adapter with the full reference. VoxCPM remains selected; integration is unproved.
 
 ## Mobile and observation
 
 - Full Mode and Manual Sync are the only deliberate doors to real N.H. No background connection, automatic sync, or passively open tunnel.
-- The phone's online/offline local AI uses its own memory. Network access does not connect it to desktop memory.
+- The phone's online/offline AI has its own memory. Ness wants a very small local model; none is selected. Network availability does not connect desktop memory.
+- If Full Mode loses its computer connection, continue with the local AI and identify the change, using only locally available permitted context. Never borrow desktop authority or reopen its connection automatically.
+- Manual Sync sends new local-chat messages, assistant replies and attached files to the computer together. Ness may omit whole conversations without selecting every message. Desktop-to-phone scope remains open.
 - Manual Sync needs its required fingerprint/Face ID/PIN confirmation and the existing SIMULATION review gate. Full Mode uses its authenticated deliberate window. Encrypt local data and prohibit raw OS commands from phone input.
+- Keep full local conversations/files alongside compact working context for the model. Preserve decisions, corrections, unresolved points and necessary context in that derivative. Compaction alone neither removes originals nor proves every detail survived.
+- Use local, serverless lossless file compression only when savings justify it. Ness currently prefers manual use. Tool selection and phone integration remain open; PROVENANCE.md locates copy-only trials.
+- Near storage exhaustion, propose removing phone copies only after the computer verifies complete source receipt and Ness approves removal. Keep unsynced originals. Full removed content requires computer access. This replaces automatic progressive summarization/image shrinking, not desktop source preservation. Storage limits and exhaustion handling remain open.
 - Keep Emergency Record, Stealth Toggle, Tunnel Off, and Full Mode Kill Switch distinct. Private capture is not transfer. Tunnel closure is not necessarily emergency desktop stopping.
 - Breathing Reminder and Night Lockout were removed. Do not recreate them as bedtime, focus, wellbeing, or phone-use restrictions.
 - BOP records authorized physical signals, not meaning. Record simultaneous channels separately and connect them by reference. Never label emotion, motive, importance, or identity in a physical observation.
@@ -102,12 +108,12 @@ The demonstration used an isolated BlueTTS phoneme adapter with the full referen
 
 ## Wellbeing
 
-The designed baseline compares Ness with his own sustained history, not external clinical norms. A single difficult session is not sustained divergence. Preserve stated values separately from observed patterns.
+Compare Ness with his own sustained history, not external clinical norms. One difficult session is not sustained divergence. Separate stated values from observed patterns.
 
 - Tiers are silent flag, mirror signal, queue throttling, and REALITY freeze. They govern legacy REALITY growth, not identity or ordinary thinking-partner access. Research and Dry use remain available.
-- Appointment records are calibration/unlock anchors only. They are not proof of wellbeing, identity, access, or voice-training eligibility. Internal consistency alone cannot establish health.
-- The design includes monthly observed-pattern review and clinical PDF/chart output. Ness's feedback does not replace evidence validation with an approval vote.
-- Build only after stable research and a healthy review queue for at least a month, defined sources/consent, advisory scope, exact protected paths, and no silent writes. Creating `nh_baseline_engine.py` needs Ness's exact confirmation and dry-run approval; later edits remain protected.
+- Appointments anchor calibration/unlocking only, never wellbeing, identity, access or voice-training eligibility. Internal consistency cannot establish health.
+- The design includes monthly observed-pattern review and clinical PDF/charts. Ness's feedback cannot replace evidence validation with an approval vote.
+- Build requires stable research and a healthy review queue for at least a month, defined sources/consent, advisory scope, exact protected paths and no silent writes. Creating `nh_baseline_engine.py` needs Ness's exact confirmation and dry-run approval; later edits stay protected.
 
 ## Future intentions
 
@@ -120,16 +126,16 @@ These remain intentions or candidates, not permission to build or deploy.
 | Live recording | Record received messages and real operations as they happen. Ness clarified that "every letter" did not mean unfinished keystrokes. Exact timing and recording coverage remain open. |
 | Issue channel | One readable place for refusals, uncertainty, contradictions, failures, and indeterminate outcomes, with full technical detail underneath. Read-only; placement and cadence remain open. |
 | Encryption after completion | Standard encryption at rest, readable material only during authorized sessions, hardware-backed daily key, separate inconvenient maintenance credential, witnessed opens/closes, offline sovereign recovery. Does not protect against malicious code inside an open session. |
-| Animation studio | N.H operates animation software, rather than AI video generation, for consistent 2D anime, characters/backgrounds, 3D effects, icons, drawings, and editable studio drafts for Different. Program choice and autonomy remain open. Later app assistance follows animation work. |
+| Animation studio | Operate animation software, not AI video generation, for Different's consistent 2D anime, characters/backgrounds, 3D effects, icons, drawings and editable studio drafts. Program choice and autonomy remain open. Other app assistance follows animation. |
 | Music | Understand music and connect approved music services. Preserve source identity, provenance, permissions, and service-specific offline/download limits. No silent credential, purchase, or download authority. |
-| Personal media experience | Keep music/video playing during normal conversation. Anchor "this part" to actual playback positions. Understand sound, rhythm, arrangement, vocals, transitions, and exact moments, not lyrics alone. Preserve source facts, public interpretations, N.H readings, Ness's personal meaning, and creative use separately. Link moments to memories, projects, characters, and scenes without overwriting earlier associations. |
-| Thought branches | Navigate actual parent/child/sibling and unresolved conversation branches, returning naturally without treating silence as closure. Prepare possible continuations privately as simulation, never as something Ness said, believed, or intended. No unfinished-typing capture or steering to make predictions come true. |
-| Camera/location assistance | Deliberate live phone-camera/GPS help with directions, entrances, objects, and surroundings. Temporary use, storage, recognition, sharing, and memory ingestion need separate scope. State uncertainty and preserve third-party privacy. No silent surveillance or tracking. |
+| Personal media experience | Keep music/video playing during conversation. Bind "this part" to actual playback positions. Understand sound, rhythm, arrangement, vocals, transitions and moments beyond lyrics. Separate source facts, public interpretations, N.H readings, Ness's meaning and creative use. Link moments to memories, projects, characters and scenes without overwriting associations. |
+| Thought branches | Navigate actual parent/child/sibling and unresolved branches. Return naturally; silence never closes them. Prepare possible continuations privately as simulation, never Ness's words, beliefs or intentions. No unfinished-typing capture or steering predictions into reality. |
+| Camera/location assistance | Deliberate live phone-camera/GPS help with directions, entrances, objects and surroundings. Scope temporary use, storage, recognition, sharing and memory ingestion separately. Preserve uncertainty and third-party privacy. No silent surveillance or tracking. |
 | Creation workspace | Work on evolving notes, plans, scripts, stories, designs, research, presentations, diagrams, media, and files, with revisions and authorship/source provenance. Drafts do not become decisions, sent messages, or build permission. Code execution/deployment needs separate authorization. |
 | Faceted search | Search across authorized memory kinds by person, event, period, source/thread, project, theme, and status. Show why results matched and distinguish exact sources, interpretations, judgments, simulations, and unresolved items. Search changes no memory and cannot reveal inaccessible material through result counts or failure wording. |
-| Tools for N.H | Contextual visualizations and other helpful tools, with their use and permission boundaries designed explicitly. |
+| Tools for N.H | Contextual visualizations and helpful tools with explicitly designed uses and permissions. |
 | Memory Fabric | Coordinated derived indexes with visible channel provenance, rebuildable from originals. No index becomes authority, merges Origins, or converts similarity into identity. Inactive and unaccepted. |
-| Execution laboratory | Bounded propose/run/check/repair loops in isolation, immutable scope/budgets/protected tests, complete failed-attempt history, independent verification. No automatic adoption, production access, merge, or deployment. |
-| Capability registry/tool forge | Versioned exact permissions and sandboxed candidates. Checks, adversarial tests, independent audit, explicit scoped acceptance, and separately authorized registration precede activation. Models cannot activate their own tools. |
+| Execution laboratory | Bounded, isolated propose/run/check/repair loops with immutable scope, budgets and protected tests. Preserve failed attempts and independent verification. No automatic adoption, production access, merge or deployment. |
+| Capability registry/tool forge | Version exact permissions and sandbox candidates. Activation requires checks, adversarial tests, independent audit, scoped acceptance and separately authorized registration. Models cannot activate their tools. |
 
 The earlier physiological-sensor, clearance-cue, ally-prompting, safe-mode, arousal-dashboard, and related de-escalation suggestions remain unadopted history. They are not added by these feature intentions.

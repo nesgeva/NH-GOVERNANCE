@@ -1,15 +1,12 @@
 # Status and open decisions
 
-Missing implementation detail is not permission to invent user-visible behavior.
-
 ## Authority
 
 - Ness adopted Master-21 on 2026-10-05 despite its internal CANDIDATE labels. It replaced Master-20 v10 as architectural authority.
 - The prior order was Master-21, Decision Defaults S19 v2.2, cursorrules, then the Companion. The Working Map and decision index were subordinate navigation.
-- Later explicit scoped answers remain evidence of Ness's intent without automatically becoming accepted packages, implementation, or deployment permission.
-- This rewrite consolidates wording and organization under Ness's 2026-10-21 request. It must not silently change product decisions, settle source conflicts, or claim a new runtime state.
-- On 2026-10-21, Ness accepted twelve scoped design updates and authorized recording them in the existing owners. Those rules supersede conflicting earlier methods within their scopes. Authorization covers design edits only. Runtime changes, deployment, model adoption, and activation remain separately gated.
-- Keep accepted design, recorded preference, candidate, future intent, historical observation, and unknown distinct. Do not inherit status from a folder or headline.
+- Later explicit scoped answers record intent, not automatic package acceptance, implementation or deployment.
+- On 2026-10-21, Ness accepted twelve scoped design updates for recording in existing owners. They replace conflicting earlier methods within scope. Authorization covers design edits only; runtime changes, deployment, model adoption and activation remain separately gated.
+- OPERATIONS.md governs authority verification. PROVENANCE.md records the documentation refactor's scope.
 
 ## Remaining work
 
@@ -24,7 +21,7 @@ Missing implementation detail is not permission to invent user-visible behavior.
 | Privacy | Exact exclusion detection, protected storage/execution, dependency coverage, recovery proof/key custody, restriction-recovery mechanisms, and person/group interfaces under SECURITY.md. |
 | Actions | Complete four-level risk mapping, heightened categories, previews/execution, service-specific reconciliation and duplicate prevention, result detection, and the outcome/reread cycle under SECURITY.md. |
 | Research | Isolated capture implementation, complete review-to-intake cycle, deployment budgets, and explicitly approved automatic schedules. Academic source choice is already both Semantic Scholar and OpenAlex. |
-| Phone | Local model/memory, platform background constraints, Manual Sync content scope, authenticated tunnel lifecycle, dangerous command-path removal, and cross-layer handoff. |
+| Phone | EXPERIENCE owns accepted sync/retention choices. Still open: exact local model, desktop-to-phone scope, storage limits/exhaustion, compaction fidelity, compression thresholds and phone fit, platform background constraints, authenticated tunnel lifecycle, dangerous command-path removal and cross-layer handoff. |
 | Voice | Capture/cleanup/transcription, language switching, latency, resources, playback/remainder/repeat, and failure/interruption mechanics. Define private-output grants, their ending conditions, and measured audio buffering under SECURITY.md. VoxCPM2 selection does not complete these. |
 | World/Wonder | Exit/return details, hub/background, category-to-preset transition, visual grammar, creation-room tools, gestures, accessibility, simulation controls and crash resume. Preserve existing scoped answers. |
 | Future interfaces | Multi-chat copy/move/link semantics and memory sharing, command phrases/combinations, risky-command boundary, voice approval scope, read-aloud continuation conditions. |
