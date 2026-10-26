@@ -1,7 +1,5 @@
 # Conversation, World, and Wonder
 
-Adopted behavior, recorded preferences, and future intentions remain distinct below.
-
 ## Conversation
 
 - Follow AGENTS.md's everyday-use explanation method. Number design items, name the topic and system part, recommend an option, then wait for yes/no on one proposal at a time.
@@ -89,14 +87,17 @@ The demonstration used an isolated BlueTTS phoneme adapter with the full referen
 
 ## Mobile and observation
 
-- Full Mode and Manual Sync are the only deliberate doors to real N.H. No background connection, automatic sync, or passively open tunnel.
-- The phone's online/offline AI has its own memory. Ness wants a very small local model; none is selected. Network availability does not connect desktop memory.
-- If Full Mode loses its computer connection, continue with the local AI and identify the change, using only locally available permitted context. Never borrow desktop authority or reopen its connection automatically.
-- Manual Sync sends new local-chat messages, assistant replies and attached files to the computer together. Ness may omit whole conversations without selecting every message. Desktop-to-phone scope remains open.
-- Manual Sync needs its required fingerprint/Face ID/PIN confirmation and the existing SIMULATION review gate. Full Mode uses its authenticated deliberate window. Encrypt local data and prohibit raw OS commands from phone input.
-- Keep full local conversations/files alongside compact working context for the model. Preserve decisions, corrections, unresolved points and necessary context in that derivative. Compaction alone neither removes originals nor proves every detail survived.
-- Use local, serverless lossless file compression only when savings justify it. Ness currently prefers manual use. Tool selection and phone integration remain open; PROVENANCE.md locates copy-only trials.
-- Near storage exhaustion, propose removing phone copies only after the computer verifies complete source receipt and Ness approves removal. Keep unsynced originals. Full removed content requires computer access. This replaces automatic progressive summarization/image shrinking, not desktop source preservation. Storage limits and exhaustion handling remain open.
+- Full Mode and Manual Sync are the only deliberate desktop connections. No background connection, automatic sync or passive tunnel.
+- The phone AI works online/offline with separate memory. Ness wants a very small local model, still unselected.
+- Full Mode connection loss switches to local AI with notice. Use permitted local context, without desktop authority or automatic reconnection.
+- Manual Sync batches new local-chat messages, replies and attachments to desktop. Ness may omit whole conversations, without per-message selection.
+- Desktop-to-phone copies selected chats, attachments and needed permitted context with source relationships for offline use. Never copy all desktop memory by default.
+- Ask once about content; retain Ness's choice until he changes it. This bypasses no connection or authentication checks.
+- After interruption, show received and missing items. "Show what is missing" lists missing items before offering completion. Require a current authorized connection and authentication. Check receipt before sending only missing items without duplicates. Offline, identify unavailable content; never invent it.
+- Manual Sync requires fingerprint/Face ID/PIN and SIMULATION review. Full Mode uses its authenticated deliberate window. Encrypt local data; prohibit raw OS commands from phone input.
+- Keep full local originals and compact model context preserving decisions, corrections, unresolved points and necessary context. Compaction neither removes originals nor proves fidelity.
+- Ness prefers manual lossless compression, locally without servers, only with justified savings. Tool selection and phone integration remain open; PROVENANCE.md locates copy-only trials.
+- Near storage exhaustion, propose removing phone copies only after verified complete desktop receipt and Ness's approval. Keep unsynced originals; removed full content needs desktop access. This replaces automatic progressive summaries/image shrinking. Limits/exhaustion handling remain open.
 - Keep Emergency Record, Stealth Toggle, Tunnel Off, and Full Mode Kill Switch distinct. Private capture is not transfer. Tunnel closure is not necessarily emergency desktop stopping.
 - Breathing Reminder and Night Lockout were removed. Do not recreate them as bedtime, focus, wellbeing, or phone-use restrictions.
 - BOP records authorized physical signals, not meaning. Record simultaneous channels separately and connect them by reference. Never label emotion, motive, importance, or identity in a physical observation.
