@@ -15,7 +15,7 @@
 | Runtime evidence | Locate and inspect actual implementation, current stores, schemas, marker enforcement, protected-file status, import dry-run support, and legacy activity. This repository cannot prove them. |
 | Model selection | Final analyst, messenger, translator, embeddings where not already fixed, hardware/resource allocation, measured throughput, full-thread benchmarks, and deployment adoption. |
 | Validation | Reviewer selection and independence evidence, automatic-acceptance scopes, consequential-case escalation, adjudicator authority, rejection-category mappings, test tolerances, and B16 judgment authorization. See MEMORY.md and OPERATIONS.md for accepted rules. |
-| Retrieval | Empirical search budgets, thresholds, ceilings, ranking/calibration, correction-link coverage, and failed/stale-index/timeout/degraded-service behavior under MEMORY.md. Do not invent values. |
+| Retrieval | Empirical budgets, thresholds, ceilings, ranking/calibration, correction-link coverage, fallback design, and failure/stale-index/timeout/degraded-service verification under MEMORY.md. Do not invent values. |
 | Stories/people | Remaining theme mechanics, identity thresholds where not qualitatively settled, full schema integration, telling support and evaluation-case availability. |
 | State | Remaining evidence/materiality/currentness calibration, domain schemas/integration, world membership and attention wiring, without numerical truth scores. |
 | Privacy | Exact exclusion detection, protected storage/execution, dependency coverage, recovery proof/key custody, restriction-recovery mechanisms, and person/group interfaces under SECURITY.md. |
@@ -23,7 +23,7 @@
 | Research | Isolated capture implementation, complete review-to-intake cycle, deployment budgets, and explicitly approved automatic schedules. Academic source choice is already both Semantic Scholar and OpenAlex. |
 | Phone | Exact local model, linked-context selection, storage limits/exhaustion, compaction fidelity, compression thresholds/phone fit, platform background constraints, authenticated tunnel lifecycle, dangerous command-path removal and cross-layer handoff. |
 | Voice | Capture/cleanup/transcription, language switching, latency, resources, playback/remainder/repeat, and failure/interruption mechanics. Define private-output grants, their ending conditions, and measured audio buffering under SECURITY.md. VoxCPM2 selection does not complete these. |
-| World/Wonder | Exit/return details, hub/background, category-to-preset transition, visual grammar, creation-room tools, gestures, accessibility, simulation controls and crash resume. Preserve existing scoped answers. |
+| World/Wonder | Exit/return, hub center, final background design, category-to-preset flow, visual grammar, creation-room tools, gestures, accessibility, simulation controls and crash resume. |
 | Future interfaces | Multi-chat copy/move/link semantics and memory sharing, command phrases/combinations, risky-command boundary, voice approval scope, read-aloud continuation conditions. |
 | Maintenance/control | Platform contracts, deployment/key choices, retry-owner integration, measured work budgets, safe yielding/continuation mechanics, and kernel/AIC callers. Coordination cannot close another component's policy gap. |
 | Legacy | Explicit coexistence rules and eventual decommissioning authorization. No implicit migration of wellbeing or mobile into Layer 3. |

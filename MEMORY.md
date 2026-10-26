@@ -62,15 +62,15 @@ Code checks required fields, existing references, current inputs and permissions
 
 ## Retrieval and relevance
 
-Keep positional adjacency and semantic association as separate labeled channels. A mode may use neither, either, or both where its trigger permits. Healthy empty retrieval permits target-only work. Retrieval failure stays a failure, never invented context or silently relaxed thresholds.
+Keep positional adjacency and semantic association separately labeled. Modes use neither, either or both as their triggers permit. Record search completion, coverage and index version. Verify results against current sources and corrections. Healthy empty retrieval permits target-only work. Failed or incomplete searches are not empty results. Use only predefined fallback paths. Never invent context or silently relax thresholds.
 
-Each versioned mode declares purpose, channel parameters, ceilings, uncertainty handling, and audit rules. Apply the lower of setting and ceiling and enforce the ceiling independently at runtime. Empirical retrieval values remain open until tested.
+Versioned modes declare purpose, channel parameters, ceilings, uncertainty handling and audit rules. Enforce the lower of setting and ceiling independently at runtime. Retrieval values await empirical tests.
 
-For ordinary answers, select permitted task-relevant sources with enough surrounding conversation to interpret references and short replies. Follow important correction, replacement, clash, and restriction links before relying on a result. Similar wording alone is insufficient. Preserve each statement's time and circumstances; newer material does not automatically replace an older statement about a different situation. Historical Engine A/B input contracts remain unchanged.
+For ordinary answers, choose permitted relevant sources with enough conversation to interpret references and short replies. Follow important correction, replacement, clash and restriction links before relying on results. Similar wording alone is insufficient. Preserve statement time and circumstances. Newer statements do not automatically replace older ones about different situations. Historical Engine A/B input contracts remain unchanged.
 
-Bound search, with extra checks for evidence that could materially change the answer. Ask about gaps only when the task needs them filled. Otherwise answer within the evidence and disclose relevant limits. Search limits supply no certainty. Failure to find a decision does not prove it never happened. Test old, differently worded, and conflicting corrections.
+Bound search. Check for evidence that could materially change the answer. Ask about gaps only when needed for the task. Otherwise answer from evidence and disclose limits. Search limits supply no certainty. Not finding a decision does not prove it never happened. Test old, differently worded and conflicting corrections.
 
-Relevance first applies categorical gates, then named graded dimensions. Preserve producer and provenance for each dimension. Do not collapse them into a hidden score.
+Apply categorical gates before named graded relevance dimensions. Preserve each dimension's producer and provenance. Never collapse dimensions into a hidden score.
 
 - Use rules for reliable mechanical dimensions, embeddings for semantic proximity, and a specifically authorized model for necessary interpretation.
 - Privacy and deletion eligibility are prerequisites, not relevance dimensions. A model-produced dimension cannot control a categorical gate.

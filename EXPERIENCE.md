@@ -2,7 +2,7 @@
 
 ## Conversation
 
-- Follow AGENTS.md's everyday-use explanation method. Number design items, name the topic and system part, recommend an option, then wait for yes/no on one proposal at a time.
+- Follow AGENTS.md's everyday-use explanations. Number proposals, name their topic and component, recommend an option, and await yes/no before proceeding.
 - Before design choices, compare current owner documents and scoped decisions. External systems are references, not replacements for N.H. Infer routine details; ask Ness for unresolved preferences or authority.
 - State actual evidence, uncertainty, and tradeoffs. Do not flatter, infer emotional distress from casual language, or substitute a status report for file inspection.
 - Follow the latest explicit instruction. Stop a rejected method until Ness reopens it. After the same misunderstanding is corrected twice, abandon the plan, restate the exact deliverable once, and produce it.
@@ -11,7 +11,7 @@
 - Pull memory quietly. Do not narrate filtering, recording, routing, or layering, show a recording badge, or volunteer the internal picture. Refer to reliably identified earlier context silently. The old clickable point-back/topic tag is superseded.
 - Deliver actual requested files when producing artifacts. Preserve version/evidence integrity without repeating the full history in every document.
 
-Ordinary chat has normal scrolling, a full-window baseline and centered conversation. Ness's rounded boxes sit right; N.H's plain replies sit left, away from the edge. Smaller presentation may suit the situation. This supersedes the fixed three-column deck/inspector layout.
+Ordinary chat scrolls in a full window with a centered conversation. Ness's rounded boxes sit right. N.H's plain replies sit left, away from the edge. Smaller views may suit the situation. This replaces the fixed three-column layout.
 
 ## World and Wonder
 
@@ -19,6 +19,7 @@ Accepted direction:
 
 - Conversation and World are separate presentations. Opening Ness's World requires identity verification and a separate explicit opening confirmation.
 - The world can grow from blank into memories, people, places, projects, and deeply nested categories. Visual organization never rewrites underlying records.
+- Try a simple, neutral background without continuous motion on the category screen. Ness can change it later. Color and image remain undecided.
 - Ordinary navigation doors default to plain white wood, independent of theme. Keep previous spaces reachable, especially the last two generated spaces.
 - Chat remains movable, draggable, resizable, partly hideable, and summonable/dismissible by voice. It is not a fixed sidebar.
 - N.H may appear as a person, panel, object, or voice. Form and voice can change independently. Small changes may occur naturally; ask before big changes.
@@ -30,10 +31,10 @@ Accepted direction:
 Recorded A19 experience preferences, not package completion or implementation permission:
 
 - Initial entry uses a deliberately activated loading icon, white luminous hover and possible zoom/light transition, not a physical entrance door.
-- The main category space uses a centered hub. Its background and exact center remain undecided. Categories are customizable image/icon panels with some depth and visible relationships.
+- The centered category hub has customizable image/icon panels with some depth and visible relationships. Its center remains undecided.
 - Selecting a category opens preset worlds, situations, stories, or experiences, including work in progress. The separate Create New World path uses a spatial door into a blank white room.
 - Cards reference existing points of interest or categories. Moving, grouping or displaying them in several places neither duplicates memory nor changes source status. Idea Cards remain provisional-creation views.
-- The older ultrawide prototype is visual reference only. Ordinary chat follows Conversation above.
+- The ultrawide prototype is visual reference only.
 - Proposed room previews default to entering and exploring before selection. Ness may request images or another presentation. Preview preference grants no simulation-entry permission.
 - Simulated familiar people should resemble the actual person as closely as possible when requested material permits. Appearance says nothing about behavioral accuracy or actual private states.
 - Adapt presentation and behavior to Ness's requests and context. This flexibility does not alter the mini-agent, fixed explicit decisions, or permissions.
@@ -89,7 +90,7 @@ The demonstration used an isolated BlueTTS phoneme adapter with the full referen
 
 - Full Mode and Manual Sync are the only deliberate desktop connections. No background connection, automatic sync or passive tunnel.
 - The phone AI works online/offline with separate memory. Ness wants a very small local model, still unselected.
-- Full Mode connection loss switches to local AI with notice. Use permitted local context, without desktop authority or automatic reconnection.
+- If Full Mode disconnects, notify Ness and switch to local AI with permitted local context, without desktop authority. Never reconnect automatically, including when the app reopens.
 - Manual Sync batches new local-chat messages, replies and attachments to desktop. Ness may omit whole conversations, without per-message selection.
 - Desktop-to-phone copies selected chats, attachments and needed permitted context with source relationships for offline use. Never copy all desktop memory by default.
 - Ask once about content; retain Ness's choice until he changes it. This bypasses no connection or authentication checks.
