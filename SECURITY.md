@@ -104,6 +104,8 @@ An unknown delivery is unresolved, never proof of withholding or success. Resolv
 
 Private speech requires a defined output grant and scope. Personal Mode, voice recognition, and a headphone connection alone cannot authorize a private channel. Shared speakers retain their audience ceiling. Microphones cannot rule out silent listeners.
 
+Default an explicit private read-aloud grant to the requested passage and channel. Offer a separate explicit grant bounded to the current session and chosen scope. Channel change, loss of required conditions, revocation, or restart ends the grant. Never move private audio automatically to a replacement device. Channel enforcement still requires testing.
+
 Recheck each short audio section, bound queued playback, and stop and flush affected audio on access reduction. Existing delivery gates apply to the exact approved wording. Do not automatically replay affected material merely because access returns. Already heard words cannot be recalled. Test buffering and channel-authorization mechanics.
 
 ## Actions

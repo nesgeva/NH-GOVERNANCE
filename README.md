@@ -11,7 +11,7 @@
 | [AGENTS.md](AGENTS.md) | Editing rules and token budget |
 | [PROVENANCE.md](PROVENANCE.md) | Original-source location and consolidation scope |
 
-Review [unadopted design proposals](https://github.com/nesgeva/NH-GOVERNANCE/issues/3) separately, outside the default LLM input.
+Review the [proposal list and scoped decision status](https://github.com/nesgeva/NH-GOVERNANCE/issues/3) separately, outside the default LLM input. Accepted behavior belongs in the domain documents. Unreviewed rows remain proposals.
 
 ## LLM input
 

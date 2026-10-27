@@ -3,7 +3,7 @@
 ## Conversation
 
 - Follow AGENTS.md's everyday-use explanations. Number proposals, name their topic and component, recommend an option, and await yes/no before proceeding.
-- Before design choices, compare current owner documents and scoped decisions. External systems are references, not replacements for N.H. Infer routine details; ask Ness for unresolved preferences or authority.
+- Compare owner documents and scoped decisions before proposing choices. Separate new behavior/permissions from existing rules, technical connections and tests. Do not seek new approval for settled principles. External systems are references, not replacements. Infer routine details; ask Ness for unresolved preferences or authority.
 - State actual evidence, uncertainty, and tradeoffs. Do not flatter, infer emotional distress from casual language, or substitute a status report for file inspection.
 - Follow the latest explicit instruction. Stop a rejected method until Ness reopens it. After the same misunderstanding is corrected twice, abandon the plan, restate the exact deliverable once, and produce it.
 - Ness controls direction, pauses, and endings. Do not pressure him to rest, wrap up, start another chat, or create closing documentation.
@@ -69,10 +69,14 @@ OPERATIONS.md records recovered CPU float32 WAVs and later GPU Q8 tests, without
 
 Standing direction is one young-adult male bilingual voice, American English, acceptable foreign accent in Hebrew, private noncommercial use, local generation, and no emotional pull. Keep generated speech separate from Ness's identity profile and language-model selection.
 
-- Stop TTS immediately when Ness starts speaking. Record the physical interruption and output position; do not infer agreement, emotion, or understanding.
+- Separate authorized recording, noise processing, transcription and interpretation. Preserve original audio beside processing outputs. Clarify action/target-changing uncertain words, not every ordinary sentence.
+- Stop TTS on detection of Ness starting to speak, without waiting for complete transcription. Record the physical interruption and output position; do not infer agreement, emotion, or understanding.
+- Use the explicitly requested language, otherwise the request's language. Retain original names/quotations where needed. Read-aloud preserves approved words and languages; pronunciation permits no translation or rewriting.
+- Bind playback/remainder to exact selected text and spans. Distinguish prepared, queued, device-submitted and measured playback. Disclose unknown cutoff words and offer the sentence start; never invent precision.
+- Distinguish interruption, transcription/generation failure, device disconnection, text revision and access loss. Clear affected queued audio and block obsolete late audio. Claim only measured playback knowledge. SECURITY.md owns private channels/grants.
 - Every spoken word passes SECURITY.md's ongoing delivery and channel checks and preserves the approved meaning. A future delivery director changes how words sound, never what they assert.
 - Recorded read-aloud answers include N.H replies, on-screen text, and supplied files. Start by pointing/tapping, speaking, or combining them. Resolve "repeat" from intent rather than a fixed default.
-- Spoken content also appears in a small side voice chat. When to offer continuation after interruption remains open.
+- Show spoken content and a quiet post-interruption continuation option in a small side voice chat. Do not ask aloud while Ness speaks. Explicit continuation resumes current permitted content; changed requests require revised answers. Silence/restored access never starts playback.
 
 ### Accepted speech preparation direction
 
@@ -89,6 +93,7 @@ The demonstration used an isolated BlueTTS phoneme adapter with the full referen
 ## Mobile and observation
 
 - Full Mode and Manual Sync are the only deliberate desktop connections. No background connection, automatic sync or passive tunnel.
+- Start disconnected. Deliberate opening creates a freshly authenticated, purpose/scoped connection. Check Personal Mode and content permissions separately. Disconnection/window end closes receipt and delivery. App or OS work resumption cannot reopen it.
 - The phone AI works online/offline with separate memory. Ness wants a very small local model, still unselected.
 - If Full Mode disconnects, notify Ness and switch to local AI with permitted local context, without desktop authority. Never reconnect automatically, including when the app reopens.
 - Manual Sync batches new local-chat messages, replies and attachments to desktop. Ness may omit whole conversations, without per-message selection.
@@ -130,7 +135,7 @@ These remain intentions or candidates, not permission to build or deploy.
 | Encryption after completion | Standard encryption at rest, readable material only during authorized sessions, hardware-backed daily key, separate inconvenient maintenance credential, witnessed opens/closes, offline sovereign recovery. Does not protect against malicious code inside an open session. |
 | Animation studio | Operate animation software, not AI video generation, for Different's consistent 2D anime, characters/backgrounds, 3D effects, icons, drawings and editable studio drafts. Program choice and autonomy remain open. Other app assistance follows animation. |
 | Music | Understand music and connect approved music services. Preserve source identity, provenance, permissions, and service-specific offline/download limits. No silent credential, purchase, or download authority. |
-| Personal media experience | Keep music/video playing during conversation. Bind "this part" to actual playback positions. Understand sound, rhythm, arrangement, vocals, transitions and moments beyond lyrics. Separate source facts, public interpretations, N.H readings, Ness's meaning and creative use. Link moments to memories, projects, characters and scenes without overwriting associations. |
+| Personal media experience | Keep music/video playing during conversation; bind "this part" to playback position. Understand sound, rhythm, arrangement, vocals and transitions beyond lyrics. Separate source facts, public interpretations, N.H readings, Ness's meaning and creative use. Link memories/projects/characters/scenes without overwriting associations. |
 | Thought branches | Navigate actual parent/child/sibling and unresolved branches. Return naturally; silence never closes them. Prepare possible continuations privately as simulation, never Ness's words, beliefs or intentions. No unfinished-typing capture or steering predictions into reality. |
 | Camera/location assistance | Deliberate live phone-camera/GPS help with directions, entrances, objects and surroundings. Scope temporary use, storage, recognition, sharing and memory ingestion separately. Preserve uncertainty and third-party privacy. No silent surveillance or tracking. |
 | Creation workspace | Work on evolving notes, plans, scripts, stories, designs, research, presentations, diagrams, media, and files, with revisions and authorship/source provenance. Drafts do not become decisions, sent messages, or build permission. Code execution/deployment needs separate authorization. |

@@ -14,37 +14,15 @@ Master-21's adopted book was verified against its adoption record:
 
 `8d7c929c5715bb8138644f2a0a7513a89e4f98d98c6f0f05e068284f4cc5ed0d`
 
-## Consolidation map
+## Consolidation sources
 
-Historical schemas, receipts and byte evidence remain in the archive. Current owners retain behavior, status, constraints and intent.
+The chapter-by-chapter consolidation map remains in this file at Git commit `cf2197dbfc035b55762ddf40621caedee6f363ea`. README.md lists current domain owners. Historical schemas, fixtures, receipts and byte evidence remain in the archive; resolve the original owner/schema before implementing a contract.
 
-| Original material | Current owner |
-|---|---|
-| Master-21 CH00/01/02 | SYSTEM; MEMORY; EXPERIENCE |
-| CH03-a/b/c | MEMORY; OPERATIONS |
-| CH03-d/e/f/g/h/l/m/n | OPERATIONS; SYSTEM; DECISIONS |
-| CH03-i/j/k/o/p | SYSTEM; MEMORY; OPERATIONS |
-| CH04-a/b/c/d/e | MEMORY; SECURITY; EXPERIENCE; OPERATIONS |
-| CH05-a/b/c/d/e | MEMORY; OPERATIONS |
-| CH06-a/b/c/d/e/f/g | MEMORY |
-| CH07-a/b/c | SECURITY |
-| CH08-a/b/c/d/e/f/g | SECURITY; MEMORY; EXPERIENCE |
-| CH09-a/b/c/d/e/f/g/h/i | SECURITY; EXPERIENCE |
-| CH10-a/b/c/d/e | OPERATIONS; SYSTEM; EXPERIENCE; DECISIONS |
-| CH11 connected paths | OPERATIONS; DECISIONS |
-| CH12 appendices | Real gaps/status in DECISIONS; original occurrence inventories in archive |
-| Accepted standalone packages | Shared contracts and domain rules in MEMORY/SECURITY/OPERATIONS/EXPERIENCE |
-| Defaults and cursorrules | Interaction in EXPERIENCE; runtime protections in SYSTEM/SECURITY/DECISIONS |
-| A19 checkpoint/answers and continuation | EXPERIENCE, retaining scoped working/historical status |
-| October voice/read-aloud/command answers | EXPERIENCE, retaining selected baseline versus unfinished mechanics |
-| Music/media, branches, creation, search, camera intentions | EXPERIENCE future intentions |
-| Other inactive candidates and historical sources | EXPERIENCE where intent remains relevant; exact history in archive |
-
-Removed from active input: repeated parent/child descriptions, reciprocal links, empty templates, generated occurrence counts, embedded source copies, old versions, audit narratives, assembly machinery and obsolete instructions.
-
-Historical mechanical fields and fixtures remain in the archive. Before implementing an existing contract, resolve its original owner and schema rather than inventing omitted details.
+The consolidation removed repeated descriptions, reciprocal links, empty templates, generated inventories, embedded copies, old versions, audit narratives, assembly machinery and obsolete instructions from active input. Current owners retain behavior, status, constraints and intent, including scoped A19 and voice answers and unadopted future intentions.
 
 ## Local experiment evidence
+
+Detailed intent-reliability proposals, conversation/speech measurements and trial outcomes remain in `OPERATIONS.md` at Git commit `cf2197dbfc035b55762ddf40621caedee6f363ea`. Current owners retain accepted behavior and unresolved limitations.
 
 The verified local archive `C:/Users/user/Downloads/NH_Voice_Evidence_20261024.zip` preserves 649 experiment files, including failures, reference audio, reader code and the complete earlier research. It excludes pretrained weights, whose identity follows below. Raw evidence stays outside this documentation commit. Its SHA-256 is `42212d4fe71e3fb2185603d45d622ca2509c056d04d0bc01c9ac44853e6f96ce`. Source folders under `C:/Users/user/AppData/Local/Temp/` include:
 

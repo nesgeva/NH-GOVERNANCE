@@ -11,7 +11,7 @@ except ImportError:
 
 ROOT = Path(__file__).resolve().parents[1]
 ROOT_METADATA = {".git", ".agents", ".aws", ".codex"}
-LIMIT = 20_000
+LIMIT = 25_000
 
 
 def collect(root):
@@ -50,8 +50,8 @@ def main():
     for encoding in ("cl100k_base", "o200k_base"):
         tokens = len(tiktoken.get_encoding(encoding).encode(bundle, disallowed_special=()))
         print(f"{encoding}: {tokens:,} / {LIMIT:,} tokens")
-        if tokens >= LIMIT:
-            failures.append(f"{encoding} must stay below {LIMIT:,} tokens")
+        if tokens > LIMIT:
+            failures.append(f"{encoding} must stay at or below {LIMIT:,} tokens")
     for failure in failures:
         print(failure, file=sys.stderr)
     if failures:

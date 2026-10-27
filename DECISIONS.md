@@ -6,36 +6,43 @@
 - The prior order was Master-21, Decision Defaults S19 v2.2, cursorrules, then the Companion. The Working Map and decision index were subordinate navigation.
 - Later explicit scoped answers record intent, not automatic package acceptance, implementation or deployment.
 - On 2026-10-21, Ness accepted twelve scoped design updates for recording in existing owners. They replace conflicting earlier methods within scope. Authorization covers design edits only; runtime changes, deployment, model adoption and activation remain separately gated.
+- The 2026-10-27 scoped approvals are integrated into the existing owners. OPERATIONS.md limits automatic acceptance to planning/testing and retains reviewer-authority and failure-handling work under existing rules.
 - OPERATIONS.md governs authority verification. PROVENANCE.md records the documentation refactor's scope.
 
 ## Remaining work
 
 | Area | Still needs a decision, design, or verification |
 |---|---|
-| Runtime evidence | Locate and inspect actual implementation, current stores, schemas, marker enforcement, protected-file status, import dry-run support, and legacy activity. This repository cannot prove them. |
-| Model selection | Final analyst, messenger, translator, embeddings where not already fixed, hardware/resource allocation, measured throughput, full-thread benchmarks, and deployment adoption. |
-| Validation | Reviewer selection and independence evidence, automatic-acceptance scopes, consequential-case escalation, adjudicator authority, rejection-category mappings, test tolerances, and B16 judgment authorization. See MEMORY.md and OPERATIONS.md for accepted rules. |
-| Retrieval | Empirical budgets, thresholds, ceilings, ranking/calibration, correction-link coverage, fallback design, and failure/stale-index/timeout/degraded-service verification under MEMORY.md. Do not invent values. |
-| Stories/people | Remaining theme mechanics, identity thresholds where not qualitatively settled, full schema integration, telling support and evaluation-case availability. |
-| State | Remaining evidence/materiality/currentness calibration, domain schemas/integration, world membership and attention wiring, without numerical truth scores. |
-| Privacy | Exact exclusion detection, protected storage/execution, dependency coverage, recovery proof/key custody, restriction-recovery mechanisms, and person/group interfaces under SECURITY.md. |
-| Actions | Complete four-level risk mapping, heightened categories, previews/execution, service-specific reconciliation and duplicate prevention, result detection, and the outcome/reread cycle under SECURITY.md. |
-| Research | Isolated capture implementation, complete review-to-intake cycle, deployment budgets, and explicitly approved automatic schedules. Academic source choice is already both Semantic Scholar and OpenAlex. |
-| Phone | Exact local model, linked-context selection, storage limits/exhaustion, compaction fidelity, compression thresholds/phone fit, platform background constraints, authenticated tunnel lifecycle, dangerous command-path removal and cross-layer handoff. |
-| Voice | Capture/cleanup/transcription, language switching, latency, resources, playback/remainder/repeat, and failure/interruption mechanics. Define private-output grants, their ending conditions, and measured audio buffering under SECURITY.md. VoxCPM2 selection does not complete these. |
-| World/Wonder | Exit/return, hub center, final background design, category-to-preset flow, visual grammar, creation-room tools, gestures, accessibility, simulation controls and crash resume. |
-| Future interfaces | Multi-chat copy/move/link semantics and memory sharing, command phrases/combinations, risky-command boundary, voice approval scope, read-aloud continuation conditions. |
-| Maintenance/control | Platform contracts, deployment/key choices, retry-owner integration, measured work budgets, safe yielding/continuation mechanics, and kernel/AIC callers. Coordination cannot close another component's policy gap. |
-| Legacy | Explicit coexistence rules and eventual decommissioning authorization. No implicit migration of wellbeing or mobile into Layer 3. |
-| Import | Deferred WhatsApp mechanics and Ness's child-data decision before ingesting that material. |
+| Runtime evidence | Inspect runtime code, stores, schemas, markers, protected files, import dry runs, and legacy activity. These documents prove none of them. |
+| Models | Select remaining models and hardware, measure resources/throughput, benchmark full threads, and obtain adoption authority under SYSTEM.md. |
+| Validation | Select and qualify independent reviewers; define acceptance scopes, consequential escalation, adjudicator/B16 authority, failure handling, and tolerances under MEMORY.md and OPERATIONS.md. |
+| Retrieval | Measure budgets, thresholds, ceilings and ranking; design fallbacks; test correction coverage, stale indexes, failures, timeouts, and degraded service under MEMORY.md. |
+| Stories/people | Integrate and test MEMORY.md's theme and Holding rules, remaining identity thresholds, schemas, telling support, and evaluation cases. |
+| State | Calibrate evidence, materiality and currentness; integrate schemas, world membership and attention without truth scores. |
+| Privacy | Implement SECURITY.md's exclusions, protected execution/storage, dependency coverage, recovery/key custody, and restriction recovery. Choose permitted unrecoverable cases and whether group membership grants access; design person/group interfaces. |
+| Actions | Complete SECURITY.md's risk mapping, heightened categories, preview/execution, service reconciliation, duplicate prevention, result detection, and rereading cycle. |
+| Research | Implement isolated capture and review-to-intake; set budgets and approve automatic schedules under OPERATIONS.md. |
+| Phone | Select the local model/context; define storage limits/exhaustion, compaction fidelity, compression fit/thresholds, background constraints, authenticated tunnel lifecycle, command-path removal, and cross-layer handoff. |
+| Voice | Implement/test EXPERIENCE.md and SECURITY.md. Measure latency, resources, cutoff progress, buffering and private-channel enforcement. Model selection proves no integration. |
+| World/Wonder | Complete exit/return, center/background, category flow, visual grammar, creation tools, gestures, accessibility, simulation controls, and crash resume. |
+| Future interfaces | Define multi-chat copy/move/link and sharing, command combinations, risky-command boundaries, and voice-command approval scope. |
+| Maintenance | Define platform/deployment/key contracts, retry-owner integration, measured budgets, safe yielding/resumption, and kernel/AIC callers. Coordination cannot decide another owner's policy. |
+| Legacy | Define coexistence and authorize retirement. Do not implicitly migrate wellbeing/mobile to Layer 3. |
+| Import | Complete WhatsApp mechanics and obtain Ness's child-data intake-scope decision. |
 
 Complete cycles still need composition and proof for chat/reply synchronization, research, Manual Sync, TSC-to-readings, action-to-result, quarantine promotion, creation confirmation, reread, and selected Wonder transfer. Accepted component contracts do not prove those cycles complete.
+
+## Types of remaining work
+
+Separate existing rules, technical work, tests, and Ness's preferences/permissions. Unreviewed proposals remain unadopted; the list adds no specification or build prerequisites. Evidence-dependent decisions need relevant evidence first. Future intentions remain optional.
+
+Immediate conversation use versus held TSC content remains unresolved. Define a permitted path without inventing an exception to MEMORY.md. These groups neither count independent questions nor prove design completion.
 
 ## Meaning names
 
 Preserve the meaning-layer names without pretending their technical mapping is finished: The First View's Turning Mirror, Stop/Connect/Carry, the First View, Grounded Keeper of Origins, Origins, Those Three To Become A One, and Holding.
 
-Unresolved mappings include Keeper scope, mixed-media Origin granularity and time fields, no-context reading, and Holding's technical representation. Existing later decisions about distinct Origins, separate time families, and linked Holding objects constrain those questions. Do not reopen their settled portions.
+MEMORY.md defines Keeper and Holding; implementation/testing remain open. Clarify only genuine remaining mixed-media Origin/time and no-context reading gaps. Preserve settled distinct Origins, separate time families, and linked Holding objects.
 
 ## Conflict handling
 

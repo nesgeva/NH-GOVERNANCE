@@ -59,6 +59,7 @@ Code checks required fields, existing references, current inputs and permissions
 - Unfillable webs name their gap without forcing Ness to answer or stopping unrelated work.
 - A hold requires both a specific missing condition and a realistic way to obtain it. Otherwise write an honest insufficient-context reading when appropriate. Release requires verified bound evidence for every active hold reason.
 - Qualitative grounding labels are exactly `grounded_enough`, `partly_grounded`, `not_grounded_enough`, and `insufficient_context`. Governed assessment assigns them to exact revisions. No numeric companion, ranking score, producer self-review, or truth claim.
+- Route a task-relevant unresolved meaning question to Ness with the supporting sources and exact question. Route missing sources to source recovery and technical failures to the existing retry path. Preserve unresolved rejection after the permitted correction; do not treat every failure as a question for Ness.
 
 ## Retrieval and relevance
 
@@ -119,12 +120,16 @@ Firmness describes supported stance, never truth or inner access. Labels are `hi
 
 Themes combine stable organization and provisional engine proposals. A telling may belong to several themes or none. Proposals can remain unconfirmed indefinitely and cannot silently influence later readings as adopted themes.
 
+Keep each theme's identity stable across renaming. Append name changes and links as separate events. Provisional links remain provisional until the applicable acceptance path completes. Theme merging changes organization, never source contents or existing tellings.
+
+Grounded Keeper of Origins displays and resolves source references through existing owners. It shows sources, versions, and documented derivation links. It has no authority to determine meaning, identity, or permission.
+
 Person-Boxes gather references. They are not profiles, diagnoses, summaries, scores, or fixed identities.
 
 - Search before proposing. Link clear mentions automatically and join definitely identical records. Keep uncertain anchors and joins pending. Name similarity alone is insufficient.
 - Ness has a confirmed Person-Box. Clear authored and source-resolved first-person material links automatically. First-person text inside a pasted third-party source does not.
 - Preserve link basis, certainty, authority, time, batch, and correction history. Never merge source contents across batches.
-- Holding links Ness's understanding, original evidence, other perspectives, and revisable readings as separate objects. It creates no second profile or memory store.
+- Holding presents linked existing objects for Ness's understanding, original evidence, other perspectives, and revisable readings, with each role explicit. Corrections append events and update the presentation while preserving earlier objects. It creates no second profile or memory store.
 - Keep each person's permissions separate. A link grants no disclosure right. Generic connections cannot establish identity or merge people.
 
 The seven Person-Box sections are roots, readings, story tellings, clashes, Ness responses, themes, and unresolved identity. Filters may combine time, perspective/role, theme, source/thread, and lifecycle/confirmation. Clearing filters restores the default; full chronology remains one switch away.
@@ -141,13 +146,14 @@ Deduplicate clashes by identity. Later detections and Ness responses append link
 - Its fixed factor order is current Ness judgment, direct root evidence, reading acceptance/grounding, purpose relevance, context quality/provenance, clashes/uncertainty, then recency as a tie-breaker. Preserve separate factor outcomes and explain priorities. No aggregate truth score.
 - Refresh only on applicable triggers. Commit immutable snapshots and separate refresh-status events. Failed, incomplete, and no-change refreshes do not create falsely fresh snapshots. Never mark an old snapshot in place.
 - Living State has no reader of its own. It consumes permitted evidence and readings. Keep state existence separate from present currentness.
+- Use a small common state record with source references, viewpoint, event period, and update history. Add only details needed for that state type, such as a constraint, capacity, or causal hypothesis.
 - Preserve brief or weak signs as evidence. Full-node creation requires materiality. Each time-bounded episode has its own identity. Later recurrence creates a new episode.
 - Separate experienced states, causes, positions, open loops, relationships, values, constraints, capacity dimensions, transitions, causal hypotheses, and counterfactuals.
 - Multiple positions may coexist. Do not average them into a false middle or label complexity a disorder.
 - Currentness changes append dated evidence-linked events. Time alone does not end a state. Relevance can initiate review, never decide its result.
 - Ground every causal-chain link. Timing, similarity, coherent storytelling, and a confirmed result connection do not prove causation.
 - Internal counterfactuals may support comparison automatically. Visible or immersive simulations require their separate permission. Imagined scenes are not observed reality.
-- Keep the world model's active core separate from wider general knowledge. Preserve attribution, uncertainty, world membership, and currentness. Visual manipulation cannot rewrite evidence.
+- Keep the world model's active core separate from wider general knowledge. Preserve attribution, uncertainty, world membership, and currentness. Keep world membership, links to simulated situations, and relevance to the current request separate. Attention selects what to inspect or present; it cannot establish truth, identity, accepted relationships, or permission. Display changes cannot change source type or rewrite evidence.
 
 Currentness labels are `current`, `possibly_current`, `stale`, `currentness_unknown`, `ended_by_evidence`, and `superseded_by_evidence`. Capacity keeps thinking, emotional, bodily, practical, and decision-making dimensions separate; an optional supported summary identifies its contributing dimensions.
 

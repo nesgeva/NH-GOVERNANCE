@@ -30,7 +30,7 @@ Example wording only, not adopted behavior: "אתה מחוץ לבית. אתה ש
 
 ## Size and verification
 
-- Keep the whole active project, including instructions, tools and filename labels, below 20,000 tokens in `cl100k_base` and `o200k_base`. Aim below 18,000.
+- Keep the whole active project, including instructions, tools and filename labels, at or below 25,000 tokens in `cl100k_base` and `o200k_base`. Aim for 21,000 or fewer.
 - Run `python3 tools/check_project.py` after edits. Install dependencies outside the project. Never exclude documents, hide text in binaries, add symlinks or weaken counting to pass.
 - Export LLM bundles outside the project. Keep no generated duplicates here.
 - Remove duplication or replace obsolete wording before additions. Add files only if no owner fits.

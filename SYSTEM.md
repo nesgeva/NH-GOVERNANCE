@@ -4,13 +4,13 @@ This specification does not authorize runtime changes.
 
 ## Purpose
 
-N.H is Ness's local, offline-first personal memory and meaning system. It preserves source material, reads it in context, connects it, and helps Ness understand, create, rehearse, and act. Ness decides what to believe and do. The system never turns an interpretation into an established fact.
+N.H is Ness's local, offline-first memory and meaning system. It preserves, reads and connects sources to help him understand, create, rehearse and act. Ness decides what to believe and do. Interpretation never becomes established fact.
 
 ## Governing rules
 
 - Preserve originals. Add interpretations beside them. Keep current views and history separate.
-- Mechanical components store, carry, link, sort, and gather. They establish machine-state and provenance facts, never semantic conclusions.
-- Interpretive components produce dated, grounded, confidence-tagged, rejectable readings. A firm interpretation remains an interpretation.
+- Mechanical components store, carry, link, sort and gather. They establish machine state/provenance, never meaning.
+- Interpretive components produce dated, grounded, confidence-tagged, rejectable readings. Firmness never changes interpretation into fact.
 - Keep observed, reported, inferred, assumed, unknown, and simulated material distinguishable. Acceptance, certainty, grounding, relevance, currentness, identity, and permission are separate judgments.
 - Preserve each person's perspective. N.H's own view is a revisable note, never another person's telling or a truth verdict.
 - Repetition, display, retrieval, model confidence, logs, and derivative records add no independent evidence.
@@ -41,49 +41,49 @@ N.H is Ness's local, offline-first personal memory and meaning system. It preser
 | Wonder / interface | Explicit simulation and presentation over references |
 | AIC / UDOK | Artifact-authority verification and durable operation coordination |
 
-Each owner retains its decisions, records, keys, and effects. A router, coordinator, index, interface, or language model cannot assume another owner's authority.
+Owners retain their decisions, records, keys and effects. Routers, coordinators, indexes, interfaces and models cannot assume another owner's authority.
 
 ## Main path
 
-1. Capture available material and provenance. Apply exclusions before ordinary storage.
-2. Catalog resolves required metadata and blockers. Held material stays outside ordinary interpretation.
-3. The shared writer selects an authorized active writable batch and commits one root per capture.
-4. Enqueue a reading job after the root is durable. Return from ingestion without waiting for a model.
-5. Commit the pass instruction. Retrieve current authorized context through LMAC.
-6. Produce one proposal. Independently validate it. Append an accepted reading to quarantine.
-7. Complete any telling-set commitment, clash detection, and view updates idempotently.
-8. Form visible output only from permitted material. Apply privacy, then speaker-access checks, and revalidate immediately before delivery.
+1. Capture material/provenance; exclude protected content before ordinary storage.
+2. Catalog resolves metadata/blockers. Do not interpret held material ordinarily.
+3. The shared writer commits one root per capture to an authorized active batch.
+4. Durably enqueue reading after root commitment; ingestion does not wait for models.
+5. Commit pass instructions; retrieve current authorized context through LMAC.
+6. Independently validate one proposal; append accepted readings to quarantine.
+7. Complete required telling sets, clashes and views without duplicate effects.
+8. Form permitted output; apply privacy, speaker access and immediate pre-delivery revalidation.
 
-The rules below govern conversation updates. Full synchronization of capture, background reading, replies, cancellation, and recovery still needs composition and testing; no complete runtime cycle is claimed.
+Capture, background reading, replies, cancellation and recovery still need joint design/testing. No complete runtime cycle is claimed.
 
 ## Models
 
-- Retrieve first, generate wording last. The embedding model and language model have different jobs.
+- Retrieve before wording. Embedding and language models have distinct jobs.
 - Engine A reads the bare root. Engine B uses up to three complete immediately preceding same-thread turns. Keep `BACKGROUND` / `END BACKGROUND` framing. Do not replace this experiment's positional retrieval with semantic search or apply its limit universally.
-- Read what the speaker is doing. Do not answer or continue the source conversation. For a short confirmation, identify what it confirms.
-- Final language models remain undecided. Historical tests used `dolphin-llama3` 8B and `all-MiniLM-L6-v2`. The 24B Dolphin candidate and RTX 3090 direction are plans, not verified present hardware or adopted models.
+- Interpret the speaker's act; do not answer/continue the source conversation. Resolve what short confirmations confirm.
+- Final models remain undecided. Historical tests used `dolphin-llama3` 8B and `all-MiniLM-L6-v2`. Dolphin 24B/RTX 3090 remain plans, not adopted models or verified hardware.
 - Benchmark replacements against both sealed gold sets and applicable story/dual-model cases. Verify exact model, quantization, license, resource use, and throughput. Ness adopts a replacement explicitly. Passing tests neither installs it nor triggers mass rereading.
-- Provider refusals are model limitations, never evidence of N.H policy, Ness's restrictions, or the truth of the material. Preserve the intended low-restriction, auditable local runtime.
+- Provider refusals describe model limits, not N.H policy, Ness's restrictions or source truth. Preserve low-restriction, auditable local operation.
 
 ## Dual-model conversation
 
 The accepted direction uses a heavy analyst and a light conversational messenger as one N.H personality.
 
 - Capture each new contribution immutably. Commit routing separately. One contribution has at most one owning deep-answer operation.
-- While analysis runs, the messenger may acknowledge clear content, ask one bounded clarification, gather relevant information, or report that analysis continues. It cannot invent the deep answer.
+- During analysis, the messenger may acknowledge clear content, ask one bounded clarification, gather relevant information or report progress. It cannot invent the deep answer.
 - Preserve message order and bind work to its request revision. Commit whether new information leaves analysis unchanged, supplements it, or requires cancellation and restart. Added requirements trigger checks of affected work; changed premises require reconsideration. Reuse verified facts only where still applicable. Do not relabel old work or create a new parent automatically for each turn. If impact is unclear, ask one focused question while independent work continues. Acknowledgment cannot imply completed reanalysis.
 - Cancellation may finish late. An earlier brief needs explicit compatibility assessment and current validation before use under the new request revision. That assessment cannot rebind stale owner records or bypass SECURITY.md's delivery checks. Stop remaining outdated speech, explain the change within current permissions, and prepare the revised answer.
 - The analyst produces an immutable structured brief. Validation records remain separate.
 - Use MEMORY.md's acceptance responsibilities and OPERATIONS.md's reviewer tests, alongside independence checks and required external adjudication. See DECISIONS.md for remaining choices.
-- Sanitize validated briefs for the messenger. Exclude private reasoning, rejected substance, unnecessary protected material, full evidence locators, and model confidence scores.
+- Messenger briefs exclude private reasoning, rejected substance, unnecessary protected material, full evidence locators and model confidence scores.
 - Validate the messenger's semantic fidelity. Preserve uncertainty and speaker agency across English, Hebrew, and other languages. Failed or stale drafts never reach delivery.
 - Failure stays explicit. Do not surface partial or unvalidated conclusions as the answer. A child's failure does not automatically terminate its parent.
 
-The candor proposal requires disagreement, inconvenient detail, and honest unknowns without flattery or reassurance changing the substance. It remains a proposal rather than an adopted extra validation policy.
+Candor remains a proposal: preserve disagreement, inconvenient details and unknowns without flattery/reassurance changing substance. No extra validation policy is adopted.
 
 ## Verification and status
 
-This repository contains design records, not the live N.H implementation. Historical claims describe 5,521 sealed roots, Engines A/B, quarantine output, two gold sets, and a Chroma index. Verify the actual runtime files before relying on those claims.
+These are design records, not runtime code. Verify runtime files before relying on historical claims of 5,521 sealed roots, Engines A/B, quarantine, two gold sets and a Chroma index.
 
 - Gold v1 has eight bare-root cases. Gold v2-B has seven context cases. Historical A/B scores are observations, not promised future results.
 - Ness judges semantic results. Fabrication fails. Grounded omission alone does not fail. Correct additional content may pass. Model self-assessment cannot grade its own output.
