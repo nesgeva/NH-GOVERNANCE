@@ -43,6 +43,10 @@ N.H is Ness's local, offline-first memory and meaning system. It preserves, read
 
 Owners retain their decisions, records, keys and effects. Routers, coordinators, indexes, interfaces and models cannot assume another owner's authority.
 
+LMAC cannot filter, summarize or cache owner data. Privacy and rule-authority queries obtain the required decisions through a metadata-only control path, without recursively requiring those same decisions first. It queries stored BOP/OOP observations through their owners, never the physical processors. Transport retries keep one logical query identity and terminal outcome.
+
+BOP's optional `acoustic_condition_notes` describe the recording only. Each note requires `condition_name`, `detection_method`, `detection_version`, `threshold_value`, `measured_value` and `certainty`. Names are `high_ambient_noise`, `close_microphone`, `far_microphone`, `room_reverb_present` and `signal_compression_heavy`. Certainty concerns detection. Absence proves nothing. Notes alone establish no identity, spoofing, emotion, intent or meaning. Consumers may use them as provenance-bearing physical context under their own rules. Methods, thresholds and calibration remain open.
+
 ## Main path
 
 1. Capture material/provenance; exclude protected content before ordinary storage.
@@ -60,8 +64,9 @@ Capture, background reading, replies, cancellation and recovery still need joint
 
 - Retrieve before wording. Embedding and language models have distinct jobs.
 - Engine A reads the bare root. Engine B uses up to three complete immediately preceding same-thread turns. Keep `BACKGROUND` / `END BACKGROUND` framing. Do not replace this experiment's positional retrieval with semantic search or apply its limit universally.
+- Engine B interprets the target only. It must not quote or paraphrase background as if the target said it. Gold v1 and v2-B do not grade Story Layer output. Several grounded readings can be valid.
 - Interpret the speaker's act; do not answer/continue the source conversation. Resolve what short confirmations confirm.
-- Final models remain undecided. Historical tests used `dolphin-llama3` 8B and `all-MiniLM-L6-v2`. Dolphin 24B/RTX 3090 remain plans, not adopted models or verified hardware.
+- Final models remain undecided. Historical tests used `dolphin-llama3` 8B and `all-MiniLM-L6-v2`. Dolphin 3.0 R1 Mistral 24B is a selected testing candidate, not an adopted model. RTX 3090 is the recorded hardware direction, not proof of purchase, installation or adequate performance.
 - Benchmark replacements against both sealed gold sets and applicable story/dual-model cases. Verify exact model, quantization, license, resource use, and throughput. Ness adopts a replacement explicitly. Passing tests neither installs it nor triggers mass rereading.
 - Provider refusals describe model limits, not N.H policy, Ness's restrictions or source truth. Preserve low-restriction, auditable local operation.
 
@@ -79,7 +84,17 @@ The accepted direction uses a heavy analyst and a light conversational messenger
 - Validate the messenger's semantic fidelity. Preserve uncertainty and speaker agency across English, Hebrew, and other languages. Failed or stale drafts never reach delivery.
 - Failure stays explicit. Do not surface partial or unvalidated conclusions as the answer. A child's failure does not automatically terminate its parent.
 
-Candor remains a proposal: preserve disagreement, inconvenient details and unknowns without flattery/reassurance changing substance. No extra validation policy is adopted.
+Capture and routing are separate committed records. Freeze the routing plan before effects or completion. Record whether a supplement was actually applied and acknowledged, cancelled, restarted or remains unknown. Never infer receipt from dispatch. A validated minimal messenger fallback may state only approved facts, scope, unknowns and explicitly unconfirmed possibilities. It still passes delivery gates. This is separate from B24's insufficient-context fallback in MEMORY.md.
+
+Concurrent deep topics may finish independently while conversation continues. Resource limits and backpressure still apply. This direction does not add workers to the single-worker reading queue or settle topic presentation.
+
+Ness approved the candor direction for ordinary instructions and inference-time steering without training. Preserve disagreement, inconvenient details and unknowns without flattery changing substance. The complete strategy package remains unadopted; fine-tuning, exact controls, tolerances and activation remain open. No promise of zero fabrication or extra validation authority follows.
+
+## Framework directions
+
+Ness approved the directions for Authority Integrity, UDOK, provenance-first Memory Fabric, a bounded repair laboratory and a governed capability registry/tool forge. Direction approval does not accept every proposed mechanism or activate a framework. OPERATIONS.md owns accepted AIC/UDOK boundaries. EXPERIENCE.md preserves the other directions and their candidate mechanics.
+
+An unchanged model has not acquired independent thought or a new kind of cognition merely because memory and tools surround it. Classification breadth and depth stay within the deliberately chosen usable boundary; enlargement needs a deliberate change.
 
 ## Verification and status
 

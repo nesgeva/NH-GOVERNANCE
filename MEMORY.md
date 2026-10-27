@@ -18,11 +18,21 @@ Root v1 has exactly seven fields:
 
 `id`, `subject`, `timestamp`, `content`, `re_reads`, `source_title`, `role`.
 
-`id` is UUID4. `subject` is an import-batch tag, never a semantic topic. `timestamp` is record creation time. A root has `re_reads = []`. `source_title` is required and may be null where allowed by the existing schema. Carry `role` from the source. Do not retrofit new fields or mutate sealed `re_reads`.
+`id` is UUID4. `subject` is an import-batch tag, never a semantic topic. `timestamp` is ISO 8601 record creation time. A root has `re_reads = []`. `source_title` is required and may be null where allowed by the existing schema. Carry `role` from the source. Do not retrofit new fields or mutate sealed `re_reads`.
 
 The original sealed 5,521-root batch stays closed. Future writes use the shared B11 active-batch boundary, never direct file writes or fallback into a sealed batch. Serialize target selection, identity, ownership, append, sealing, and rotation. Prevent duplicate captures globally across epochs. Schema changes cannot manufacture another root for the same capture.
 
+Batch identity is separate from location. A global capture claim permanently reserves one root ID, including after cancellation. Old sealed roots need verified ID coverage, not fabricated capture IDs. New admissions require the current active selection. A reservation admitted before cutoff may finish into its exact predecessor while sealing; unresolved reservations prevent sealing. Rotation prepares the successor, atomically selects it and cuts off the predecessor, then drains and seals. Equally valid selection forks stop writes; time and lexical order cannot choose a winner.
+
+Cancellation and commit fencing compete atomically. A fenced claim needs exclusive recovery authority, proof the old writer cannot run, exact target lookup and conclusive non-commit before release. Commit the parent terminal log before acknowledgment. Index registration is repairable afterward; complete/partial/stale/missing/conflicting index coverage is separate from root commitment.
+
 Future schema proposals preserve separate source Origins, source/import/record-creation times, thread identity, and append-only aliases and relationships. Keep mixed-media source items distinct and connected. Do not silently activate proposed fields on v1 roots.
+
+The accepted next-schema design separates `thread_id` from `display_label`. Typed `source_times` distinguish created, captured, sent, recorded and occurred, with source provenance, reliability and timezone state. Zero reliable source times is valid; select at most one reliable main real-life date. Keep `imported_at` and `record_created_at` separate. Mixed-media relationships commit only after both exact Origins exist.
+
+Aliases affect presentation and explicitly label-based filtering only. They never change thread membership. Compare-and-append one predecessor-bound alias chain; conflict or unverifiable history falls back to the sealed original. Live-conversation provenance asserts origin and source-known speakers, not meaning. Its designed structured label is `live_conversation/v1`, not the older illustrative string. Failed earlier-reference detection proceeds without reference context.
+
+Keep original media type and provenance. Mechanical normalization records its method/version beside the untouched source. An optional hash over `reads`, `meaning`, `produced_by` and `schema_version` can check integrity or exact duplicates. It neither replaces operation identity nor adds a field to reading v1.
 
 ## Readings
 
@@ -46,7 +56,7 @@ The webs work together in one pass. Segmentation and meaning classification happ
 
 Thin-context readings default to low confidence and say so. Form and authorship stay separate: a character's despair inside a story is not automatically Ness's despair. More inferential readings must be easier to trace, challenge, suppress, and replace in the current view.
 
-Peer webs are intent, deixis, common ground, implicature, theory of mind, time/sequence, rereading, and mode/register. Mode describes form rather than replacing intent. Whole-work form does not exempt individual sentences from other webs. Add a web only for a grounded dimension the existing set cannot express.
+Peer webs examine intent, references such as "this" or "here", assumed common ground, implied meaning, attributed viewpoints, time/sequence, rereading, and mode/register. Their historical names are intent, deixis, common ground, implicature, theory of mind, time/sequence, rereading, and mode/register. Mode describes form rather than replacing intent. Whole-work form does not exempt individual sentences from other webs. Add a web only for a grounded dimension the existing set cannot express.
 
 One declared pass produces one reading. Multiple angles require separate passes with their own inputs and provenance. Later synthesis adds a layer rather than rewriting earlier readings.
 
@@ -55,10 +65,12 @@ Code checks required fields, existing references, current inputs and permissions
 - A rejected proposal is not a reading.
 - After the permitted correction attempt under the retry rules below, unresolved disagreement leaves the proposal unaccepted. Never repeat reviews until one approves. Unrelated work continues. Routine readings need no individual approval within tested, authorized automatic-acceptance scopes. Consequential or unresolved cases follow the agreed review path. Ask Ness only when his judgment matters. See OPERATIONS.md for reviewer tests.
 - Genuine `insufficient_context` is an honest, revisable reading when the source cannot support interpretation.
-- A hold produces no reading. Use it only for a legitimate missing condition that can be tracked and verified. Keep hold state outside the source record and block new use from its enforcement commit. Never park a rejected draft until it appears fresh.
+- Holding never forces a missing reading. An existing item or reading may also be held. Keep hold state outside the source and block new use, including derivatives, from its enforcement commit. Never park a rejected draft until it appears fresh.
 - Unfillable webs name their gap without forcing Ness to answer or stopping unrelated work.
 - A hold requires both a specific missing condition and a realistic way to obtain it. Otherwise write an honest insufficient-context reading when appropriate. Release requires verified bound evidence for every active hold reason.
+- N.H tracks and checks holds automatically. Do not make them a manual backlog or invent an expiry. If a condition becomes known to be unobtainable, use the governed genuine-insufficiency path. Mechanical release does not reinterpret the item. Repeated rejection is not genuine insufficiency.
 - Qualitative grounding labels are exactly `grounded_enough`, `partly_grounded`, `not_grounded_enough`, and `insufficient_context`. Governed assessment assigns them to exact revisions. No numeric companion, ranking score, producer self-review, or truth claim.
+- `partly_grounded` cannot pass unchanged; repair or narrow it honestly. Grounding does not establish relevance, permission or quality. Missing validation is not a negative content judgment. Keep direct source evidence separate from prior interpretations, independently of positional/semantic retrieval. Ness's statement proves what he said or reported, not automatically the external event.
 - Route a task-relevant unresolved meaning question to Ness with the supporting sources and exact question. Route missing sources to source recovery and technical failures to the existing retry path. Preserve unresolved rejection after the permitted correction; do not treat every failure as a question for Ness.
 
 ## Retrieval and relevance
@@ -66,6 +78,8 @@ Code checks required fields, existing references, current inputs and permissions
 Keep positional adjacency and semantic association separately labeled. Modes use neither, either or both as their triggers permit. Record search completion, coverage and index version. Verify results against current sources and corrections. Healthy empty retrieval permits target-only work. Failed or incomplete searches are not empty results. Use only predefined fallback paths. Never invent context or silently relax thresholds.
 
 Versioned modes declare purpose, channel parameters, ceilings, uncertainty handling and audit rules. Enforce the lower of setting and ceiling independently at runtime. Retrieval values await empirical tests.
+
+A usable declaration needs all eight contract fields, including its reason and uncertainty behavior. Bind exact declaration/configuration versions, source scope and ceilings. Reject over-ceiling configuration; runtime also records any defensive clamp. Audit admitted sources, exclusions, provenance, parameters and index/model/system versions. Keep positional and semantic prompt sections separate.
 
 For ordinary answers, choose permitted relevant sources with enough conversation to interpret references and short replies. Follow important correction, replacement, clash and restriction links before relying on results. Similar wording alone is insufficient. Preserve statement time and circumstances. Newer statements do not automatically replace older ones about different situations. Historical Engine A/B input contracts remain unchanged.
 
@@ -77,9 +91,13 @@ Apply categorical gates before named graded relevance dimensions. Preserve each 
 - Privacy and deletion eligibility are prerequisites, not relevance dimensions. A model-produced dimension cannot control a categorical gate.
 - Evaluate on demand. Precompute only for an explicitly declared latency-sensitive context. No permanent global relevance state.
 - Tier 1 belongs to relevance control. Tier 2 belongs to the consumer. Each validates its own contract.
+- Ness can inspect gates, dimensions, their producers and both complete configuration tiers. An invalid requested change preserves his request and the existing configuration, identifies the exact conflict and helps translate his intent into a valid change. A consequence preview supplies information, not a veto over an otherwise valid choice.
 - A mode change needs preview and confirmation. Per-judgment corrections and scoped overrides append directly without rewriting earlier judgments.
 - Unknown purpose types halt evaluation and preserve the request. Offer an explicit mapping or versioned addition, never guess.
 - Relevance events may prompt state review. They cannot establish state currentness, certainty, causation, permission, or truth.
+- A consumer that uses model-produced dimensions owns a versioned unresolved-dimension rule. Tier 1 validates its reference; the consumer validates content. Changed rules require reference updates. Do not use the reviewed state's own currentness as proof of currentness.
+- An uncertain connection may support quiet search preparation, but material effects, including withholding, retain its uncertainty. Old weak evidence supports only a gentle protective possibility. An active outward suggestion needs evidence of the current situation; thread/time proximity alone is insufficient.
+- A correction pattern requires the same mode/version, target and correction direction. Show its exact basis as a possibility. Silence leaves it open; explicit dismissal closes it until new overrides or material change. This differs from SECURITY.md's general gentle-question rule.
 
 Shared gates are `same_thread_or_group`, `precedes_target_in_same_thread`, `within_declared_time_range`, and `object_type_matches`. Shared dimensions are `semantic_similarity`, `temporal_distance`, `positional_distance`, `currentness_status`, `explicit_links`, `ness_response_links`, `proposal_acceptance_outcome`, `reading_context_status`, and `active_clash_links`.
 
@@ -91,6 +109,7 @@ Rereading adds a new reading and preserves every earlier one. Triggers are manua
 
 - Manual rereading needs no new evidence or justification. Do not manufacture a semantic reason or gate it on relevance.
 - Semantic assignments are direct, wider-context, or both when their distinct relationships apply. They are not mutually exclusive and do not replace trigger evidence.
+- Both assignments still produce one operation, context snapshot and at most one reading. They define the reason and checks, not a narrower context allowance. A manual reread with no new information uses one `manual_reread_compatibility_record`, kind `manual_no_new_information_compatibility`, basis `master_v10_7H_manual`, and no `assigned_modes` field. Neither an empty list nor a third "manual" mode substitutes. Recovery reuses the exact claim-bound record.
 - B10 gives each root/trigger one canonical claim and at most one new quarantine reading. Use separate caller, child, and attempt identities. Do not reuse new-root enqueue keys.
 - Commit trigger, claim, inputs, reading, telling completion where required, and final outcome before acknowledging completion. Recover from committed sources, never rebuilt indexes alone.
 - Retry completes the same operation. It never reinterprets a completed reading, bypasses a hold, renews authority, or repeats an uncertain outside effect.
@@ -108,6 +127,10 @@ Substantive rejection permits one careful retry within the same deadline, withou
 
 A later episode needs recorded real change and one-time consumption of that change evidence. Permanent attempt numbers never reset. Episode ordinals restart within the same canonical operation only when inputs remain unchanged. Changed inputs require a new linked operation. Time and repetition alone are not real change.
 
+The source owner must permit unchanged-input continuation. Resuming a completed B26 retrieval requires a new linked operation and real change, whether the earlier operation succeeded or failed. Partial failed retrieval stays audit-only and is never merged into later results. Exhausted retrieval failure stops with saved state; no degraded continuation is authorized.
+
+A held refusal consumes no attempt or clock; release alone starts no retry. A later episode's first attempt has no gap or deadline until its first durable failure. Gap class follows the latest outcome, while deadline class stays fixed. Real-change examples are not exhaustive, but every other change needs explanation and evidence. Technical exhaustion, an unstarted/failed careful retry or deadline expiry cannot open B24's insufficiency fallback.
+
 ## Story, people, and clashes
 
 Tellings stay local, source-grounded, and perspective-specific. Separate root producer, subject, viewpoint owner, direct self-report, quotation, reported speech, observation, and inference. Retain supported nested attribution; leave unsupported attribution unresolved.
@@ -116,11 +139,19 @@ Optional telling elements are whose, stance, firmness, telling, theme, and when.
 
 The Story Layer owns immutable telling cards. Consumers reference them. Persist the preparation before the reading, the reading before its cards, and valid set completion before semantic telling use. Partial cards and recovery material are not canonical evidence.
 
+Resolve pass-local source handles mechanically and assign stable IDs before hashing preparation. Prepared IDs remain spent after abandonment. Models cannot invent persisted IDs or enrich semantics after approval. `created_at` is logical creation during preparation; `prepared_at` records manifest validity; `committed_at` records card commitment. Recovery uses exact prepared payloads, never a new model interpretation. Abandoned preparation without a committed reading needs a new linked pass.
+
+Preserve embedded `whose`, `stance`, `firmness`, `telling`, `theme` and `when` exactly. Do not guess structured roles from `whose`, turn a legacy theme into a confirmed theme, copy parent confidence as card certainty or fill missing required legacy fields. Keep embedded time, source-event time and record time separate. A card and its commit event must exist before use. Eligibility never exceeds the parent reading. The complete expected set gates semantic use, while privacy, safety and recovery discovery remain available. A zero-telling sentinel requires a validated zero-telling result, never removal of rejected tellings.
+
 Firmness describes supported stance, never truth or inner access. Labels are `high_firmness`, `moderate_firmness`, `low_firmness`, `mixed_firmness`, and `uncertain_firmness`. `omitted_no_support` means omit the unsupported field. Use qualitative evidence, never hidden arithmetic. Firmness does not trigger or release holds.
+
+Direct statements of certainty/doubt outweigh tone, style or repetition alone. Reported speech and uncertain attribution weaken the basis. `mixed_firmness` requires conflicting comparable signals; `uncertain_firmness` means signals exist but support no level. Repetition within one root may be a signal; repeated records add no strength.
 
 Themes combine stable organization and provisional engine proposals. A telling may belong to several themes or none. Proposals can remain unconfirmed indefinitely and cannot silently influence later readings as adopted themes.
 
 Keep each theme's identity stable across renaming. Append name changes and links as separate events. Provisional links remain provisional until the applicable acceptance path completes. Theme merging changes organization, never source contents or existing tellings.
+
+Theme actions may confirm, reject, rename, merge, split or remain unresolved. Only Ness confirms. Every retrieval use retains a trace so later evidence can challenge theme influence. A clash key binds the conflicting item set and specific disputed aspect. Dismissal can stop resurfacing until a valid trigger; it removes neither evidence nor confidence.
 
 Grounded Keeper of Origins displays and resolves source references through existing owners. It shows sources, versions, and documented derivation links. It has no authority to determine meaning, identity, or permission.
 
@@ -141,6 +172,7 @@ Deduplicate clashes by identity. Later detections and Ness responses append link
 ## Views and state
 
 - Always retain current and historical views. Ordering is presentation, never a truth verdict.
+- Simple reading presentation starts with the newest usable accepted reading, excluding rejected and insufficient-context readings. It is not automatically the best or true reading. Computed View's evidence ordering remains a separate presentation; original chronology stays reachable.
 - Person-Box sections open as compact lists with evidential status and expandable chains. Keep unusable items labeled, clashes adjacent, and original chronology reachable. No synthesized personality strip or per-person score.
 - Computed View derives an inspectable current picture with disclosed ordering. It neither writes new interpretations nor supplies upstream evidence. Use it quietly for responses; show the internal picture when Ness asks.
 - Its fixed factor order is current Ness judgment, direct root evidence, reading acceptance/grounding, purpose relevance, context quality/provenance, clashes/uncertainty, then recency as a tie-breaker. Preserve separate factor outcomes and explain priorities. No aggregate truth score.
@@ -157,22 +189,35 @@ Deduplicate clashes by identity. Later detections and Ness responses append link
 
 Currentness labels are `current`, `possibly_current`, `stale`, `currentness_unknown`, `ended_by_evidence`, and `superseded_by_evidence`. Capacity keeps thinking, emotional, bodily, practical, and decision-making dimensions separate; an optional supported summary identifies its contributing dimensions.
 
-Read-only memory-health checks look for missing sources, excessive older-reading dependence, one lineage masquerading as independent repetition, thin Person-Box support, confidence without independent roots, and hidden contradictions. Checks never repair or rewrite inspected records themselves.
+Direct self-report may establish current state immediately. Inference requires several meaningfully independent grounded messages/signals and starts `possibly_current`; repeated copies count once. Routine updates need no per-item approval. Only newer grounded evidence ends or supersedes a state; time alone gives stale or unknown. A protected personal boundary needs direct wording or repeated clear choices, refusals, stopping or withdrawal. Causes require direct statements or several connected grounded signs, with alternatives and uncertainty. Exact counts/windows remain open.
+
+Give records derived from one underlying evidence event a shared evidence-family identifier. Readings, restatements, derivative links and logs retain their individual records but count as one family when assessing independent support. Do not confuse repeated representations with independent observations.
+
+Only a definite same-episode match adds support to an existing node. Later recurrence, separate concurrent positions, changed interpretation and uncertain matches stay distinct. Search existing vocabulary and nodes first. Ground each causal link and preserve the weakest link's visibility. Internal counterfactuals remain hypothetical and assumption-linked, never plans.
+
+World-model active membership needs a qualifying life, relationship, project, commitment, decision, environment, resource, rule, purpose or materially connected event. Preserve every separate basis. End membership only after all bases end on evidence; failed evaluation preserves prior membership. It is not the visual World or a store of all knowledge.
+
+Computed View needs a valid current authorized ordering profile, with separate factor, tie, omission, surfacing and refresh rules. A null update creates only a status event. Failed refresh leaves the prior valid snapshot possibly stale. Recover a missing status event for a committed snapshot without rebuilding it. Source families include roots and safe pre-ingest metadata, never held raw content.
+
+During quarantine and periodically afterward, read-only memory-health checks look for missing sources, excessive older-reading dependence, one lineage masquerading as independent repetition, thin Person-Box support, confidence without independent roots, and hidden contradictions. Checks never repair or rewrite inspected records themselves.
 
 ## Connections and creations
 
-Connections require a direct recorded relationship, Ness's explicit statement/confirmation, or a narrow authorized rule. Similarity, timing, shared themes, interpretation, and co-retrieval cannot create accepted relationships by themselves.
+Connections require a direct recorded relationship, Ness's explicit statement/confirmation, or a narrow authorized rule. Similarity, timing, shared themes, interpretation, and co-retrieval cannot create a connection proposal or accepted relationship by themselves.
 
 - Keep endpoints, relationship type/direction, certainty, decision status, authority, and history separate.
 - Pending connections may guide investigation silently. They cannot support claims, recommendations, identity effects, or actions. They never age into acceptance.
 - Acceptance atomically commits the connection and its authority evidence after duplicate checking. Competing routes converge on one relationship.
+- Candidate reports, proposals, Ness's durable decision input, final decisions and accepted records remain distinct. Forward completion requires the same current proposal/version, shown certainty and decision display, valid authority/integrity/privacy and no intervening competing decision or correction. Never rebind approval. Commit the accepted record, authority proof, duplicate key and final decision together. Symmetric keys normalize endpoint order; directional keys preserve it. Changed endpoints/type/direction/type version require a new key. Failed source verification is evaluated and set aside, not confused with unavailable verification.
 - Before each use, resolve exact accepted version, later correction/dispute/supersession, integrity, authority, current-use state, certainty, privacy, and influence restrictions. An old accepted record is insufficient.
 - Rejection suppresses repeat surfacing. Genuine new evidence permits a new linked proposal, not reversal of the earlier decision.
 
-The Unified Creation Store holds root-referencing records for `design`, `idea`, `rule`, `name`, and `decision`. A record may have several types. Projects and categories are views, not separate databases.
+The Unified Creation Store holds root-referencing records for `design`, `idea`, `rule`, `name`, and `decision`. A record may have several types. Projects and categories are views, not separate databases. Creation origination is currently live-chat-only. Adding intake paths or types beyond these five requires Ness's explicit decision and a versioned change.
 
 - Detect source-grounded fragments broadly and provisionally. Each immutable base starts `provisional` with identity, type set, provenance, schema version, and detector reference where applicable.
 - Later confirmation, correction, supersession, and grouping are append-only events. Do not change the original status field.
 - Confirmation requires explicit Ness confirmation or later clear words/actions demonstrating adoption. Ambiguity, time, retrieval, repetition, and model confidence never confirm.
 - Wider provisional use must retain status and a trace. Larger works reference every original fragment rather than fusing them.
-- Affirmation records an actual response to specific readings. It does not alter their truth, confidence, evidence, or firmness. Rejection does not prove the opposite. Silence changes nothing.
+- The root and exact fragment identify a creation independently of detector version. Changed segmentation is a linked proposal, never silent fusion. The confirmation event is the single status authority. Demonstrated adoption requires a grounded B24-checked proposal linking the original fragment and later words/actions. Every wider use records `provisional_material_used` with status at use time and shows its provisional status in the output context.
+- Selected Wonder material retains its origin on every presentation. An explicit retrieval request is enough reason to surface it within permissions. Later real-world evidence has a separate source identity even if it matches the imagined event.
+- Affirmation records an actual response to specific readings. It does not alter their truth, confidence, evidence, or firmness. Rejection does not prove the opposite. Dismissing a specific reading can stop its resurfacing until a valid new trigger, without deleting it. Silence changes nothing.

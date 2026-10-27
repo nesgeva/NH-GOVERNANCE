@@ -11,7 +11,7 @@ except ImportError:
 
 ROOT = Path(__file__).resolve().parents[1]
 ROOT_METADATA = {".git", ".agents", ".aws", ".codex"}
-LIMIT = 25_000
+LIMIT = 35_000
 
 
 def collect(root):

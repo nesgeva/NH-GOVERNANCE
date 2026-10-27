@@ -30,7 +30,9 @@ Example wording only, not adopted behavior: "אתה מחוץ לבית. אתה ש
 
 ## Size and verification
 
-- Keep the whole active project, including instructions, tools and filename labels, at or below 25,000 tokens in `cl100k_base` and `o200k_base`. Aim for 21,000 or fewer.
+- Keep the whole active project, including instructions, tools and filename labels, at or below 35,000 tokens in `cl100k_base` and `o200k_base`. Aim for 21,000 or fewer.
+- The 2026-10-27 restoration permits the larger ceiling to recover omitted requirements. Above 25,000, review duplication and report actual counts. Never remove unique current behavior, conditions, exceptions or status to meet a target. Raise any remaining size conflict explicitly.
+- Keep complete historical source contracts in Git history and the preserved archive. PROVENANCE maps their current owners. Load the relevant exact contract before detailed implementation; the compact active input is not a substitute for its schemas, fixtures or recovery tables.
 - Run `python3 tools/check_project.py` after edits. Install dependencies outside the project. Never exclude documents, hide text in binaries, add symlinks or weaken counting to pass.
 - Export LLM bundles outside the project. Keep no generated duplicates here.
 - Remove duplication or replace obsolete wording before additions. Add files only if no owner fits.

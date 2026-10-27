@@ -32,3 +32,13 @@ python3 tools/check_project.py --bundle /tmp/NH-LLM.md
 Install [tools/requirements.txt](tools/requirements.txt) outside the project. The checker covers two encodings, not every model's tokenizer. Leave room for the task and reply.
 
 Use [PROVENANCE.md](PROVENANCE.md) for historical or exact-contract sources, outside the default prompt.
+
+## Preparing implementation with a coding agent
+
+Ask the coding agent to read AGENTS.md and all listed documents. OPERATIONS.md owns the build draft, DECISIONS.md the gaps, and PROVENANCE.md historical contracts. The draft grants no implementation permission.
+
+Suggested first request:
+
+> Read AGENTS.md and all documents in the README table. Review the build plan draft in OPERATIONS.md against the domain rules. Report the first milestone's remaining decisions, required source artifacts, component contracts and acceptance checks. Do not change runtime code, adopt proposals, select models or activate services. This checkout does not establish the state of external implementation code.
+
+After scope approval and implementation authorization, inspect supplied code before choosing reuse/replacement. Track progress through Git and existing owners. Runtime commands remain unverified until that inspection.

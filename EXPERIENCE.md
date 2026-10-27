@@ -21,11 +21,14 @@ Accepted direction:
 - The world can grow from blank into memories, people, places, projects, and deeply nested categories. Visual organization never rewrites underlying records.
 - Try a simple, neutral background without continuous motion on the category screen. Ness can change it later. Color and image remain undecided.
 - Ordinary navigation doors default to plain white wood, independent of theme. Keep previous spaces reachable, especially the last two generated spaces.
+- Preserve walking, flying and instant movement, pausing automatic World changes, mood-dependent weather/light/sound, and presentation-time controls. Related spaces may transition smoothly; unrelated spaces may use a doorway. These ordinary navigation choices do not replace the later initial-entry loading-icon preference.
+- Categories may appear as places, objects, beings or portals. Preserve manual placement and automatic organization, glow or calls for attention, and direct hand reshaping. These are presentation directions, not finished gestures or permission to alter source records. Home/center design, object persistence and deep-branch visibility retain their open contextual details.
 - Chat remains movable, draggable, resizable, partly hideable, and summonable/dismissible by voice. It is not a fixed sidebar.
 - N.H may appear as a person, panel, object, or voice. Form and voice can change independently. Small changes may occur naturally; ask before big changes.
 - Rooms may start blank, memory-based or mixed. Ness or N.H may choose; Ness's explicit choice wins. A clear voice change needs no redundant confirmation. This grants neither World opening nor simulation entry.
-- Simulation must be explicit. Distinguish replay, reconstruction, and invention. Announce generated requested-voice material through the simulation boundary.
+- Simulation must be explicit. Distinguish replay, reconstruction, and invention. Say "Simulating voice" in N.H's normal voice, then gradually shift to the requested simulated voice. This announcement does not establish behavioral accuracy.
 - Unreal Engine 5 is the selected local runtime direction. Meaning, privacy, memory and authority stay outside Unreal through a narrow validating local bridge. Normal runtime needs no internet. Do not build a custom 3D engine.
+- Blender remains an optional local asset tool. Before personal data, a tiny synthetic offline room must prove the bridge and simulation boundary, duplicate/stale-command handling, crash recovery and absence of ordinary-memory writes. Transport, ports, schemas, engine components and detailed build procedure remain proposals.
 - Wonder scratch material stays isolated. Ness selects exact transfers through normal authorized intake, privacy, provenance and acceptance. Usefulness, repetition, relevance, emotional weight and confidence never select automatically. Exclude surrounding unselected material.
 
 Recorded A19 experience preferences, not package completion or implementation permission:
@@ -34,6 +37,7 @@ Recorded A19 experience preferences, not package completion or implementation pe
 - The centered category hub has customizable image/icon panels with some depth and visible relationships. Its center remains undecided.
 - Selecting a category opens preset worlds, situations, stories, or experiences, including work in progress. The separate Create New World path uses a spatial door into a blank white room.
 - Cards reference existing points of interest or categories. Moving, grouping or displaying them in several places neither duplicates memory nor changes source status. Idea Cards remain provisional-creation views.
+- A natural mention may create a provisional Idea Card. Summon cards by voice, click or drag. Deliberately place one or several beside an exact message or text group. Preserve the object reference, target text, association, context, spatial meaning and provenance. Visual reconstruction and structured evidence stay separate. Returning a card to its deck preserves the association and history. An authorized image tool may propose a meaningful 2D icon that Ness can replace. Tool choice and cards' placement in the new ordinary-chat layout remain open.
 - The ultrawide prototype is visual reference only.
 - Proposed room previews default to entering and exploring before selection. Ness may request images or another presentation. Preview preference grants no simulation-entry permission.
 - Simulated familiar people should resemble the actual person as closely as possible when requested material permits. Appearance says nothing about behavioral accuracy or actual private states.
@@ -51,6 +55,12 @@ Preserved historical Wonder answers retain their source scope and later question
 - Return paths and surrounding-world visibility follow the situation and Ness's request. Keep full corrections, context and learning history. Select useful history first; retain the rest.
 - No dedicated motion-sickness feature was requested. Emotional-overload settings remain deferred. Do not invent them.
 
+## Restored Canvas intention
+
+The September recovery decision preserves a separate architecture/solution Canvas. It is not the ordinary chat layout. Architecture uses pure black with a faint red blueprint grid. Solution work uses dark metallic blue. Swappable illustrated vault, gate, core and sandbox icons use warm glow fill and HUD detail, with pulse/flare responses. Core is red, gate orange and store purple. Vault opens records, gate pending review and core engine state.
+
+The recorded sequence is draggable nodes and drawable links, then icons and controls, solution mode, and a real-backend `/generateincanvas <topic>` or joint file/memory/module scan. This is restored design intent, not a working command or current integration. The original C2+D2 visual reference remains in the source contract.
+
 ## Speech
 
 VoxCPM2 with the 2026-10-09 reference replaced the BlueTTS listening baseline.
@@ -67,7 +77,9 @@ VoxCPM2 with the 2026-10-09 reference replaced the BlueTTS listening baseline.
 
 OPERATIONS.md records recovered CPU float32 WAVs and later GPU Q8 tests, without adopting incidental reader mechanics.
 
-Standing direction is one young-adult male bilingual voice, American English, acceptable foreign accent in Hebrew, private noncommercial use, local generation, and no emotional pull. Keep generated speech separate from Ness's identity profile and language-model selection.
+Standing direction is one male bilingual voice sounding roughly 20 to 24, with American English and an acceptable foreign accent in Hebrew. It should not be Ness's voice, someone he knows or a paid speaker. These ordinary-baseline preferences do not prohibit separately requested simulation voices. Use is private and noncommercial, with local generation and no emotional pull. Keep generated speech separate from Ness's identity profile and language-model selection.
+
+Whisper was a proposed transcription tool, optionally after `noisereduce`/`librosa`, through the historical `nh_sensor_bridge.py` boundary. Piper and Coqui were earlier speech-output candidates. They were not installed or adopted by those notes. The later VoxCPM2 output choice does not select the transcription model. Incoming tone and sound understanding is a separate future intent: BOP records physical signals; interpretation belongs to a permitted meaning process. Its owner, model and connection remain open.
 
 - Separate authorized recording, noise processing, transcription and interpretation. Preserve original audio beside processing outputs. Clarify action/target-changing uncertain words, not every ordinary sentence.
 - Stop TTS on detection of Ness starting to speak, without waiting for complete transcription. Record the physical interruption and output position; do not infer agreement, emotion, or understanding.
@@ -95,23 +107,36 @@ The demonstration used an isolated BlueTTS phoneme adapter with the full referen
 - Full Mode and Manual Sync are the only deliberate desktop connections. No background connection, automatic sync or passive tunnel.
 - Start disconnected. Deliberate opening creates a freshly authenticated, purpose/scoped connection. Check Personal Mode and content permissions separately. Disconnection/window end closes receipt and delivery. App or OS work resumption cannot reopen it.
 - The phone AI works online/offline with separate memory. Ness wants a very small local model, still unselected.
+- The historical fresh-phone exception applies only when offline with no local memory: preserve input silently without inventing a reply. It does not impose silence on a populated offline phone or authorize automatic reconnection.
 - If Full Mode disconnects, notify Ness and switch to local AI with permitted local context, without desktop authority. Never reconnect automatically, including when the app reopens.
 - Manual Sync batches new local-chat messages, replies and attachments to desktop. Ness may omit whole conversations, without per-message selection.
 - Desktop-to-phone copies selected chats, attachments and needed permitted context with source relationships for offline use. Never copy all desktop memory by default.
 - Ask once about content; retain Ness's choice until he changes it. This bypasses no connection or authentication checks.
 - After interruption, show received and missing items. "Show what is missing" lists missing items before offering completion. Require a current authorized connection and authentication. Check receipt before sending only missing items without duplicates. Offline, identify unavailable content; never invent it.
-- Manual Sync requires fingerprint/Face ID/PIN and SIMULATION review. Full Mode uses its authenticated deliberate window. Encrypt local data; prohibit raw OS commands from phone input.
+- Manual Sync requires fingerprint/Face ID/PIN and SIMULATION review. Full Mode uses its authenticated deliberate Cloudflare-tunnel direction. Provider behavior and the current installation still require verification. Encrypt local data; prohibit raw OS commands from phone input.
 - Keep full local originals and compact model context preserving decisions, corrections, unresolved points and necessary context. Compaction neither removes originals nor proves fidelity.
 - Ness prefers manual lossless compression, locally without servers, only with justified savings. Tool selection and phone integration remain open; PROVENANCE.md locates copy-only trials.
 - Near storage exhaustion, propose removing phone copies only after verified complete desktop receipt and Ness's approval. Keep unsynced originals; removed full content needs desktop access. This replaces automatic progressive summaries/image shrinking. Limits/exhaustion handling remain open.
-- Keep Emergency Record, Stealth Toggle, Tunnel Off, and Full Mode Kill Switch distinct. Private capture is not transfer. Tunnel closure is not necessarily emergency desktop stopping.
+- Emergency Record deliberately records an active call privately on the phone. After the call, ask once whether to keep it private, send the whole call or choose parts. Mark excerpts partial. Transfers use the existing desktop connections; detailed routing remains open.
+- Stealth deliberately records ambient voices/sound without audible replies. Local understanding and silent text are allowed. On stopping, offer the same three retention/transfer choices. Capture grants no automatic desktop or memory use.
+- Tunnel Off closes only the remote session. Desktop N.H, Windows and phone-local memory continue. Reconnection needs a deliberate action.
+- Full Mode Kill Switch closes Full Mode/tunnel, invalidates its session and stops or locks desktop N.H and active services while Windows stays on. Prevent safely stoppable unfinished effects, preserve records and require deliberate restart. Do not pretend completed effects were undone.
 - Breathing Reminder and Night Lockout were removed. Do not recreate them as bedtime, focus, wellbeing, or phone-use restrictions.
 - BOP records authorized physical signals, not meaning. Record simultaneous channels separately and connect them by reference. Never label emotion, motive, importance, or identity in a physical observation.
 - OOP returns actual outcomes through Catalog and the Meaning Engine. No separate feedback database, stored personality, or direct behavior-configuration path.
 - Silence is not satisfaction. Only record a meaningful absence when its required prior conditions hold, without inventing a cause.
 - Imported-media reactions remain separate observations. Link only actual playback and bounded post-playback segments, never paused or out-of-window signals. No reaction implies agreement or causality.
+- A reaction window starts at the exact playback start, with at most one window per session. A configured finite pause limit permits return to the same item; paused observations remain unlinked. Final playback end starts a separate finite post-playback segment. New media, session end, explicit close, crash or expiry ends linking. Each observation links to at most one segment and item. Missing/invalid limits disable linking, not authorized capture. Never backfill crash gaps.
 - LMAC routes current queries throughout a function, before/during/after execution. It owns no data, summary, cross-query cache, or model of Ness. Keep all authorized owners reachable; relevance directs attention rather than cutting off the rest.
-- Adapt responses from current shared evidence. Small reversible improvements may follow their governed path; major changes need the applicable approval. Calibration is roughly 6 to 10 months and ends on evidence reliability, not a date.
+- Adapt responses from shared evidence. Every adaptation needs a prior improvement reading. During learning, small low-stakes reversible tone, timing, pacing and answer-length changes may be automatic. Before calibration completes, major changes need permission. The recorded post-calibration direction permits larger automatic changes only with multiple independent sessions, varied conditions, consistent direction, no recent counterevidence and confidence passing the current automatic-change threshold. Log the basis; keep changes explainable and reversible. Protected core never rewrites itself. Calibration is roughly 6 to 10 months and ends on evidence reliability, not a date. Thresholds and integration remain open.
+
+One correction never establishes a permanent rule. Ness can inspect current and earlier learned patterns, what changed, supporting evidence and certainty, then correct through conversation. Preserve his exact correction apart from N.H's interpretation. OOP, Catalog and reading controls still apply; this creates no personality database, model-training permission or direct configuration-writing path.
+
+## Personalization views
+
+The thirteen accepted names describe views over shared material, not separate stores, models or fixed profiles: response timing and pacing; tone and register calibration; language and vocabulary alignment; processing depth preferences; branch and topic navigation patterns; decision-support preferences; question-handling patterns; silence and non-response interpretation; emotional register recognition; personal correction and feedback integration; project and context continuity; energy and capacity state awareness; communication pattern adaptation over time.
+
+The operational Log is a read-only view with subject filtering and expandable records, web activity, gaps and layers. It is not an approval queue or a return of the removed ordinary-chat point-back link.
 
 ## Wellbeing
 
@@ -124,7 +149,7 @@ Compare Ness with his own sustained history, not external clinical norms. One di
 
 ## Future intentions
 
-These remain intentions or candidates, not permission to build or deploy.
+The rows distinguish approved directions from unfinished mechanisms and future intentions. None grants permission to build or deploy.
 
 | Intent | Preserve |
 |---|---|
@@ -140,9 +165,17 @@ These remain intentions or candidates, not permission to build or deploy.
 | Camera/location assistance | Deliberate live phone-camera/GPS help with directions, entrances, objects and surroundings. Scope temporary use, storage, recognition, sharing and memory ingestion separately. Preserve uncertainty and third-party privacy. No silent surveillance or tracking. |
 | Creation workspace | Work on evolving notes, plans, scripts, stories, designs, research, presentations, diagrams, media, and files, with revisions and authorship/source provenance. Drafts do not become decisions, sent messages, or build permission. Code execution/deployment needs separate authorization. |
 | Faceted search | Search across authorized memory kinds by person, event, period, source/thread, project, theme, and status. Show why results matched and distinguish exact sources, interpretations, judgments, simulations, and unresolved items. Search changes no memory and cannot reveal inaccessible material through result counts or failure wording. |
-| Tools for N.H | Contextual visualizations and helpful tools with explicitly designed uses and permissions. |
-| Memory Fabric | Coordinated derived indexes with visible channel provenance, rebuildable from originals. No index becomes authority, merges Origins, or converts similarity into identity. Inactive and unaccepted. |
+| Tools for N.H | Use 2D images, 3D models, diagrams and blueprints to explain within conversation when useful. Keep this purpose separate from production assets for Different. Exact tools and permissions remain open. |
+| Memory Fabric | Coordinated derived indexes with visible channel provenance, rebuildable from originals. No index becomes authority, merges Origins, or converts similarity into identity. The direction is approved. The v1.4 mechanism remains inactive and unaccepted. |
 | Execution laboratory | Bounded, isolated propose/run/check/repair loops with immutable scope, budgets and protected tests. Preserve failed attempts and independent verification. No automatic adoption, production access, merge or deployment. |
 | Capability registry/tool forge | Version exact permissions and sandbox candidates. Activation requires checks, adversarial tests, independent audit, scoped acceptance and separately authorized registration. Models cannot activate their tools. |
+
+The laboratory and registry directions are approved, with their detailed mechanics still open. The Memory Fabric candidate proposes eight index families: positional, semantic, time, people/entities, accepted connections, story/theme/clash, operational provenance, and state/World. It proposes one query plan, separate channel coverage, eligibility before ranking and atomic index publication. Healthy empty, partial, unhealthy, failed and unused stay distinct. Required-channel failure cannot silently borrow another channel. Rebuild and terminal replacement use new linked operations; preterminal continuation requires exact predecessor closure. These remain proposals, not active wiring.
+
+Preserve isolated project-space intent, including Different and Invasives, without selecting separate databases or a sharing policy. The restored phone labels "research", "emotional", "strategic" and "power switch" have no settled behavior. Do not equate that switch with the accepted controls above.
+
+Music references retain provider/item identity, title/artist, exact time or note interval, personal meaning, provenance and reopening availability. A reference does not mean N.H possesses the recording. Disclose an unavailable original. Conversation-based search, browse, selection and playback are intentions; Spotify/YouTube are examples, not adopted providers.
+
+Voice-command intentions include combinations and user-created, changed or removed triggers. Automatic related commands, partial sequence failure and confirmation boundaries remain open. Cross-links among media, creation, conversation, search, branches and camera/GPS context grant no new capture permission.
 
 The earlier physiological-sensor, clearance-cue, ally-prompting, safe-mode, arousal-dashboard, and related de-escalation suggestions remain unadopted history. They are not added by these feature intentions.
