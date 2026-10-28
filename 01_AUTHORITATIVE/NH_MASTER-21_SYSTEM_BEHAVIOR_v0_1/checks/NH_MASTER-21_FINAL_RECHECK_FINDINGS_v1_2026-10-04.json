@@ -1,0 +1,3150 @@
+{
+  "verdict": "PASS",
+  "stages": {
+    "R0": {
+      "result": "PASS",
+      "evidence": {
+        "inputs": [
+          {
+            "file": "nh_master21_assemble_v3.py",
+            "expected_sha256": "81195e8eb4c1a31d8af14216e36f2e896432c47296be65315c46d031d91d50bc",
+            "sha256": "81195e8eb4c1a31d8af14216e36f2e896432c47296be65315c46d031d91d50bc",
+            "bytes": 17270,
+            "lf_lines": 387,
+            "match": true
+          },
+          {
+            "file": "NH_MASTER-21_CLEANUP_FIXED_CHAPTERS_v8_2026-10-04(1).zip",
+            "expected_sha256": "43957c01343121773ab5304a71471a2af84d8889eb3f9c33d568747eb4a40ef8",
+            "sha256": "43957c01343121773ab5304a71471a2af84d8889eb3f9c33d568747eb4a40ef8",
+            "bytes": 6236717,
+            "lf_lines": 24147,
+            "match": true
+          },
+          {
+            "file": "NH_MASTER-21_FINAL_CHECK_KIT_v1_2026-10-04(1).zip",
+            "expected_sha256": "6c810b49320af16b96fdfae354466002c4323c88bdebda0463fe266e3e80b957",
+            "sha256": "6c810b49320af16b96fdfae354466002c4323c88bdebda0463fe266e3e80b957",
+            "bytes": 13115,
+            "lf_lines": 54,
+            "match": true
+          },
+          {
+            "file": "NH_MASTER-21_FINAL_CHECK_REPORT_v1_2026-10-04 (1).md",
+            "expected_sha256": "4d23ab8f1459b5c8278d8a088c92bbe08cd837b728bb46e53d7cb21a9d70f0f7",
+            "sha256": "4d23ab8f1459b5c8278d8a088c92bbe08cd837b728bb46e53d7cb21a9d70f0f7",
+            "bytes": 11728,
+            "lf_lines": 142,
+            "match": true
+          },
+          {
+            "file": "nh_master21_assemble_v2.py",
+            "expected_sha256": "de0b5feafb2ec8f5dbdce7ec4a200974276565560035c8951d65dda63a8a71c2",
+            "sha256": "de0b5feafb2ec8f5dbdce7ec4a200974276565560035c8951d65dda63a8a71c2",
+            "bytes": 14334,
+            "match": true
+          },
+          {
+            "file": "NH_MASTER-21_FINAL_CHECK_BRIEF_v1_2026-10-04.md",
+            "expected_sha256": "d387ad922f2843a460a0733b2fa1d447148cf46719355a4375a263493ee5c067",
+            "sha256": "d387ad922f2843a460a0733b2fa1d447148cf46719355a4375a263493ee5c067",
+            "bytes": 4713,
+            "match": true
+          }
+        ],
+        "chapters": [
+          {
+            "chapter": "CH00",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH00.md",
+            "expected_sha256": "c3754d69149cc4ac3c34fd457124eccaffb3b2d465e25fc4bb97f74c5c9eb712",
+            "sha256": "c3754d69149cc4ac3c34fd457124eccaffb3b2d465e25fc4bb97f74c5c9eb712",
+            "match": true
+          },
+          {
+            "chapter": "CH01",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH01.md",
+            "expected_sha256": "b7577363aaf7a82d51f087a36626de25dd88e318a084350ca0a0910ecc721e6c",
+            "sha256": "b7577363aaf7a82d51f087a36626de25dd88e318a084350ca0a0910ecc721e6c",
+            "match": true
+          },
+          {
+            "chapter": "CH02",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH02.md",
+            "expected_sha256": "4b138714ed59b023f7919cc9ad6bb707025973730dee9fde0dfa5f1d37b988c7",
+            "sha256": "4b138714ed59b023f7919cc9ad6bb707025973730dee9fde0dfa5f1d37b988c7",
+            "match": true
+          },
+          {
+            "chapter": "CH03-a",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-a.md",
+            "expected_sha256": "9fc34677d53903b43b870c98f6874f0210b88a6f3a1b92ffa74aa51c3ef10dcb",
+            "sha256": "9fc34677d53903b43b870c98f6874f0210b88a6f3a1b92ffa74aa51c3ef10dcb",
+            "match": true
+          },
+          {
+            "chapter": "CH03-b",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-b.md",
+            "expected_sha256": "acdbfcaef1d2f13eff14f6d2833b9ae00543b4b84c2d6d964bef7f0d39ad70fc",
+            "sha256": "acdbfcaef1d2f13eff14f6d2833b9ae00543b4b84c2d6d964bef7f0d39ad70fc",
+            "match": true
+          },
+          {
+            "chapter": "CH03-c",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-c.md",
+            "expected_sha256": "d28e5b380195b8814ee3f7eb82ae330abee007ea1981107a68b529b55862b71a",
+            "sha256": "d28e5b380195b8814ee3f7eb82ae330abee007ea1981107a68b529b55862b71a",
+            "match": true
+          },
+          {
+            "chapter": "CH03-d",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-d.md",
+            "expected_sha256": "4eb6b8e19f6ad0cf5bc2d16002405ea622edefcaced2efe10c4e63f1cbc653fd",
+            "sha256": "4eb6b8e19f6ad0cf5bc2d16002405ea622edefcaced2efe10c4e63f1cbc653fd",
+            "match": true
+          },
+          {
+            "chapter": "CH03-e",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-e.md",
+            "expected_sha256": "d847cdf0ca2438551550e7116681200de3e76fdec065303db67f3fa8655d71ba",
+            "sha256": "d847cdf0ca2438551550e7116681200de3e76fdec065303db67f3fa8655d71ba",
+            "match": true
+          },
+          {
+            "chapter": "CH03-f",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-f.md",
+            "expected_sha256": "819e031c443f6f422d303f53de3885f18ed2de970934736d6e1c32f18358de60",
+            "sha256": "819e031c443f6f422d303f53de3885f18ed2de970934736d6e1c32f18358de60",
+            "match": true
+          },
+          {
+            "chapter": "CH03-g",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-g.md",
+            "expected_sha256": "9bf7359900a5277d81b4e3b2c41ecb5fd96bf0a006257751202ec4342fef9a36",
+            "sha256": "9bf7359900a5277d81b4e3b2c41ecb5fd96bf0a006257751202ec4342fef9a36",
+            "match": true
+          },
+          {
+            "chapter": "CH03-h",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-h.md",
+            "expected_sha256": "994ae416ad9d2168e2a992a1960e61dbb562df70460be12b4ad9bc19b5bdb03c",
+            "sha256": "994ae416ad9d2168e2a992a1960e61dbb562df70460be12b4ad9bc19b5bdb03c",
+            "match": true
+          },
+          {
+            "chapter": "CH03-i",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-i.md",
+            "expected_sha256": "4a71d3d559f461fa715469b8e53c54af78411bec845214aebcc06729fbfb78db",
+            "sha256": "4a71d3d559f461fa715469b8e53c54af78411bec845214aebcc06729fbfb78db",
+            "match": true
+          },
+          {
+            "chapter": "CH03-j",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-j.md",
+            "expected_sha256": "7ff83b73028508e4d62eac2d995d225cb1f61ca0cf4a18b6cdc7cb01f5f8160b",
+            "sha256": "7ff83b73028508e4d62eac2d995d225cb1f61ca0cf4a18b6cdc7cb01f5f8160b",
+            "match": true
+          },
+          {
+            "chapter": "CH03-k",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-k.md",
+            "expected_sha256": "7446015e0a993937875f97c85d796b93704305d3d23393ca47cfeea106b2d133",
+            "sha256": "7446015e0a993937875f97c85d796b93704305d3d23393ca47cfeea106b2d133",
+            "match": true
+          },
+          {
+            "chapter": "CH03-l",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-l.md",
+            "expected_sha256": "0bd4fc827739381771dfc05951f4de81358acb165d44864f11f6bd9ca4e5f87c",
+            "sha256": "0bd4fc827739381771dfc05951f4de81358acb165d44864f11f6bd9ca4e5f87c",
+            "match": true
+          },
+          {
+            "chapter": "CH03-m",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-m.md",
+            "expected_sha256": "83f539466728ec4ae2eae542fbf6e70a326c7296558c4bef31674e933c5af4df",
+            "sha256": "83f539466728ec4ae2eae542fbf6e70a326c7296558c4bef31674e933c5af4df",
+            "match": true
+          },
+          {
+            "chapter": "CH03-n",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-n.md",
+            "expected_sha256": "da57bd8b1eaa0a723c2c9743b763992ab3666791839e8cbdc06a4f4643076d54",
+            "sha256": "da57bd8b1eaa0a723c2c9743b763992ab3666791839e8cbdc06a4f4643076d54",
+            "match": true
+          },
+          {
+            "chapter": "CH03-o",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-o.md",
+            "expected_sha256": "1b46e39b6126c27764d67c861291dfe61879bc6ff3c9931f4085e9cf8a5ca180",
+            "sha256": "1b46e39b6126c27764d67c861291dfe61879bc6ff3c9931f4085e9cf8a5ca180",
+            "match": true
+          },
+          {
+            "chapter": "CH03-p",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-p.md",
+            "expected_sha256": "35ad0e72eeabc8aba94a6017b69a5c96388dff06f8b0f038ffc2797c40953df2",
+            "sha256": "35ad0e72eeabc8aba94a6017b69a5c96388dff06f8b0f038ffc2797c40953df2",
+            "match": true
+          },
+          {
+            "chapter": "CH04-a",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH04-a.md",
+            "expected_sha256": "6208d08770d9483775c7721d5d04c8d5356967e4d0d7777e7fbcab59c0af365b",
+            "sha256": "6208d08770d9483775c7721d5d04c8d5356967e4d0d7777e7fbcab59c0af365b",
+            "match": true
+          },
+          {
+            "chapter": "CH04-b",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH04-b.md",
+            "expected_sha256": "efbf21a5da3cfeed1012d3b3a359419b6f3fb21be26cc0df1263a221c7a7a69d",
+            "sha256": "efbf21a5da3cfeed1012d3b3a359419b6f3fb21be26cc0df1263a221c7a7a69d",
+            "match": true
+          },
+          {
+            "chapter": "CH04-c",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH04-c.md",
+            "expected_sha256": "0055993433ebfe3302dfcf0cf85ffe07fc016b2508a2e63311e23966f6d96703",
+            "sha256": "0055993433ebfe3302dfcf0cf85ffe07fc016b2508a2e63311e23966f6d96703",
+            "match": true
+          },
+          {
+            "chapter": "CH04-d",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH04-d.md",
+            "expected_sha256": "d50c597cc27846b7717e20206ad0f5f255a6058adacf7df9cfdaeb458999b564",
+            "sha256": "d50c597cc27846b7717e20206ad0f5f255a6058adacf7df9cfdaeb458999b564",
+            "match": true
+          },
+          {
+            "chapter": "CH04-e",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH04-e.md",
+            "expected_sha256": "98d61845784becec6914d1ea2e9ef6d6a7c9854ddb742c21271c98690a398b17",
+            "sha256": "98d61845784becec6914d1ea2e9ef6d6a7c9854ddb742c21271c98690a398b17",
+            "match": true
+          },
+          {
+            "chapter": "CH05-a",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH05-a.md",
+            "expected_sha256": "8727c0611054eedc59bd56fa655e503267052cc34939c7f471cf954e73430797",
+            "sha256": "8727c0611054eedc59bd56fa655e503267052cc34939c7f471cf954e73430797",
+            "match": true
+          },
+          {
+            "chapter": "CH05-b",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH05-b.md",
+            "expected_sha256": "6a533174a3569b06d38652be23ad11abd418595a5c89743bb84b5acba75fe673",
+            "sha256": "6a533174a3569b06d38652be23ad11abd418595a5c89743bb84b5acba75fe673",
+            "match": true
+          },
+          {
+            "chapter": "CH05-c",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH05-c.md",
+            "expected_sha256": "2212276c93f0e30a764995c853f29920c28ecf6862dcd7beb715d07a937a3c57",
+            "sha256": "2212276c93f0e30a764995c853f29920c28ecf6862dcd7beb715d07a937a3c57",
+            "match": true
+          },
+          {
+            "chapter": "CH05-d",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH05-d.md",
+            "expected_sha256": "130c81030d0b666b20ee5849e5f2f6a69336c4d2c50f141e6dd23383075fb506",
+            "sha256": "130c81030d0b666b20ee5849e5f2f6a69336c4d2c50f141e6dd23383075fb506",
+            "match": true
+          },
+          {
+            "chapter": "CH05-e",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH05-e.md",
+            "expected_sha256": "3ef6911fe59bd668e129a75b6800afd399f542962281b4a8968f72dacc49be2c",
+            "sha256": "3ef6911fe59bd668e129a75b6800afd399f542962281b4a8968f72dacc49be2c",
+            "match": true
+          },
+          {
+            "chapter": "CH06-a",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH06-a.md",
+            "expected_sha256": "4694f6c72b8637847d5ed3f395f89d7d4292d00143574cf710250546e4a9cd0f",
+            "sha256": "4694f6c72b8637847d5ed3f395f89d7d4292d00143574cf710250546e4a9cd0f",
+            "match": true
+          },
+          {
+            "chapter": "CH06-b",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH06-b.md",
+            "expected_sha256": "4e6c31355cfcd4c18dcc630d7e6fa8b7739010435e57620773066acd213924db",
+            "sha256": "4e6c31355cfcd4c18dcc630d7e6fa8b7739010435e57620773066acd213924db",
+            "match": true
+          },
+          {
+            "chapter": "CH06-c",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH06-c.md",
+            "expected_sha256": "b1ce7215e7f32068e32f7004682827edc5aeddb51424d92291730ee37d11a794",
+            "sha256": "b1ce7215e7f32068e32f7004682827edc5aeddb51424d92291730ee37d11a794",
+            "match": true
+          },
+          {
+            "chapter": "CH06-d",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH06-d.md",
+            "expected_sha256": "c4c3529141076e2a92663050c0dc8dd453e0391d0c16b3b72d798050745ae47f",
+            "sha256": "c4c3529141076e2a92663050c0dc8dd453e0391d0c16b3b72d798050745ae47f",
+            "match": true
+          },
+          {
+            "chapter": "CH06-e",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH06-e.md",
+            "expected_sha256": "a26e416de59696fec451ea05005a61cd6f553a3033ef249dce9f638dedd74d27",
+            "sha256": "a26e416de59696fec451ea05005a61cd6f553a3033ef249dce9f638dedd74d27",
+            "match": true
+          },
+          {
+            "chapter": "CH06-f",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH06-f.md",
+            "expected_sha256": "a176f93cfbac41a93412a31e62808949e6dd8dbead68356d0493a1819e126e27",
+            "sha256": "a176f93cfbac41a93412a31e62808949e6dd8dbead68356d0493a1819e126e27",
+            "match": true
+          },
+          {
+            "chapter": "CH06-g",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH06-g.md",
+            "expected_sha256": "87bc611b84c406d61fbbe9ae8b81c50c9cff6b700f7d2ea9126e2ddc5154267d",
+            "sha256": "87bc611b84c406d61fbbe9ae8b81c50c9cff6b700f7d2ea9126e2ddc5154267d",
+            "match": true
+          },
+          {
+            "chapter": "CH07-a",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH07-a.md",
+            "expected_sha256": "53bb25e7519341e44dde22d8fa4062d19e6b5776f50c4fd0dcc7dfce82dfc810",
+            "sha256": "53bb25e7519341e44dde22d8fa4062d19e6b5776f50c4fd0dcc7dfce82dfc810",
+            "match": true
+          },
+          {
+            "chapter": "CH07-b",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH07-b.md",
+            "expected_sha256": "3e1871c69445a18662d8021299c4b44f0038b438fd01234de9212a775c7846ae",
+            "sha256": "3e1871c69445a18662d8021299c4b44f0038b438fd01234de9212a775c7846ae",
+            "match": true
+          },
+          {
+            "chapter": "CH07-c",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH07-c.md",
+            "expected_sha256": "9a2d3455439ed3c5e657c35d94cd4aaa2a85322378d7094a76e2e4cda4567f0a",
+            "sha256": "9a2d3455439ed3c5e657c35d94cd4aaa2a85322378d7094a76e2e4cda4567f0a",
+            "match": true
+          },
+          {
+            "chapter": "CH08-a",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH08-a.md",
+            "expected_sha256": "7675c180ba5e3c762af0c38285a2194fd3472371e5f715b3de0712266024ff19",
+            "sha256": "7675c180ba5e3c762af0c38285a2194fd3472371e5f715b3de0712266024ff19",
+            "match": true
+          },
+          {
+            "chapter": "CH08-b",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH08-b.md",
+            "expected_sha256": "78e57e64c9befe00e0f5bf1ea8600d2c33a7070c2e671ee10b8856adc18ad83a",
+            "sha256": "78e57e64c9befe00e0f5bf1ea8600d2c33a7070c2e671ee10b8856adc18ad83a",
+            "match": true
+          },
+          {
+            "chapter": "CH08-c",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH08-c.md",
+            "expected_sha256": "0fb5af3d493c4d758d55687f9e4529ea0441c077cc87d01a11c820f3c2149960",
+            "sha256": "0fb5af3d493c4d758d55687f9e4529ea0441c077cc87d01a11c820f3c2149960",
+            "match": true
+          },
+          {
+            "chapter": "CH08-d",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH08-d.md",
+            "expected_sha256": "8aa021d2eed9189c9491826e537ff58fae4b9daa39374eb4d9a682f617229427",
+            "sha256": "8aa021d2eed9189c9491826e537ff58fae4b9daa39374eb4d9a682f617229427",
+            "match": true
+          },
+          {
+            "chapter": "CH08-e",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH08-e.md",
+            "expected_sha256": "c54991e8b3fa02b2b95d79505f31aeb894ce2008ae23965d37379b4bb698abe1",
+            "sha256": "c54991e8b3fa02b2b95d79505f31aeb894ce2008ae23965d37379b4bb698abe1",
+            "match": true
+          },
+          {
+            "chapter": "CH08-f",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH08-f.md",
+            "expected_sha256": "e8fa22abdfb98c7a395dd6169c56b92f862140118d31290aa4f1790055c57760",
+            "sha256": "e8fa22abdfb98c7a395dd6169c56b92f862140118d31290aa4f1790055c57760",
+            "match": true
+          },
+          {
+            "chapter": "CH08-g",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH08-g.md",
+            "expected_sha256": "7054b9d5a084dc2a9e59d54ce9f9d5df97fbd8b15439b2511c711318b73ea4cd",
+            "sha256": "7054b9d5a084dc2a9e59d54ce9f9d5df97fbd8b15439b2511c711318b73ea4cd",
+            "match": true
+          },
+          {
+            "chapter": "CH09-a",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH09-a.md",
+            "expected_sha256": "f451c47b7b09d6285c251a595a06d69fdc0af4d3c779e5df973bfdf0deecf9f4",
+            "sha256": "f451c47b7b09d6285c251a595a06d69fdc0af4d3c779e5df973bfdf0deecf9f4",
+            "match": true
+          },
+          {
+            "chapter": "CH09-b",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH09-b.md",
+            "expected_sha256": "b3cf98fa9ba312ad2d402802de9960438769c9290e03ae80c4efdc1fc137a739",
+            "sha256": "b3cf98fa9ba312ad2d402802de9960438769c9290e03ae80c4efdc1fc137a739",
+            "match": true
+          },
+          {
+            "chapter": "CH09-c",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH09-c.md",
+            "expected_sha256": "b9b9d850cdf0167c72fb95c11334f67ac04cef4a31d56724ce744ead53993126",
+            "sha256": "b9b9d850cdf0167c72fb95c11334f67ac04cef4a31d56724ce744ead53993126",
+            "match": true
+          },
+          {
+            "chapter": "CH09-d",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH09-d.md",
+            "expected_sha256": "69fe3bd8d18d16993b39713aea379ecea9b1d47b0409929d9712352262263743",
+            "sha256": "69fe3bd8d18d16993b39713aea379ecea9b1d47b0409929d9712352262263743",
+            "match": true
+          },
+          {
+            "chapter": "CH09-e",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH09-e.md",
+            "expected_sha256": "28bd602f1846f313cdb4c3bde5eafa980b60dba29ce4408d5a1e7288948c73f8",
+            "sha256": "28bd602f1846f313cdb4c3bde5eafa980b60dba29ce4408d5a1e7288948c73f8",
+            "match": true
+          },
+          {
+            "chapter": "CH09-f",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH09-f.md",
+            "expected_sha256": "9e80c078a30d37dcea40c5d4024cebb0f08fcdad0ac747373d528a19f12c9cd6",
+            "sha256": "9e80c078a30d37dcea40c5d4024cebb0f08fcdad0ac747373d528a19f12c9cd6",
+            "match": true
+          },
+          {
+            "chapter": "CH09-g",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH09-g.md",
+            "expected_sha256": "a4861468f9182c2f829711c5f8c1c2544813f82fa0b423ead9d642f73b77dced",
+            "sha256": "a4861468f9182c2f829711c5f8c1c2544813f82fa0b423ead9d642f73b77dced",
+            "match": true
+          },
+          {
+            "chapter": "CH09-h",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH09-h.md",
+            "expected_sha256": "229de6895db7e8fd96112073fa557bdd9dc7f301c659bd7a2a82ba6536b6b993",
+            "sha256": "229de6895db7e8fd96112073fa557bdd9dc7f301c659bd7a2a82ba6536b6b993",
+            "match": true
+          },
+          {
+            "chapter": "CH09-i",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH09-i.md",
+            "expected_sha256": "4f707f000c575ea1a8bf818de7c27d4db15718e4de506180d8eba49879dcacc8",
+            "sha256": "4f707f000c575ea1a8bf818de7c27d4db15718e4de506180d8eba49879dcacc8",
+            "match": true
+          },
+          {
+            "chapter": "CH10-a",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH10-a.md",
+            "expected_sha256": "7888db915ea59899e6184240845671bc96d267e7614107da7d07fce624994ac9",
+            "sha256": "7888db915ea59899e6184240845671bc96d267e7614107da7d07fce624994ac9",
+            "match": true
+          },
+          {
+            "chapter": "CH10-b",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH10-b.md",
+            "expected_sha256": "7cc97074f212e29b674a6de7dbc71149836641fd04a4225218a12bb1f94354ae",
+            "sha256": "7cc97074f212e29b674a6de7dbc71149836641fd04a4225218a12bb1f94354ae",
+            "match": true
+          },
+          {
+            "chapter": "CH10-c",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH10-c.md",
+            "expected_sha256": "33a26651b2e31733d270c04abfdf21d02ba8623a2a6a09db847309a3cd537dff",
+            "sha256": "33a26651b2e31733d270c04abfdf21d02ba8623a2a6a09db847309a3cd537dff",
+            "match": true
+          },
+          {
+            "chapter": "CH10-d",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH10-d.md",
+            "expected_sha256": "6b731de81a7c8f913b143294ba8b68a76d48af9f03c91f2c01b42d12af8bcdd7",
+            "sha256": "6b731de81a7c8f913b143294ba8b68a76d48af9f03c91f2c01b42d12af8bcdd7",
+            "match": true
+          },
+          {
+            "chapter": "CH10-e",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH10-e.md",
+            "expected_sha256": "813b64e52c1b856fe43df9d7fb36b6d218312db5462fb735400e72f56ab3ae92",
+            "sha256": "813b64e52c1b856fe43df9d7fb36b6d218312db5462fb735400e72f56ab3ae92",
+            "match": true
+          },
+          {
+            "chapter": "CH11",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH11.md",
+            "expected_sha256": "0a6b2e3602ec4d3924967385d9242332b436bbb76ac421f48a1261f5522ae3c8",
+            "sha256": "0a6b2e3602ec4d3924967385d9242332b436bbb76ac421f48a1261f5522ae3c8",
+            "match": true
+          },
+          {
+            "chapter": "CH12-a",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH12-a.md",
+            "expected_sha256": "98d9028f5040c6f730bb983efd5f856bf02817fdd5132fb7dc8aa4cd45c6be80",
+            "sha256": "98d9028f5040c6f730bb983efd5f856bf02817fdd5132fb7dc8aa4cd45c6be80",
+            "match": true
+          },
+          {
+            "chapter": "CH12-b",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH12-b.md",
+            "expected_sha256": "b7661a928436bbf37b410692c8726e8595b314fabb48e7f12484f0e611f21d7e",
+            "sha256": "b7661a928436bbf37b410692c8726e8595b314fabb48e7f12484f0e611f21d7e",
+            "match": true
+          },
+          {
+            "chapter": "CH12-c",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH12-c.md",
+            "expected_sha256": "748cc70adc8595eb6400eb433729d9a605e8f32d4e64a0fe2de1fe8d5852c8fd",
+            "sha256": "748cc70adc8595eb6400eb433729d9a605e8f32d4e64a0fe2de1fe8d5852c8fd",
+            "match": true
+          },
+          {
+            "chapter": "CH12-d",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH12-d.md",
+            "expected_sha256": "d19cc5a79d6c7c25272d1063954dbd8e16f082fcc61d5cbe3ee17224b20fef47",
+            "sha256": "d19cc5a79d6c7c25272d1063954dbd8e16f082fcc61d5cbe3ee17224b20fef47",
+            "match": true
+          },
+          {
+            "chapter": "CH12-e",
+            "filename": "NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH12-e.md",
+            "expected_sha256": "74fe84ed14c945c2a49291ad6ac8e7b0468a38c22964b981d44c702cc847d896",
+            "sha256": "74fe84ed14c945c2a49291ad6ac8e7b0468a38c22964b981d44c702cc847d896",
+            "match": true
+          }
+        ],
+        "pass": true
+      },
+      "summary": "All six listed input fingerprints and all 66 chapter fingerprints match."
+    },
+    "R1": {
+      "result": "PASS",
+      "evidence": {
+        "pass": true,
+        "runs": [
+          {
+            "version": "v2",
+            "command": [
+              "python3",
+              "/workspace/scratch/e5a3e6c38c97/recheck_work/kit/nh_master21_assemble_v2.py",
+              "/workspace/scratch/e5a3e6c38c97/recheck_work/v8",
+              "/workspace/scratch/e5a3e6c38c97/recheck_work/v2_run"
+            ],
+            "output_directory_initially_empty": true,
+            "exit_code": 0,
+            "stderr": "",
+            "sha256": "24e9ccdb285a11186c76375196ec9806ecc05914f270dbcfca07dd425ed7a76a",
+            "expected_sha256": "24e9ccdb285a11186c76375196ec9806ecc05914f270dbcfca07dd425ed7a76a",
+            "bytes": 44770908,
+            "lf_lines": 361506,
+            "cr_bytes": 0,
+            "source_chapter_report_hashes_match_record": true,
+            "source_chapter_report_rows": 66,
+            "result_line_present": true,
+            "locator_count_line_present": true,
+            "pass": true
+          },
+          {
+            "version": "v3",
+            "command": [
+              "python3",
+              "/workspace/scratch/e5a3e6c38c97/upload/nh_master21_assemble_v3.py",
+              "/workspace/scratch/e5a3e6c38c97/recheck_work/v8",
+              "/workspace/scratch/e5a3e6c38c97/recheck_work/v3_run"
+            ],
+            "output_directory_initially_empty": true,
+            "exit_code": 0,
+            "stderr": "",
+            "sha256": "8d7c929c5715bb8138644f2a0a7513a89e4f98d98c6f0f05e068284f4cc5ed0d",
+            "expected_sha256": "8d7c929c5715bb8138644f2a0a7513a89e4f98d98c6f0f05e068284f4cc5ed0d",
+            "bytes": 44986552,
+            "lf_lines": 361508,
+            "cr_bytes": 0,
+            "source_chapter_report_hashes_match_record": true,
+            "source_chapter_report_rows": 66,
+            "result_line_present": true,
+            "locator_count_line_present": true,
+            "body_YES_lines": 66,
+            "rebuild_YES_lines": 66,
+            "contract_YES_lines": 66,
+            "reported_NO_lines": [],
+            "locator_owner_rows_9392": true,
+            "locator_outside_rows_zero": true,
+            "assembler_version_line": true,
+            "pass": true
+          }
+        ]
+      },
+      "summary": "Both books reproduced with their expected fingerprints, sizes and LF counts; both runs exit 0. Every required v3 report check passes."
+    },
+    "R2": {
+      "result": "PASS",
+      "evidence": {
+        "pass": true,
+        "expected_hunks": [
+          "3c3",
+          "6a7,23",
+          "29c46",
+          "152a170",
+          "179,180c197,203",
+          "184c207,208",
+          "217a242",
+          "219c244,246",
+          "268c295,303",
+          "271d305",
+          "272a307",
+          "275,276d309",
+          "284c317,321",
+          "308,309c345,347",
+          "311,312c349,353",
+          "318a360,366"
+        ],
+        "actual_hunks": [
+          "3c3",
+          "6a7,23",
+          "29c46",
+          "152a170",
+          "179,180c197,203",
+          "184c207,208",
+          "217a242",
+          "219c244,246",
+          "268c295,303",
+          "271d305",
+          "272a307",
+          "275,276d309",
+          "284c317,321",
+          "308,309c345,347",
+          "311,312c349,353",
+          "318a360,366"
+        ],
+        "complete_diff": "3c3\n< NH Master-21 assembler, version 2 (2026-10-04).\n---\n> NH Master-21 assembler, version 3 (2026-10-04).\n6a7,23\n> Changes from version 2 (nh_master21_assemble_v2.py, SHA-256\n> de0b5feafb2ec8f5dbdce7ec4a200974276565560035c8951d65dda63a8a71c2), made for\n> the two findings of NH_MASTER-21_FINAL_CHECK_REPORT_v1_2026-10-04.md:\n>   1. NH21-FINAL-002: the part locator's \"described in\" column names the\n>      chapter each part heading is in (that chapter's \"# \" title line).\n>      Version 2 wrote the last \"## \" heading it had passed, which was often\n>      carried over from an earlier chapter.\n>   2. NH21-FINAL-001: chapter bodies keep their trailing blank lines.\n>      Version 2 removed them without reporting it and then added one blank\n>      line before each separator, so a body ending in two blank lines lost\n>      one. The separator now adds a blank line only when the body does not\n>      already end with one. The integrity proof now checks each body with its\n>      line endings at its exact place in the output, and checks that the body,\n>      the moved CONTRACT CHECK block and the reported removals together\n>      rebuild the original chapter file byte for byte.\n> Nothing else changes: no chapter sentence is written, reworded or reordered.\n> \n29c46\n<     python3 nh_master21_assemble_v2.py <chapters_dir> <out_dir>\n---\n>     python3 nh_master21_assemble_v3.py <chapters_dir> <out_dir>\n152a170\n>     report.append('assembler: nh_master21_assemble_v3.py (version 3)')\n179,180c197,203\n<         while body and body[-1].strip() == '':\n<             body.pop()\n---\n>         # version 3: no trimming. Trailing blank lines stay part of the body.\n>         # Rebuild check: body + moved block + reported removals put back at\n>         # their original line numbers must give the original file exactly.\n>         rebuilt = list(body) + list(contract)\n>         for ln, text in removed:\n>             rebuilt.insert(ln - 1, text)\n>         rebuild_ok = '\\n'.join(rebuilt).encode('utf-8') == raw\n184c207,208\n<                          'sha': sha(raw), 'bytes': len(raw)})\n---\n>                          'sha': sha(raw), 'bytes': len(raw),\n>                          'rebuild_ok': rebuild_ok})\n217a242\n>         start = len(out)\n219c244,246\n<         out.append('')\n---\n>         c['range'] = (start, len(out))   # version 3: output lines of this body\n>         if not c['body'] or c['body'][-1].strip() != '':\n>             out.append('')               # only when the body has no blank line of its own\n268c295,303\n<     # part locator: ### headings whose first token looks like a part ID\n---\n>     # part locator: ### headings whose first token looks like a part ID.\n>     # Version 3: \"described in\" is the chapter whose body holds the heading,\n>     # taken from where the assembler placed that body (c['range']).\n>     owner_of = [None] * len(out)\n>     for c in chapters:\n>         a, z = c['range']\n>         label = c['title'].lstrip('# ').strip()\n>         for i in range(a, z):\n>             owner_of[i] = label\n271d305\n<     current = ''\n272a307\n>     outside = []\n275,276d309\n<         if line.startswith('## ') and not line.startswith('### '):\n<             current = line[3:].strip()\n284c317,321\n<                     loc.append(f'| {pid} | {current} | {head} |')\n---\n>                     where = owner_of[i]\n>                     if where is None:\n>                         where = '(not inside a chapter body)'\n>                         outside.append((pid, head))\n>                     loc.append(f'| {pid} | {where} | {head} |')\n308,309c345,347\n<         chunk = '\\n'.join(c['body'])\n<         present = chunk in final_text\n---\n>         a, z = c['range']\n>         chunk = '\\n'.join(c['body']) + '\\n'   # version 3: every body line with its line ending\n>         present = (chunk in final_text) and out[a:z] == c['body']\n311,312c349,353\n<         report.append(f\"  {c['name']}: body block of {len(chunk)} chars \"\n<                       f\"present verbatim in output: {'YES' if present else 'NO'}\")\n---\n>         report.append(f\"  {c['name']}: body block of {len(chunk)} chars, with its line endings, \"\n>                       f\"present verbatim at its place in output: {'YES' if present else 'NO'}\")\n>         all_ok &= c['rebuild_ok']\n>         report.append(f\"    body + moved block + reported removals rebuild the source file \"\n>                       f\"byte for byte: {'YES' if c['rebuild_ok'] else 'NO'}\")\n318a360,366\n>     report.append('')\n>     report.append('PART LOCATOR CHECK')\n>     report.append(f'  rows naming the chapter that holds the heading: {len(seen) - len(outside)}')\n>     report.append(f'  rows whose heading is not inside a chapter body: {len(outside)}')\n>     for pid, head in outside:\n>         report.append(f'    {pid}: {head}')\n>     all_ok &= not outside\n",
+        "review": "Complete textual diff reviewed against each allowed-content row; no changes outside those 16 hunks. The version-1 change history remains unchanged."
+      },
+      "summary": "The complete textual diff contains exactly the 16 allowed hunks, with only their allowed content."
+    },
+    "R3": {
+      "result": "PASS",
+      "evidence": {
+        "comparison": "Raw byte lines with their original line endings; no whitespace normalization.",
+        "locator_rows_changed": 9392,
+        "v2_locator_first_line": 803,
+        "v2_locator_last_line": 10194,
+        "v3_locator_first_line": 803,
+        "v3_locator_last_line": 10194,
+        "first_and_third_cells_unchanged": true,
+        "blank_insertions": [
+          {
+            "chapter": "CH12-b",
+            "v2_before_separator_line": 355461,
+            "v3_inserted_blank_line": 355461,
+            "v3_separator_line": 355462
+          },
+          {
+            "chapter": "CH12-e",
+            "v2_before_separator_line": 356746,
+            "v3_inserted_blank_line": 356747,
+            "v3_separator_line": 356748
+          }
+        ],
+        "other_differences": [],
+        "reversing_only_allowed_edits_reproduces_v2": true,
+        "reversed_sha256": "24e9ccdb285a11186c76375196ec9806ecc05914f270dbcfca07dd425ed7a76a"
+      },
+      "summary": "Exactly 9,392 locator middle cells change, plus the two permitted blank-line insertions. No other byte difference."
+    },
+    "R4": {
+      "result": "PASS",
+      "evidence": {
+        "source_card_ids": 9392,
+        "locator_rows": 9392,
+        "duplicate_source_ids": [],
+        "duplicate_locator_ids": [],
+        "missing_ids": [],
+        "extra_ids": [],
+        "chapter_mismatches": [],
+        "heading_mismatches": [],
+        "per_chapter_rows": {
+          "CH01": 51,
+          "CH02": 407,
+          "CH03-a": 709,
+          "CH03-b": 173,
+          "CH03-c": 352,
+          "CH03-d": 189,
+          "CH03-e": 241,
+          "CH03-f": 177,
+          "CH03-g": 88,
+          "CH03-h": 96,
+          "CH03-i": 20,
+          "CH03-j": 17,
+          "CH03-k": 27,
+          "CH03-l": 69,
+          "CH03-m": 56,
+          "CH03-n": 38,
+          "CH03-o": 24,
+          "CH03-p": 23,
+          "CH04-a": 56,
+          "CH04-b": 515,
+          "CH04-c": 56,
+          "CH04-d": 45,
+          "CH04-e": 54,
+          "CH05-a": 238,
+          "CH05-b": 175,
+          "CH05-c": 125,
+          "CH05-d": 319,
+          "CH05-e": 72,
+          "CH06-a": 50,
+          "CH06-b": 34,
+          "CH06-c": 103,
+          "CH06-d": 149,
+          "CH06-e": 27,
+          "CH06-f": 190,
+          "CH06-g": 255,
+          "CH07-a": 129,
+          "CH07-b": 74,
+          "CH07-c": 122,
+          "CH08-a": 482,
+          "CH08-b": 218,
+          "CH08-c": 79,
+          "CH08-d": 180,
+          "CH08-e": 45,
+          "CH08-f": 25,
+          "CH08-g": 63,
+          "CH09-a": 15,
+          "CH09-b": 33,
+          "CH09-c": 87,
+          "CH09-d": 221,
+          "CH09-e": 119,
+          "CH09-f": 140,
+          "CH09-g": 83,
+          "CH09-h": 194,
+          "CH09-i": 345,
+          "CH10-a": 85,
+          "CH10-b": 899,
+          "CH10-c": 48,
+          "CH10-d": 35,
+          "CH10-e": 384,
+          "CH11": 67
+        },
+        "six_examples": [
+          {
+            "id": "C-STORE",
+            "chapter_title": "Chapter 3-a — Group A: C-STORE",
+            "heading": "C-STORE — Accretive store & sealed roots (§6B)",
+            "joined_line": 1261,
+            "expected_chapter": "CH03-a",
+            "source_heading_line": 17,
+            "pass": true
+          },
+          {
+            "id": "C-ENGINE-AB",
+            "chapter_title": "Chapter 3-i — Group A: C-ENGINE-AB",
+            "heading": "C-ENGINE-AB — Engines A & B (§7C, §16)",
+            "joined_line": 3286,
+            "expected_chapter": "CH03-i",
+            "source_heading_line": 14,
+            "pass": true
+          },
+          {
+            "id": "C-7G",
+            "chapter_title": "Chapter 5-a — Group C: C-7G",
+            "heading": "C-7G — Meaning Engine Interior + Acceptance Check + Creation-aware mode (§7G)",
+            "joined_line": 4286,
+            "expected_chapter": "CH05-a",
+            "source_heading_line": 14,
+            "pass": true
+          },
+          {
+            "id": "C-WIS-SEP",
+            "chapter_title": "Chapter 9-a — Group G: C-WIS-SEP",
+            "heading": "C-WIS-SEP — Wellbeing / Identity / Security Separation (§25.5; cross-cutting)",
+            "joined_line": 7440,
+            "expected_chapter": "CH09-a",
+            "source_heading_line": 16,
+            "pass": true
+          },
+          {
+            "id": "C-16",
+            "chapter_title": "Chapter 10-b — Group H: C-16",
+            "heading": "C-16 — Model Layer (§16)",
+            "joined_line": 8762,
+            "expected_chapter": "CH10-b",
+            "source_heading_line": 36,
+            "pass": true
+          },
+          {
+            "id": "C-7GA.15",
+            "chapter_title": "Chapter 11 — The side paths",
+            "heading": "C-7GA.15 — B12 — Nightly-batch activation",
+            "joined_line": 10128,
+            "expected_chapter": "CH11",
+            "source_heading_line": 486,
+            "pass": true
+          }
+        ]
+      },
+      "summary": "All 9,392 unique locator IDs have the exact title of their containing chapter; zero mismatches. All six examples pass."
+    },
+    "R5": {
+      "result": "PASS",
+      "evidence": {
+        "full_bodies_verbatim": 66,
+        "source_rebuilds_match": 66,
+        "contract_blocks_verbatim": 66,
+        "whitelisted_metadata_removals": 264,
+        "reported_removal_list_exactly_matches": true,
+        "blank_line_distribution": {
+          "1": 64,
+          "2": 2
+        },
+        "appendix_at_expected_position": true,
+        "entire_appendix_byte_identical_to_v2": true,
+        "unclassified_added_content": 0,
+        "generated_additions_basis": "R3 byte equality to the previously classified v2 output, with the independently verified locator-cell changes; all 66 exact source bodies and their separators consumed in order; entire appendix unchanged and each source CONTRACT CHECK block verified inside its own appendix section.",
+        "chapters": [
+          {
+            "chapter": "CH00",
+            "body_start_line": 10198,
+            "body_bytes": 56346,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 575,
+            "contract_bytes": 3599,
+            "contract_sha256": "fa039859e5c55341a13ab35c9536300f8167258b5ad9518029ee564312b0f8cb",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 356758
+          },
+          {
+            "chapter": "CH01",
+            "body_start_line": 10770,
+            "body_bytes": 247893,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 2049,
+            "contract_bytes": 4069,
+            "contract_sha256": "e48532e0fdaf9f7e5b1ad7b979d534c5676e04f169ca3fa55224d737e17016ef",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 356812
+          },
+          {
+            "chapter": "CH02",
+            "body_start_line": 12816,
+            "body_bytes": 1206229,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 12080,
+            "contract_bytes": 5265,
+            "contract_sha256": "8fdbbb1ecdbe9d6dc9d900a02f66641958197844481bf6bcba48f2571019b806",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 356852
+          },
+          {
+            "chapter": "CH03-a",
+            "body_start_line": 24893,
+            "body_bytes": 1741401,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 20927,
+            "contract_bytes": 3936,
+            "contract_sha256": "cbd7509bb8ceeeee1517f38fdf0612f0297c1874a91bc3e7d07efd8bed3d0642",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 356892
+          },
+          {
+            "chapter": "CH03-b",
+            "body_start_line": 45817,
+            "body_bytes": 490357,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 5396,
+            "contract_bytes": 4350,
+            "contract_sha256": "516f512dbd7d0d9c7b4d450ff100dbf0ed5f24e06f9ffd5f24b9400a5c225a1f",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 356933
+          },
+          {
+            "chapter": "CH03-c",
+            "body_start_line": 51210,
+            "body_bytes": 1163449,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 10518,
+            "contract_bytes": 4508,
+            "contract_sha256": "a47e5db14f0e4841650d1b3afa8dccd393d0fb90bbc53e5e81d2f004c1fa5039",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 356975
+          },
+          {
+            "chapter": "CH03-d",
+            "body_start_line": 61725,
+            "body_bytes": 671234,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 5570,
+            "contract_bytes": 5328,
+            "contract_sha256": "60a6fdb11a2d73b1bcc8ed0cb1f61998204ac85b1bbc1b29bacddb9416ba5345",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 357021
+          },
+          {
+            "chapter": "CH03-e",
+            "body_start_line": 67292,
+            "body_bytes": 1089761,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 7331,
+            "contract_bytes": 4744,
+            "contract_sha256": "e5818e2d7103011e6ea51f2828896588f6826b12398ba4907ea9dfe8e4e5ed2f",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 357063
+          },
+          {
+            "chapter": "CH03-f",
+            "body_start_line": 74620,
+            "body_bytes": 770815,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 5402,
+            "contract_bytes": 4787,
+            "contract_sha256": "813177f1a0618da229d0fec4f5a26f700dada4030b76d2297c6c184905f523f2",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 357105
+          },
+          {
+            "chapter": "CH03-g",
+            "body_start_line": 80019,
+            "body_bytes": 447741,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 2975,
+            "contract_bytes": 4709,
+            "contract_sha256": "03ff016ee16dff6c3db9288ea636ab798c69845f7f5515af0a441e9da2a7f239",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 357147
+          },
+          {
+            "chapter": "CH03-h",
+            "body_start_line": 82991,
+            "body_bytes": 493393,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 3121,
+            "contract_bytes": 4758,
+            "contract_sha256": "7a6fda68dd79e7b6fe2c2c2619a09528012c060a8a693ad3f99d18bdc18b12ba",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 357189
+          },
+          {
+            "chapter": "CH03-i",
+            "body_start_line": 86109,
+            "body_bytes": 158944,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 1038,
+            "contract_bytes": 4023,
+            "contract_sha256": "21c4b69d080bbc934e3f803e0123d01be3edf8aa84d6951c3d4b4219053ada71",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 357231
+          },
+          {
+            "chapter": "CH03-j",
+            "body_start_line": 87144,
+            "body_bytes": 166432,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 976,
+            "contract_bytes": 5516,
+            "contract_sha256": "6d1f5b386fc6142aa4fb91f6a1b7b717a6a0e65348f642deda846defdb59960d",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 357300
+          },
+          {
+            "chapter": "CH03-k",
+            "body_start_line": 88117,
+            "body_bytes": 171425,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 1242,
+            "contract_bytes": 5358,
+            "contract_sha256": "4c7972cd4c660af2960ad81f4a81f494d969922638e91bf868c20d68dcb8c5d4",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 357377
+          },
+          {
+            "chapter": "CH03-l",
+            "body_start_line": 89356,
+            "body_bytes": 362281,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 2634,
+            "contract_bytes": 7010,
+            "contract_sha256": "15d4dfb60a6b49a4dc64222c439ffdac75d4e7d3daac6a8c5433802ff88fa47f",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 357454
+          },
+          {
+            "chapter": "CH03-m",
+            "body_start_line": 91987,
+            "body_bytes": 310484,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 2012,
+            "contract_bytes": 4977,
+            "contract_sha256": "8a7337cbb61ba150217961448a8383503722595c1ca0f9598952c2523823c0c9",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 357533
+          },
+          {
+            "chapter": "CH03-n",
+            "body_start_line": 93996,
+            "body_bytes": 283340,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 1816,
+            "contract_bytes": 5599,
+            "contract_sha256": "c2738363c62f0ab241415060d6d971f02beaf952653fe4aaea7289d27071e106",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 357610
+          },
+          {
+            "chapter": "CH03-o",
+            "body_start_line": 95809,
+            "body_bytes": 162095,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 1146,
+            "contract_bytes": 5264,
+            "contract_sha256": "3724e5234c49f71fa85e474cfc9fb92d6b4ed1dcca52a006a992d8cacd2743d9",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 357692
+          },
+          {
+            "chapter": "CH03-p",
+            "body_start_line": 96952,
+            "body_bytes": 154633,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 1099,
+            "contract_bytes": 5241,
+            "contract_sha256": "21b695b181e2c0c7b791c289351cbfe3d78a6d6237d9f153ef9c97420bbaf540",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 357769
+          },
+          {
+            "chapter": "CH04-a",
+            "body_start_line": 98048,
+            "body_bytes": 320480,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 2205,
+            "contract_bytes": 6715,
+            "contract_sha256": "38be6e5c5bede5552d57e05476b478842b7bff7099120024baa11c28a8ab6ff3",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 357846
+          },
+          {
+            "chapter": "CH04-b",
+            "body_start_line": 100250,
+            "body_bytes": 1603063,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 14183,
+            "contract_bytes": 6689,
+            "contract_sha256": "66686cbd54de5e6746c4aa8df5064adf47008dff56accd8f6cc2a5389b31f4b2",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 357925
+          },
+          {
+            "chapter": "CH04-c",
+            "body_start_line": 114430,
+            "body_bytes": 347643,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 2193,
+            "contract_bytes": 5954,
+            "contract_sha256": "213b45bf1383eaccaa629e6c1a3d843d192f0aa6fcc5bb050ee0b84c4925a2b7",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 358018
+          },
+          {
+            "chapter": "CH04-d",
+            "body_start_line": 116620,
+            "body_bytes": 235043,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 1773,
+            "contract_bytes": 5965,
+            "contract_sha256": "01c3e4eb10621b60bf75dcbee88b1a096e2bac920d11bf0eeb913eca875f1968",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 358112
+          },
+          {
+            "chapter": "CH04-e",
+            "body_start_line": 118390,
+            "body_bytes": 253895,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 1985,
+            "contract_bytes": 5947,
+            "contract_sha256": "18fc510b3e28250fdc5a0906d827c174a7ea5762ed6980795fe42013974a7dfb",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 358204
+          },
+          {
+            "chapter": "CH05-a",
+            "body_start_line": 120372,
+            "body_bytes": 813084,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 7241,
+            "contract_bytes": 7125,
+            "contract_sha256": "cffe0c7e141a85caff2276c15b415ea8a29eb77b1c818f52205a454d7d7d39fe",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 358296
+          },
+          {
+            "chapter": "CH05-b",
+            "body_start_line": 127610,
+            "body_bytes": 541608,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 5378,
+            "contract_bytes": 7011,
+            "contract_sha256": "5a8627933086623db20e2df2e07c558bad1c57688e315a14e40def0e92ff8ceb",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 358388
+          },
+          {
+            "chapter": "CH05-c",
+            "body_start_line": 132985,
+            "body_bytes": 413703,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 4061,
+            "contract_bytes": 7335,
+            "contract_sha256": "8b6dd1f65e005aa680561104a644d0c80785c87daf5e116cbbe703b82542202e",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 358480
+          },
+          {
+            "chapter": "CH05-d",
+            "body_start_line": 137043,
+            "body_bytes": 848498,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 9262,
+            "contract_bytes": 7178,
+            "contract_sha256": "0aafd12419909ed8bd105fbaf451d773d3a95f6b2a0e1c9c05cf6a9049295dea",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 358572
+          },
+          {
+            "chapter": "CH05-e",
+            "body_start_line": 146302,
+            "body_bytes": 321663,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 2505,
+            "contract_bytes": 7069,
+            "contract_sha256": "e25a9370b9ade6f18f615b3810866c585b9f4cd01e13ba027e0a62a31ac73cb8",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 358664
+          },
+          {
+            "chapter": "CH06-a",
+            "body_start_line": 148804,
+            "body_bytes": 282415,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 1935,
+            "contract_bytes": 4449,
+            "contract_sha256": "28909360af1e7937e626c2b299371baeb8cdad6bec62ccdef01c450d1d07f31d",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 358756
+          },
+          {
+            "chapter": "CH06-b",
+            "body_start_line": 150736,
+            "body_bytes": 257556,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 1542,
+            "contract_bytes": 4368,
+            "contract_sha256": "838259a919ca815045596f8fd9ee1970677018ef4e86b58bbe59314401b89284",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 358835
+          },
+          {
+            "chapter": "CH06-c",
+            "body_start_line": 152275,
+            "body_bytes": 532400,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 3499,
+            "contract_bytes": 4453,
+            "contract_sha256": "3436aa96344388ce79d6e6732af76cddd11cbdc5a8effcd616165dab09385452",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 358916
+          },
+          {
+            "chapter": "CH06-d",
+            "body_start_line": 155771,
+            "body_bytes": 734287,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 4733,
+            "contract_bytes": 4617,
+            "contract_sha256": "3b3c55e5d797c200f7df97c82141567904ee5fef2094a7b0d57e8b39a92f6c35",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 358997
+          },
+          {
+            "chapter": "CH06-e",
+            "body_start_line": 160501,
+            "body_bytes": 248893,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 1384,
+            "contract_bytes": 4250,
+            "contract_sha256": "f4aea309dbe93f6806c8cfb6f8e4decec3903c80bcb5881a72cfd977952b47d9",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 359078
+          },
+          {
+            "chapter": "CH06-f",
+            "body_start_line": 161882,
+            "body_bytes": 872371,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 5884,
+            "contract_bytes": 4429,
+            "contract_sha256": "b5cb5dd3fbb09b9448a3b164146347154e10dab1dfeecd3b30bb82cabbe29262",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 359159
+          },
+          {
+            "chapter": "CH06-g",
+            "body_start_line": 167763,
+            "body_bytes": 980187,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 7599,
+            "contract_bytes": 4537,
+            "contract_sha256": "252e666497c0c0f6d8d55529771a7b7e06a9cc4e9723ee8e4a22f4fb9e4ddf2d",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 359240
+          },
+          {
+            "chapter": "CH07-a",
+            "body_start_line": 175359,
+            "body_bytes": 552819,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 4344,
+            "contract_bytes": 4756,
+            "contract_sha256": "9fa9d31adf38687f15745d1203f311928ee7c960137a251941a1f611dcf9bf0c",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 359321
+          },
+          {
+            "chapter": "CH07-b",
+            "body_start_line": 179700,
+            "body_bytes": 364917,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 2817,
+            "contract_bytes": 4266,
+            "contract_sha256": "58d3f6754d93f275852a513600dd05ce76f28925e72a527c76ea69838eb22ba1",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 359403
+          },
+          {
+            "chapter": "CH07-c",
+            "body_start_line": 182514,
+            "body_bytes": 613273,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 4267,
+            "contract_bytes": 4278,
+            "contract_sha256": "4284e82f6625a8c13e124ceca47829de4398cc87f0335b1a633169d3518b86f5",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 359484
+          },
+          {
+            "chapter": "CH08-a",
+            "body_start_line": 186778,
+            "body_bytes": 1579678,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 14459,
+            "contract_bytes": 5042,
+            "contract_sha256": "9a0ac2519369ff7b7539890ce7bf82cd8b272c6bd82b89a966faa3b3545adf1a",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 359565
+          },
+          {
+            "chapter": "CH08-b",
+            "body_start_line": 201234,
+            "body_bytes": 627536,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 6803,
+            "contract_bytes": 4708,
+            "contract_sha256": "975763672de020fe23b5ee125abd02426d8cd621c463d67adaf6201b165c7be1",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 359647
+          },
+          {
+            "chapter": "CH08-c",
+            "body_start_line": 208034,
+            "body_bytes": 439013,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 3108,
+            "contract_bytes": 4294,
+            "contract_sha256": "fd62d57e8176439c37b900feb211ebf8943404f0c18d713bccc16d5febb8cafc",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 359728
+          },
+          {
+            "chapter": "CH08-d",
+            "body_start_line": 211139,
+            "body_bytes": 544971,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 5833,
+            "contract_bytes": 4339,
+            "contract_sha256": "30b00159c829e50facce38b09526dd3be0e9b328621550990a32f252b50d5ada",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 359809
+          },
+          {
+            "chapter": "CH08-e",
+            "body_start_line": 216969,
+            "body_bytes": 308101,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 2159,
+            "contract_bytes": 4061,
+            "contract_sha256": "dbc8a2c23b2a2e776b6f30e28bfd89c921529dce705c76a748362312507c29e3",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 359890
+          },
+          {
+            "chapter": "CH08-f",
+            "body_start_line": 219125,
+            "body_bytes": 280270,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 1618,
+            "contract_bytes": 4063,
+            "contract_sha256": "1c6962a878121e9a2608dcbf62d6f7c26f075912e4d28a4d011ecf86ef3536fd",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 359971
+          },
+          {
+            "chapter": "CH08-g",
+            "body_start_line": 220740,
+            "body_bytes": 385175,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 2720,
+            "contract_bytes": 4230,
+            "contract_sha256": "18ddd7179b73255d50bbedf4e7282b70403ebed4f2568c02f500296f894a61a1",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 360052
+          },
+          {
+            "chapter": "CH09-a",
+            "body_start_line": 223457,
+            "body_bytes": 254890,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 1419,
+            "contract_bytes": 5212,
+            "contract_sha256": "8703a4e66b6875bde4ff7f6d840fe39b38f5290628e87c2ed7f1233b5be5e5f5",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 360133
+          },
+          {
+            "chapter": "CH09-b",
+            "body_start_line": 224873,
+            "body_bytes": 326264,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 1900,
+            "contract_bytes": 5102,
+            "contract_sha256": "eca2711cdb36aa79451faa7bbfb44b0fc1c5f4b2efabce932b453daa2a050145",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 360208
+          },
+          {
+            "chapter": "CH09-c",
+            "body_start_line": 226770,
+            "body_bytes": 493113,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 3548,
+            "contract_bytes": 5629,
+            "contract_sha256": "11b3e68fbcbd4e137abff2921d700af56c50a53449c8c7c31f1b497e2560bb38",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 360284
+          },
+          {
+            "chapter": "CH09-d",
+            "body_start_line": 230315,
+            "body_bytes": 1031757,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 7469,
+            "contract_bytes": 6761,
+            "contract_sha256": "088332c43890f5bd5c845a3df8f2363ae4838e5a3982932d64d41b31bb73a55c",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 360339
+          },
+          {
+            "chapter": "CH09-e",
+            "body_start_line": 237781,
+            "body_bytes": 574491,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 4534,
+            "contract_bytes": 5790,
+            "contract_sha256": "0ad872326595591e75912ee7dd121d03162812e54c79204827a0b194ee17ac2a",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 360394
+          },
+          {
+            "chapter": "CH09-f",
+            "body_start_line": 242312,
+            "body_bytes": 851188,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 4926,
+            "contract_bytes": 5801,
+            "contract_sha256": "4a64c5dbe726a33182ff22630a3108ee09d76383f2dbeb3ab7033f7a6b04245c",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 360447
+          },
+          {
+            "chapter": "CH09-g",
+            "body_start_line": 247235,
+            "body_bytes": 725996,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 3454,
+            "contract_bytes": 5412,
+            "contract_sha256": "0fa3666d60ba1cc73039b0c642d17af15a948c4d098df79d795c0d2941ae48f4",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 360500
+          },
+          {
+            "chapter": "CH09-h",
+            "body_start_line": 250686,
+            "body_bytes": 889063,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 6415,
+            "contract_bytes": 6361,
+            "contract_sha256": "c5cbfcfcb12f7bec731656025c58d6ab226be31ba3200a8c2f29618b72b257e0",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 360555
+          },
+          {
+            "chapter": "CH09-i",
+            "body_start_line": 257098,
+            "body_bytes": 1290259,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 10668,
+            "contract_bytes": 6941,
+            "contract_sha256": "1f72df40484cc07721b96e621f490b8d004a42d0fc9fa16e589b3a1382bc333e",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 360610
+          },
+          {
+            "chapter": "CH10-a",
+            "body_start_line": 267763,
+            "body_bytes": 520826,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 3580,
+            "contract_bytes": 7305,
+            "contract_sha256": "5aa9d2741fc12271783e485eedc43fb492c36fa32c83cc9dae81dccdd2bc9605",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 360665
+          },
+          {
+            "chapter": "CH10-b",
+            "body_start_line": 271340,
+            "body_bytes": 2921188,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 24574,
+            "contract_bytes": 5177,
+            "contract_sha256": "26c8c00dd8226ca2a0cde63c513b200d60e9e1e814f80ecc73d6f9c7b9ca7ede",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 360720
+          },
+          {
+            "chapter": "CH10-c",
+            "body_start_line": 295911,
+            "body_bytes": 448863,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 2740,
+            "contract_bytes": 3922,
+            "contract_sha256": "370d4395680452eab84eb81f7eeb26afe0c97a93f07c2ba4b330ac8598b060ab",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 360799
+          },
+          {
+            "chapter": "CH10-d",
+            "body_start_line": 298648,
+            "body_bytes": 439543,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 2431,
+            "contract_bytes": 4017,
+            "contract_sha256": "8575f8910538a1a9e7252eb170b05bc39d3ee25a5dc8483091602b9590ad4817",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 360878
+          },
+          {
+            "chapter": "CH10-e",
+            "body_start_line": 301076,
+            "body_bytes": 1369742,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 12001,
+            "contract_bytes": 5087,
+            "contract_sha256": "ffc824acb48acd2ec03e8719aa306d54dc131901a9093a260f8a597dfdef3514",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 360957
+          },
+          {
+            "chapter": "CH11",
+            "body_start_line": 313074,
+            "body_bytes": 2372239,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 15232,
+            "contract_bytes": 5257,
+            "contract_sha256": "8660296253bae173fd53d19043417a8e6122c528d5d0656d76521cd82cd45fbe",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 361036
+          },
+          {
+            "chapter": "CH12-a",
+            "body_start_line": 328303,
+            "body_bytes": 2682847,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 27005,
+            "contract_bytes": 7846,
+            "contract_sha256": "90012fba73db1fd27dc7af29950d411146f7e64b44b1aeaac6746ec7332ba03f",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 361078
+          },
+          {
+            "chapter": "CH12-b",
+            "body_start_line": 355305,
+            "body_bytes": 16552,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 2,
+            "expected_trailing_blank_lines": 2,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 162,
+            "contract_bytes": 3378,
+            "contract_sha256": "c5ea00e714f1a7a21992eff360c2d0eb25f97fbb9fcbaa4e3551b9ad91b3730d",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 361171
+          },
+          {
+            "chapter": "CH12-c",
+            "body_start_line": 355464,
+            "body_bytes": 18357,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 167,
+            "contract_bytes": 4025,
+            "contract_sha256": "53ac6fdec0c8b59b6204d28119ba35f9e173482727e0239a20871620ad61f0b3",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 361240
+          },
+          {
+            "chapter": "CH12-d",
+            "body_start_line": 355628,
+            "body_bytes": 95931,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 1,
+            "expected_trailing_blank_lines": 1,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 316,
+            "contract_bytes": 3278,
+            "contract_sha256": "d752acc08d260131e5a024ad323823dffb7d9ac093b9a4dd649b5867dc2653fa",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 361308
+          },
+          {
+            "chapter": "CH12-e",
+            "body_start_line": 355941,
+            "body_bytes": 716513,
+            "body_verbatim_at_exact_position": true,
+            "source_trailing_blank_lines": 2,
+            "expected_trailing_blank_lines": 2,
+            "only_expected_separator_after_body": true,
+            "rebuild_equals_original_bytes": true,
+            "contract_source_start_line": 812,
+            "contract_bytes": 19528,
+            "contract_sha256": "7c95712b9b98336890e9f022641255e42495a0448f17571148a8f737c81ecdb7",
+            "contract_verbatim_in_its_own_appendix_section": true,
+            "contract_output_start_line": 361372
+          }
+        ],
+        "removed_metadata_lines": [
+          {
+            "chapter": "CH00",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH00.md`  "
+          },
+          {
+            "chapter": "CH00",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH00",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH00",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`"
+          },
+          {
+            "chapter": "CH01",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH01.md`  "
+          },
+          {
+            "chapter": "CH01",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH01",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH01",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`"
+          },
+          {
+            "chapter": "CH02",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH02.md`  "
+          },
+          {
+            "chapter": "CH02",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH02",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH02",
+            "source_line": 6,
+            "text": "**Source commit:** `855459fc6674dfe3a1f310f3d1690a9e7db59405`"
+          },
+          {
+            "chapter": "CH03-a",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-a.md`  "
+          },
+          {
+            "chapter": "CH03-a",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH03-a",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH03-a",
+            "source_line": 6,
+            "text": "**Source commit:** `855459fc6674dfe3a1f310f3d1690a9e7db59405`"
+          },
+          {
+            "chapter": "CH03-b",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-b.md`  "
+          },
+          {
+            "chapter": "CH03-b",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH03-b",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH03-b",
+            "source_line": 6,
+            "text": "**Source commit:** `855459fc6674dfe3a1f310f3d1690a9e7db59405`"
+          },
+          {
+            "chapter": "CH03-c",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-c.md`  "
+          },
+          {
+            "chapter": "CH03-c",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH03-c",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH03-c",
+            "source_line": 6,
+            "text": "**Source commit:** `855459fc6674dfe3a1f310f3d1690a9e7db59405`"
+          },
+          {
+            "chapter": "CH03-d",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-d.md`  "
+          },
+          {
+            "chapter": "CH03-d",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH03-d",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH03-d",
+            "source_line": 6,
+            "text": "**Source commit:** `855459fc6674dfe3a1f310f3d1690a9e7db59405`"
+          },
+          {
+            "chapter": "CH03-e",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-e.md`  "
+          },
+          {
+            "chapter": "CH03-e",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH03-e",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH03-e",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`"
+          },
+          {
+            "chapter": "CH03-f",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-f.md`  "
+          },
+          {
+            "chapter": "CH03-f",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH03-f",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH03-f",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`"
+          },
+          {
+            "chapter": "CH03-g",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-g.md`  "
+          },
+          {
+            "chapter": "CH03-g",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH03-g",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH03-g",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`"
+          },
+          {
+            "chapter": "CH03-h",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-h.md`  "
+          },
+          {
+            "chapter": "CH03-h",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH03-h",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH03-h",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`"
+          },
+          {
+            "chapter": "CH03-i",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-i.md`  "
+          },
+          {
+            "chapter": "CH03-i",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH03-i",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH03-i",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`"
+          },
+          {
+            "chapter": "CH03-j",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-j.md`  "
+          },
+          {
+            "chapter": "CH03-j",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH03-j",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH03-j",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`"
+          },
+          {
+            "chapter": "CH03-k",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-k.md`  "
+          },
+          {
+            "chapter": "CH03-k",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH03-k",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH03-k",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`"
+          },
+          {
+            "chapter": "CH03-l",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-l.md`  "
+          },
+          {
+            "chapter": "CH03-l",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH03-l",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH03-l",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`"
+          },
+          {
+            "chapter": "CH03-m",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-m.md`  "
+          },
+          {
+            "chapter": "CH03-m",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH03-m",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH03-m",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`"
+          },
+          {
+            "chapter": "CH03-n",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-n.md`  "
+          },
+          {
+            "chapter": "CH03-n",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH03-n",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH03-n",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`"
+          },
+          {
+            "chapter": "CH03-o",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-o.md`  "
+          },
+          {
+            "chapter": "CH03-o",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH03-o",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH03-o",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`"
+          },
+          {
+            "chapter": "CH03-p",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH03-p.md`  "
+          },
+          {
+            "chapter": "CH03-p",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH03-p",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH03-p",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`"
+          },
+          {
+            "chapter": "CH04-a",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH04-a.md`  "
+          },
+          {
+            "chapter": "CH04-a",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH04-a",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH04-a",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`"
+          },
+          {
+            "chapter": "CH04-b",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH04-b.md`  "
+          },
+          {
+            "chapter": "CH04-b",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE — Writing 1, CH04-b  "
+          },
+          {
+            "chapter": "CH04-b",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH04-b",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`"
+          },
+          {
+            "chapter": "CH04-c",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH04-c.md`  "
+          },
+          {
+            "chapter": "CH04-c",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH04-c",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH04-c",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`"
+          },
+          {
+            "chapter": "CH04-d",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH04-d.md`  "
+          },
+          {
+            "chapter": "CH04-d",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH04-d",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH04-d",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`"
+          },
+          {
+            "chapter": "CH04-e",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH04-e.md`  "
+          },
+          {
+            "chapter": "CH04-e",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH04-e",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH04-e",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`"
+          },
+          {
+            "chapter": "CH05-a",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH05-a.md`  "
+          },
+          {
+            "chapter": "CH05-a",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH05-a",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH05-a",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`"
+          },
+          {
+            "chapter": "CH05-b",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH05-b.md`  "
+          },
+          {
+            "chapter": "CH05-b",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH05-b",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH05-b",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`"
+          },
+          {
+            "chapter": "CH05-c",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH05-c.md`  "
+          },
+          {
+            "chapter": "CH05-c",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH05-c",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH05-c",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`"
+          },
+          {
+            "chapter": "CH05-d",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH05-d.md`  "
+          },
+          {
+            "chapter": "CH05-d",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH05-d",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH05-d",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`"
+          },
+          {
+            "chapter": "CH05-e",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH05-e.md`  "
+          },
+          {
+            "chapter": "CH05-e",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH05-e",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH05-e",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`"
+          },
+          {
+            "chapter": "CH06-a",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH06-a.md`  "
+          },
+          {
+            "chapter": "CH06-a",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH06-a",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH06-a",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH06-b",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH06-b.md`  "
+          },
+          {
+            "chapter": "CH06-b",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH06-b",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH06-b",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH06-c",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH06-c.md`  "
+          },
+          {
+            "chapter": "CH06-c",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH06-c",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH06-c",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH06-d",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH06-d.md`  "
+          },
+          {
+            "chapter": "CH06-d",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH06-d",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH06-d",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH06-e",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH06-e.md`  "
+          },
+          {
+            "chapter": "CH06-e",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH06-e",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH06-e",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH06-f",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH06-f.md`  "
+          },
+          {
+            "chapter": "CH06-f",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH06-f",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH06-f",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH06-g",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH06-g.md`  "
+          },
+          {
+            "chapter": "CH06-g",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH06-g",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH06-g",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH07-a",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH07-a.md`  "
+          },
+          {
+            "chapter": "CH07-a",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH07-a",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH07-a",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH07-b",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH07-b.md`  "
+          },
+          {
+            "chapter": "CH07-b",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH07-b",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH07-b",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH07-c",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH07-c.md`  "
+          },
+          {
+            "chapter": "CH07-c",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH07-c",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH07-c",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH08-a",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH08-a.md`  "
+          },
+          {
+            "chapter": "CH08-a",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH08-a",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH08-a",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH08-b",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH08-b.md`  "
+          },
+          {
+            "chapter": "CH08-b",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH08-b",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH08-b",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH08-c",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH08-c.md`  "
+          },
+          {
+            "chapter": "CH08-c",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH08-c",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH08-c",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH08-d",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH08-d.md`  "
+          },
+          {
+            "chapter": "CH08-d",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH08-d",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH08-d",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH08-e",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH08-e.md`  "
+          },
+          {
+            "chapter": "CH08-e",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH08-e",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH08-e",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH08-f",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH08-f.md`  "
+          },
+          {
+            "chapter": "CH08-f",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH08-f",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH08-f",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH08-g",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH08-g.md`  "
+          },
+          {
+            "chapter": "CH08-g",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH08-g",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH08-g",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH09-a",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH09-a.md`  "
+          },
+          {
+            "chapter": "CH09-a",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH09-a",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH09-a",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH09-b",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH09-b.md`  "
+          },
+          {
+            "chapter": "CH09-b",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH09-b",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH09-b",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH09-c",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH09-c.md`  "
+          },
+          {
+            "chapter": "CH09-c",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH09-c",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH09-c",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH09-d",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH09-d.md`  "
+          },
+          {
+            "chapter": "CH09-d",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH09-d",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH09-d",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH09-e",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH09-e.md`  "
+          },
+          {
+            "chapter": "CH09-e",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH09-e",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH09-e",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH09-f",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH09-f.md`  "
+          },
+          {
+            "chapter": "CH09-f",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH09-f",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH09-f",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH09-g",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH09-g.md`  "
+          },
+          {
+            "chapter": "CH09-g",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH09-g",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH09-g",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH09-h",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH09-h.md`  "
+          },
+          {
+            "chapter": "CH09-h",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH09-h",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH09-h",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH09-i",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH09-i.md`  "
+          },
+          {
+            "chapter": "CH09-i",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH09-i",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH09-i",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH10-a",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH10-a.md`  "
+          },
+          {
+            "chapter": "CH10-a",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH10-a",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH10-a",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH10-b",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH10-b.md`  "
+          },
+          {
+            "chapter": "CH10-b",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH10-b",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH10-b",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH10-c",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH10-c.md`  "
+          },
+          {
+            "chapter": "CH10-c",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH10-c",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH10-c",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH10-d",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH10-d.md`  "
+          },
+          {
+            "chapter": "CH10-d",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH10-d",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH10-d",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH10-e",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH10-e.md`  "
+          },
+          {
+            "chapter": "CH10-e",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH10-e",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH10-e",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH11",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH11.md`  "
+          },
+          {
+            "chapter": "CH11",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH11",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH11",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH12-a",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH12-a.md`  "
+          },
+          {
+            "chapter": "CH12-a",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH12-a",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH12-a",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH12-b",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH12-b.md`  "
+          },
+          {
+            "chapter": "CH12-b",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH12-b",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH12-b",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH12-c",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH12-c.md`  "
+          },
+          {
+            "chapter": "CH12-c",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH12-c",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH12-c",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH12-d",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH12-d.md`  "
+          },
+          {
+            "chapter": "CH12-d",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH12-d",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH12-d",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          },
+          {
+            "chapter": "CH12-e",
+            "source_line": 3,
+            "text": "**Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH12-e.md`  "
+          },
+          {
+            "chapter": "CH12-e",
+            "source_line": 4,
+            "text": "**Status:** CANDIDATE  "
+          },
+          {
+            "chapter": "CH12-e",
+            "source_line": 5,
+            "text": "**Source repository:** `nesgeva/NH-GOVERNANCE`  "
+          },
+          {
+            "chapter": "CH12-e",
+            "source_line": 6,
+            "text": "**Source commit:** `6a7160ba688ba4e433a31899162815df7e2bab17`  "
+          }
+        ]
+      },
+      "summary": "All 66 bodies, including boundary blanks, and all 66 moved blocks are verbatim; only the 264 listed metadata lines are removed. No unclassified additions."
+    }
+  },
+  "findings": [],
+  "carry_over": {
+    "basis": "R3 passes and the freshly reproduced v2 book matches the previously checked SHA-256. All lines other than the 9,392 locator middle cells and two restored blank lines are byte-identical.",
+    "recount_performed": false,
+    "carried_results": {
+      "current_totals": 726,
+      "B2_notes": 66,
+      "totals_tables": 66,
+      "source_pin_rows": 66,
+      "contents_entries": 718
+    }
+  },
+  "closed_findings": {
+    "NH21-FINAL-002": true,
+    "NH21-FINAL-001": true
+  },
+  "method": "Separate checker code for R3-R5; no assembler imports or function reuse; no chapter, tool, or joined-book edits.",
+  "checker_sha256": "f421091e0d4cc7edc510ce136cee89c11720cbe055676e0c7882ffbf6407b431",
+  "schema_version": "1.0",
+  "brief": "NH_MASTER-21_FINAL_RECHECK_BRIEF_v1_2026-10-04.md",
+  "checked_at_utc": "2026-10-04T21:25:28.807177+00:00",
+  "deliverables": [
+    "NH_MASTER-21_FINAL_RECHECK_REPORT_v1_2026-10-04.md",
+    "NH_MASTER-21_FINAL_RECHECK_FINDINGS_v1_2026-10-04.json"
+  ],
+  "source_fixes_made": false
+}

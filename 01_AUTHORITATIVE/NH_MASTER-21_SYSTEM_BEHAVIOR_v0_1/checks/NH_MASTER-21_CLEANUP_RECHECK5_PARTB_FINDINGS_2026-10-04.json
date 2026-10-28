@@ -1,0 +1,571 @@
+[
+  {
+    "id": "PARTB-RECHECK5-001",
+    "chapter": "CH04-c",
+    "line": [
+      2199,
+      2222
+    ],
+    "item": null,
+    "stage": 4,
+    "problem": "Two unchanged CH04-c totals omit the two new TOGETHER lines: populated fields says 484 instead of 486; external relationship lines says 77 instead of 79.",
+    "rule": "Brief v5 Stages 1 and 4; brief v4.1 Ness decision B: per-chapter totals are notes, deferred to joining; all design content and local register entries remain must-pass.",
+    "evidence": {
+      "occurrences": [
+        {
+          "chapter": "CH04-c",
+          "line": 2199,
+          "text": "§3 exactly one stamp per line: PASS — 56 headers, 484 populated field lines and 99 USED BY rows checked; 0 BUILT field lines. Named-card status governs relationships. The 04 receipt/placement record provides the approved-concept evidence.",
+          "metric": "populated_fields",
+          "stated": 484,
+          "recount": 486,
+          "method": "Count every populated physical box line.",
+          "old_v3_line": 2197,
+          "v4_line": 2199
+        },
+        {
+          "chapter": "CH04-c",
+          "line": 2222,
+          "text": "| external_relationships | 77 |",
+          "metric": "external_relationships",
+          "stated": 77,
+          "recount": 79,
+          "method": "CH04-c explicitly counts named relationship lines; count each external TOGETHER line once.",
+          "old_v3_line": 2220,
+          "v4_line": 2222
+        }
+      ],
+      "new_lines": [
+        {
+          "item": "R5-09974",
+          "line": 96,
+          "text": "- Gated by: DESIGNED — C-7B.9 — Wonder / simulation boundary: keeps Wonder on the deep side within the same scratch-space boundary (CY-B). [V10 §13] [V10 §11 item 30] [MAP C-13]"
+        },
+        {
+          "item": "R5-09975",
+          "line": 93,
+          "text": "- Fed by: DESIGNED — C-7B.10.1 — Browsable Log: makes the engine's recorded activity browsable without permitting edits (CY-B). [V10 §7B / Part 7 — THE LOG] [V10 §13]"
+        }
+      ],
+      "nonblocking": true,
+      "prior_finding_v4": "PARTB-RECHECK4-002",
+      "disposition_v5": "STILL OPEN — NOTE; deferred to joining under decision B"
+    },
+    "severity": "note"
+  },
+  {
+    "id": "PARTB-RECHECK5-002",
+    "chapter": [
+      "CH05-a",
+      "CH05-b"
+    ],
+    "line": [
+      6776,
+      4921
+    ],
+    "item": null,
+    "stage": 4,
+    "problem": "The retained inventory summaries still assert that no plain gate remains, although each chapter has one and its numeric table now correctly says 1.",
+    "rule": "Brief v5 Stages 1 and 4; brief v4.1 Ness decision B: per-chapter totals are notes, deferred to joining; all design content and local register entries remain must-pass.",
+    "evidence": {
+      "occurrences": [
+        {
+          "assertion": {
+            "chapter": "CH05-a",
+            "line": 6776,
+            "text": "All populated TOGETHER lines name an owning or connected card; no plain gate remains."
+          },
+          "implied_plain_gate_total": 0,
+          "actual_plain_gate_total": 1,
+          "actual_card": "C-7G.7",
+          "actual_gate": {
+            "line": 517,
+            "label": "Gated by",
+            "value": "DESIGNED — A creation record is confirmed only through Ness's explicit confirmation or later words or actions clearly demonstrating adoption; provisional capture needs neither. [V10 §7G / CREATION-AWARE MODE]",
+            "text": "- Gated by: DESIGNED — A creation record is confirmed only through Ness's explicit confirmation or later words or actions clearly demonstrating adoption; provisional capture needs neither. [V10 §7G / CREATION-AWARE MODE]"
+          },
+          "current_correct_count_table": {
+            "chapter": "CH05-a",
+            "line": 7275,
+            "text": "| plain_gates | 1 |"
+          }
+        },
+        {
+          "assertion": {
+            "chapter": "CH05-b",
+            "line": 4921,
+            "text": "All populated TOGETHER lines name an owning or connected card; no plain gate remains."
+          },
+          "implied_plain_gate_total": 0,
+          "actual_plain_gate_total": 1,
+          "actual_card": "C-7GA.3.1",
+          "actual_gate": {
+            "line": 165,
+            "label": "Gated by",
+            "value": "DESIGNED — Ness deliberately enables the queue before it activates. [V10 §7G-A / QUEUE ACTIVATION BOUNDARY]",
+            "text": "- Gated by: DESIGNED — Ness deliberately enables the queue before it activates. [V10 §7G-A / QUEUE ACTIVATION BOUNDARY]"
+          },
+          "current_correct_count_table": {
+            "chapter": "CH05-b",
+            "line": 5412,
+            "text": "| plain_gates | 1 |"
+          }
+        }
+      ],
+      "prior_findings": [
+        "PARTB-RECHECK3-006",
+        "PARTB-RECHECK3-007"
+      ],
+      "assessment": "Both existing plain gates remain source-defined personal/confirmation conditions. The note concerns the inventory summary, not either gate.",
+      "nonblocking": true,
+      "prior_finding_v4": "PARTB-RECHECK4-003",
+      "disposition_v5": "STILL OPEN — NOTE; deferred to joining under decision B"
+    },
+    "severity": "note"
+  },
+  {
+    "id": "PARTB-RECHECK5-003",
+    "chapter": [
+      "CH04-a",
+      "CH04-b",
+      "CH04-c",
+      "CH04-d",
+      "CH04-e",
+      "CH05-a",
+      "CH05-b",
+      "CH05-c",
+      "CH05-d",
+      "CH05-e",
+      "CH06-a",
+      "CH06-b",
+      "CH06-c",
+      "CH06-d",
+      "CH06-e",
+      "CH06-f",
+      "CH06-g",
+      "CH07-a",
+      "CH07-b",
+      "CH07-c",
+      "CH08-a",
+      "CH08-b",
+      "CH08-c",
+      "CH08-d",
+      "CH08-e",
+      "CH08-f",
+      "CH08-g"
+    ],
+    "line": [
+      2236,
+      2237,
+      14240,
+      2229,
+      2251,
+      1809,
+      1831,
+      2021,
+      2043,
+      7277,
+      7299,
+      5414,
+      5436,
+      4097,
+      4119,
+      9298,
+      9320,
+      2541,
+      2563,
+      1973,
+      1585,
+      3542,
+      4776,
+      1427,
+      5927,
+      7642,
+      4387,
+      2860,
+      4310,
+      14502,
+      6846,
+      3151,
+      5876,
+      2202,
+      1661,
+      2763
+    ],
+    "item": null,
+    "stage": 1,
+    "problem": "The 36 historical selected source-name and step-review counters remain unchanged and have no supplied exact selection rule. This remains a nonblocking note, deferred under decision B.",
+    "rule": "Brief v5 Stages 1 and 4; brief v4.1 Ness decision B: per-chapter totals are notes, deferred to joining; all design content and local register entries remain must-pass.",
+    "evidence": {
+      "prior_finding": "PARTB-RECHECK3-019",
+      "counters": [
+        {
+          "chapter": "CH04-a",
+          "v3_line": 2236,
+          "v4_line": 2236,
+          "metric": "step_cards",
+          "stated": 31,
+          "text": "| step_cards | 31 |",
+          "unchanged": true,
+          "v5_line": 2236
+        },
+        {
+          "chapter": "CH04-a",
+          "v3_line": 2237,
+          "v4_line": 2237,
+          "metric": "source_names_checked",
+          "stated": 72,
+          "text": "| source_names_checked | 72 |",
+          "unchanged": true,
+          "v5_line": 2237
+        },
+        {
+          "chapter": "CH04-b",
+          "v3_line": 14245,
+          "v4_line": 14245,
+          "metric": "source_names_checked",
+          "stated": 338,
+          "text": "| source_names_checked | 338 |",
+          "unchanged": true,
+          "v5_line": 14240
+        },
+        {
+          "chapter": "CH04-c",
+          "v3_line": 2227,
+          "v4_line": 2229,
+          "metric": "explicit_step_cards_checked",
+          "stated": 26,
+          "text": "| explicit_step_cards_checked | 26 |",
+          "unchanged": true,
+          "v5_line": 2229
+        },
+        {
+          "chapter": "CH04-c",
+          "v3_line": 2249,
+          "v4_line": 2251,
+          "metric": "source_names_checked",
+          "stated": 4,
+          "text": "| source_names_checked | 4 |",
+          "unchanged": true,
+          "v5_line": 2251
+        },
+        {
+          "chapter": "CH04-d",
+          "v3_line": 1809,
+          "v4_line": 1809,
+          "metric": "explicit_step_cards_checked",
+          "stated": 15,
+          "text": "| explicit_step_cards_checked | 15 |",
+          "unchanged": true,
+          "v5_line": 1809
+        },
+        {
+          "chapter": "CH04-d",
+          "v3_line": 1831,
+          "v4_line": 1831,
+          "metric": "source_names_checked",
+          "stated": 16,
+          "text": "| source_names_checked | 16 |",
+          "unchanged": true,
+          "v5_line": 1831
+        },
+        {
+          "chapter": "CH04-e",
+          "v3_line": 2021,
+          "v4_line": 2021,
+          "metric": "explicit_step_cards_checked",
+          "stated": 38,
+          "text": "| explicit_step_cards_checked | 38 |",
+          "unchanged": true,
+          "v5_line": 2021
+        },
+        {
+          "chapter": "CH04-e",
+          "v3_line": 2043,
+          "v4_line": 2043,
+          "metric": "source_names_checked",
+          "stated": 17,
+          "text": "| source_names_checked | 17 |",
+          "unchanged": true,
+          "v5_line": 2043
+        },
+        {
+          "chapter": "CH05-a",
+          "v3_line": 7276,
+          "v4_line": 7277,
+          "metric": "explicit_step_cards_checked",
+          "stated": 72,
+          "text": "| explicit_step_cards_checked | 72 |",
+          "unchanged": true,
+          "v5_line": 7277
+        },
+        {
+          "chapter": "CH05-a",
+          "v3_line": 7298,
+          "v4_line": 7299,
+          "metric": "source_names_checked",
+          "stated": 158,
+          "text": "| source_names_checked | 158 |",
+          "unchanged": true,
+          "v5_line": 7299
+        },
+        {
+          "chapter": "CH05-b",
+          "v3_line": 5413,
+          "v4_line": 5414,
+          "metric": "explicit_step_cards_checked",
+          "stated": 78,
+          "text": "| explicit_step_cards_checked | 78 |",
+          "unchanged": true,
+          "v5_line": 5414
+        },
+        {
+          "chapter": "CH05-b",
+          "v3_line": 5435,
+          "v4_line": 5436,
+          "metric": "source_names_checked",
+          "stated": 93,
+          "text": "| source_names_checked | 93 |",
+          "unchanged": true,
+          "v5_line": 5436
+        },
+        {
+          "chapter": "CH05-c",
+          "v3_line": 4095,
+          "v4_line": 4097,
+          "metric": "explicit_step_cards_checked",
+          "stated": 37,
+          "text": "| explicit_step_cards_checked | 37 |",
+          "unchanged": true,
+          "v5_line": 4097
+        },
+        {
+          "chapter": "CH05-c",
+          "v3_line": 4117,
+          "v4_line": 4119,
+          "metric": "source_names_checked",
+          "stated": 39,
+          "text": "| source_names_checked | 39 |",
+          "unchanged": true,
+          "v5_line": 4119
+        },
+        {
+          "chapter": "CH05-d",
+          "v3_line": 9296,
+          "v4_line": 9298,
+          "metric": "explicit_step_cards_checked",
+          "stated": 182,
+          "text": "| explicit_step_cards_checked | 182 |",
+          "unchanged": true,
+          "v5_line": 9298
+        },
+        {
+          "chapter": "CH05-d",
+          "v3_line": 9318,
+          "v4_line": 9320,
+          "metric": "source_names_checked",
+          "stated": 42,
+          "text": "| source_names_checked | 42 |",
+          "unchanged": true,
+          "v5_line": 9320
+        },
+        {
+          "chapter": "CH05-e",
+          "v3_line": 2541,
+          "v4_line": 2541,
+          "metric": "explicit_step_cards_checked",
+          "stated": 51,
+          "text": "| explicit_step_cards_checked | 51 |",
+          "unchanged": true,
+          "v5_line": 2541
+        },
+        {
+          "chapter": "CH05-e",
+          "v3_line": 2563,
+          "v4_line": 2563,
+          "metric": "source_names_checked",
+          "stated": 20,
+          "text": "| source_names_checked | 20 |",
+          "unchanged": true,
+          "v5_line": 2563
+        },
+        {
+          "chapter": "CH06-a",
+          "v3_line": 1973,
+          "v4_line": 1973,
+          "metric": "source_names_checked",
+          "stated": 42,
+          "text": "| source_names_checked | 42 |",
+          "unchanged": true,
+          "v5_line": 1973
+        },
+        {
+          "chapter": "CH06-b",
+          "v3_line": 1585,
+          "v4_line": 1585,
+          "metric": "source_names_checked",
+          "stated": 38,
+          "text": "| source_names_checked | 38 |",
+          "unchanged": true,
+          "v5_line": 1585
+        },
+        {
+          "chapter": "CH06-c",
+          "v3_line": 3542,
+          "v4_line": 3542,
+          "metric": "source_names_checked",
+          "stated": 59,
+          "text": "| source_names_checked | 59 |",
+          "unchanged": true,
+          "v5_line": 3542
+        },
+        {
+          "chapter": "CH06-d",
+          "v3_line": 4776,
+          "v4_line": 4776,
+          "metric": "source_names_checked",
+          "stated": 70,
+          "text": "| source_names_checked | 70 |",
+          "unchanged": true,
+          "v5_line": 4776
+        },
+        {
+          "chapter": "CH06-e",
+          "v3_line": 1427,
+          "v4_line": 1427,
+          "metric": "source_names_checked",
+          "stated": 21,
+          "text": "| source_names_checked | 21 |",
+          "unchanged": true,
+          "v5_line": 1427
+        },
+        {
+          "chapter": "CH06-f",
+          "v3_line": 5927,
+          "v4_line": 5927,
+          "metric": "source_names_checked",
+          "stated": 62,
+          "text": "| source_names_checked | 62 |",
+          "unchanged": true,
+          "v5_line": 5927
+        },
+        {
+          "chapter": "CH06-g",
+          "v3_line": 7642,
+          "v4_line": 7642,
+          "metric": "source_names_checked",
+          "stated": 75,
+          "text": "| source_names_checked | 75 |",
+          "unchanged": true,
+          "v5_line": 7642
+        },
+        {
+          "chapter": "CH07-a",
+          "v3_line": 4387,
+          "v4_line": 4387,
+          "metric": "source_names_checked",
+          "stated": 57,
+          "text": "| source_names_checked | 57 |",
+          "unchanged": true,
+          "v5_line": 4387
+        },
+        {
+          "chapter": "CH07-b",
+          "v3_line": 2860,
+          "v4_line": 2860,
+          "metric": "source_names_checked",
+          "stated": 26,
+          "text": "| source_names_checked | 26 |",
+          "unchanged": true,
+          "v5_line": 2860
+        },
+        {
+          "chapter": "CH07-c",
+          "v3_line": 4310,
+          "v4_line": 4310,
+          "metric": "source_names_checked",
+          "stated": 53,
+          "text": "| source_names_checked | 53 |",
+          "unchanged": true,
+          "v5_line": 4310
+        },
+        {
+          "chapter": "CH08-a",
+          "v3_line": 14502,
+          "v4_line": 14502,
+          "metric": "source_names_checked",
+          "stated": 227,
+          "text": "| source_names_checked | 227 |",
+          "unchanged": true,
+          "v5_line": 14502
+        },
+        {
+          "chapter": "CH08-b",
+          "v3_line": 6846,
+          "v4_line": 6846,
+          "metric": "source_names_checked",
+          "stated": 46,
+          "text": "| source_names_checked | 46 |",
+          "unchanged": true,
+          "v5_line": 6846
+        },
+        {
+          "chapter": "CH08-c",
+          "v3_line": 3151,
+          "v4_line": 3151,
+          "metric": "source_names_checked",
+          "stated": 4,
+          "text": "| source_names_checked | 4 |",
+          "unchanged": true,
+          "v5_line": 3151
+        },
+        {
+          "chapter": "CH08-d",
+          "v3_line": 5876,
+          "v4_line": 5876,
+          "metric": "source_names_checked",
+          "stated": 101,
+          "text": "| source_names_checked | 101 |",
+          "unchanged": true,
+          "v5_line": 5876
+        },
+        {
+          "chapter": "CH08-e",
+          "v3_line": 2202,
+          "v4_line": 2202,
+          "metric": "source_names_checked",
+          "stated": 8,
+          "text": "| source_names_checked | 8 |",
+          "unchanged": true,
+          "v5_line": 2202
+        },
+        {
+          "chapter": "CH08-f",
+          "v3_line": 1661,
+          "v4_line": 1661,
+          "metric": "source_names_checked",
+          "stated": 5,
+          "text": "| source_names_checked | 5 |",
+          "unchanged": true,
+          "v5_line": 1661
+        },
+        {
+          "chapter": "CH08-g",
+          "v3_line": 2763,
+          "v4_line": 2763,
+          "metric": "source_names_checked",
+          "stated": 17,
+          "text": "| source_names_checked | 17 |",
+          "unchanged": true,
+          "v5_line": 2763
+        }
+      ],
+      "record_disposition": "PARTB-RECHECK3-019 (note): source-name and step-review counters have no stated selection rule; unchanged",
+      "assessment": "No claim is made that these 36 numbers are wrong. Their original selection cannot be reproduced from the supplied chapter text. No fresh selection rule is invented in this targeted check.",
+      "nonblocking": true,
+      "prior_finding_v4": "PARTB-RECHECK4-004",
+      "disposition_v5": "STILL OPEN — NOTE; deferred to joining under decision B"
+    },
+    "severity": "note"
+  }
+]

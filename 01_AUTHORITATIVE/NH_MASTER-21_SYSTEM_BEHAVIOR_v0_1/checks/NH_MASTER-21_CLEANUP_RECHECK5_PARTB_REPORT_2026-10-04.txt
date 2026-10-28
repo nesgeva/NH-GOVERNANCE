@@ -1,0 +1,368 @@
+NH_MASTER-21 CLEANUP — TARGETED RE-CHECK 5, PART B
+Date: 2026-10-04
+VERDICT: PASS
+Stages 0–5: all PASS. Open must-fix: 0. Open should-fix: 0. Carried nonblocking notes: 3.
+
+Scope and basis
+Part B: CH04-a–CH08-g, 27 chapters. This is the targeted v5 check required by
+NH_MASTER-21_CLEANUP_CHECK_BRIEF_v5_2026-10-04.md. Brief v4.1 decision B applies:
+per-chapter totals and count summaries are notes deferred to joining, while
+design content, local register entries, structure, replay and links remain must-pass.
+The governing contract v1_0, lessons v0_4 and brief v3 rules 6–8 remain applicable.
+
+The supplied v4 FINDINGS is the complete Stage 1 list: four findings.
+The single must-fix, PARTB-RECHECK4-001, is fixed. The three earlier notes
+are still open, with the deferral confirmed against the v5 record and files.
+No chapter or supplied input was edited.
+
+Line convention: physical, one-based v5 chapter lines unless explicitly labeled v4.
+Removed rows have v4 coordinates only. Chapter filenames use the prefix
+NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__ and suffix .md.
+
+STAGE 0 — FINGERPRINTS: PASS
+NH_MASTER-21_CLEANUP_FIXED_CHAPTERS_v5_2026-10-04.zip
+  SHA-256 71f71e9c6e2117476bd6a8a6806c5064ea49f400f1acb2c01257a1b0fcdc9382
+  Matches the supplied expected hash; ZIP CRC check passed.
+NH_MASTER-21_CLEANUP_RECHECK_KIT_v5_2026-10-04.zip
+  SHA-256 600fa0cb0faa16c4bc3c12879dfe7d1f652a96a2991ae6329ab671db86f30353
+  Matches the supplied expected hash; ZIP CRC check passed.
+NH_MASTER-21_CLEANUP_FIXED_CHAPTERS_v4_2026-10-04(3).zip
+  SHA-256 9394b4da3372c322dafe6c78c8c32c03d4b4a1fb3325e6c999ffecc924607c6f
+  Matches the supplied expected hash; ZIP CRC check passed.
+NH_MASTER-21_CLEANUP_RECHECK4_PARTB_FINDINGS_2026-10-04(1).json
+  SHA-256 88199c01472a777395f1629c9330580bfbdb853caf7f92f3da16dd8960cef44f
+  Parsed successfully; four prior findings. Hash recorded for input identity.
+
+All 66 v4 and v5 chapter files match the cleanup record fingerprints. Extracted
+chapter bytes also match the corresponding ZIP payloads. The six changed
+chapters match both hashes in brief v5. Every other chapter (60) is byte-identical.
+Only CH04-b changes in Part B; the other 26 Part B chapters are byte-identical.
+The record has ten unique items: five CH04-b deletions and five appendix regenerations.
+
+Changed-chapter fingerprints (independently calculated):
+  CH04-b
+    v4 c015ee7c497810d2e9918ad688ba30ad7b262e65fa4298b7133cf8cd469aa6d3
+    v5 efbf21a5da3cfeed1012d3b3a359419b6f3fb21be26cc0df1263a221c7a7a69d
+  CH12-a
+    v4 f390d47783bd8a52b7976c638e45b64cbadd018eab19b7ec19399d6899e88d14
+    v5 fcce7780824054b163ce59473e1ffae86409ab282790bef12117f57ceae2d594
+  CH12-b
+    v4 d394a1b36ab6a289f86388063cac5c29731ec8259bf30a4cff7d88b7a6d0619e
+    v5 298b55e4ae85ccb928079ad1e6dd5bc009c84dfda6254da5cc6f6ea9664e0484
+  CH12-c
+    v4 aecb0f70e52a6025f8ea25123fb4ea65e26023a1f442a652dc153861f24f0868
+    v5 e65477efbf7e58a0437bdfc3060d8f55f2f5aafdfbf22b2bebd6fbe72f7f3dfd
+  CH12-d
+    v4 7223ff6055765654ff6c939c33ec6bbba5b4f0ed74bace4c4a580083d295fe88
+    v5 f59ce3008e31b8a16abc9151c1a9c512dd25cbf8a0ea6bc10626b97b9debc19f
+  CH12-e
+    v4 72b95b179ef4263b8613781104046bd751b4683cf9c746d8df75b2e0b4584c5f
+    v5 d4d42f4123f226dfd54671292fa0d42f554caef14068b12fab72eb1037dd8e7a
+
+The CH12-a–CH12-e hashes are checked here as required by Stage 0. Recomputing
+their entries and locators belongs to Part C under brief v5; this Part B PASS
+does not certify that separate appendix recomputation.
+
+STAGE 1 — FOURTH RE-CHECK FINDINGS: PASS
+PARTB-RECHECK4-001 — FIXED. All five stale CH04-b inventory rows are removed
+  by R5-10041–R5-10045. Their cards have one named gate and four NOT DECIDED
+  Gated by boxes. The remaining 13 entries match the actual plain gates exactly.
+PARTB-RECHECK4-002 — STILL OPEN — NOTE; deferred to joining under decision B.
+  CH04-c still states 484/77 where the applicable recounts are 486/79.
+  Carried as PARTB-RECHECK5-001.
+PARTB-RECHECK4-003 — STILL OPEN — NOTE; deferred to joining under decision B.
+  CH05-a and CH05-b retain the zero-plain-gate summary despite one gate each.
+  Carried as PARTB-RECHECK5-002.
+PARTB-RECHECK4-004 — STILL OPEN — NOTE; deferred to joining under decision B.
+  All 36 historical selected counters remain unchanged. The v5 not_done entry
+  retains PARTB-RECHECK3-019, the earlier identifier for this same note.
+  Carried as PARTB-RECHECK5-003; CH04-b line 14245 moves to 14240.
+
+All disposition evidence was checked against current chapter text. The v5 record
+explicitly defers notes 002 and 003 in deferred_to_the_join; its not_done entry
+preserves the selected-counter note. None is reclassified as fixed.
+
+STAGE 2 — EXACT REPLAY: PASS
+Applied the five removal items in record order, using their original v4 line
+coordinates and preserving all remaining bytes and line endings. Each before
+string exactly matches its v4 line. The resulting CH04-b file equals v5 byte
+for byte; there are no additions, replacements or unexplained removals.
+CH04-b: 14,256 lines -> 14,251 lines; exactly five lines removed.
+Replayed SHA-256: efbf21a5da3cfeed1012d3b3a359419b6f3fb21be26cc0df1263a221c7a7a69d
+The other 26 Part B chapters have no record items and replay unchanged.
+
+Item       | v4 inventory line | Card
+-----------|-------------------|----------------
+R5-10041 | 13728 | C-TSC.26.20
+R5-10042 | 13726 | C-TSC.23.8
+R5-10043 | 13724 | C-TSC.23.5.3
+R5-10044 | 13723 | C-TSC.23.5.2
+R5-10045 | 13716 | C-TSC.16.4
+
+STAGE 3 — CORRECTNESS OF EACH REMOVAL: PASS
+The five deleted rows exactly match the occurrences in PARTB-RECHECK4-001.
+Every affected card retains its original content. None has a populated plain
+Gated by field requiring the removed inventory row.
+
+R5-10041 — C-TSC.26.20; removed v4 inventory line 13728:
+  Current card line 10471: - Gated by: NOT DECIDED
+  PASS — no populated plain gate; the stale inventory row is absent.
+R5-10042 — C-TSC.23.8; removed v4 inventory line 13726:
+  Current card line 9110: - Gated by: NOT DECIDED
+  PASS — no populated plain gate; the stale inventory row is absent.
+R5-10043 — C-TSC.23.5.3; removed v4 inventory line 13724:
+  Current card line 8752: - Gated by: NOT DECIDED
+  PASS — no populated plain gate; the stale inventory row is absent.
+R5-10044 — C-TSC.23.5.2; removed v4 inventory line 13723:
+  Current card line 8733: - Gated by: NOT DECIDED
+  PASS — no populated plain gate; the stale inventory row is absent.
+R5-10045 — C-TSC.16.4; removed v4 inventory line 13716:
+  Current card line 5210: - Gated by: ACCEPTED — C-TSC.16.3.1 — Coordination record common fields: schema identity, privacy access and append-only correction rules apply. [04/NH_B_INT_4_TSC_AUTHORIZATION_PROMOTION_AND_INTERRUPTED_CONTINUATION_WIRING_v1_3_CANDIDATE.md §8]
+  PASS — no populated plain gate; the stale inventory row is absent.
+
+The retained inventory is at CH04-b lines 13709–13725. Each row below matches
+its card, field, stamp, complete prerequisite wording and citations exactly.
+A multiset comparison finds exactly 13 actual plain gates and 13 listed rows,
+with no missing, extra or duplicate entries.
+
+Card          | Inventory line | Gated by line | Result
+--------------|----------------|---------------|-------
+C-TSC.3.4 | 13713 | 875 | exact match
+C-TSC.13.2 | 13714 | 4420 | exact match
+C-TSC.16.3.1 | 13715 | 5135 | exact match
+C-TSC.16.4.7 | 13716 | 5354 | exact match
+C-TSC.16.4.8 | 13717 | 5373 | exact match
+C-TSC.20.3 | 13718 | 8138 | exact match
+C-TSC.20.4 | 13719 | 8165 | exact match
+C-TSC.23.1 | 13720 | 8308 | exact match
+C-TSC.23.2.4 | 13721 | 8444 | exact match
+C-TSC.23.6.1 | 13722 | 8859 | exact match
+C-TSC.23.9 | 13723 | 9144 | exact match
+C-TSC.28.6 | 13724 | 11322 | exact match
+C-TSC.29.7 | 13725 | 11734 | exact match
+
+The retained prerequisites were not rewritten. This stage checks their exact
+registration against the unchanged cards; it does not reopen approved design
+or repeat an unchanged source-content audit.
+
+STAGE 4 — STRUCTURE AND LOCAL REGISTERS: PASS
+CH04-b has 515 cards, 5,387 physical box lines and 1,279 USED BY rows.
+The empty-field/data-cell register contains exactly the 1,744 actual empty
+slots: 1,657 behavior boxes and 87 USED BY data cells. There are no missing
+entries, extra entries or duplicate registrations. The plain-gate register
+has the exact 13-row coverage demonstrated in Stage 3.
+
+The 15 additional implementation slots remain separate, uniquely keyed,
+attached to existing cards, and explicitly NOT DECIDED. They are not counted
+as registrations of filled behavior boxes.
+
+Every other CH04-b section is unchanged in content, including continuation
+tables, scope/conflict records, source coverage, READ RECORD and CONTRACT CHECK.
+Sections after the inventory move up five lines. The incoming and outgoing
+continuations and all card lines occur before the deletions and do not move.
+Unchanged source and coverage claims retain their v4 audit basis.
+
+A fresh mechanical pass across Part B found no structure errors: nine boxes
+in order (including allowed repeated labels), consecutive USED BY numbering,
+one syntactic stamp on each populated line, and no duplicate card IDs.
+All 27 empty-field/data-cell registers reconcile: 10,565 actual and listed entries.
+The scan covers 3,880 Part B cards, 37,003 physical box lines and 8,674 USED BY rows.
+There are no fenced JSON blocks in the Part B chapters. The v5 cleanup record
+and supplied prior findings parse as valid JSON.
+
+Per-chapter totals remain governed by decision B. The three carried notes
+are reported below and do not fail this stage.
+
+STAGE 5 — LINKS: PASS
+Byte comparison of every card body, from header through SUB-PARTS, confirms
+that all 9,392 whole-document cards are unchanged from v4, including all
+3,880 Part B cards and their external endpoints. The five deletions are
+inventory rows after the card area; no card line or link was edited.
+
+A fresh reciprocal-link pass confirms the same v4 results:
+  - 8,674 USED BY rows owned by Part B cards are answered.
+  - 8,665 have their using card’s own direct TOGETHER answer.
+  - Seven use a direction-correct continuation.
+  - Two unchanged C-7E path-use rows are answered by CH00 P-MAIN steps 1 and 3.
+  - All 8,859 document-wide USED BY rows whose using card is in Part B are answered.
+  - 8,747 Part B TOGETHER endpoint occurrences represent 8,667 unique pairs;
+    all have answering USED BY rows.
+  - All 8,736 document-wide TOGETHER endpoint occurrences targeting Part B
+    have answering USED BY rows.
+No new missing or reversed relationship is found. Link direction follows
+brief v3 rule 6; sharing an unordered pair of IDs is not treated as reciprocity.
+
+CURRENT FINDINGS — ALL NONBLOCKING NOTES
+The FINDINGS JSON contains the following three notes, with full occurrence
+evidence and prior finding identifiers. No fixed issue is listed as open.
+
+PARTB-RECHECK5-001 | severity: note | stage: 4
+Prior finding: PARTB-RECHECK4-002
+Problem: Two unchanged CH04-c totals omit the two new TOGETHER lines: populated fields says 484 instead of 486; external relationship lines says 77 instead of 79.
+Rule: Brief v5 Stages 1 and 4; brief v4.1 Ness decision B: per-chapter totals are notes, deferred to joining; all design content and local register entries remain must-pass.
+Disposition: STILL OPEN — NOTE; deferred to joining under decision B.
+Evidence:
+  CH04-c:2199 | populated_fields: stated 484; recount 486.
+    §3 exactly one stamp per line: PASS — 56 headers, 484 populated field lines and 99 USED BY rows checked; 0 BUILT field lines. Named-card status governs relationships. The 04 receipt/placement record provides the approved-concept evidence.
+    Method: Count every populated physical box line.
+  CH04-c:2222 | external_relationships: stated 77; recount 79.
+    | external_relationships | 77 |
+    Method: CH04-c explicitly counts named relationship lines; count each external TOGETHER line once.
+  The two v4-added TOGETHER lines remain unchanged at CH04-c:93 and :96.
+  They explain the two-line difference; v5 does not change CH04-c.
+
+PARTB-RECHECK5-002 | severity: note | stage: 4
+Prior finding: PARTB-RECHECK4-003
+Problem: The retained inventory summaries still assert that no plain gate remains, although each chapter has one and its numeric table now correctly says 1.
+Rule: Brief v5 Stages 1 and 4; brief v4.1 Ness decision B: per-chapter totals are notes, deferred to joining; all design content and local register entries remain must-pass.
+Disposition: STILL OPEN — NOTE; deferred to joining under decision B.
+Evidence:
+  CH05-a:6776: All populated TOGETHER lines name an owning or connected card; no plain gate remains.
+    Actual plain gate on C-7G.7 at line 517:
+    - Gated by: DESIGNED — A creation record is confirmed only through Ness's explicit confirmation or later words or actions clearly demonstrating adoption; provisional capture needs neither. [V10 §7G / CREATION-AWARE MODE]
+    Correct numeric table at CH05-a:7275: | plain_gates | 1 |
+  CH05-b:4921: All populated TOGETHER lines name an owning or connected card; no plain gate remains.
+    Actual plain gate on C-7GA.3.1 at line 165:
+    - Gated by: DESIGNED — Ness deliberately enables the queue before it activates. [V10 §7G-A / QUEUE ACTIVATION BOUNDARY]
+    Correct numeric table at CH05-b:5412: | plain_gates | 1 |
+  These are chapter-wide zero-total assertions; decision B makes them notes.
+  The gates themselves remain unchanged and are not the subject of the note.
+
+PARTB-RECHECK5-003 | severity: note | stage: 1
+Prior finding: PARTB-RECHECK4-004
+Problem: The 36 historical selected source-name and step-review counters remain unchanged and have no supplied exact selection rule. This remains a nonblocking note, deferred under decision B.
+Rule: Brief v5 Stages 1 and 4; brief v4.1 Ness decision B: per-chapter totals are notes, deferred to joining; all design content and local register entries remain must-pass.
+Disposition: STILL OPEN — NOTE; deferred to joining under decision B.
+Evidence:
+  All 36 counters below are unchanged. No exact original selection rule is
+  supplied. This note does not assert that the 36 numbers are wrong.
+  Chapter | v4 line -> v5 line | Metric | Stated
+  CH04-a | 2236 -> 2236 | step_cards | 31
+  CH04-a | 2237 -> 2237 | source_names_checked | 72
+  CH04-b | 14245 -> 14240 | source_names_checked | 338
+  CH04-c | 2229 -> 2229 | explicit_step_cards_checked | 26
+  CH04-c | 2251 -> 2251 | source_names_checked | 4
+  CH04-d | 1809 -> 1809 | explicit_step_cards_checked | 15
+  CH04-d | 1831 -> 1831 | source_names_checked | 16
+  CH04-e | 2021 -> 2021 | explicit_step_cards_checked | 38
+  CH04-e | 2043 -> 2043 | source_names_checked | 17
+  CH05-a | 7277 -> 7277 | explicit_step_cards_checked | 72
+  CH05-a | 7299 -> 7299 | source_names_checked | 158
+  CH05-b | 5414 -> 5414 | explicit_step_cards_checked | 78
+  CH05-b | 5436 -> 5436 | source_names_checked | 93
+  CH05-c | 4097 -> 4097 | explicit_step_cards_checked | 37
+  CH05-c | 4119 -> 4119 | source_names_checked | 39
+  CH05-d | 9298 -> 9298 | explicit_step_cards_checked | 182
+  CH05-d | 9320 -> 9320 | source_names_checked | 42
+  CH05-e | 2541 -> 2541 | explicit_step_cards_checked | 51
+  CH05-e | 2563 -> 2563 | source_names_checked | 20
+  CH06-a | 1973 -> 1973 | source_names_checked | 42
+  CH06-b | 1585 -> 1585 | source_names_checked | 38
+  CH06-c | 3542 -> 3542 | source_names_checked | 59
+  CH06-d | 4776 -> 4776 | source_names_checked | 70
+  CH06-e | 1427 -> 1427 | source_names_checked | 21
+  CH06-f | 5927 -> 5927 | source_names_checked | 62
+  CH06-g | 7642 -> 7642 | source_names_checked | 75
+  CH07-a | 4387 -> 4387 | source_names_checked | 57
+  CH07-b | 2860 -> 2860 | source_names_checked | 26
+  CH07-c | 4310 -> 4310 | source_names_checked | 53
+  CH08-a | 14502 -> 14502 | source_names_checked | 227
+  CH08-b | 6846 -> 6846 | source_names_checked | 46
+  CH08-c | 3151 -> 3151 | source_names_checked | 4
+  CH08-d | 5876 -> 5876 | source_names_checked | 101
+  CH08-e | 2202 -> 2202 | source_names_checked | 8
+  CH08-f | 1661 -> 1661 | source_names_checked | 5
+  CH08-g | 2763 -> 2763 | source_names_checked | 17
+  Record continuity: v5 not_done preserves PARTB-RECHECK3-019.
+  No new selection rule was invented for this targeted check.
+
+PART B FINGERPRINT AND REPLAY LEDGER
+Every entry below passed the record fingerprint comparison and exact replay.
+CH04-a | 0 items | unchanged | PASS
+  v4 6208d08770d9483775c7721d5d04c8d5356967e4d0d7777e7fbcab59c0af365b
+  v5 6208d08770d9483775c7721d5d04c8d5356967e4d0d7777e7fbcab59c0af365b
+CH04-b | 5 items | five deletions | PASS
+  v4 c015ee7c497810d2e9918ad688ba30ad7b262e65fa4298b7133cf8cd469aa6d3
+  v5 efbf21a5da3cfeed1012d3b3a359419b6f3fb21be26cc0df1263a221c7a7a69d
+CH04-c | 0 items | unchanged | PASS
+  v4 0055993433ebfe3302dfcf0cf85ffe07fc016b2508a2e63311e23966f6d96703
+  v5 0055993433ebfe3302dfcf0cf85ffe07fc016b2508a2e63311e23966f6d96703
+CH04-d | 0 items | unchanged | PASS
+  v4 d50c597cc27846b7717e20206ad0f5f255a6058adacf7df9cfdaeb458999b564
+  v5 d50c597cc27846b7717e20206ad0f5f255a6058adacf7df9cfdaeb458999b564
+CH04-e | 0 items | unchanged | PASS
+  v4 98d61845784becec6914d1ea2e9ef6d6a7c9854ddb742c21271c98690a398b17
+  v5 98d61845784becec6914d1ea2e9ef6d6a7c9854ddb742c21271c98690a398b17
+CH05-a | 0 items | unchanged | PASS
+  v4 e166db889442419d771cbe5c2dd5fe054755a2d8cb151d52e9ef5f81b5218c36
+  v5 e166db889442419d771cbe5c2dd5fe054755a2d8cb151d52e9ef5f81b5218c36
+CH05-b | 0 items | unchanged | PASS
+  v4 2b3cfb5c50a4af1b923fedddbe34a51aabdfa6479a1dbd92b1106da153ce92a5
+  v5 2b3cfb5c50a4af1b923fedddbe34a51aabdfa6479a1dbd92b1106da153ce92a5
+CH05-c | 0 items | unchanged | PASS
+  v4 2212276c93f0e30a764995c853f29920c28ecf6862dcd7beb715d07a937a3c57
+  v5 2212276c93f0e30a764995c853f29920c28ecf6862dcd7beb715d07a937a3c57
+CH05-d | 0 items | unchanged | PASS
+  v4 130c81030d0b666b20ee5849e5f2f6a69336c4d2c50f141e6dd23383075fb506
+  v5 130c81030d0b666b20ee5849e5f2f6a69336c4d2c50f141e6dd23383075fb506
+CH05-e | 0 items | unchanged | PASS
+  v4 3ef6911fe59bd668e129a75b6800afd399f542962281b4a8968f72dacc49be2c
+  v5 3ef6911fe59bd668e129a75b6800afd399f542962281b4a8968f72dacc49be2c
+CH06-a | 0 items | unchanged | PASS
+  v4 4694f6c72b8637847d5ed3f395f89d7d4292d00143574cf710250546e4a9cd0f
+  v5 4694f6c72b8637847d5ed3f395f89d7d4292d00143574cf710250546e4a9cd0f
+CH06-b | 0 items | unchanged | PASS
+  v4 4e6c31355cfcd4c18dcc630d7e6fa8b7739010435e57620773066acd213924db
+  v5 4e6c31355cfcd4c18dcc630d7e6fa8b7739010435e57620773066acd213924db
+CH06-c | 0 items | unchanged | PASS
+  v4 b1ce7215e7f32068e32f7004682827edc5aeddb51424d92291730ee37d11a794
+  v5 b1ce7215e7f32068e32f7004682827edc5aeddb51424d92291730ee37d11a794
+CH06-d | 0 items | unchanged | PASS
+  v4 c4c3529141076e2a92663050c0dc8dd453e0391d0c16b3b72d798050745ae47f
+  v5 c4c3529141076e2a92663050c0dc8dd453e0391d0c16b3b72d798050745ae47f
+CH06-e | 0 items | unchanged | PASS
+  v4 a26e416de59696fec451ea05005a61cd6f553a3033ef249dce9f638dedd74d27
+  v5 a26e416de59696fec451ea05005a61cd6f553a3033ef249dce9f638dedd74d27
+CH06-f | 0 items | unchanged | PASS
+  v4 a176f93cfbac41a93412a31e62808949e6dd8dbead68356d0493a1819e126e27
+  v5 a176f93cfbac41a93412a31e62808949e6dd8dbead68356d0493a1819e126e27
+CH06-g | 0 items | unchanged | PASS
+  v4 87bc611b84c406d61fbbe9ae8b81c50c9cff6b700f7d2ea9126e2ddc5154267d
+  v5 87bc611b84c406d61fbbe9ae8b81c50c9cff6b700f7d2ea9126e2ddc5154267d
+CH07-a | 0 items | unchanged | PASS
+  v4 53bb25e7519341e44dde22d8fa4062d19e6b5776f50c4fd0dcc7dfce82dfc810
+  v5 53bb25e7519341e44dde22d8fa4062d19e6b5776f50c4fd0dcc7dfce82dfc810
+CH07-b | 0 items | unchanged | PASS
+  v4 3e1871c69445a18662d8021299c4b44f0038b438fd01234de9212a775c7846ae
+  v5 3e1871c69445a18662d8021299c4b44f0038b438fd01234de9212a775c7846ae
+CH07-c | 0 items | unchanged | PASS
+  v4 9a2d3455439ed3c5e657c35d94cd4aaa2a85322378d7094a76e2e4cda4567f0a
+  v5 9a2d3455439ed3c5e657c35d94cd4aaa2a85322378d7094a76e2e4cda4567f0a
+CH08-a | 0 items | unchanged | PASS
+  v4 7675c180ba5e3c762af0c38285a2194fd3472371e5f715b3de0712266024ff19
+  v5 7675c180ba5e3c762af0c38285a2194fd3472371e5f715b3de0712266024ff19
+CH08-b | 0 items | unchanged | PASS
+  v4 78e57e64c9befe00e0f5bf1ea8600d2c33a7070c2e671ee10b8856adc18ad83a
+  v5 78e57e64c9befe00e0f5bf1ea8600d2c33a7070c2e671ee10b8856adc18ad83a
+CH08-c | 0 items | unchanged | PASS
+  v4 0fb5af3d493c4d758d55687f9e4529ea0441c077cc87d01a11c820f3c2149960
+  v5 0fb5af3d493c4d758d55687f9e4529ea0441c077cc87d01a11c820f3c2149960
+CH08-d | 0 items | unchanged | PASS
+  v4 8aa021d2eed9189c9491826e537ff58fae4b9daa39374eb4d9a682f617229427
+  v5 8aa021d2eed9189c9491826e537ff58fae4b9daa39374eb4d9a682f617229427
+CH08-e | 0 items | unchanged | PASS
+  v4 c54991e8b3fa02b2b95d79505f31aeb894ce2008ae23965d37379b4bb698abe1
+  v5 c54991e8b3fa02b2b95d79505f31aeb894ce2008ae23965d37379b4bb698abe1
+CH08-f | 0 items | unchanged | PASS
+  v4 e8fa22abdfb98c7a395dd6169c56b92f862140118d31290aa4f1790055c57760
+  v5 e8fa22abdfb98c7a395dd6169c56b92f862140118d31290aa4f1790055c57760
+CH08-g | 0 items | unchanged | PASS
+  v4 7054b9d5a084dc2a9e59d54ce9f9d5df97fbd8b15439b2511c711318b73ea4cd
+  v5 7054b9d5a084dc2a9e59d54ce9f9d5df97fbd8b15439b2511c711318b73ea4cd
+
+Deliverables:
+NH_MASTER-21_CLEANUP_RECHECK5_PARTB_REPORT_2026-10-04.txt
+NH_MASTER-21_CLEANUP_RECHECK5_PARTB_FINDINGS_2026-10-04.json
+
+Part B targeted v5 verdict: PASS. PARTB-RECHECK4-001 is closed. Three notes
+remain for the joining step and final verification under decision B.

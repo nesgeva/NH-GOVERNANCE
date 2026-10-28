@@ -1,0 +1,39 @@
+NH MASTER-21 ASSEMBLY REPORT
+generated 2026-09-25 12:20 UTC
+
+SOURCE CHAPTERS
+  NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH00.md  58357 bytes  sha256 d01e8ec370be9c8e50fbb293c863c95ddaf6f82af5700877bf1a57276a1f4998  591 lines
+  NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH01.md  238767 bytes  sha256 3fed48bc7a48620ce30bd8e991d349b75869c44ce8c65c4ee9fd6a1ba7b54b6a  2083 lines
+  NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH02.md  1042150 bytes  sha256 dbd6366c17f4b380875d89e2e0bc42d23c5aeff2f3f248dd6ade6b318ebf06f8  11990 lines
+
+LINES REMOVED (metadata only, header zone only)
+  NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH00.md
+    line 3: Status: CANDIDATE
+    line 4: Repository: `nesgeva/NH-GOVERNANCE` · Branch: `main` · Source commit: `5f95d4a9cf21801be92b2f06f36bfca508e7ae70`
+    CONTRACT CHECK block moved to appendix: 29 lines
+  NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH01.md
+    line 3: Status: CANDIDATE
+    line 4: Repository: `nesgeva/NH-GOVERNANCE` · Branch: `main` · Source commit: `855459fc6674dfe3a1f310f3d1690a9e7db59405`
+    CONTRACT CHECK block moved to appendix: 17 lines
+  NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH02.md
+    line 3: **Document:** `NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH02.md`  
+    line 4: **Status:** CANDIDATE  
+    line 5: **Source repository:** `nesgeva/NH-GOVERNANCE`  
+    line 6: **Source commit:** `855459fc6674dfe3a1f310f3d1690a9e7db59405`
+    CONTRACT CHECK block moved to appendix: 17 lines
+
+BODY INTEGRITY PROOF
+  NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH00.md: body block of 54563 chars present verbatim in output: YES
+    contract block of 3177 chars present verbatim: YES
+  NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH01.md: body block of 232044 chars present verbatim in output: YES
+    contract block of 3534 chars present verbatim: YES
+  NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE__CH02.md: body block of 1022569 chars present verbatim in output: YES
+    contract block of 4456 chars present verbatim: YES
+
+  RESULT: ALL SOURCE TEXT PRESENT VERBATIM
+
+OUTPUT
+  NH_MASTER-21_SYSTEM_BEHAVIOR_v0_1_CANDIDATE.md
+  1374287 bytes, 15182 lines
+  SHA-256 0751d780ef3b7a64e85e61edfb5672c6f68c78afb83ea2ed0949f17304f18842
+  part locator rows: 458
